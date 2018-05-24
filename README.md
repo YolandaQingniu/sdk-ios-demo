@@ -69,7 +69,7 @@ SDK的运行需要appid以及配置文件，商家在接入时可先使用轻牛
 	+ 设置扫描到秤时是否返回多次 `allowDuplicates`
 	+ 设置扫描的时间 `duration`
 6. 扫描设备 `- (void)startBleDeviceDiscovery:(QNResultCallback)callback;`
-7. 设置连接的配置 （也可以在步骤2或者步骤45中设置）
+7. 设置连接的配置 （也可以在步骤2或者步骤5中设置）
 	+ 获取配置信息 `- (QNConfig *)getConfig;`
 	+ 设置秤端显示的单位 `unit`
 8. 构建连接秤的用户对象 `- (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(QNResultCallback)callback`
