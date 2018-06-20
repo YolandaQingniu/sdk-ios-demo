@@ -29,6 +29,7 @@ typedef enum{
 @property (weak, nonatomic) IBOutlet UILabel *styleLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *unstableWeightLabel;  //时时体重
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (nonatomic, assign) DeviceStyle currentStyle;
 @property (nonatomic, strong) NSMutableArray *deviceAry; //扫描到外设数组
@@ -42,6 +43,9 @@ typedef enum{
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"测量";
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedRowHeight = 0;
     self.currentStyle = QNScaleStateDisconnected;
     self.bleApi = [QNBleApi sharedBleApi];
     self.bleApi.discoveryListener = self;
@@ -97,6 +101,7 @@ typedef enum{
 #pragma mark 正在扫描状态UI
 - (void)setScanningStyleUI {
     [self.scanBtn setTitle:@"正在扫描" forState:UIControlStateNormal];
+    self.headerView.hidden = NO;
     self.styleLabel.text = @"点击链接设备";
     self.unstableWeightLabel.text = @"";
     self.tableView.hidden = NO;
@@ -108,6 +113,7 @@ typedef enum{
     self.styleLabel.text = @"正在连接";
     self.unstableWeightLabel.text = @"";
     self.tableView.hidden = YES;
+    self.headerView.hidden = YES;
 }
 
 #pragma mark 链接成功状态UI
@@ -116,6 +122,7 @@ typedef enum{
     self.styleLabel.text = @"连接成功";
     self.unstableWeightLabel.text = @"0.0";
     self.tableView.hidden = YES;
+    self.headerView.hidden = YES;
 }
 
 #pragma mark 测量体重状态UI
@@ -146,6 +153,7 @@ typedef enum{
     self.styleLabel.text = @"";
     self.unstableWeightLabel.text = @"";
     self.tableView.hidden = YES;
+    self.headerView.hidden = NO;
 }
 
 #pragma mark - 蓝牙状态处理
