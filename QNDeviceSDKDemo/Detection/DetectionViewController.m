@@ -41,7 +41,6 @@ typedef enum{
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"Text" ofType:@"txt"];
     self.navigationItem.title = @"测量";
     self.currentStyle = QNScaleStateDisconnected;
     self.bleApi = [QNBleApi sharedBleApi];
@@ -49,7 +48,6 @@ typedef enum{
     self.bleApi.connectionChangeListener = self;
     self.bleApi.dataListener = self;
     self.bleApi.bleStateListener = self;
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
@@ -185,7 +183,6 @@ typedef enum{
 
 #pragma mark - QNBleConnectionChangeListener
 - (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state{//秤连接或测量状态变化
-    
     if (state == QNScaleStateConnected) {//链接成功
           self.currentStyle = DeviceStyleLingSucceed;
     }else if (state == QNScaleStateRealTime){//测量体重
@@ -224,8 +221,6 @@ typedef enum{
 - (void)onBleSystemState:(QNBLEState)state {
     
 }
-
-
 
 #pragma mark - UITabelViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

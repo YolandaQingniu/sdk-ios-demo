@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *macLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RSSILabel;
+@property (weak, nonatomic) IBOutlet UILabel *modeIdLabel;
 
 @end
 @implementation DeviceTableViewCell
@@ -20,6 +21,7 @@
     self.nameLabel.text = device.name;
     self.macLabel.text = device.mac;
     self.RSSILabel.text = [device.RSSI stringValue];
+    self.modeIdLabel.text = device.modeId;
 }
 
 @end

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F2X-eM-oUn">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F2X-eM-oUn">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,7 +14,7 @@
             <objects>
                 <navigationController id="F2X-eM-oUn" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="n1M-Id-SOd">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -34,17 +34,17 @@
                         <viewControllerLayoutGuide type="bottom" id="Mc7-cd-s9U"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eTj-gA-GWi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5H-sz-tvd">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U0n-Sx-2zy" userLabel="确定">
-                                        <rect key="frame" x="0.0" y="800" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="800" width="320" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldQ-KI-MRw">
-                                                <rect key="frame" x="80" y="20" width="215" height="40"/>
+                                                <rect key="frame" x="80" y="20" width="160" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="U3m-av-oxf"/>
@@ -76,10 +76,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uz-9t-PNa" userLabel="用户资料">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="450"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="450"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户资料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thy-Ig-HxL" userLabel="用户资料">
-                                                <rect key="frame" x="10" y="0.0" width="355" height="40"/>
+                                                <rect key="frame" x="10" y="0.0" width="300" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="LOv-Md-JjL"/>
@@ -89,7 +89,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNT-Xt-cXk" userLabel="身高">
-                                                <rect key="frame" x="0.0" y="220" width="375" height="90"/>
+                                                <rect key="frame" x="0.0" y="220" width="320" height="90"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身高" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIu-sC-jGQ">
                                                         <rect key="frame" x="15" y="5" width="80" height="40"/>
@@ -102,13 +102,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单位是cm，范围为40~240cm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTN-FR-JaZ">
-                                                        <rect key="frame" x="15" y="45" width="345" height="45"/>
+                                                        <rect key="frame" x="15" y="45" width="290" height="45"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="170cm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMn-gR-7U7" userLabel="高度">
-                                                        <rect key="frame" x="170" y="5" width="150" height="40"/>
+                                                        <rect key="frame" x="115" y="5" width="150" height="40"/>
                                                         <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="H4x-Bo-2fn"/>
@@ -122,14 +122,14 @@
                                                         </connections>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_icon" translatesAutoresizingMaskIntoConstraints="NO" id="NPf-kI-D9i" userLabel="操作箭头">
-                                                        <rect key="frame" x="326" y="15" width="20" height="20"/>
+                                                        <rect key="frame" x="271" y="15" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="9tX-Na-7ak"/>
                                                             <constraint firstAttribute="height" constant="20" id="vCb-Jg-wnD"/>
                                                         </constraints>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pq-hd-0Th" userLabel="分割线">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="g6V-Oo-Sek"/>
@@ -155,7 +155,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="klU-Ez-oj5" userLabel="用户ID">
-                                                <rect key="frame" x="0.0" y="40" width="375" height="90"/>
+                                                <rect key="frame" x="0.0" y="40" width="320" height="90"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnf-74-lzx">
                                                         <rect key="frame" x="15" y="0.0" width="80" height="30"/>
@@ -168,13 +168,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置用户的资料，计算体脂率时会需要" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEe-80-egg" userLabel="说明">
-                                                        <rect key="frame" x="15" y="45" width="345" height="45"/>
+                                                        <rect key="frame" x="15" y="45" width="290" height="45"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="单行输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-Gm-ugP" userLabel="ID输入框">
-                                                        <rect key="frame" x="125" y="3" width="190" height="35"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="bezel" placeholder="单行输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-Gm-ugP" userLabel="ID输入框">
+                                                        <rect key="frame" x="125" y="3" width="135" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="n9z-2p-iCC"/>
                                                         </constraints>
@@ -186,7 +186,7 @@
                                                         </connections>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omm-nQ-VqC" userLabel="分割线">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="wi9-kq-kKc"/>
@@ -211,7 +211,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kE-QO-fS3" userLabel="性别">
-                                                <rect key="frame" x="0.0" y="130" width="375" height="90"/>
+                                                <rect key="frame" x="0.0" y="130" width="320" height="90"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性别" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUX-lJ-cjv">
                                                         <rect key="frame" x="15" y="7" width="80" height="30"/>
@@ -224,13 +224,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="男的为“male”，女的为“female”。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJ0-xi-cY8" userLabel="说明">
-                                                        <rect key="frame" x="15" y="42" width="345" height="48"/>
+                                                        <rect key="frame" x="15" y="42" width="290" height="48"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="女" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mqv-i1-EKQ">
-                                                        <rect key="frame" x="297" y="14" width="23" height="23"/>
+                                                        <rect key="frame" x="242" y="14" width="23" height="23"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="23" id="ULU-3M-gy9"/>
                                                             <constraint firstAttribute="height" constant="23" id="utW-XU-vBG"/>
@@ -240,7 +240,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="im6-GL-mDI" userLabel="女Btn">
-                                                        <rect key="frame" x="257" y="8.5" width="35" height="35"/>
+                                                        <rect key="frame" x="202" y="8.5" width="35" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="3PY-2c-IWe"/>
                                                             <constraint firstAttribute="width" constant="35" id="4o4-o9-AX8"/>
@@ -255,7 +255,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ik1-Rp-K4Y" userLabel="男Btn">
-                                                        <rect key="frame" x="184" y="8.5" width="35" height="35"/>
+                                                        <rect key="frame" x="129" y="8.5" width="35" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="35" id="9ba-ie-Jml"/>
                                                             <constraint firstAttribute="height" constant="35" id="eNb-EV-sW2"/>
@@ -270,7 +270,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="男" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAy-MK-SoI">
-                                                        <rect key="frame" x="224" y="14" width="23" height="23"/>
+                                                        <rect key="frame" x="169" y="14" width="23" height="23"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="23" id="4N1-CF-QsK"/>
                                                             <constraint firstAttribute="height" constant="23" id="MUL-ac-rV0"/>
@@ -280,7 +280,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ty-h0-Gc5" userLabel="分割线">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="QmM-kO-NeZ"/>
@@ -310,7 +310,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buf-aF-Xgf" userLabel="生日">
-                                                <rect key="frame" x="0.0" y="310" width="375" height="90"/>
+                                                <rect key="frame" x="0.0" y="310" width="320" height="90"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKd-0o-5b3">
                                                         <rect key="frame" x="15" y="5" width="80" height="30"/>
@@ -323,13 +323,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年龄范围为3~80岁" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQM-0T-rxA" userLabel="说明">
-                                                        <rect key="frame" x="15" y="35" width="345" height="55"/>
+                                                        <rect key="frame" x="15" y="35" width="290" height="55"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1992-12-10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvQ-xc-TZD" userLabel="日期">
-                                                        <rect key="frame" x="173" y="5" width="150" height="30"/>
+                                                        <rect key="frame" x="118" y="5" width="150" height="30"/>
                                                         <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="150" id="giu-ND-RSO"/>
@@ -343,14 +343,14 @@
                                                         </connections>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_icon" translatesAutoresizingMaskIntoConstraints="NO" id="dd8-Bz-atS">
-                                                        <rect key="frame" x="326" y="10" width="20" height="20"/>
+                                                        <rect key="frame" x="271" y="10" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="9OP-RY-5Op"/>
                                                             <constraint firstAttribute="width" constant="20" id="9hQ-qP-gCY"/>
                                                         </constraints>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GOI-z7-2eo" userLabel="风格线">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="g2C-wl-qtK"/>
@@ -404,10 +404,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z0D-Zc-VnH" userLabel="蓝牙相关设置">
-                                        <rect key="frame" x="0.0" y="450" width="375" height="350"/>
+                                        <rect key="frame" x="0.0" y="450" width="320" height="350"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蓝牙相关设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjN-QA-t3S" userLabel="蓝牙相关设置">
-                                                <rect key="frame" x="10" y="0.0" width="355" height="40"/>
+                                                <rect key="frame" x="10" y="0.0" width="300" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="MQd-o0-auu"/>
@@ -417,7 +417,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlY-Qf-S0c" userLabel="扫描模式">
-                                                <rect key="frame" x="0.0" y="40" width="375" height="140"/>
+                                                <rect key="frame" x="0.0" y="40" width="320" height="140"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描模式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TyE-x5-mL2" userLabel="扫描模式">
                                                         <rect key="frame" x="15" y="5" width="90" height="30"/>
@@ -430,13 +430,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择“首次”时，每个设备单次扫描只返回一次，选择“每次”时，每个设备单次扫描可能会回调多次，不过信号强度会不同。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23O-ht-WyT" userLabel="说明">
-                                                        <rect key="frame" x="15" y="38" width="345" height="102"/>
+                                                        <rect key="frame" x="15" y="38" width="290" height="102"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每次" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhE-J0-DCv">
-                                                        <rect key="frame" x="300" y="5" width="38" height="30"/>
+                                                        <rect key="frame" x="245" y="5" width="38" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="38" id="QTM-ET-9lB"/>
                                                             <constraint firstAttribute="height" constant="30" id="wab-xj-XtA"/>
@@ -446,7 +446,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqi-7o-TuP" userLabel="每次Btn">
-                                                        <rect key="frame" x="262" y="5" width="30" height="30"/>
+                                                        <rect key="frame" x="207" y="5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Vdp-Qu-iqP"/>
                                                             <constraint firstAttribute="width" constant="30" id="qQT-6t-mf6"/>
@@ -460,7 +460,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="首次" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak4-yo-iBP">
-                                                        <rect key="frame" x="210" y="5.5" width="38" height="30"/>
+                                                        <rect key="frame" x="155" y="5.5" width="38" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="38" id="Kjs-Z3-l9y"/>
                                                             <constraint firstAttribute="height" constant="30" id="ToC-XZ-yap"/>
@@ -470,7 +470,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9sT-Mf-Tjt" userLabel="首次Btn">
-                                                        <rect key="frame" x="172" y="5" width="30" height="30"/>
+                                                        <rect key="frame" x="117" y="5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="ACO-4e-5jb"/>
                                                             <constraint firstAttribute="width" constant="30" id="SXm-sk-j6L"/>
@@ -483,7 +483,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvW-gm-zXd" userLabel="分割线">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="o7r-yk-iqt"/>
@@ -513,7 +513,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qng-q1-f3M" userLabel="重量单位">
-                                                <rect key="frame" x="0.0" y="180" width="375" height="160"/>
+                                                <rect key="frame" x="0.0" y="180" width="320" height="160"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="体重单位" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcz-mP-fqI">
                                                         <rect key="frame" x="15" y="5" width="90" height="30"/>
@@ -526,7 +526,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ps-uL-odr" userLabel="说明">
-                                                        <rect key="frame" x="15" y="38" width="345" height="122"/>
+                                                        <rect key="frame" x="15" y="38" width="290" height="122"/>
                                                         <string key="text">kg 公斤 默认值
 lb磅，所有称都能够支持这个单位
 斤，称端如果不支持，则会显示kg
@@ -536,7 +536,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Llk-2b-8Ff" userLabel="斤Btn">
-                                                        <rect key="frame" x="253" y="5" width="30" height="30"/>
+                                                        <rect key="frame" x="198" y="5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="5KM-LI-Upo"/>
                                                             <constraint firstAttribute="width" constant="30" id="Nmx-1p-NVs"/>
@@ -549,7 +549,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGm-lF-Z1S" userLabel="stBtn">
-                                                        <rect key="frame" x="313" y="5" width="30" height="30"/>
+                                                        <rect key="frame" x="258" y="5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="NSl-RE-Yr6"/>
                                                             <constraint firstAttribute="height" constant="30" id="its-5K-125"/>
@@ -562,7 +562,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7F2-hH-jtJ" userLabel="kgBtn">
-                                                        <rect key="frame" x="139" y="5" width="30" height="30"/>
+                                                        <rect key="frame" x="84" y="5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="L3v-SN-Wii"/>
                                                             <constraint firstAttribute="width" constant="30" id="SmA-GO-uAA"/>
@@ -575,7 +575,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="st" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIH-K9-hdB">
-                                                        <rect key="frame" x="345" y="5.5" width="20" height="30"/>
+                                                        <rect key="frame" x="290" y="5.5" width="20" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="I8J-gZ-4Kd"/>
                                                             <constraint firstAttribute="height" constant="30" id="mPM-az-I0g"/>
@@ -585,7 +585,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="斤" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="snv-jb-SvG">
-                                                        <rect key="frame" x="288" y="5" width="20" height="30"/>
+                                                        <rect key="frame" x="233" y="5" width="20" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="cwt-qi-1EQ"/>
                                                             <constraint firstAttribute="height" constant="30" id="yRc-fb-JKa"/>
@@ -595,7 +595,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lb" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt1-0u-0ry">
-                                                        <rect key="frame" x="228" y="5" width="20" height="30"/>
+                                                        <rect key="frame" x="173" y="5" width="20" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="a5S-sR-lKN"/>
                                                             <constraint firstAttribute="width" constant="20" id="h3K-mS-xBv"/>
@@ -605,7 +605,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhS-O7-K8r">
-                                                        <rect key="frame" x="171" y="5" width="20" height="30"/>
+                                                        <rect key="frame" x="116" y="5" width="20" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="0yn-gZ-26n"/>
                                                             <constraint firstAttribute="width" constant="20" id="Kr3-6I-jfD"/>
@@ -615,7 +615,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gO-wk-IWq" userLabel="lbBtn">
-                                                        <rect key="frame" x="196" y="5" width="30" height="30"/>
+                                                        <rect key="frame" x="141" y="5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="HjU-AK-Vgk"/>
                                                             <constraint firstAttribute="height" constant="30" id="ddq-eD-Ygc"/>
@@ -628,7 +628,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRb-U5-Wzf" userLabel="分割线">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="tsF-RB-D7o"/>
@@ -713,6 +713,7 @@ st 英石，如果称端不支持会显示lb</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="设置" id="jEW-Cm-03T"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="birthdayLabel" destination="yvQ-xc-TZD" id="idM-EN-6bF"/>
                         <outlet property="everyBtn" destination="Vqi-7o-TuP" id="w4P-ng-OGe"/>
@@ -739,7 +740,7 @@ st 英石，如果称端不支持会显示lb</string>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1036" y="-172.26386806596702"/>
+            <point key="canvasLocation" x="-860.625" y="-172.18309859154931"/>
         </scene>
     </scenes>
     <resources>

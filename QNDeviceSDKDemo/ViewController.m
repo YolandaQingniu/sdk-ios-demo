@@ -19,9 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *femaleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *maleBtn;
 
-@property (nonatomic, assign) int height;
 @property (nonatomic, strong) NSDate *birthdayDate;
-
 
 @property (weak, nonatomic) IBOutlet UIButton *everyBtn;
 @property (weak, nonatomic) IBOutlet UIButton *firstBtn;
@@ -39,17 +37,14 @@
 @end
 
 @implementation ViewController
-#define HeightDefault 170
-
 
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.bleApi = [QNBleApi sharedBleApi];
     self.config = [self.bleApi getConfig];
-    self.userIdTF.text = @"121545";
-    self.height = HeightDefault;
-    self.pickerView.defaultHeight = self.height;
+    
+    self.pickerView.defaultHeight = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.year = 2000;
     dateComponents.month = 1;
@@ -95,7 +90,6 @@
 }
 
 - (void)confirmHeight:(NSInteger)height {
-    self.height = (int)height;
     self.heightLabel.text = [NSString stringWithFormat:@"%ldcm",height];
 }
 
@@ -193,7 +187,8 @@
 
 #pragma mark - 点击确认跳转扫描
 - (IBAction)clickConfirm:(UIButton *)sender {
-    QNUser *user = [_bleApi buildUser:self.userIdTF.text height:self.height gender:self.femaleBtn.selected ? @"female" : @"male" birthday:self.birthdayDate callback:^(NSError *error) {
+    int height = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
+    QNUser *user = [_bleApi buildUser:self.userIdTF.text height:height gender:self.femaleBtn.selected ? @"female" : @"male" birthday:self.birthdayDate callback:^(NSError *error) {
         
     }];
     DetectionViewController *detectionVC = [[DetectionViewController alloc] init];

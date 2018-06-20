@@ -13,6 +13,8 @@
 @property (nonatomic, readonly, strong) NSString *mac;
 /** 设备名称 */
 @property (nonatomic, readonly, strong) NSString *name;
+/** 型号标识 */
+@property (nonatomic, readonly, strong) NSString *modeId;
 /** 蓝牙名称 */
 @property (nonatomic, readonly, strong) NSString *bluetoothName;
 /** 信号强度 */
