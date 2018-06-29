@@ -14,8 +14,8 @@
 		D232D6542004DE2D00AABD67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D232D6532004DE2D00AABD67 /* Assets.xcassets */; };
 		D232D6572004DE2D00AABD67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D232D6552004DE2D00AABD67 /* LaunchScreen.storyboard */; };
 		D232D65A2004DE2D00AABD67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D232D6592004DE2D00AABD67 /* main.m */; };
-		D2435C2120D9EE1E00FB52C3 /* updateRemind.md in Resources */ = {isa = PBXBuildFile; fileRef = D2435C1B20D9EE1D00FB52C3 /* updateRemind.md */; };
-		D2435C2220D9EE1E00FB52C3 /* libQNDeviceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2435C1C20D9EE1D00FB52C3 /* libQNDeviceSDK.a */; };
+		D24AA81820E62D3F00780BC6 /* libQNDeviceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D24AA80820E62D3D00780BC6 /* libQNDeviceSDK.a */; };
+		D24AA81920E62D3F00780BC6 /* updateRemind.md in Resources */ = {isa = PBXBuildFile; fileRef = D24AA80F20E62D3E00780BC6 /* updateRemind.md */; };
 		D2B9E98820723DEC0020C2B6 /* DetectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B9E97C20723DEC0020C2B6 /* DetectionViewController.m */; };
 		D2B9E98920723DEC0020C2B6 /* ScaleDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B9E97D20723DEC0020C2B6 /* ScaleDataCell.xib */; };
 		D2B9E98A20723DEC0020C2B6 /* DeviceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B9E98020723DEC0020C2B6 /* DeviceTableViewCell.xib */; };
@@ -51,22 +51,22 @@
 		D232D6562004DE2D00AABD67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D232D6582004DE2D00AABD67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D232D6592004DE2D00AABD67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D2435C1120D9EE1C00FB52C3 /* QNBleApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleApi.h; sourceTree = "<group>"; };
-		D2435C1220D9EE1C00FB52C3 /* QNConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNConfig.h; sourceTree = "<group>"; };
-		D2435C1320D9EE1C00FB52C3 /* QNBleConnectionChangeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleConnectionChangeProtocol.h; sourceTree = "<group>"; };
-		D2435C1420D9EE1C00FB52C3 /* QNCallBackConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNCallBackConst.h; sourceTree = "<group>"; };
-		D2435C1520D9EE1D00FB52C3 /* QNBleDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDevice.h; sourceTree = "<group>"; };
-		D2435C1620D9EE1D00FB52C3 /* QNDeviceSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDeviceSDK.h; sourceTree = "<group>"; };
-		D2435C1720D9EE1D00FB52C3 /* QNErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNErrorCode.h; sourceTree = "<group>"; };
-		D2435C1820D9EE1D00FB52C3 /* QNScaleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleData.h; sourceTree = "<group>"; };
-		D2435C1920D9EE1D00FB52C3 /* QNScaleStoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleStoreData.h; sourceTree = "<group>"; };
-		D2435C1A20D9EE1D00FB52C3 /* QNBleStateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleStateProtocol.h; sourceTree = "<group>"; };
-		D2435C1B20D9EE1D00FB52C3 /* updateRemind.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = updateRemind.md; sourceTree = "<group>"; };
-		D2435C1C20D9EE1D00FB52C3 /* libQNDeviceSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libQNDeviceSDK.a; sourceTree = "<group>"; };
-		D2435C1D20D9EE1D00FB52C3 /* QNScaleItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleItemData.h; sourceTree = "<group>"; };
-		D2435C1E20D9EE1D00FB52C3 /* QNUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUser.h; sourceTree = "<group>"; };
-		D2435C1F20D9EE1D00FB52C3 /* QNBleDeviceDiscoveryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDeviceDiscoveryProtocol.h; sourceTree = "<group>"; };
-		D2435C2020D9EE1D00FB52C3 /* QNDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDataProtocol.h; sourceTree = "<group>"; };
+		D24AA80820E62D3D00780BC6 /* libQNDeviceSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libQNDeviceSDK.a; sourceTree = "<group>"; };
+		D24AA80920E62D3E00780BC6 /* QNBleConnectionChangeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleConnectionChangeProtocol.h; sourceTree = "<group>"; };
+		D24AA80A20E62D3E00780BC6 /* QNCallBackConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNCallBackConst.h; sourceTree = "<group>"; };
+		D24AA80B20E62D3E00780BC6 /* QNBleDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDevice.h; sourceTree = "<group>"; };
+		D24AA80C20E62D3E00780BC6 /* QNDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDataProtocol.h; sourceTree = "<group>"; };
+		D24AA80D20E62D3E00780BC6 /* QNBleApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleApi.h; sourceTree = "<group>"; };
+		D24AA80E20E62D3E00780BC6 /* QNDeviceSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDeviceSDK.h; sourceTree = "<group>"; };
+		D24AA80F20E62D3E00780BC6 /* updateRemind.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = updateRemind.md; sourceTree = "<group>"; };
+		D24AA81020E62D3E00780BC6 /* QNBleStateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleStateProtocol.h; sourceTree = "<group>"; };
+		D24AA81120E62D3E00780BC6 /* QNScaleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleData.h; sourceTree = "<group>"; };
+		D24AA81220E62D3E00780BC6 /* QNUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUser.h; sourceTree = "<group>"; };
+		D24AA81320E62D3E00780BC6 /* QNBleDeviceDiscoveryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDeviceDiscoveryProtocol.h; sourceTree = "<group>"; };
+		D24AA81420E62D3E00780BC6 /* QNConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNConfig.h; sourceTree = "<group>"; };
+		D24AA81520E62D3E00780BC6 /* QNScaleStoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleStoreData.h; sourceTree = "<group>"; };
+		D24AA81620E62D3F00780BC6 /* QNScaleItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleItemData.h; sourceTree = "<group>"; };
+		D24AA81720E62D3F00780BC6 /* QNErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNErrorCode.h; sourceTree = "<group>"; };
 		D2B9E97C20723DEC0020C2B6 /* DetectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectionViewController.m; sourceTree = "<group>"; };
 		D2B9E97D20723DEC0020C2B6 /* ScaleDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScaleDataCell.xib; sourceTree = "<group>"; };
 		D2B9E97E20723DEC0020C2B6 /* DeviceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTableViewCell.h; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2435C2220D9EE1E00FB52C3 /* libQNDeviceSDK.a in Frameworks */,
+				D24AA81820E62D3F00780BC6 /* libQNDeviceSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,22 +142,22 @@
 		D27E37372099659F00F4077A /* QNDeviceSDK */ = {
 			isa = PBXGroup;
 			children = (
-				D2435C1C20D9EE1D00FB52C3 /* libQNDeviceSDK.a */,
-				D2435C1120D9EE1C00FB52C3 /* QNBleApi.h */,
-				D2435C1320D9EE1C00FB52C3 /* QNBleConnectionChangeProtocol.h */,
-				D2435C1520D9EE1D00FB52C3 /* QNBleDevice.h */,
-				D2435C1F20D9EE1D00FB52C3 /* QNBleDeviceDiscoveryProtocol.h */,
-				D2435C1A20D9EE1D00FB52C3 /* QNBleStateProtocol.h */,
-				D2435C1420D9EE1C00FB52C3 /* QNCallBackConst.h */,
-				D2435C1220D9EE1C00FB52C3 /* QNConfig.h */,
-				D2435C2020D9EE1D00FB52C3 /* QNDataProtocol.h */,
-				D2435C1620D9EE1D00FB52C3 /* QNDeviceSDK.h */,
-				D2435C1720D9EE1D00FB52C3 /* QNErrorCode.h */,
-				D2435C1820D9EE1D00FB52C3 /* QNScaleData.h */,
-				D2435C1D20D9EE1D00FB52C3 /* QNScaleItemData.h */,
-				D2435C1920D9EE1D00FB52C3 /* QNScaleStoreData.h */,
-				D2435C1E20D9EE1D00FB52C3 /* QNUser.h */,
-				D2435C1B20D9EE1D00FB52C3 /* updateRemind.md */,
+				D24AA80820E62D3D00780BC6 /* libQNDeviceSDK.a */,
+				D24AA80D20E62D3E00780BC6 /* QNBleApi.h */,
+				D24AA80920E62D3E00780BC6 /* QNBleConnectionChangeProtocol.h */,
+				D24AA80B20E62D3E00780BC6 /* QNBleDevice.h */,
+				D24AA81320E62D3E00780BC6 /* QNBleDeviceDiscoveryProtocol.h */,
+				D24AA81020E62D3E00780BC6 /* QNBleStateProtocol.h */,
+				D24AA80A20E62D3E00780BC6 /* QNCallBackConst.h */,
+				D24AA81420E62D3E00780BC6 /* QNConfig.h */,
+				D24AA80C20E62D3E00780BC6 /* QNDataProtocol.h */,
+				D24AA80E20E62D3E00780BC6 /* QNDeviceSDK.h */,
+				D24AA81720E62D3F00780BC6 /* QNErrorCode.h */,
+				D24AA81120E62D3E00780BC6 /* QNScaleData.h */,
+				D24AA81620E62D3F00780BC6 /* QNScaleItemData.h */,
+				D24AA81520E62D3E00780BC6 /* QNScaleStoreData.h */,
+				D24AA81220E62D3E00780BC6 /* QNUser.h */,
+				D24AA80F20E62D3E00780BC6 /* updateRemind.md */,
 			);
 			path = QNDeviceSDK;
 			sourceTree = "<group>";
@@ -244,7 +244,7 @@
 				D232D6542004DE2D00AABD67 /* Assets.xcassets in Resources */,
 				D232D6522004DE2D00AABD67 /* Main.storyboard in Resources */,
 				D2048A5220A6E15600D943BC /* 123456789.qn in Resources */,
-				D2435C2120D9EE1E00FB52C3 /* updateRemind.md in Resources */,
+				D24AA81920E62D3F00780BC6 /* updateRemind.md in Resources */,
 				D2B9E98A20723DEC0020C2B6 /* DeviceTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

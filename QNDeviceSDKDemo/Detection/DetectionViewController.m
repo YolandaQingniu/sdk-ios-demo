@@ -46,7 +46,7 @@ typedef enum{
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedRowHeight = 0;
-    self.currentStyle = QNScaleStateDisconnected;
+    self.currentStyle = DeviceStyleNormal;
     self.bleApi = [QNBleApi sharedBleApi];
     self.bleApi.discoveryListener = self;
     self.bleApi.connectionChangeListener = self;
@@ -91,9 +91,11 @@ typedef enum{
             break;
         case DeviceStyleDisconnect://断开连接/称关机
             [self setDisconnectStyleUI];
+            [self disconnectDevice];
             break;
         default: //默认状态
             [self setNormalStyleUI];
+            [self stopScanDevice];
             break;
     }
 }
@@ -168,7 +170,16 @@ typedef enum{
 
 #pragma mark 链接设备设备
 - (void)connectDevice:(QNBleDevice *)device {
-    [self stopScanDevice];
+    [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark 断开设备
+- (void)disconnectDevice {
+    [_bleApi disconnectDevice:nil callback:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark 停止扫描附近设备
@@ -202,7 +213,7 @@ typedef enum{
     }else if (state == QNScaleStateMeasureCompleted){//测量完成
         self.currentStyle = DeviceStyleMeasuringSucceed;
     }else if (state == QNScaleStateLinkLoss){//断开连接/称关机
-        self.currentStyle = DeviceStyleDisconnect;
+        self.currentStyle = DeviceStyleNormal;
     }
 }
 
@@ -260,6 +271,10 @@ typedef enum{
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.currentStyle == DeviceStyleScanning) {
+        [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {
+            
+        }];
+        self.currentStyle = DeviceStyleLinging;
         QNBleDevice *device = self.deviceAry[indexPath.row];
         [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
             
@@ -270,7 +285,21 @@ typedef enum{
 }
 
 - (IBAction)clickScanBtn:(UIButton *)sender {
-    self.currentStyle = _currentStyle == (DeviceStyleNormal || _currentStyle == DeviceStyleDisconnect) ? DeviceStyleScanning : DeviceStyleNormal;
+    switch (self.currentStyle) {
+        case DeviceStyleScanning: self.currentStyle = DeviceStyleNormal; break;
+        case DeviceStyleLinging:
+        case DeviceStyleLingSucceed:
+        case DeviceStyleMeasuringWeight:
+        case DeviceStyleMeasuringResistance:
+        case DeviceStyleMeasuringHeartRate:
+        case DeviceStyleMeasuringSucceed:
+            self.currentStyle = DeviceStyleDisconnect;
+            break;
+        case DeviceStyleDisconnect: self.currentStyle = DeviceStyleScanning; break;
+        default:
+            self.currentStyle = DeviceStyleScanning;
+            break;
+    }
 }
 
 - (NSMutableArray *)deviceAry {
