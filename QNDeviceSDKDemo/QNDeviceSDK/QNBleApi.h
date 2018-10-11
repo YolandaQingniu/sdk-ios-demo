@@ -18,7 +18,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 0.3.1 】
+ 当前版本【 0.4.0 】
  
  SDK最低配置8.0的系统
  
@@ -89,7 +89,7 @@
 
 /**
  初始化SDK
-
+ 
  @return QNBleApi
  */
 + (QNBleApi *)sharedBleApi;
@@ -99,7 +99,7 @@
  注册SDK
  必须先注册SDK后使用其他操作
  appid以及初始配置文件请向轻牛官方洽谈
-
+ 
  @param appId 需要向官方获取正确的appid
  @param dataFile 配置文件路径
  @param callback 结果回调
@@ -109,7 +109,7 @@
 
 /**
  扫描设备
-
+ 
  @param callback 结果回调
  */
 - (void)startBleDeviceDiscovery:(QNResultCallback)callback;
@@ -117,7 +117,7 @@
 
 /**
  停止扫描
-
+ 
  @param callback 结果回调
  */
 - (void)stopBleDeviceDiscorvery:(QNResultCallback)callback;
@@ -125,7 +125,7 @@
 
 /**
  连接设备
-
+ 
  @param device 连接的设备(该设备对象必须是搜索返回的设备对象)
  @param user 用户信息 (该用户信息对象，必须使用以下"buildUser"构建对象)
  @param callback 结果回调
@@ -135,7 +135,7 @@
 
 /**
  断开设备的连接
-
+ 
  @param device 当前连接的设备(可不传)
  @param callback 结果回调
  */
@@ -144,7 +144,7 @@
 
 /**
  获取SDK的当前设置情况
-
+ 
  @return QNConfig
  */
 - (QNConfig *)getConfig;
@@ -152,7 +152,7 @@
 
 /**
  根据提供的kg数值的体重，转化为指定单位的数值
-
+ 
  @param kgWeight kg单位的体重
  @param unit QNUnit kg、lb，所有秤都能够支持这个单位; 斤，秤端如果不支持，则会显示kg (不支持ST的转换)
  @return 结果回调
@@ -171,4 +171,18 @@
  */
 - (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(QNResultCallback)callback;
 
+/**
+ 建立用户模型
+
+ @param userId 用户id
+ @param height 用户身高
+ @param gender 用户性别 male female
+ @param birthday 用户的出生日期 age 3~80
+ @param athleteType 是否是运动员模式
+ @param callback 结果的回调
+ @return QNUser
+ */
+- (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday athleteType:(int)athleteType callback:(QNResultCallback)callback;
+
 @end
+

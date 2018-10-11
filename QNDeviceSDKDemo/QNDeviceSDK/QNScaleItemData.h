@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, QNValueType) {
 typedef NS_ENUM(NSInteger, QNScaleType) {
     QNScaleTypeWeight = 1, //体重
     QNScaleTypeBMI = 2, //BMI
-    QNScaleTypeBodyFatRage = 3, //体脂率
+    QNScaleTypeBodyFatRate = 3, //体脂率
     QNScaleTypeSubcutaneousFat = 4, //皮下脂肪率
     QNScaleTypeVisceralFat = 5, //内脏脂肪等级
     QNScaleTypeBodyWaterRate = 6, //身体水分率
