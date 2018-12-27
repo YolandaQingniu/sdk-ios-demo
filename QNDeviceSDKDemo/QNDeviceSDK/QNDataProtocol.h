@@ -37,4 +37,12 @@
  */
 - (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray <QNScaleStoreData *> *)storedDataList;
 
+/**
+ 充电款电量的监听
+
+ @param electric electric
+ @param device QNBleDevice
+ */
+- (void)onGetElectric:(NSUInteger)electric device:(QNBleDevice *)device;;
+
 @end

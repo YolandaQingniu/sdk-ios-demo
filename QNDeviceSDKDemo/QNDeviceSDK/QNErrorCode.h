@@ -34,5 +34,5 @@ typedef NS_ENUM(NSInteger, QNBleErrorCode) {
     QNBleErrorCodeUserHeight = 1206,
     QNBleErrorCodeUserBirthday = 1207,
     QNBleErrorCodeUserAthleteType = 1209,
-
+    QNBleErrorCodeUserShapeGoalType = 1210,
 };

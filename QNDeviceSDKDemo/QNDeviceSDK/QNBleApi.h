@@ -18,7 +18,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 0.4.1 】
+ 当前版本【 0.4.2 】
  
  SDK最低配置8.0的系统
  
@@ -170,19 +170,6 @@
  @return QNUser
  */
 - (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(QNResultCallback)callback;
-
-/**
- 建立用户模型
-
- @param userId 用户id
- @param height 用户身高
- @param gender 用户性别 male female
- @param birthday 用户的出生日期 age 3~80
- @param athleteType 是否是运动员模式
- @param callback 结果的回调
- @return QNUser
- */
-- (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday athleteType:(YLAthleteType)athleteType callback:(QNResultCallback)callback;
 
 @end
 
