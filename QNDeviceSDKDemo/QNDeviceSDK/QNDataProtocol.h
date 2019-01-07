@@ -43,6 +43,20 @@
  @param electric electric
  @param device QNBleDevice
  */
-- (void)onGetElectric:(NSUInteger)electric device:(QNBleDevice *)device;;
+- (void)onGetElectric:(NSUInteger)electric device:(QNBleDevice *)device;
+
+/**
+ 拍照回调
+
+ @param device QNBleDevice
+ */
+- (void)strikeTakePhotosWithDevice:(QNBleDevice *)device;
+
+/**
+ 查找手机回调
+
+ @param device QNBleDevice
+ */
+- (void)strikeFindPhoneWithDevice:(QNBleDevice *)device;
 
 @end

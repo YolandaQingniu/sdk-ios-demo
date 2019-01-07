@@ -23,6 +23,20 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
     QNUnitST = 3,
 };
 
+
+/**
+ 扫描类型
+
+ - QNScanAll: 扫描所有设备
+ - QNScanScale: 仅返回秤设备
+ - QNScanBand: 仅返回手环设备
+ */
+typedef NS_ENUM(NSUInteger, QNScanType) {
+    QNScanAll = 0,
+    QNScanScale = 1,
+    QNScanBand = 2,
+};
+
 /**
  该QNConfig类，用户设置后，SDK会自动保存设置信息，当再次用到类中的设置信息时，会采用用户上次设置的信息
  */
@@ -43,6 +57,9 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
 
 /** 端显示的单位，不设置的话，SDK默认为kg，设置后会保存本地，如果当前已经连接设备，会尽量实时更新秤端的单位显示 */
 @property (nonatomic, assign) QNUnit unit;
+
+/** 设置扫描对象 */
+@property (nonatomic, assign) QNScanType scanType;
 
 /**
  该设置只有在 调用 "- (void)initSdk:(NSString *)appId firstDataFile:(NSString *)dataFile callback:(QNResultCallback)callback" 方法前设置才有效，若在调用该方法后面再设置，SDK会在下次重新启动SDK的时候自动配置该设置.

@@ -8,3 +8,4 @@
 //
 
 typedef void(^QNResultCallback) (NSError *error);
+typedef void(^QNObjCallback) (id obj, NSError *error);

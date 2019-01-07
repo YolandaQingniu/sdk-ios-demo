@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F2X-eM-oUn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F2X-eM-oUn">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -107,7 +107,7 @@
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="170cm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMn-gR-7U7" userLabel="高度">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMn-gR-7U7" userLabel="高度">
                                                         <rect key="frame" x="115" y="5" width="150" height="40"/>
                                                         <gestureRecognizers/>
                                                         <constraints>
@@ -173,7 +173,7 @@
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="bezel" placeholder="单行输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-Gm-ugP" userLabel="ID输入框">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="单行输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-Gm-ugP" userLabel="ID输入框">
                                                         <rect key="frame" x="125" y="3" width="135" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="n9z-2p-iCC"/>
@@ -240,7 +240,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="im6-GL-mDI" userLabel="女Btn">
-                                                        <rect key="frame" x="202" y="8.5" width="35" height="35"/>
+                                                        <rect key="frame" x="202" y="8" width="35" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="3PY-2c-IWe"/>
                                                             <constraint firstAttribute="width" constant="35" id="4o4-o9-AX8"/>
@@ -255,7 +255,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ik1-Rp-K4Y" userLabel="男Btn">
-                                                        <rect key="frame" x="129" y="8.5" width="35" height="35"/>
+                                                        <rect key="frame" x="129" y="8" width="35" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="35" id="9ba-ie-Jml"/>
                                                             <constraint firstAttribute="height" constant="35" id="eNb-EV-sW2"/>
@@ -328,7 +328,7 @@
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1992-12-10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvQ-xc-TZD" userLabel="日期">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvQ-xc-TZD" userLabel="日期">
                                                         <rect key="frame" x="118" y="5" width="150" height="30"/>
                                                         <gestureRecognizers/>
                                                         <constraints>
@@ -375,12 +375,25 @@
                                                     <constraint firstItem="GOI-z7-2eo" firstAttribute="leading" secondItem="buf-aF-Xgf" secondAttribute="leading" id="qkC-2F-L07"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWO-q4-NvW">
+                                                <rect key="frame" x="210" y="5" width="100" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="96F-Er-0DF"/>
+                                                </constraints>
+                                                <state key="normal" title="已绑定手环">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="turnToBandVC:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yas-Mg-Ufl"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="9kE-QO-fS3" secondAttribute="trailing" id="48o-qZ-gwU"/>
                                             <constraint firstItem="9kE-QO-fS3" firstAttribute="top" secondItem="klU-Ez-oj5" secondAttribute="bottom" id="4DS-V7-rgU"/>
+                                            <constraint firstAttribute="trailing" secondItem="LWO-q4-NvW" secondAttribute="trailing" constant="10" id="4dw-9H-Rz3"/>
                                             <constraint firstItem="thy-Ig-HxL" firstAttribute="top" secondItem="1uz-9t-PNa" secondAttribute="top" id="61H-ef-Aeb"/>
                                             <constraint firstItem="klU-Ez-oj5" firstAttribute="leading" secondItem="1uz-9t-PNa" secondAttribute="leading" id="7Ce-i3-Yxy"/>
                                             <constraint firstItem="thy-Ig-HxL" firstAttribute="top" secondItem="1uz-9t-PNa" secondAttribute="top" id="9G9-hn-s7N"/>
@@ -390,11 +403,13 @@
                                             <constraint firstAttribute="height" constant="450" id="HCz-y5-F1B"/>
                                             <constraint firstItem="yNT-Xt-cXk" firstAttribute="top" secondItem="9kE-QO-fS3" secondAttribute="bottom" id="Jel-Aj-ECg"/>
                                             <constraint firstItem="buf-aF-Xgf" firstAttribute="leading" secondItem="1uz-9t-PNa" secondAttribute="leading" id="K97-mZ-nlr"/>
+                                            <constraint firstItem="klU-Ez-oj5" firstAttribute="top" secondItem="LWO-q4-NvW" secondAttribute="bottom" constant="5" id="NKc-t5-DK5"/>
                                             <constraint firstItem="yNT-Xt-cXk" firstAttribute="top" secondItem="9kE-QO-fS3" secondAttribute="bottom" id="TUo-h0-QFB"/>
                                             <constraint firstAttribute="trailing" secondItem="thy-Ig-HxL" secondAttribute="trailing" constant="10" id="XCO-QM-YAv"/>
                                             <constraint firstItem="thy-Ig-HxL" firstAttribute="leading" secondItem="1uz-9t-PNa" secondAttribute="leading" constant="10" id="ZNe-OW-0Ht"/>
                                             <constraint firstItem="buf-aF-Xgf" firstAttribute="top" secondItem="yNT-Xt-cXk" secondAttribute="bottom" id="aiq-cO-W8f"/>
                                             <constraint firstItem="9kE-QO-fS3" firstAttribute="top" secondItem="klU-Ez-oj5" secondAttribute="bottom" id="b85-rC-JRw"/>
+                                            <constraint firstItem="LWO-q4-NvW" firstAttribute="top" secondItem="1uz-9t-PNa" secondAttribute="top" constant="5" id="dTN-zp-VoQ"/>
                                             <constraint firstAttribute="trailing" secondItem="yNT-Xt-cXk" secondAttribute="trailing" id="oMj-si-srg"/>
                                             <constraint firstItem="yNT-Xt-cXk" firstAttribute="leading" secondItem="1uz-9t-PNa" secondAttribute="leading" id="sv1-6U-0Tf"/>
                                             <constraint firstItem="klU-Ez-oj5" firstAttribute="top" secondItem="thy-Ig-HxL" secondAttribute="bottom" id="tbK-rg-KMM"/>
@@ -460,7 +475,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="首次" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak4-yo-iBP">
-                                                        <rect key="frame" x="155" y="5.5" width="38" height="30"/>
+                                                        <rect key="frame" x="155" y="5" width="38" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="38" id="Kjs-Z3-l9y"/>
                                                             <constraint firstAttribute="height" constant="30" id="ToC-XZ-yap"/>
@@ -575,7 +590,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="st" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIH-K9-hdB">
-                                                        <rect key="frame" x="290" y="5.5" width="20" height="30"/>
+                                                        <rect key="frame" x="290" y="5" width="20" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="I8J-gZ-4Kd"/>
                                                             <constraint firstAttribute="height" constant="30" id="mPM-az-I0g"/>
@@ -715,6 +730,7 @@ st 英石，如果称端不支持会显示lb</string>
                     <navigationItem key="navigationItem" title="设置" id="jEW-Cm-03T"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="bandBtn" destination="LWO-q4-NvW" id="luC-ZW-NwR"/>
                         <outlet property="birthdayLabel" destination="yvQ-xc-TZD" id="idM-EN-6bF"/>
                         <outlet property="everyBtn" destination="Vqi-7o-TuP" id="w4P-ng-OGe"/>
                         <outlet property="femaleBtn" destination="im6-GL-mDI" id="Bji-hx-v1q"/>
@@ -744,8 +760,8 @@ st 英石，如果称端不支持会显示lb</string>
         </scene>
     </scenes>
     <resources>
-        <image name="arrow_icon" width="21" height="21"/>
-        <image name="notSelect_icon" width="30" height="30"/>
-        <image name="select_icon" width="30" height="30"/>
+        <image name="arrow_icon" width="42" height="42"/>
+        <image name="notSelect_icon" width="61" height="60"/>
+        <image name="select_icon" width="61" height="60"/>
     </resources>
 </document>

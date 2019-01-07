@@ -14,6 +14,7 @@
 #import "QNDataProtocol.h"
 #import "QNUser.h"
 #import "QNConfig.h"
+#import "QNBandManager.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
@@ -54,6 +55,7 @@
  
  */
 
+NS_ASSUME_NONNULL_BEGIN
 @interface QNBleApi : NSObject
 
 /** 是否打开调试开关 默认为NO (建议发布版本时,设置为NO) */
@@ -104,7 +106,7 @@
  @param dataFile 配置文件路径
  @param callback 结果回调
  */
-- (void)initSdk:(NSString *)appId firstDataFile:(NSString *)dataFile callback:(QNResultCallback)callback;
+- (void)initSdk:(NSString *)appId firstDataFile:(NSString *)dataFile callback:(nullable QNResultCallback)callback;
 
 
 /**
@@ -112,34 +114,51 @@
  
  @param callback 结果回调
  */
-- (void)startBleDeviceDiscovery:(QNResultCallback)callback;
+- (void)startBleDeviceDiscovery:(nullable QNResultCallback)callback;
 
+
+/**
+ 从系统中获取已经配对的设备（当接入手环时才启作用，仅接入秤时忽略该方法）
+ 
+ 用于获取已经和系统配对的手环
+ 
+ 调用该方法时，会自动启动扫描
+ 
+ 当手环和系统配对时，无法再从广播数据中获取手环设备，必须从系统配对列表中获取设备，进行连接。因此如果有绑定的手环，后续搜索设备时，必须调用该方法。
+ 当获取到已经配对的设备后，会通过 “- (void)onDeviceDiscover:(QNBleDevice *)device;”回调设备
+
+ @param mac 已配对的设备的mac
+ @param modeId 已配对的设备的modeID
+ @param uuidIdentifier 已配对的设备的uuidIdentifier
+ @param callback 结果回调
+ */
+- (void)findPairBandWithMac:(NSString *)mac modeId:(NSString *)modeId uuidIdentifier:(NSString *)uuidIdentifier callback:(nullable QNResultCallback)callback;
 
 /**
  停止扫描
  
  @param callback 结果回调
  */
-- (void)stopBleDeviceDiscorvery:(QNResultCallback)callback;
+- (void)stopBleDeviceDiscorvery:(nullable QNResultCallback)callback;
 
 
 /**
  连接设备
  
  @param device 连接的设备(该设备对象必须是搜索返回的设备对象)
- @param user 用户信息 (该用户信息对象，必须使用以下"buildUser"构建对象)
+ @param user 用户信息,连接秤时user不可以为nil
  @param callback 结果回调
  */
-- (void)connectDevice:(QNBleDevice *)device user:(QNUser *)user callback:(QNResultCallback)callback;
+- (void)connectDevice:(QNBleDevice *)device user:(nullable QNUser *)user callback:(nullable QNResultCallback)callback;
 
 
 /**
  断开设备的连接
  
- @param device 当前连接的设备(可不传)
+ @param device 当前连接的设备
  @param callback 结果回调
  */
-- (void)disconnectDevice:(QNBleDevice *)device callback:(QNResultCallback)callback;
+- (void)disconnectDevice:(QNBleDevice *)device callback:(nullable QNResultCallback)callback;
 
 
 /**
@@ -169,7 +188,13 @@
  @param callback 结果的回调
  @return QNUser
  */
-- (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(QNResultCallback)callback;
+- (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(nullable QNResultCallback)callback NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "请自行构建对象");
 
+/**
+ 获取手环管理类
+
+ @return QNBandManager
+ */
+- (QNBandManager *)getBandManager;
 @end
-
+NS_ASSUME_NONNULL_END

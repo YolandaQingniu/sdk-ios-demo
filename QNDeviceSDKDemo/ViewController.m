@@ -10,6 +10,7 @@
 #import "PickerView.h"
 #import "DetectionViewController.h"
 #import "QNBleApi.h"
+#import "BandVC.h"
 
 @interface ViewController ()<PickerViewDelegate,UITextFieldDelegate>
 
@@ -18,8 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *birthdayLabel;
 @property (weak, nonatomic) IBOutlet UIButton *femaleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *maleBtn;
-
-@property (nonatomic, strong) NSDate *birthdayDate;
+@property (weak, nonatomic) IBOutlet UIButton *bandBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *everyBtn;
 @property (weak, nonatomic) IBOutlet UIButton *firstBtn;
@@ -34,6 +34,8 @@
 @property (nonatomic, strong) QNConfig *config;
 @property (nonatomic, strong) UIButton *selectBtn;
 
+@property (nonatomic, strong) NSDate *birthdayDate;
+
 @end
 
 @implementation ViewController
@@ -44,36 +46,42 @@
     self.bleApi = [QNBleApi sharedBleApi];
     self.config = [self.bleApi getConfig];
     
-    self.pickerView.defaultHeight = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
+    [self setDefaultValue];
+    
+}
+
+- (void)setDefaultValue {
+    self.userIdTF.text = @"123456";
+    self.maleBtn.selected = YES;
+    self.heightLabel.text = @"170cm";
+    self.birthdayLabel.text = @"1990-01-01";
+    
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    dateComponents.year = 2000;
+    dateComponents.year = 1990;
     dateComponents.month = 1;
     dateComponents.day = 1;
     self.birthdayDate = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
     self.birthdayLabel.text = [self.pickerView.dateFormatter stringFromDate:self.birthdayDate];
-    self.pickerView.defaultBirthday = self.birthdayDate;
-    switch (self.config.unit) {
-        case QNUnitLB:
-            [self setSelectUnitWith:self.lbBtn];
-            break;
-        case QNUnitST:
-            [self setSelectUnitWith:self.stBtn];
-            break;
-        case QNUnitJIN:
-            [self setSelectUnitWith:self.jinBtn];
-            break;
-        default:
-            [self setSelectUnitWith:self.kgBtn];
-            break;
-    }
-
-    [self selectMaleBtn:self.maleBtn];
     
+    self.pickerView.defaultHeight = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
+    self.pickerView.defaultBirthday = self.birthdayDate;
+    
+    [self selectUnit:self.config.unit];
+
     if (self.config.allowDuplicates) {
         [self selectEveryBtn:self.everyBtn];
     }else {
         [self selectFirstBtn:self.firstBtn];
     }
+    
+//    self.bandBtn.backgroundColor = [UIColor grayColor];
+//    self.bandBtn.enabled = NO;
+    
+}
+
+- (IBAction)turnToBandVC:(UIButton *)sender {
+    BandVC *bandVc = [[BandVC alloc] init];
+    [self.navigationController pushViewController:bandVc animated:YES];
 }
 
 #pragma mark - 确认用户ID
@@ -83,7 +91,7 @@
     return YES;
 }
 
-#pragma mark - 选择身高
+#pragma mark 选择身高
 - (IBAction)selectHeight:(UITapGestureRecognizer *)sender {
     self.pickerView.type = PickerViewTypeHeight;
     self.pickerView.hidden = NO;
@@ -93,7 +101,7 @@
     self.heightLabel.text = [NSString stringWithFormat:@"%ldcm",height];
 }
 
-#pragma mark - 选择生日
+#pragma mark 选择生日
 - (IBAction)selectBirthday:(UITapGestureRecognizer *)sender {
     self.pickerView.type = PickerViewTypeBirthday;
     self.pickerView.defaultBirthday = self.birthdayDate;
@@ -120,8 +128,7 @@
     self.femaleBtn.selected = NO;
 }
 
-#pragma mark - 选扫描模式
-#pragma mark 选中扫描模式-每次
+#pragma mark - 选中扫描模式-每次
 - (IBAction)selectEveryBtn:(UIButton *)sender {
     if (sender.isSelected) return;
     sender.selected = YES;
@@ -137,49 +144,55 @@
     self.config.allowDuplicates = NO;
 }
 
-#pragma mark - 选称量单位
-#pragma mark 选中称量单位-斤
+#pragma mark - 选中称量单位-斤
 - (IBAction)selectJinBtn:(UIButton *)sender {
-    [self setSelectUnitWith:sender];
+    [self selectUnit:QNUnitJIN];
 }
 
 #pragma mark 选中称量单位-st
 - (IBAction)selectStBtn:(UIButton *)sender {
-    [self setSelectUnitWith:sender];
+    [self selectUnit:QNUnitST];
 }
 
 #pragma mark 选中称量单位-kg
 - (IBAction)selectKgBtn:(UIButton *)sender {
-    [self setSelectUnitWith:sender];
+    [self selectUnit:QNUnitKG];
 }
 
 #pragma mark 选中称量单位-lb
 - (IBAction)selectLbBtn:(UIButton *)sender {
-    [self setSelectUnitWith:sender];
+    [self selectUnit:QNUnitLB];
 }
 
-- (void)setSelectUnitWith:(UIButton *)sender {
-    if (sender.isSelected) return;
-    _selectBtn.selected = NO;
-    sender.selected = YES;
-    _selectBtn = sender;
-    //保存设置秤的单位 0 为 kg，默认值;  1 为 lb  2 为 斤 3 为 st
-    int index = (int)sender.tag - 100;
-    switch (index) {
-            case 1:
-            self.config.unit = QNUnitLB;
+- (void)selectUnit:(QNUnit)unit {
+    self.config.unit = unit;
+    switch (unit) {
+            case QNUnitLB:
+            self.kgBtn.selected = NO;
+            self.jinBtn.selected = NO;
+            self.stBtn.selected = NO;
+            self.lbBtn.selected = YES;
             break;
             
-            case 2:
-            self.config.unit = QNUnitJIN;
+            case QNUnitJIN:
+            self.kgBtn.selected = NO;
+            self.jinBtn.selected = YES;
+            self.stBtn.selected = NO;
+            self.lbBtn.selected = NO;
             break;
             
-            case 3:
-            self.config.unit = QNUnitST;
+            case QNUnitST:
+            self.kgBtn.selected = NO;
+            self.jinBtn.selected = NO;
+            self.stBtn.selected = YES;
+            self.lbBtn.selected = NO;
             break;
             
         default:
-            self.config.unit = QNUnitKG;
+            self.kgBtn.selected = YES;
+            self.jinBtn.selected = NO;
+            self.stBtn.selected = NO;
+            self.lbBtn.selected = NO;
             break;
     }
 }

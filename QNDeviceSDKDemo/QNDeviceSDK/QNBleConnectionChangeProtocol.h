@@ -19,6 +19,8 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
     QNScaleStateBodyFat = 7, //正在测试生物阻抗
     QNScaleStateHeartRate = 8, //正在测试心率
     QNScaleStateMeasureCompleted = 9, //测量完成
+    QNScaleStateInteraction = 10, //通讯通道开启(手环专属)
+
 };
 
 @protocol QNBleConnectionChangeListener <NSObject>
@@ -62,15 +64,13 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
  */
 - (void)onConnectError:(QNBleDevice *)device error:(NSError *)error;
 
-
-
 /**
  秤连接或测量状态变化
 
  @param device QNBleDevice
  @param state 状态
  */
-- (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state;
+- (void)onDeviceStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state;
 
 @end
 

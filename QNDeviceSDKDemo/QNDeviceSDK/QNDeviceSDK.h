@@ -27,6 +27,16 @@ FOUNDATION_EXPORT const unsigned char QNDeviceSDKVersionString[];
 #import "QNScaleStoreData.h"
 #import "QNConfig.h"
 #import "QNCallBackConst.h"
+#import "QNBandManager.h"
+#import "QNBandInfo.h"
+#import "QNAlarm.h"
+#import "QNWeek.h"
+#import "QNBandMetrics.h"
+#import "QNSitRemind.h"
+#import "QNThirdRemind.h"
+#import "QNCleanInfo.h"
+#import "QNBandBaseConfig.h"
+#import "QNHealthData.h"
 
 
 
