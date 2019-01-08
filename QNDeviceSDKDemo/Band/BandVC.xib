@@ -16,6 +16,7 @@
                 <outlet property="hardwareLabel" destination="krQ-XC-9bg" id="kLt-gb-0kC"/>
                 <outlet property="macLabel" destination="CVR-2L-Mug" id="RLI-GZ-61X"/>
                 <outlet property="modeIdLabel" destination="Fam-c4-gST" id="xQQ-4N-pNC"/>
+                <outlet property="stateLabel" destination="dd5-0f-JYB" id="RqN-AW-ldA"/>
                 <outlet property="topConstraint" destination="sZU-RD-soM" id="Hyd-ex-LT4"/>
                 <outlet property="view" destination="1Yh-3K-Adw" id="8gR-Au-yoc"/>
             </connections>

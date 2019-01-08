@@ -6,11 +6,18 @@
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BandBaseVC.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BandVC : UIViewController
+typedef NS_ENUM(NSUInteger, BandComeStyle) {
+    BandComeConfig = 0,
+    BandComeScan,
+};
+
+@interface BandVC : BandBaseVC
+
+@property (nonatomic, assign) BandComeStyle comeStyle;
 
 @end
 

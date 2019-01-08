@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import "PickerView.h"
 #import "DetectionViewController.h"
-#import "QNBleApi.h"
 #import "BandVC.h"
 
 @interface ViewController ()<PickerViewDelegate,UITextFieldDelegate>
@@ -74,9 +73,17 @@
         [self selectFirstBtn:self.firstBtn];
     }
     
-//    self.bandBtn.backgroundColor = [UIColor grayColor];
-//    self.bandBtn.enabled = NO;
-    
+    if ([BandMessage sharedBandMessage].mac.length == 0) {
+        self.bandBtn.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.3];
+        [self.bandBtn setTitle:@"未绑定手环" forState:UIControlStateNormal];
+        [self.bandBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        self.bandBtn.enabled = NO;
+    }else {
+        self.bandBtn.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
+        [self.bandBtn setTitle:@"已绑定手环" forState:UIControlStateNormal];
+        [self.bandBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        self.bandBtn.enabled = YES;
+    }
 }
 
 - (IBAction)turnToBandVC:(UIButton *)sender {

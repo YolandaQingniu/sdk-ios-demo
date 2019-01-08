@@ -1,0 +1,3 @@
+github "Tencent/MMKV"
+github "jdg/MBProgressHUD" ~> 1.1.0
+github "google/promises"

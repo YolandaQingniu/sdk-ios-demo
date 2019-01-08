@@ -52,22 +52,45 @@
 }
 
 - (IBAction)reboot:(UIButton *)sender {
-    
+    [[[QNBleApi sharedBleApi] getBandManager] rebootCallback:^(NSError *error) {
+        
+    }];
 }
 
 - (IBAction)lossRemindSwitch:(UISwitch *)sender {
+    
 }
 
 - (IBAction)handRecognizeSwitch:(UISwitch *)sender {
+    [[[QNBleApi sharedBleApi] getBandManager] syncHandRecognizeModeWithOpenFlag:sender.isOn callback:^(NSError *error) {
+        if (error == nil) {
+            [BandMessage sharedBandMessage].handRecognize = sender.isOn;
+        }
+    }];
 }
 
 - (IBAction)heartRateObserverSwitch:(UISwitch *)sender {
+    
+    [[[QNBleApi sharedBleApi] getBandManager] syncHeartRateObserverModeWithAutoFlag:sender.isOn callback:^(NSError *error) {
+        if (error == nil) {
+            [BandMessage sharedBandMessage].heartRateObserver = sender.isOn;
+        }
+    }];
+    
 }
 
 - (IBAction)findPhoneSwitch:(UISwitch *)sender {
+    [[[QNBleApi sharedBleApi] getBandManager] syncFindPhoneWithOpenFlag:sender.isOn callback:^(NSError *error) {
+        if (error == nil) {
+            [BandMessage sharedBandMessage].findPhone = sender.isOn;
+        }
+    }];
 }
 
 - (IBAction)cameraSwitch:(UISwitch *)sender {
+    [[[QNBleApi sharedBleApi] getBandManager] syncCameraModeWithEnterFlag:sender.isOn callback:^(NSError *error) {
+        
+    }];
 }
 
 @end

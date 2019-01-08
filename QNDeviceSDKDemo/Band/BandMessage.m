@@ -68,7 +68,7 @@ static BandMessage *bandMessage = nil;
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        bandMessage = [[BandMessage allocWithZone:zone] init];
+        bandMessage = [[super allocWithZone:zone] init];
     });
     return bandMessage;
 }

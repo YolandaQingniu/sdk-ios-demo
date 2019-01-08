@@ -22,6 +22,7 @@ typedef enum{
 #import "DetectionViewController.h"
 #import "DeviceTableViewCell.h"
 #import "ScaleDataCell.h"
+#import "BandVC.h"
 
 @interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
@@ -276,9 +277,20 @@ typedef enum{
         }];
         self.currentStyle = DeviceStyleLinging;
         QNBleDevice *device = self.deviceAry[indexPath.row];
-        [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
+        if (device.deviceType == QNDeviceBand) {
+            BandMessage *bandMessage = [BandMessage sharedBandMessage];
+            bandMessage.mac = device.mac;
+            bandMessage.modeId = device.modeId;
+            bandMessage.uuidString = device.uuidIdentifier;
+            bandMessage.blueToothName = device.bluetoothName;
             
-        }];
+            BandVC *bandVc = [[BandVC alloc] init];
+            [self.navigationController pushViewController:bandVc animated:YES];
+        }else {
+            [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
+                
+            }];
+        }
     }else {
         
     }
