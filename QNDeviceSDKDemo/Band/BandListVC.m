@@ -16,6 +16,9 @@
 
 @interface BandListVC ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
+@property (weak, nonatomic) IBOutlet UISwitch *handRecogizerSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *heartRateModeSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *findPhoneSwitch;
 
 @end
 
@@ -24,6 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.topConstraint.constant = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame) + 44 + 10;
+    self.handRecogizerSwitch.on = [BandMessage sharedBandMessage].handRecognize;
+    self.heartRateModeSwitch.on = [BandMessage sharedBandMessage].heartRateObserver;
+    self.findPhoneSwitch.on = [BandMessage sharedBandMessage].findPhone;
 }
 
 - (IBAction)turnToAlarmVc:(UIButton *)sender {
@@ -52,44 +58,86 @@
 }
 
 - (IBAction)reboot:(UIButton *)sender {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在恢复出厂设置...";
     [[[QNBleApi sharedBleApi] getBandManager] rebootCallback:^(NSError *error) {
-        
+        if (error) {
+            hud.label.text = @"恢复出厂设置失败";
+        }else {
+            BandMessage *message = [BandMessage sharedBandMessage];
+            NSString *bleName = message.blueToothName;
+            NSString *modeId = message.modeId;
+            NSString *uuid = message.uuidString;
+            NSString *mac = message.mac;
+            [message cleanBandMessage];
+            message.blueToothName = bleName;
+            message.modeId = modeId;
+            message.uuidString = uuid;
+            message.mac = mac;
+            hud.label.text = @"恢复出厂设置成功";
+        }
+        [hud hideAnimated:YES afterDelay:1];
     }];
 }
 
-- (IBAction)lossRemindSwitch:(UISwitch *)sender {
-    
-}
-
 - (IBAction)handRecognizeSwitch:(UISwitch *)sender {
-    [[[QNBleApi sharedBleApi] getBandManager] syncHandRecognizeModeWithOpenFlag:sender.isOn callback:^(NSError *error) {
-        if (error == nil) {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在同步...";
+    [[[QNBleApi sharedBleApi] getBandManager] syncHandRecognizeModeWithOpenFlag:sender.on callback:^(NSError *error) {
+        if (error) {
+            hud.label.text = @"同步失败...";
+            sender.on = !sender.on;
+        }else {
+            hud.label.text = @"同步成功";
             [BandMessage sharedBandMessage].handRecognize = sender.isOn;
         }
+        [hud hideAnimated:YES afterDelay:1];
     }];
 }
 
 - (IBAction)heartRateObserverSwitch:(UISwitch *)sender {
-    
-    [[[QNBleApi sharedBleApi] getBandManager] syncHeartRateObserverModeWithAutoFlag:sender.isOn callback:^(NSError *error) {
-        if (error == nil) {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在同步...";
+    [[[QNBleApi sharedBleApi] getBandManager] syncHeartRateObserverModeWithAutoFlag:sender.on callback:^(NSError *error) {
+        if (error) {
+            hud.label.text = @"同步失败...";
+            sender.on = !sender.on;
+        }else {
+            hud.label.text = @"同步成功";
             [BandMessage sharedBandMessage].heartRateObserver = sender.isOn;
         }
+        [hud hideAnimated:YES afterDelay:1];
     }];
     
 }
 
 - (IBAction)findPhoneSwitch:(UISwitch *)sender {
-    [[[QNBleApi sharedBleApi] getBandManager] syncFindPhoneWithOpenFlag:sender.isOn callback:^(NSError *error) {
-        if (error == nil) {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在同步...";
+    [[[QNBleApi sharedBleApi] getBandManager] syncFindPhoneWithOpenFlag:sender.on callback:^(NSError *error) {
+        if (error) {
+            hud.label.text = @"同步失败...";
+            sender.on = !sender.on;
+        }else {
+            hud.label.text = @"同步成功";
             [BandMessage sharedBandMessage].findPhone = sender.isOn;
         }
+        [hud hideAnimated:YES afterDelay:1];
     }];
 }
 
 - (IBAction)cameraSwitch:(UISwitch *)sender {
-    [[[QNBleApi sharedBleApi] getBandManager] syncCameraModeWithEnterFlag:sender.isOn callback:^(NSError *error) {
-        
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在进入拍照模式...";
+    BOOL openFlag = sender.on;
+    [[[QNBleApi sharedBleApi] getBandManager] syncCameraModeWithEnterFlag:openFlag callback:^(NSError *error) {
+        if (error) {
+            hud.label.text = @"正在进入拍照模式失败...";
+            sender.on = !openFlag;
+        }else {
+            hud.label.text = @"正在进入拍照模式成功";
+        }
+        [hud hideAnimated:YES afterDelay:1];
     }];
 }
 

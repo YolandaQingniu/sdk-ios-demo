@@ -22,12 +22,18 @@
 #define BandMMKVLengthUnitKey @"bandMmkvLengthUnitKey"
 #define BandMMKVLanguageKey @"bandMmkvLanguageKey"
 #define BandMMKVHourFormatKey @"bandMmkvHourFormatKey"
+#define BandMMKVUserKey @"bandMmkvUserKey"
 #define BandMMKVLossRemindKey @"bandMmkvLossRemindKey"
 #define BandMMKVMHeartRateObserverKey @"bandMmkvHeartRateObserverKey"
 #define BandMMKVFindPhoneOpenKey @"bandMmkvFindPhoneOpenKey"
 #define BandMMKVHandRecognizeKey @"bandMmkvHandRecognizeKey"
 #define BandMMKVSitRemindKey @"bandMmkvSitRemindKey"
 #define BandMMKVThirdRemindKey @"bandMmkvThirdRemindKey"
+
+#define BandMMKVUserWeightKey @"weightKey"
+#define BandMMKVUserHeightKey @"heihgtKey"
+#define BandMMKVUserBirthdayKey @"birthdayKey"
+#define BandMMKVUserGenderKey @"genderKey"
 
 #define BandMMKVAlarmIDKey @"alarmId"
 #define BandMMKVAlarmHourKey @"hourKey"
@@ -245,6 +251,30 @@ static BandMessage *bandMessage = nil;
     [self.mmkv setInt32:(int)hourFormat forKey:BandMMKVHourFormatKey];
 }
 
+- (QNUser *)user {
+    NSData *data = [self.mmkv getDataForKey:BandMMKVUserKey];
+    QNUser *user = nil;
+    if (data != nil) {
+        NSMutableDictionary<NSString *,id> *dis = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        user = [[QNUser alloc] init];
+        user.gender = [dis valueForKey:BandMMKVUserGenderKey];
+        user.weight = [[dis valueForKey:BandMMKVUserWeightKey] doubleValue];
+        user.height = [[dis valueForKey:BandMMKVUserHeightKey] intValue];
+        user.birthday = [NSDate dateWithTimeIntervalSince1970:[[dis valueForKey:BandMMKVUserBirthdayKey] longLongValue]];
+    }
+    return user;
+}
+
+- (void)setUser:(QNUser *)user {
+    NSMutableDictionary<NSString *,id> *userDis = [NSMutableDictionary<NSString *,id> dictionary];
+    [userDis setObject:user.gender forKey:BandMMKVUserGenderKey];
+    [userDis setObject:[NSNumber numberWithInt:user.height] forKey:BandMMKVUserWeightKey];
+    [userDis setObject:[NSNumber numberWithDouble:user.weight] forKey:BandMMKVUserHeightKey];
+    [userDis setObject:[NSNumber numberWithLongLong:[user.birthday timeIntervalSince1970]] forKey:BandMMKVUserBirthdayKey];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:userDis options:NSJSONWritingPrettyPrinted error:nil];
+    if (data) [self.mmkv setData:data forKey:BandMMKVUserKey];
+}
+
 - (BOOL)lossRemind {
     return [self.mmkv getBoolForKey:BandMMKVLossRemindKey];
 }
@@ -342,7 +372,10 @@ static BandMessage *bandMessage = nil;
 
 - (QNThirdRemind *)thirdRemind {
     NSData *data = [self.mmkv getDataForKey:BandMMKVThirdRemindKey];
-    NSMutableDictionary<NSString *,id> *sitRemindDis = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    NSMutableDictionary<NSString *,id> *sitRemindDis = nil;
+    if (data) {
+        sitRemindDis = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    }
     QNThirdRemind *thirdRemind = [[QNThirdRemind alloc] init];
     
     if (sitRemindDis == nil) {

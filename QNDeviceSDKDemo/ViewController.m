@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *kgBtn;
 @property (weak, nonatomic) IBOutlet UIButton *lbBtn;
 
-@property (nonatomic, strong) PickerView *pickerView;
+@property (nonatomic, weak) PickerView *pickerView;
 @property (nonatomic, strong) QNBleApi *bleApi;
 @property (nonatomic, strong) QNConfig *config;
 @property (nonatomic, strong) UIButton *selectBtn;
@@ -49,30 +49,8 @@
     
 }
 
-- (void)setDefaultValue {
-    self.userIdTF.text = @"123456";
-    self.maleBtn.selected = YES;
-    self.heightLabel.text = @"170cm";
-    self.birthdayLabel.text = @"1990-01-01";
-    
-    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    dateComponents.year = 1990;
-    dateComponents.month = 1;
-    dateComponents.day = 1;
-    self.birthdayDate = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
-    self.birthdayLabel.text = [self.pickerView.dateFormatter stringFromDate:self.birthdayDate];
-    
-    self.pickerView.defaultHeight = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
-    self.pickerView.defaultBirthday = self.birthdayDate;
-    
-    [self selectUnit:self.config.unit];
-
-    if (self.config.allowDuplicates) {
-        [self selectEveryBtn:self.everyBtn];
-    }else {
-        [self selectFirstBtn:self.firstBtn];
-    }
-    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     if ([BandMessage sharedBandMessage].mac.length == 0) {
         self.bandBtn.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.3];
         [self.bandBtn setTitle:@"未绑定手环" forState:UIControlStateNormal];
@@ -86,7 +64,39 @@
     }
 }
 
+- (void)setDefaultValue {
+    self.userIdTF.text = @"123456";
+    self.maleBtn.selected = YES;
+    self.heightLabel.text = @"170cm";
+    self.birthdayLabel.text = @"1990-01-01";
+    
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    dateComponents.year = 1990;
+    dateComponents.month = 1;
+    dateComponents.day = 1;
+    self.birthdayDate = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
+    
+    [self selectUnit:self.config.unit];
+
+    if (self.config.allowDuplicates) {
+        [self selectEveryBtn:self.everyBtn];
+    }else {
+        [self selectFirstBtn:self.firstBtn];
+    }
+}
+
 - (IBAction)turnToBandVC:(UIButton *)sender {
+    
+    int height = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
+    QNUser *user = [[QNUser alloc] init];
+    user.userId = self.userIdTF.text;
+    user.height = height;
+    user.birthday = self.birthdayDate;
+    user.gender = self.femaleBtn.selected ? @"female" : @"male";
+    user.weight = 60;//此处应为用户的实际体重值，该值会影响健康的相关数据
+    
+    [BandMessage sharedBandMessage].user = user;
+    
     BandVC *bandVc = [[BandVC alloc] init];
     [self.navigationController pushViewController:bandVc animated:YES];
 }
@@ -100,24 +110,58 @@
 
 #pragma mark 选择身高
 - (IBAction)selectHeight:(UITapGestureRecognizer *)sender {
-    self.pickerView.type = PickerViewTypeHeight;
-    self.pickerView.hidden = NO;
+    PickerView *pickerView = (PickerView *)([[UINib nibWithNibName:@"PickerView" bundle:nil] instantiateWithOwner:nil options:nil].firstObject);
+    pickerView.frame = self.view.bounds;
+    pickerView.pickerViewDelegate = self;
+    pickerView.type = PickerViewTypeNumber;
+    [pickerView defaultNum:[[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue] maxNum:240 minNum:40 intervalNum:1];
+    [self.view addSubview:pickerView];
+    self.pickerView = pickerView;
 }
 
-- (void)confirmHeight:(NSInteger)height {
-    self.heightLabel.text = [NSString stringWithFormat:@"%ldcm",height];
+- (void)confirmDate:(NSDate *)date {
+    self.birthdayDate = date;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    self.birthdayLabel.text = [dateFormatter stringFromDate:self.birthdayDate];
+}
+
+- (void)confirmNumber:(NSInteger)num {
+    self.heightLabel.text = [NSString stringWithFormat:@"%ldcm",(long)num];
+}
+
+
+- (void)dismissPickView {
+    [self.pickerView removeFromSuperview];
+    self.pickerView = nil;
 }
 
 #pragma mark 选择生日
 - (IBAction)selectBirthday:(UITapGestureRecognizer *)sender {
-    self.pickerView.type = PickerViewTypeBirthday;
-    self.pickerView.defaultBirthday = self.birthdayDate;
-    self.pickerView.hidden = NO;
-}
-
-- (void)confirmBirthday:(NSDate *)birthday {
-    self.birthdayDate = birthday;
-    self.birthdayLabel.text = [self.pickerView.dateFormatter stringFromDate:birthday];
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+    NSInteger year = [components year];
+    [components setYear:year - 80];
+    [components setMonth:1];
+    [components setDay:1];
+    NSDate *minDate = [calendar dateFromComponents:components];
+    
+    components = [calendar components:unitFlags fromDate:now];
+    year = [components year];
+    [components setYear:year - 3];
+    [components setMonth:1];
+    [components setDay:1];
+    NSDate *maxDate = [calendar dateFromComponents:components];
+    
+    PickerView *pickerView = (PickerView *)([[UINib nibWithNibName:@"PickerView" bundle:nil] instantiateWithOwner:nil options:nil].firstObject);
+    pickerView.frame = self.view.bounds;
+    pickerView.pickerViewDelegate = self;
+    pickerView.type = PickerViewTypeDate;
+    [pickerView defaultDate:self.birthdayDate maxDate:maxDate minDate:minDate];
+    [self.view addSubview:pickerView];
+    self.pickerView = pickerView;
 }
 
 #pragma mark - 选中性别
@@ -208,24 +252,16 @@
 #pragma mark - 点击确认跳转扫描
 - (IBAction)clickConfirm:(UIButton *)sender {
     int height = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
-    QNUser *user = [_bleApi buildUser:self.userIdTF.text height:height gender:self.femaleBtn.selected ? @"female" : @"male" birthday:self.birthdayDate callback:^(NSError *error) {
-        
-    }];
+    QNUser *user = [[QNUser alloc] init];
+    user.userId = self.userIdTF.text;
+    user.height = height;
+    user.birthday = self.birthdayDate;
+    user.gender = self.femaleBtn.selected ? @"female" : @"male";
+
     DetectionViewController *detectionVC = [[DetectionViewController alloc] init];
     detectionVC.user = user;
     detectionVC.config = self.config;
     [self.navigationController pushViewController:detectionVC animated:YES];
-}
-
-- (PickerView *)pickerView {
-    if (!_pickerView) {
-        _pickerView = [PickerView secPickerView];
-        _pickerView.frame = self.view.bounds;
-        _pickerView.hidden = YES;
-        _pickerView.pickerViewDelegate = self;
-        [self.view addSubview:_pickerView];
-    }
-    return _pickerView;
 }
 
 @end

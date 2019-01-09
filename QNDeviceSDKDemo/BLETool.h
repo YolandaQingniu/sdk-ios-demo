@@ -37,8 +37,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<BLEToolDelegate> delegate;
 
+@property (nonatomic, strong) QNBleDevice *bandDevice;
 
+- (void)connectDevice:(QNBleDevice *)device user:(nullable QNUser *)user;
 
+- (void)scanDevice;
+
+- (void)stopScan;
 
 @end
 

@@ -283,7 +283,8 @@ typedef enum{
             bandMessage.modeId = device.modeId;
             bandMessage.uuidString = device.uuidIdentifier;
             bandMessage.blueToothName = device.bluetoothName;
-            
+            self.user.weight = 60;//此处应为用户的实际体重值，该值会影响健康的相关数据
+            bandMessage.user = self.user;
             BandVC *bandVc = [[BandVC alloc] init];
             [self.navigationController pushViewController:bandVc animated:YES];
         }else {

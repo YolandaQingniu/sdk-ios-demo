@@ -74,6 +74,8 @@ static QNBleApi *bleApi = nil;
 + (void)setDebug:(BOOL)debug {
     QNDebug.debug = debug;
     QNCentralManager.debug = debug;
+    QNPScaleManager.logPrefix = YES;
+    QNWristManager.logPrefix = YES;
 }
 
 + (BOOL)debug {

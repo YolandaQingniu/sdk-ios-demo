@@ -25,8 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    if (self.bandDevice == nil) {
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    if (delegate.bandDevice == nil) {
         self.stateLabel.text = @"未连接";
     }else {
         self.stateLabel.text = @"已连接";
@@ -44,6 +45,14 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
+- (void)dealloc {
+    //该处只是demo为了方便才断开连接
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [[QNBleApi sharedBleApi] disconnectDevice:delegate.bandDevice callback:^(NSError *error) {
+        
+    }];
+}
+
 - (void)back {
     if (self.comeStyle == BandComeScan) {
         UIViewController *vc = [self.navigationController.childViewControllers objectAtIndex:self.navigationController.childViewControllers.count - 2];
@@ -54,18 +63,18 @@
 }
 
 - (IBAction)synTodayHealthData:(id)sender {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在同步今日数据...";
     [[[QNBleApi sharedBleApi] getBandManager] syncTodayHealthDataCallback:^(QNHealthData *healthData, NSError *error) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.contentMode = MBProgressHUDModeText;
-        hud.label.text = @"今日数据同步完成";
+        hud.label.text = @"同步今日数据完成";
         [hud hideAnimated:YES afterDelay:1];
     }];
 }
 
 - (IBAction)synHistoryHealthData:(id)sender {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在同步历史数据...";
     [[[QNBleApi sharedBleApi] getBandManager] syncHistoryHealthDataCallback:^(NSArray<QNHealthData *> *healthDatas, NSError *error) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.contentMode = MBProgressHUDModeText;
         hud.label.text = @"历史数据同步完成";
         [hud hideAnimated:YES afterDelay:1];
     }];
@@ -77,22 +86,51 @@
 }
 
 - (IBAction)cancelBind:(id)sender {
-    if (self.bandDevice == nil) {
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (delegate.bandDevice == nil) {
         [[BandMessage sharedBandMessage] cleanBandMessage];
         return;
     }
-    
-    
-    
-    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在解绑中...";
+    [[[[FBLPromise async:^(FBLPromiseFulfillBlock  _Nonnull fulfill, FBLPromiseRejectBlock  _Nonnull reject) {
+        [[[QNBleApi sharedBleApi] getBandManager] syncTodayHealthDataCallback:^(QNHealthData *healthData, NSError *error) {
+            fulfill(nil);
+        }];
+    }] then:^id _Nullable(id  _Nullable value) {
+        return [FBLPromise async:^(FBLPromiseFulfillBlock  _Nonnull fulfill, FBLPromiseRejectBlock  _Nonnull reject) {
+            [[[QNBleApi sharedBleApi] getBandManager] syncHistoryHealthDataCallback:^(NSArray<QNHealthData *> *healthDatas, NSError *error) {
+                fulfill(nil);
+            }];
+        }];
+    }] then:^id _Nullable(id  _Nullable value) {
+        return [FBLPromise async:^(FBLPromiseFulfillBlock  _Nonnull fulfill, FBLPromiseRejectBlock  _Nonnull reject) {
+            [[[QNBleApi sharedBleApi] getBandManager] cancelBindCallback:^(NSError *error) {
+                fulfill(nil);
+            }];
+        }];
+    }] always:^{
+        [[QNBleApi sharedBleApi] disconnectDevice:delegate.bandDevice callback:^(NSError *error) {
+            
+        }];
+        [[BandMessage sharedBandMessage] cleanBandMessage];
+        delegate.bandDevice = nil;
+        hud.label.text = @"解绑完成";
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [hud hideAnimated:YES afterDelay:0];
+            [self back];
+        });
+    }];
 }
 
 - (void)onDeviceStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state {
     [super onDeviceStateChange:device scaleState:state];
-
-    if ([device.mac isEqualToString:self.bandDevice.mac] == NO) return;
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if ([device.mac isEqualToString:delegate.bandDevice.mac] == NO) return;
     if (state == QNScaleStateDisconnected || state == QNScaleStateLinkLoss || state == QNScaleStateLinkLoss) {
         self.stateLabel.text = @"未连接";
+    }else if (state == QNScaleStateConnecting) {
+        self.stateLabel.text = @"正在连接";
     }else {
         self.stateLabel.text = @"已连接";
     }

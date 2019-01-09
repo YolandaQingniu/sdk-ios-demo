@@ -361,7 +361,7 @@
             healthData.sleep = [weakSelf transformBandSleep:item];
         }
         
-        for (QNBandHeartRate *item in healthDatas) {
+        for (QNBandHeartRate *item in heartRates) {
             QNHealthData *healthData = nil;
             for (QNHealthData *healthDataItem in healthDatas) {
                 if ([healthDataItem.date timeIntervalSince1970] / (3600 * 24) == item.recordTimeStamp / (3600 * 24)) {

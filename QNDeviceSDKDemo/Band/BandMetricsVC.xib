@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BandMetricsVC">
             <connections>
+                <outlet property="hourFormatSetControl" destination="qaM-3G-Msq" id="kjf-hW-dtq"/>
+                <outlet property="languageSegControl" destination="oEa-hu-MGW" id="o8y-CQ-8bZ"/>
+                <outlet property="lengthSegControl" destination="hRY-oO-mSI" id="dic-N2-lYs"/>
                 <outlet property="topConstraint" destination="H0n-4U-uWK" id="XVm-0a-GXu"/>
                 <outlet property="view" destination="slH-By-EE7" id="UBc-P4-1cg"/>
             </connections>
@@ -42,6 +45,9 @@
                         <segment title="公制"/>
                         <segment title="英制"/>
                     </segments>
+                    <connections>
+                        <action selector="lengthSelected:" destination="-1" eventType="valueChanged" id="Abw-Pm-cgH"/>
+                    </connections>
                 </segmentedControl>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oEa-hu-MGW">
                     <rect key="frame" x="85" y="60" width="285" height="31"/>
@@ -49,6 +55,9 @@
                         <segment title="中文"/>
                         <segment title="英文"/>
                     </segments>
+                    <connections>
+                        <action selector="languageSelected:" destination="-1" eventType="valueChanged" id="Z3U-0m-Ssa"/>
+                    </connections>
                 </segmentedControl>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="语言类型:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFb-Kx-lKV">
                     <rect key="frame" x="5" y="60" width="75" height="30"/>
@@ -62,6 +71,9 @@
                         <segment title="24"/>
                         <segment title="12小时"/>
                     </segments>
+                    <connections>
+                        <action selector="hourFormatSelected:" destination="-1" eventType="valueChanged" id="NrZ-LG-fhA"/>
+                    </connections>
                 </segmentedControl>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

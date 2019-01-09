@@ -7,8 +7,9 @@
 //
 
 #import "BandBaseVC.h"
+#import "AppDelegate.h"
 
-@interface BandBaseVC ()<QNBleStateListener,QNBleConnectionChangeListener,QNBleDeviceDiscoveryListener>
+@interface BandBaseVC ()<QNBleStateListener,QNBleConnectionChangeListener,QNBleDeviceDiscoveryListener,QNDataListener>
 
 @end
 
@@ -17,21 +18,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (self.bandDevice) return;
-    
     QNBleApi *bleApi = [QNBleApi sharedBleApi];
-    
     bleApi.bleStateListener = self;
     bleApi.connectionChangeListener = self;
     bleApi.discoveryListener = self;
-    
-    [self startScanDevice];
+    bleApi.dataListener = self;
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (delegate.bandDevice == nil) {
+        [self startScanDevice];
+    }
 }
 
 - (void)startScanDevice {
@@ -48,14 +48,15 @@
 
 - (void)onBleSystemState:(QNBLEState)state {
     if (state != QNBLEStatePoweredOn) {
-        self.bandDevice = nil;
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        delegate.bandDevice = nil;
     }
-
 }
 
 - (void)onDeviceDiscover:(QNBleDevice *)device {
-    if (self.bandDevice || [[BandMessage sharedBandMessage].mac isEqualToString:device.mac] == NO) nil;
-    self.bandDevice = device;
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (delegate.bandDevice || [[BandMessage sharedBandMessage].mac isEqualToString:device.mac] == NO) nil;
+    delegate.bandDevice = device;
     QNBleApi *api = [QNBleApi sharedBleApi];
     __weak typeof(self) weakSelf = self;
     [api stopBleDeviceDiscorvery:^(NSError *error) {
@@ -63,16 +64,17 @@
     }];
     [api connectDevice:device user:nil callback:^(NSError *error) {
         if (error) {
-            weakSelf.bandDevice = nil;
+            delegate.bandDevice = nil;
             [weakSelf startScanDevice];
         }
     }];
 }
 
 - (void)onDeviceStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state {
-    if ([device.mac isEqualToString:self.bandDevice.mac] == NO) return;
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if ([device.mac isEqualToString:delegate.bandDevice.mac] == NO) return;
     if (state == QNScaleStateDisconnected || state == QNScaleStateLinkLoss || state == QNScaleStateLinkLoss) {
-        self.bandDevice = nil;
+        delegate.bandDevice = nil;
         [self startScanDevice];
     }
     
@@ -81,6 +83,19 @@
     }
 }
 
+- (void)strikeTakePhotosWithDevice:(QNBleDevice *)device {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.contentMode = MBProgressHUDModeText;
+    hud.label.text = @"收到拍照指令";
+    [hud hideAnimated:YES afterDelay:1];
+}
+
+- (void)strikeFindPhoneWithDevice:(QNBleDevice *)device {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.contentMode = MBProgressHUDModeText;
+    hud.label.text = @"收到查找手机指令";
+    [hud hideAnimated:YES afterDelay:1];
+}
 
 - (void)syncLocalSet {
     

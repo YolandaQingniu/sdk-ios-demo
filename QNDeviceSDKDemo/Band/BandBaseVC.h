@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BandBaseVC : UIViewController
 
-@property (nullable, nonatomic, strong) QNBleDevice *bandDevice;
-
 - (void)onDeviceStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state;
 
 @end

@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) QNBandLengthMode length;
 @property (nonatomic, assign) QNBandLanguageMode language;
 @property (nonatomic, assign) QNBandFormatHourMode hourFormat;
+@property (nullable, nonatomic, assign) QNUser *user;
 @property (nonatomic, assign) BOOL lossRemind;
 @property (nonatomic, assign) BOOL heartRateObserver;
 @property (nonatomic, assign) BOOL findPhone;

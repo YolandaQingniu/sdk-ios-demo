@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BandListVC">
             <connections>
+                <outlet property="findPhoneSwitch" destination="2ip-xd-GnQ" id="QUp-Gi-4a5"/>
+                <outlet property="handRecogizerSwitch" destination="l87-9B-QAD" id="1ZG-eK-Xxp"/>
+                <outlet property="heartRateModeSwitch" destination="uUI-Gf-pWM" id="wxj-gY-PVr"/>
                 <outlet property="topConstraint" destination="IfI-Am-NJk" id="ozq-XW-R7A"/>
                 <outlet property="view" destination="HdJ-Ji-sSM" id="9ws-5O-wUf"/>
             </connections>
@@ -63,7 +66,7 @@
                         <action selector="turnThirdRemindVc:" destination="-1" eventType="touchUpInside" id="YGj-LP-7vg"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="防丢:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOX-mF-vWL">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拍照:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOX-mF-vWL">
                     <rect key="frame" x="5" y="180" width="113.5" height="40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
@@ -72,7 +75,7 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QSE-3x-0QE">
                     <rect key="frame" x="123.5" y="184.5" width="51" height="31"/>
                     <connections>
-                        <action selector="lossRemindSwitch:" destination="-1" eventType="valueChanged" id="mAd-M3-rfH"/>
+                        <action selector="cameraSwitch:" destination="-1" eventType="touchUpInside" id="3qg-g5-mCG"/>
                     </connections>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抬腕:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7I4-GD-OGs">
@@ -84,7 +87,7 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l87-9B-QAD">
                     <rect key="frame" x="311" y="184.5" width="51" height="31"/>
                     <connections>
-                        <action selector="handRecognizeSwitch:" destination="-1" eventType="valueChanged" id="z9i-jz-VWL"/>
+                        <action selector="handRecognizeSwitch:" destination="-1" eventType="touchUpInside" id="YbF-Xj-q3U"/>
                     </connections>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="心率模式:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hpj-mF-ohc">
@@ -96,7 +99,7 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uUI-Gf-pWM">
                     <rect key="frame" x="123.5" y="234.5" width="51" height="31"/>
                     <connections>
-                        <action selector="heartRateObserverSwitch:" destination="-1" eventType="valueChanged" id="6JQ-1n-U6D"/>
+                        <action selector="heartRateObserverSwitch:" destination="-1" eventType="touchUpInside" id="v1O-XN-b3w"/>
                     </connections>
                 </switch>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCL-eE-h3R">
@@ -116,19 +119,7 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2ip-xd-GnQ">
                     <rect key="frame" x="311" y="234.5" width="51" height="31"/>
                     <connections>
-                        <action selector="findPhoneSwitch:" destination="-1" eventType="valueChanged" id="oIA-g7-CoI"/>
-                    </connections>
-                </switch>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拍照:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrc-tb-AXb">
-                    <rect key="frame" x="5" y="280" width="113.5" height="40"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4rP-5y-gcD">
-                    <rect key="frame" x="123.5" y="284.5" width="51" height="31"/>
-                    <connections>
-                        <action selector="cameraSwitch:" destination="-1" eventType="valueChanged" id="0nn-2f-oek"/>
+                        <action selector="findPhoneSwitch:" destination="-1" eventType="touchUpInside" id="GaI-kd-l3E"/>
                     </connections>
                 </switch>
             </subviews>
@@ -140,17 +131,13 @@
                 <constraint firstItem="gJY-d2-9iG" firstAttribute="leading" secondItem="7I4-GD-OGs" secondAttribute="leading" id="5TB-Mg-4iL"/>
                 <constraint firstItem="gJY-d2-9iG" firstAttribute="bottom" secondItem="Hpj-mF-ohc" secondAttribute="bottom" id="5aS-aJ-Hsf"/>
                 <constraint firstItem="VtK-AM-RpW" firstAttribute="trailing" secondItem="jWE-Ci-94X" secondAttribute="trailing" id="6B9-aG-5Vn"/>
-                <constraint firstItem="hrc-tb-AXb" firstAttribute="trailing" secondItem="Hpj-mF-ohc" secondAttribute="trailing" id="Adh-Wi-LNY"/>
-                <constraint firstItem="hrc-tb-AXb" firstAttribute="leading" secondItem="Hpj-mF-ohc" secondAttribute="leading" id="BRp-S9-JB8"/>
                 <constraint firstItem="uUI-Gf-pWM" firstAttribute="trailing" secondItem="QSE-3x-0QE" secondAttribute="trailing" id="CrL-nO-fwW"/>
                 <constraint firstItem="2ip-xd-GnQ" firstAttribute="centerY" secondItem="gJY-d2-9iG" secondAttribute="centerY" id="DB2-KJ-Usk"/>
                 <constraint firstItem="cOX-mF-vWL" firstAttribute="height" secondItem="YFB-Uw-2m8" secondAttribute="height" id="DH1-gl-Zhr"/>
                 <constraint firstItem="Hpj-mF-ohc" firstAttribute="trailing" secondItem="cOX-mF-vWL" secondAttribute="trailing" id="Fbr-Mp-Yyw"/>
                 <constraint firstItem="2ip-xd-GnQ" firstAttribute="leading" secondItem="l87-9B-QAD" secondAttribute="leading" id="FnS-RX-KrE"/>
                 <constraint firstItem="jWE-Ci-94X" firstAttribute="top" secondItem="HdJ-Ji-sSM" secondAttribute="top" constant="20" id="IfI-Am-NJk"/>
-                <constraint firstItem="4rP-5y-gcD" firstAttribute="leading" secondItem="uUI-Gf-pWM" secondAttribute="leading" id="KOV-jN-3Y2"/>
                 <constraint firstItem="jWE-Ci-94X" firstAttribute="leading" secondItem="HdJ-Ji-sSM" secondAttribute="leading" constant="5" id="LQd-aC-POD"/>
-                <constraint firstItem="4rP-5y-gcD" firstAttribute="trailing" secondItem="uUI-Gf-pWM" secondAttribute="trailing" id="MZr-Gh-f5O"/>
                 <constraint firstItem="2ip-xd-GnQ" firstAttribute="trailing" secondItem="l87-9B-QAD" secondAttribute="trailing" id="MrG-eX-Qo4"/>
                 <constraint firstItem="YFB-Uw-2m8" firstAttribute="leading" secondItem="VtK-AM-RpW" secondAttribute="leading" id="OF9-Hf-RVj"/>
                 <constraint firstItem="7I4-GD-OGs" firstAttribute="top" secondItem="cOX-mF-vWL" secondAttribute="top" id="Otu-Pc-g0P"/>
@@ -159,10 +146,8 @@
                 <constraint firstItem="7I4-GD-OGs" firstAttribute="leading" secondItem="uCL-eE-h3R" secondAttribute="leading" id="RHh-Of-y5P"/>
                 <constraint firstItem="7hw-O9-z1V" firstAttribute="bottom" secondItem="VtK-AM-RpW" secondAttribute="bottom" id="Rgc-AV-KSj"/>
                 <constraint firstItem="o7y-i7-hIy" firstAttribute="top" secondItem="jWE-Ci-94X" secondAttribute="top" id="Rxe-ee-FoL"/>
-                <constraint firstItem="hrc-tb-AXb" firstAttribute="height" secondItem="Hpj-mF-ohc" secondAttribute="height" id="SDB-CS-be0"/>
                 <constraint firstItem="l87-9B-QAD" firstAttribute="trailing" secondItem="uCL-eE-h3R" secondAttribute="trailing" constant="-10" id="UfR-vy-Lif"/>
                 <constraint firstItem="VtK-AM-RpW" firstAttribute="top" secondItem="jWE-Ci-94X" secondAttribute="bottom" constant="10" id="Una-9m-sSB"/>
-                <constraint firstItem="4rP-5y-gcD" firstAttribute="centerY" secondItem="hrc-tb-AXb" secondAttribute="centerY" id="VFG-Uq-z03"/>
                 <constraint firstItem="YFB-Uw-2m8" firstAttribute="height" secondItem="VtK-AM-RpW" secondAttribute="height" id="WL0-Oy-1wO"/>
                 <constraint firstItem="uUI-Gf-pWM" firstAttribute="leading" secondItem="QSE-3x-0QE" secondAttribute="leading" id="XcC-1w-dyf"/>
                 <constraint firstItem="o7y-i7-hIy" firstAttribute="leading" secondItem="HdJ-Ji-sSM" secondAttribute="centerX" constant="5" id="ZGZ-sr-yVm"/>
@@ -183,7 +168,6 @@
                 <constraint firstItem="Hpj-mF-ohc" firstAttribute="leading" secondItem="cOX-mF-vWL" secondAttribute="leading" id="mRA-iW-oTC"/>
                 <constraint firstItem="Hpj-mF-ohc" firstAttribute="height" secondItem="cOX-mF-vWL" secondAttribute="height" id="mgJ-yw-S1Z"/>
                 <constraint firstItem="uCL-eE-h3R" firstAttribute="leading" secondItem="7hw-O9-z1V" secondAttribute="leading" id="nbk-h5-ZEn"/>
-                <constraint firstItem="hrc-tb-AXb" firstAttribute="top" secondItem="Hpj-mF-ohc" secondAttribute="bottom" constant="10" id="pFB-6z-tSi"/>
                 <constraint firstItem="QSE-3x-0QE" firstAttribute="centerY" secondItem="cOX-mF-vWL" secondAttribute="centerY" id="qL8-3v-tpp"/>
                 <constraint firstItem="cOX-mF-vWL" firstAttribute="top" secondItem="YFB-Uw-2m8" secondAttribute="bottom" constant="20" id="rVm-UF-dXv"/>
                 <constraint firstItem="uUI-Gf-pWM" firstAttribute="centerY" secondItem="Hpj-mF-ohc" secondAttribute="centerY" id="wTu-yu-RLa"/>
