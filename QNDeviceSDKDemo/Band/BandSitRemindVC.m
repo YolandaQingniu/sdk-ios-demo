@@ -167,7 +167,7 @@ typedef NS_ENUM(NSUInteger, BandSitPickerType) {
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在同步...";
-    [[[QNBleApi sharedBleApi] getBandManager] syncSitRemind:sitRemind callback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager syncSitRemind:sitRemind callback:^(NSError *error) {
         if (error) {
             hud.label.text = @"同步失败...";
             [self update];

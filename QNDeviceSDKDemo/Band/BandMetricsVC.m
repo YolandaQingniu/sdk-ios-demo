@@ -52,7 +52,7 @@
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在同步...";
-    [[[QNBleApi sharedBleApi] getBandManager] syncMetrics:metrics callback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager syncMetrics:metrics callback:^(NSError *error) {
         if (error) {
             hud.label.text = @"同步失败...";
             [self update];

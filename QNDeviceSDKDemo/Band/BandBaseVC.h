@@ -2,7 +2,7 @@
 //  BandBaseVC.h
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/1/8.
+//  Created by donyau on 2019/1/21.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 
@@ -11,8 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BandBaseVC : UIViewController
-
-- (void)onDeviceStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state;
 
 @end
 

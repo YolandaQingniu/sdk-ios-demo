@@ -60,7 +60,7 @@
 - (IBAction)reboot:(UIButton *)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在恢复出厂设置...";
-    [[[QNBleApi sharedBleApi] getBandManager] rebootCallback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager rebootCallback:^(NSError *error) {
         if (error) {
             hud.label.text = @"恢复出厂设置失败";
         }else {
@@ -83,7 +83,7 @@
 - (IBAction)handRecognizeSwitch:(UISwitch *)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在同步...";
-    [[[QNBleApi sharedBleApi] getBandManager] syncHandRecognizeModeWithOpenFlag:sender.on callback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager  syncHandRecognizeModeWithOpenFlag:sender.on callback:^(NSError *error) {
         if (error) {
             hud.label.text = @"同步失败...";
             sender.on = !sender.on;
@@ -98,7 +98,7 @@
 - (IBAction)heartRateObserverSwitch:(UISwitch *)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在同步...";
-    [[[QNBleApi sharedBleApi] getBandManager] syncHeartRateObserverModeWithAutoFlag:sender.on callback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager  syncHeartRateObserverModeWithAutoFlag:sender.on callback:^(NSError *error) {
         if (error) {
             hud.label.text = @"同步失败...";
             sender.on = !sender.on;
@@ -114,7 +114,7 @@
 - (IBAction)findPhoneSwitch:(UISwitch *)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在同步...";
-    [[[QNBleApi sharedBleApi] getBandManager] syncFindPhoneWithOpenFlag:sender.on callback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager syncFindPhoneWithOpenFlag:sender.on callback:^(NSError *error) {
         if (error) {
             hud.label.text = @"同步失败...";
             sender.on = !sender.on;
@@ -130,7 +130,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在进入拍照模式...";
     BOOL openFlag = sender.on;
-    [[[QNBleApi sharedBleApi] getBandManager] syncCameraModeWithEnterFlag:openFlag callback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager syncCameraModeWithEnterFlag:openFlag callback:^(NSError *error) {
         if (error) {
             hud.label.text = @"正在进入拍照模式失败...";
             sender.on = !openFlag;

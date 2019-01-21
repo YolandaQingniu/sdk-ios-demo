@@ -24,7 +24,7 @@ typedef enum{
 #import "ScaleDataCell.h"
 #import "BandVC.h"
 
-@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
+@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,BLEToolDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
 @property (weak, nonatomic) IBOutlet UIButton *scanBtn;
 @property (weak, nonatomic) IBOutlet UILabel *styleLabel;
@@ -35,8 +35,6 @@ typedef enum{
 @property (nonatomic, assign) DeviceStyle currentStyle;
 @property (nonatomic, strong) NSMutableArray *deviceAry; //扫描到外设数组
 @property (nonatomic, strong) NSMutableArray *scaleDataAry; //收到测量完成后数组
-
-@property (nonatomic, strong) QNBleApi *bleApi;
 @end
 
 @implementation DetectionViewController
@@ -48,18 +46,12 @@ typedef enum{
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedRowHeight = 0;
     self.currentStyle = DeviceStyleNormal;
-    self.bleApi = [QNBleApi sharedBleApi];
-    self.bleApi.discoveryListener = self;
-    self.bleApi.connectionChangeListener = self;
-    self.bleApi.dataListener = self;
-    self.bleApi.bleStateListener = self;
+    [BLETool sharedBLETool].delegate = self;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 - (void)back {
-    [self.bleApi disconnectDevice:nil callback:^(NSError *error) {
-        
-    }];
+    [[BLETool sharedBLETool] disconnectScale];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -164,34 +156,26 @@ typedef enum{
 - (void)startScanDevice {
     [self.deviceAry removeAllObjects];
     [self.tableView reloadData];
-    [_bleApi startBleDeviceDiscovery:^(NSError *error) {
-        
-    }];
+    [[BLETool sharedBLETool] scanDevice];
 }
 
 #pragma mark 链接设备设备
 - (void)connectDevice:(QNBleDevice *)device {
-    [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {
-        
-    }];
+
 }
 
 #pragma mark 断开设备
 - (void)disconnectDevice {
-    [_bleApi disconnectDevice:nil callback:^(NSError *error) {
-        
-    }];
+    [[BLETool sharedBLETool] disconnectScale];
 }
 
 #pragma mark 停止扫描附近设备
 - (void)stopScanDevice {
-    [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {
-        
-    }];
+    [[BLETool sharedBLETool] stopScan];
 }
 
-#pragma mark - QNBleDeviceDiscorveryListener
-- (void)onDeviceDiscover:(QNBleDevice *)device {//该方法会在发现设备后回调
+#pragma mark -
+- (void)qnDiscoverDevice:(QNBleDevice *)device{//该方法会在发现设备后回调
     for (QNBleDevice *item in self.deviceAry) {
         if ([item.mac isEqualToString:device.mac]) {
             return;
@@ -201,10 +185,9 @@ typedef enum{
     [self.tableView reloadData];
 }
 
-#pragma mark - QNBleConnectionChangeListener
-- (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state{//秤连接或测量状态变化
+- (void)qnDeviceStateChange:(QNScaleState)state device:(QNBleDevice *)device {
     if (state == QNScaleStateConnected) {//链接成功
-          self.currentStyle = DeviceStyleLingSucceed;
+        self.currentStyle = DeviceStyleLingSucceed;
     }else if (state == QNScaleStateRealTime){//测量体重
         self.currentStyle = DeviceStyleMeasuringWeight;
     }else if (state == QNScaleStateBodyFat){//测量阻抗
@@ -218,13 +201,12 @@ typedef enum{
     }
 }
 
-#pragma mark - 测量QNDataListener处理
-- (void)onGetUnsteadyWeight:(QNBleDevice *)device weight:(double)weight {
-    weight = [self.bleApi convertWeightWithTargetUnit:weight unit:[self.bleApi getConfig].unit];
+- (void)qnScaleReceiveRealTimeWeight:(double)weight device:(QNBleDevice *)device {
+    weight = [[BLETool sharedBLETool] convertWeightWithTargetUnit:weight unit:[[QNBleApi sharedBleApi] getConfig].unit];
     self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f",weight];
 }
 
-- (void)onGetScaleData:(QNBleDevice *)device data:(QNScaleData *)scaleData {
+- (void)qnScaleReceiveResultData:(QNScaleData *)scaleData device:(QNBleDevice *)device {
     [self.scaleDataAry removeAllObjects];
     for (QNScaleItemData *item in [scaleData getAllItem]) {
         [self.scaleDataAry addObject:item];
@@ -232,15 +214,14 @@ typedef enum{
     [self.tableView reloadData];
 }
 
-- (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray<QNScaleStoreData *> *)storedDataList {
-    
+- (void)qnScaleStoredDatas:(NSArray<QNScaleStoreData *> *)storedDataList device:(QNBleDevice *)device {
+    //存储数据
+}
+
+- (void)qnBleStateUpdate:(QNBLEState)bleState {
     
 }
 
-#pragma mark - QNBleStateListener
-- (void)onBleSystemState:(QNBLEState)state {
-    
-}
 
 #pragma mark - UITabelViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -265,16 +246,14 @@ typedef enum{
             cell = [[[NSBundle mainBundle]loadNibNamed:@"ScaleDataCell" owner:self options:nil]lastObject];
         }
         cell.itemData = self.scaleDataAry[indexPath.row];
-        cell.unit = [self.bleApi getConfig].unit;
+        cell.unit = [[QNBleApi sharedBleApi] getConfig].unit;
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.currentStyle == DeviceStyleScanning) {
-        [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {
-            
-        }];
+        [[BLETool sharedBLETool] stopScan];
         self.currentStyle = DeviceStyleLinging;
         QNBleDevice *device = self.deviceAry[indexPath.row];
         if (device.deviceType == QNDeviceBand) {
@@ -288,9 +267,7 @@ typedef enum{
             BandVC *bandVc = [[BandVC alloc] init];
             [self.navigationController pushViewController:bandVc animated:YES];
         }else {
-            [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
-                
-            }];
+            [[BLETool sharedBLETool] connectDevice:device user:self.user];
         }
     }else {
         

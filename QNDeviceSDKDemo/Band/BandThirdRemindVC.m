@@ -66,7 +66,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在同步...";
     QNThirdRemind *thirdRemind = [self buildThirdRemind];
-    [[[QNBleApi sharedBleApi] getBandManager] setThirdRemind:thirdRemind callback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager setThirdRemind:thirdRemind callback:^(NSError *error) {
         if (error) {
             hud.label.text = @"同步失败...";
             [self updateThirdRemindState];

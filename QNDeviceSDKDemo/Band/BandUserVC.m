@@ -24,7 +24,6 @@ typedef NS_ENUM(NSUInteger, QNUserPickerType) {
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderSegControl;
 @property (nonatomic, strong) PickerView *pickerView;
 @property (nonatomic, assign) QNUserPickerType pickType;
-@property (nonatomic, strong) QNUser *user;
 @end
 
 @implementation BandUserVC
@@ -32,33 +31,22 @@ typedef NS_ENUM(NSUInteger, QNUserPickerType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.topConstraint.constant = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame) + 44 + 10;
-    
-    self.user = [[QNUser alloc] init];
-    self.user.userId = @"123456";
-    self.user.height = 170;
-    self.user.weight = 65;
-    self.user.gender = @"female";
-    
-    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    dateComponents.year = 1990;
-    dateComponents.month = 1;
-    dateComponents.day = 1;
-    self.user.birthday = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
- 
     [self update];
 }
 
 - (void)update {
     [self.stepGoalBtn setTitle:[NSString stringWithFormat:@"%d",[BandMessage sharedBandMessage].sportGoal] forState:UIControlStateNormal];
 
-    [self.weightBtn setTitle:[NSString stringWithFormat:@"%ld",(long)self.user.weight] forState:UIControlStateNormal];
-    [self.heightBtn setTitle:[NSString stringWithFormat:@"%ld",(long)self.user.height] forState:UIControlStateNormal];
+    QNUser *user = [BandMessage sharedBandMessage].user;
+    
+    [self.weightBtn setTitle:[NSString stringWithFormat:@"%ld",(long)user.weight] forState:UIControlStateNormal];
+    [self.heightBtn setTitle:[NSString stringWithFormat:@"%ld",(long)user.height] forState:UIControlStateNormal];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd";
-    [self.birthdayBtn setTitle:[dateFormatter stringFromDate:self.user.birthday] forState:UIControlStateNormal];
+    [self.birthdayBtn setTitle:[dateFormatter stringFromDate:user.birthday] forState:UIControlStateNormal];
     
-    if ([self.user.gender isEqualToString:@"male"]) {
+    if ([user.gender isEqualToString:@"male"]) {
         self.genderSegControl.selectedSegmentIndex = 1;
     }else {
         self.genderSegControl.selectedSegmentIndex = 0;
@@ -82,7 +70,7 @@ typedef NS_ENUM(NSUInteger, QNUserPickerType) {
     pickerView.frame = self.view.bounds;
     pickerView.pickerViewDelegate = self;
     pickerView.type = PickerViewTypeNumber;
-    [pickerView defaultNum:self.user.weight maxNum:180 minNum:0 intervalNum:1];
+    [pickerView defaultNum:[BandMessage sharedBandMessage].user.weight maxNum:180 minNum:0 intervalNum:1];
     [self.view addSubview:pickerView];
     self.pickerView = pickerView;
 }
@@ -93,7 +81,7 @@ typedef NS_ENUM(NSUInteger, QNUserPickerType) {
     pickerView.frame = self.view.bounds;
     pickerView.pickerViewDelegate = self;
     pickerView.type = PickerViewTypeNumber;
-    [pickerView defaultNum:self.user.height maxNum:240 minNum:40 intervalNum:1];
+    [pickerView defaultNum:[BandMessage sharedBandMessage].user.height maxNum:240 minNum:40 intervalNum:1];
     [self.view addSubview:pickerView];
     self.pickerView = pickerView;
 }
@@ -120,7 +108,7 @@ typedef NS_ENUM(NSUInteger, QNUserPickerType) {
     pickerView.frame = self.view.bounds;
     pickerView.pickerViewDelegate = self;
     pickerView.type = PickerViewTypeDate;
-    [pickerView defaultDate:self.user.birthday maxDate:maxDate minDate:minDate];
+    [pickerView defaultDate:[BandMessage sharedBandMessage].user.birthday maxDate:maxDate minDate:minDate];
     [self.view addSubview:pickerView];
     self.pickerView = pickerView;
 }
@@ -159,7 +147,7 @@ typedef NS_ENUM(NSUInteger, QNUserPickerType) {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在同步...";
     int goal = [self.stepGoalBtn.titleLabel.text intValue];
-    [[[QNBleApi sharedBleApi] getBandManager] syncGoal:goal callback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager syncGoal:goal callback:^(NSError *error) {
         if (error) {
             hud.label.text = @"同步失败...";
             [self update];
@@ -176,7 +164,7 @@ typedef NS_ENUM(NSUInteger, QNUserPickerType) {
     dateFormatter.dateFormat = @"yyyy-MM-dd";
     
     QNUser *user = [[QNUser alloc] init];
-    user.userId = @"123456";
+    user.userId = [BandMessage sharedBandMessage].user.userId;
     user.height = [self.heightBtn.titleLabel.text intValue];
     user.weight = [self.weightBtn.titleLabel.text doubleValue];
     user.gender = self.genderSegControl.selectedSegmentIndex == 1 ? @"male" : @"female";
@@ -184,13 +172,13 @@ typedef NS_ENUM(NSUInteger, QNUserPickerType) {
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"正在同步...";
-    [[[QNBleApi sharedBleApi] getBandManager] syncUser:user callback:^(NSError *error) {
+    [[BLETool sharedBLETool].bandManager syncUser:user callback:^(NSError *error) {
         if (error) {
             hud.label.text = @"同步失败...";
             [self update];
         }else {
-            self.user = user;
             hud.label.text = @"同步成功";
+            [BandMessage sharedBandMessage].user = user;
         }
         [hud hideAnimated:YES afterDelay:1];
     }];
