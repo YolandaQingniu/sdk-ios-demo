@@ -2,7 +2,7 @@
 //  BandVC.m
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/1/7.
+//  Created by Yolanda on 2019/1/7.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 
@@ -117,11 +117,11 @@
 }
 
 #pragma mark -
-- (void)qnDeviceStateChange:(QNScaleState)state device:(QNBleDevice *)device {
+- (void)qnDeviceStateChange:(QNDeviceState)state device:(QNBleDevice *)device {
     if ([device.mac isEqualToString:[BLETool sharedBLETool].bandDevice.mac] == NO) return;
-    if (state == QNScaleStateDisconnected || state == QNScaleStateLinkLoss || state == QNScaleStateLinkLoss) {
+    if (state == QNDeviceStateDisconnected || state == QNDeviceStateLinkLoss || state == QNDeviceStateLinkLoss) {
         self.stateLabel.text = @"未连接";
-    }else if (state == QNScaleStateConnecting) {
+    }else if (state == QNDeviceStateConnecting) {
         self.stateLabel.text = @"正在连接";
     }else {
         self.stateLabel.text = @"已连接";

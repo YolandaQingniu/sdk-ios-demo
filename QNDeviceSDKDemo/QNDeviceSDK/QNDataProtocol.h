@@ -14,7 +14,7 @@
 
 /**
  实时数据的监听
- 
+
  @param device QNBleDevice
  @param weight 实时体重
  */
@@ -22,20 +22,19 @@
 
 /**
  稳定数据的监听
- 
+
  @param device QNBleDevice
  @param scaleData 数据结果
  */
 - (void)onGetScaleData:(QNBleDevice *)device data:(QNScaleData *)scaleData;
 
-
 /**
  存储数据的监听
- 
+
  @param device QNBleDevice
  @param storedDataList 结果数组
  */
-- (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray <QNScaleStoreData *> *)storedDataList;
+- (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray<QNScaleStoreData *> *)storedDataList;
 
 /**
  充电款电量的监听
@@ -44,19 +43,5 @@
  @param device QNBleDevice
  */
 - (void)onGetElectric:(NSUInteger)electric device:(QNBleDevice *)device;
-
-/**
- 拍照回调
-
- @param device QNBleDevice
- */
-- (void)strikeTakePhotosWithDevice:(QNBleDevice *)device;
-
-/**
- 查找手机回调
-
- @param device QNBleDevice
- */
-- (void)strikeFindPhoneWithDevice:(QNBleDevice *)device;
 
 @end

@@ -2,7 +2,7 @@
 //  BandUserVC.m
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/1/7.
+//  Created by Yolanda on 2019/1/7.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

@@ -64,66 +64,65 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  发现设备监听，该监听必须实现，否则无法获取搜索到的设备信息
  可在 QNBleDeviceDiscorveryProtocol.h 中查看详细信息
- 
+
  */
 @property (nonatomic, weak) id<QNBleDeviceDiscoveryListener> discoveryListener;
 
 /**
  设备状态的监听
  可在 QNBleConnectionChangeProtocol.h 中查看详细信息
- 
+
  */
 @property (nonatomic, weak) id<QNBleConnectionChangeListener> connectionChangeListener;
 
 /**
  测量数据的监听，该监听必须实现
  可在 QNDataProtocol.h 中查看详细信息
- 
+
  */
 @property (nonatomic, weak) id<QNDataListener> dataListener;
 
 /**
  系统蓝牙状态的监听
  可在 QQNBleStateProtocol.h 中查看详细信息
- 
+
  */
 @property (nonatomic, weak) id<QNBleStateListener> bleStateListener;
 
 /**
  初始化SDK
- 
+
  @return QNBleApi
  */
 + (QNBleApi *)sharedBleApi;
-
 
 /**
  注册SDK
  必须先注册SDK后使用其他操作
  appid以及初始配置文件请向轻牛官方洽谈
- 
+
  @param appId 需要向官方获取正确的appid
  @param dataFile 配置文件路径
  @param callback 结果回调
  */
-- (void)initSdk:(NSString *)appId firstDataFile:(NSString *)dataFile callback:(nullable QNResultCallback)callback;
-
+- (void)initSdk:(NSString *)appId
+    firstDataFile:(NSString *)dataFile
+         callback:(nullable QNResultCallback)callback;
 
 /**
  扫描设备
- 
+
  @param callback 结果回调
  */
 - (void)startBleDeviceDiscovery:(nullable QNResultCallback)callback;
 
-
 /**
  从系统中获取已经配对的设备（当接入手环时才启作用，仅接入秤时忽略该方法）
- 
+
  用于获取已经和系统配对的手环
- 
+
  调用该方法时，会自动启动扫描
- 
+
  当手环和系统配对时，无法再从广播数据中获取手环设备，必须从系统配对列表中获取设备，进行连接。因此如果有绑定的手环，后续搜索设备时，必须调用该方法。
  当获取到已经配对的设备后，会通过 “- (void)onDeviceDiscover:(QNBleDevice *)device;”回调设备
 
@@ -132,55 +131,57 @@ NS_ASSUME_NONNULL_BEGIN
  @param uuidIdentifier 已配对的设备的uuidIdentifier
  @param callback 结果回调
  */
-- (void)findPairBandWithMac:(NSString *)mac modeId:(NSString *)modeId uuidIdentifier:(NSString *)uuidIdentifier callback:(nullable QNResultCallback)callback;
+- (void)findPairBandWithMac:(NSString *)mac
+                     modeId:(NSString *)modeId
+             uuidIdentifier:(NSString *)uuidIdentifier
+                   callback:(nullable QNResultCallback)callback;
 
 /**
  停止扫描
- 
+
  @param callback 结果回调
  */
 - (void)stopBleDeviceDiscorvery:(nullable QNResultCallback)callback;
 
-
 /**
  连接设备
- 
+
  @param device 连接的设备(该设备对象必须是搜索返回的设备对象)
  @param user 用户信息,连接秤时user不可以为nil
  @param callback 结果回调
  */
-- (void)connectDevice:(QNBleDevice *)device user:(nullable QNUser *)user callback:(nullable QNResultCallback)callback;
-
+- (void)connectDevice:(QNBleDevice *)device
+                 user:(nullable QNUser *)user
+             callback:(nullable QNResultCallback)callback;
 
 /**
  断开设备的连接
- 
+
  @param device 当前连接的设备
  @param callback 结果回调
  */
 - (void)disconnectDevice:(QNBleDevice *)device callback:(nullable QNResultCallback)callback;
 
-
 /**
  获取SDK的当前设置情况
- 
+
  @return QNConfig
  */
 - (QNConfig *)getConfig;
 
-
 /**
  根据提供的kg数值的体重，转化为指定单位的数值
- 
+
  @param kgWeight kg单位的体重
- @param unit QNUnit kg、lb，所有秤都能够支持这个单位; 斤，秤端如果不支持，则会显示kg (不支持ST的转换)
+ @param unit QNUnit kg、lb，所有秤都能够支持这个单位; 斤，秤端如果不支持，则会显示kg
+ (不支持ST的转换)
  @return 结果回调
  */
 - (double)convertWeightWithTargetUnit:(double)kgWeight unit:(QNUnit)unit;
 
 /**
  建立用户模型
- 
+
  @param userId 用户id
  @param height 用户身高
  @param gender 用户性别 male female
@@ -188,13 +189,18 @@ NS_ASSUME_NONNULL_BEGIN
  @param callback 结果的回调
  @return QNUser
  */
-- (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(nullable QNResultCallback)callback NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "请自行构建对象");
+- (QNUser *)buildUser:(NSString *)userId
+               height:(int)height
+               gender:(NSString *)gender
+             birthday:(NSDate *)birthday
+             callback:(nullable QNResultCallback)callback
+    NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "请自行构建对象");
 
 /**
  获取手环管理类
- 
+
  @return QNBandManager
  */
-- (QNBandManager *)getBandManagerCallback:(nullable QNResultCallback)callback;
+- (QNBandManager *)getBandManager;
 @end
 NS_ASSUME_NONNULL_END

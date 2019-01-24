@@ -2,7 +2,7 @@
 //  BandHealthDataView.m
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/1/19.
+//  Created by Yolanda on 2019/1/19.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

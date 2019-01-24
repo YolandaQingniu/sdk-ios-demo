@@ -2,7 +2,7 @@
 //  QNThirdRemind.h
 //  QNDeviceSDK
 //
-//  Created by donyau on 2019/1/3.
+//  Created by Yolanda on 2019/1/3.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

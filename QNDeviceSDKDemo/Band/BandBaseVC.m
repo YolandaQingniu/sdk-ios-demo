@@ -2,7 +2,7 @@
 //  BandBaseVC.m
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/1/21.
+//  Created by Yolanda on 2019/1/21.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

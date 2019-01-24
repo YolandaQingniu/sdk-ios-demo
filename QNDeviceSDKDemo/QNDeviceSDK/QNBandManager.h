@@ -2,11 +2,12 @@
 //  QNBandManager.h
 //  QNDeviceSDK
 //
-//  Created by donyau on 2018/12/29.
+//  Created by Yolanda on 2018/12/29.
 //  Copyright © 2018 Yolanda. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "QNBandEventProtocol.h"
 #import "QNCallBackConst.h"
 #import "QNBandInfo.h"
 #import "QNAlarm.h"
@@ -19,6 +20,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QNBandManager : NSObject
+
+/** EventProtocol */
+@property (nonatomic, strong) id<QNBandEventListener> bandEventListener;
 
 - (instancetype)init NS_UNAVAILABLE;
 

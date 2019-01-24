@@ -2,7 +2,7 @@
 //  BandListVC.m
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/1/7.
+//  Created by Yolanda on 2019/1/7.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 
@@ -128,14 +128,14 @@
 
 - (IBAction)cameraSwitch:(UISwitch *)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.label.text = @"正在进入拍照模式...";
+    hud.label.text = sender.isOn ? @"正在进入拍照模式..." : @"正在退出拍照模式...";
     BOOL openFlag = sender.on;
     [[BLETool sharedBLETool].bandManager syncCameraModeWithEnterFlag:openFlag callback:^(NSError *error) {
         if (error) {
-            hud.label.text = @"正在进入拍照模式失败...";
+            hud.label.text = sender.isOn ? @"正在进入拍照模式失败..." : @"正在退出拍照模式失败...";
             sender.on = !openFlag;
         }else {
-            hud.label.text = @"正在进入拍照模式成功";
+            hud.label.text = sender.isOn ? @"正在进入拍照模式成功" : @"正在退出拍照模式成功";
         }
         [hud hideAnimated:YES afterDelay:1];
     }];

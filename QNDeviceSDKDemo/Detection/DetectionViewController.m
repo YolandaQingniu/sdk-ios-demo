@@ -185,18 +185,18 @@ typedef enum{
     [self.tableView reloadData];
 }
 
-- (void)qnDeviceStateChange:(QNScaleState)state device:(QNBleDevice *)device {
-    if (state == QNScaleStateConnected) {//链接成功
+- (void)qnDeviceStateChange:(QNDeviceState)state device:(QNBleDevice *)device {
+    if (state == QNDeviceStateConnected) {//链接成功
         self.currentStyle = DeviceStyleLingSucceed;
-    }else if (state == QNScaleStateRealTime){//测量体重
+    }else if (state == QNDeviceStateRealTime){//测量体重
         self.currentStyle = DeviceStyleMeasuringWeight;
-    }else if (state == QNScaleStateBodyFat){//测量阻抗
+    }else if (state == QNDeviceStateBodyFat){//测量阻抗
         self.currentStyle = DeviceStyleMeasuringResistance;
-    }else if (state == QNScaleStateHeartRate){//测量心率
+    }else if (state == QNDeviceStateHeartRate){//测量心率
         self.currentStyle = DeviceStyleMeasuringHeartRate;
-    }else if (state == QNScaleStateMeasureCompleted){//测量完成
+    }else if (state == QNDeviceStateMeasureCompleted){//测量完成
         self.currentStyle = DeviceStyleMeasuringSucceed;
-    }else if (state == QNScaleStateLinkLoss){//断开连接/称关机
+    }else if (state == QNDeviceStateLinkLoss){//断开连接/称关机
         self.currentStyle = DeviceStyleNormal;
     }
 }

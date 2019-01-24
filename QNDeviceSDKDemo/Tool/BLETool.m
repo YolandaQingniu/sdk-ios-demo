@@ -2,7 +2,7 @@
 //  BLETool.m
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/1/8.
+//  Created by Yolanda on 2019/1/8.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 typedef void (^ResultCallBlock)(BOOL success);
 
-@interface BLETool ()<QNBleDeviceDiscoveryListener,QNBleConnectionChangeListener,QNDataListener,QNBleStateListener>
+@interface BLETool ()<QNBleDeviceDiscoveryListener,QNBleConnectionChangeListener,QNDataListener,QNBleStateListener,QNBandEventListener>
 @property (nonatomic, strong) QNBleApi *bleApi;
 @end
 
@@ -40,6 +40,7 @@ static BLETool *_bleTool = nil;
         self.bleApi.connectionChangeListener = self;
         self.bleApi.dataListener = self;
         self.bleApi.bleStateListener = self;
+        [self.bleApi getBandManager].bandEventListener = self;
         
         QNConfig *config = [self.bleApi getConfig];
         config.showPowerAlertKey = YES;
@@ -47,7 +48,9 @@ static BLETool *_bleTool = nil;
         QNBleApi.debug = YES;
         NSString *file = [[NSBundle mainBundle] pathForResource:@"123456789" ofType:@"qn"];
         [self.bleApi initSdk:@"123456789" firstDataFile:file callback:^(NSError *error) {
-            
+            if (error) {
+                //错误处理
+            }
         }];
     }
     return self;
@@ -55,12 +58,7 @@ static BLETool *_bleTool = nil;
 
 #pragma mark -
 - (QNBandManager *)bandManager {
-    return [self.bleApi getBandManagerCallback:^(NSError *error) {
-        if (error) {
-            //错误处理
-            [self alertMesgError:error];
-        }
-    }];
+    return [self.bleApi getBandManager];
 }
 
 #pragma mark -
@@ -201,11 +199,11 @@ static BLETool *_bleTool = nil;
     }
 }
 
-- (void)onDeviceStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state {
+- (void)onDeviceStateChange:(QNBleDevice *)device scaleState:(QNDeviceState)state {
     if ([self.delegate respondsToSelector:@selector(qnDeviceStateChange:device:)]) {
         [self.delegate qnDeviceStateChange:state device:device];
     }
-    if (state == QNScaleStateInteraction) {
+    if (state == QNDeviceStateDeviceReady) {
         [self syncLocalBandSet];
     }
 }
@@ -232,14 +230,14 @@ static BLETool *_bleTool = nil;
     [self alertMesg:[NSString stringWithFormat:@"电量： %ld",(long)electric]];
 }
 
-- (void)strikeTakePhotosWithDevice:(QNBleDevice *)device {
-    //收到拍照指令
-    [self alertMesg:@"收到拍照指令"];
-}
-
 - (void)strikeFindPhoneWithDevice:(QNBleDevice *)device {
     //收到查找手机指令
     [self alertMesg:@"收到查找手机指令"];
+}
+
+- (void)strikeTakePhotosWithDevice:(QNBleDevice *)device {
+    //收到拍照指令
+    [self alertMesg:@"收到拍照指令"];
 }
 
 #pragma mark -

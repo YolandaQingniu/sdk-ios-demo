@@ -2,7 +2,7 @@
 //  QNDeviceSDK-Prefix-Header.h
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/1/8.
+//  Created by Yolanda on 2019/1/8.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

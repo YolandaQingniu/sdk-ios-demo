@@ -8,53 +8,48 @@
 
 #import "QNBleDevice.h"
 
-typedef NS_ENUM(NSInteger, QNScaleState) {
-    QNScaleStateDisconnected = 0, //未连接
-    QNScaleStateLinkLoss = -1, //失去连接
-    QNScaleStateConnected = 1, //已连接
-    QNScaleStateConnecting = 2, //正在连接
-    QNScaleStateDisconnecting = 3, //正在断开
-    QNScaleStateStartMeasure = 4, //正在测量
-    QNScaleStateRealTime = 5, //正在测量体重
-    QNScaleStateBodyFat = 7, //正在测试生物阻抗
-    QNScaleStateHeartRate = 8, //正在测试心率
-    QNScaleStateMeasureCompleted = 9, //测量完成
-    QNScaleStateInteraction = 10, //通讯通道开启(手环专属)
-
+typedef NS_ENUM(NSInteger, QNDeviceState) {
+    QNDeviceStateDisconnected     = 0,  //未连接
+    QNDeviceStateLinkLoss         = -1, //失去连接
+    QNDeviceStateConnected        = 1,  //已连接
+    QNDeviceStateConnecting       = 2,  //正在连接
+    QNDeviceStateDisconnecting    = 3,  //正在断开
+    QNDeviceStateDeviceReady      = 4,  //设备已经准备好了，可以开始交互
+    QNDeviceStateStartMeasure     = 5,  //正在测量
+    QNDeviceStateRealTime         = 6,  //正在测量体重
+    QNDeviceStateBodyFat          = 7,  //正在测试生物阻抗
+    QNDeviceStateHeartRate        = 8,  //正在测试心率
+    QNDeviceStateMeasureCompleted = 9,  //测量完成
 };
 
 @protocol QNBleConnectionChangeListener <NSObject>
 /**
  正在连接的回调
- 
+
  @param device QNBleDevice
  */
 - (void)onConnecting:(QNBleDevice *)device;
 
-
 /**
  连接成功的回调
- 
+
  @param device QNBleDevice
  */
 - (void)onConnected:(QNBleDevice *)device;
 
-
 /**
  设备的服务搜索完成
- 
+
  @param device QNBleDevice
  */
 - (void)onServiceSearchComplete:(QNBleDevice *)device;
 
-
 /**
  正在断开连接
- 
+
  @param device QNBleDevice
  */
 - (void)onDisconnecting:(QNBleDevice *)device;
-
 
 /**
  断开设备连接
@@ -65,7 +60,7 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
 
 /**
  连接错误
- 
+
  @param device QNBleDevice
  @param error 错误代码
  */
@@ -77,7 +72,6 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
  @param device QNBleDevice
  @param state 状态
  */
-- (void)onDeviceStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state;
+- (void)onDeviceStateChange:(QNBleDevice *)device scaleState:(QNDeviceState)state;
 
 @end
-

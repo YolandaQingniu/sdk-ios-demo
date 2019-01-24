@@ -2,7 +2,7 @@
 //  BLETool.h
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/1/8.
+//  Created by Yolanda on 2019/1/8.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)qnScaleElectric:(NSUInteger)electric device:(QNBleDevice *)device;
 
-- (void)qnDeviceStateChange:(QNScaleState)state device:(QNBleDevice *)device;
+- (void)qnDeviceStateChange:(QNDeviceState)state device:(QNBleDevice *)device;
 
 - (void)qnBandTakePhotosWithDevice:(QNBleDevice *)device;
 
