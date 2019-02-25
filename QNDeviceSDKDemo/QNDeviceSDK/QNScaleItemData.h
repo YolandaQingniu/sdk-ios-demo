@@ -49,6 +49,7 @@ typedef NS_ENUM(NSInteger, QNScaleType) {
     QNScaleTypeWeightControlIndex = 28, //体重控制
     QNScaleTypeFatControlIndex = 29, //脂肪控制
     QNScaleTypeMuscleControlIndex = 30, //肌肉控制
+    QNScaleTypeMuscleMassRate = 31, //肌肉率
 };
 
 @interface QNScaleItemData : NSObject
