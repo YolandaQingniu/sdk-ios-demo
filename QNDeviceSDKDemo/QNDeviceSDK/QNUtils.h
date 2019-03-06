@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (nullable QNShareData *)decodeShareDataWithCode:(NSString *)qnCode user:(QNUser *)user callblock:(QNResultCallback)callblock;
 
++ (nullable QNShareData *)decodeShareDataWithCode:(NSString *)qnCode user:(QNUser *)user validTime:(long)validTime callblock:(QNResultCallback)callblock;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
