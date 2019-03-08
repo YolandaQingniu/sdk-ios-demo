@@ -121,7 +121,7 @@
 		D232D6492004DE2D00AABD67 /* QNDeviceSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D25680E72231FFDA0049356E /* QNDeviceSDK */,
+				D25680E72231FFDA0049356E /* QNSDK */,
 				D2B9E97B20723DEC0020C2B6 /* Detection */,
 				D2B9E98520723DEC0020C2B6 /* PickerView.h */,
 				D2B9E98620723DEC0020C2B6 /* PickerView.m */,
@@ -140,7 +140,7 @@
 			path = QNDeviceSDKDemo;
 			sourceTree = "<group>";
 		};
-		D25680E72231FFDA0049356E /* QNDeviceSDK */ = {
+		D25680E72231FFDA0049356E /* QNSDK */ = {
 			isa = PBXGroup;
 			children = (
 				D256810B22320B8F0049356E /* libQNDeviceSDK.a */,
@@ -161,7 +161,7 @@
 				D256810A22320B8E0049356E /* QNUtils.h */,
 				D25680FD22320B8D0049356E /* updateRemind.md */,
 			);
-			path = QNDeviceSDK;
+			path = QNSDK;
 			sourceTree = SOURCE_ROOT;
 		};
 		D2B9E97B20723DEC0020C2B6 /* Detection */ = {
