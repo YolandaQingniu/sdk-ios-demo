@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-s.name             = 'QNDeviceSDK'
+s.name             = 'QNSDK'
 s.version          = '0.4.9-beta.1'
 s.summary          = '轻牛旗下设备通讯类'
 
