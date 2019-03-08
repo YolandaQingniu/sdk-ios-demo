@@ -42,9 +42,26 @@ SDK的运行需要appid以及配置文件，商家在接入时可先使用轻牛
 #### QNScaleItemData
 该类主要显示每个指标的详细数据信息
 
+#### QNUtils
+该类目前主要为共享秤测试完成的二维码提供解析
+
 ### 错误信息
 #### QNErrorCode.h
 该头文件展示了SDK中所有的错误信息类型
+
+## 安装
+
+### cocoapods安装:
+- 先安装Cocoapods；
+- 通过 pod repo update 更新QNSDK的cocoapods版本。
+- 在Podfile对应的target中，添加pod 'QNSDK'，并执行pod install
+- 在项目中使用CocoaPods生成的.xcworkspace运行工程。
+- 在你的代码文件头引入头文件#import <QNSDK/QNDeviceSDK.h>
+
+### 手动安装:
+- 下载SDK安装包至工程
+- 引入SDK路径 【TARGETS】-> 【Build Setting】->【Search Paths】->【LibrarySearch Paths】中添加SDK路径
+- 配置链接器 【TARGETS】-> 【Build Setting】-> 【Linking】-> 【Other Linker Flags】中添加 `-ObjC`、`-all_load`、`-force_load [SDK路径]` 其中之一
 
 
 ## SDK调用步骤
@@ -52,26 +69,24 @@ SDK的运行需要appid以及配置文件，商家在接入时可先使用轻牛
 ### 1. 工程的配置
 
 - 在Info.plist中有对 "Privacy - Bluetooth Peripheral Usage Description" 键 进行蓝牙的使用说明
-- 引入SDK路径 【TARGETS】-> 【Build Setting】->【Search Paths】->【LibrarySearch Paths】中添加SDK路径
-- 配置链接器 【TARGETS】-> 【Build Setting】-> 【Linking】-> 【Other Linker Flags】中添加 `-ObjC`、`-all_load`、`-force_load [SDK路径]` 其中之一
 
 ### 2. 方法的调用步骤
 
 1. 初始化SDK `+ (QNBleApi *)sharedBleApi;`
 2. 配置系统蓝牙弹框提示开关
-	+ 获取配置信息 `- (QNConfig *)getConfig;`
-	+ 设置是否需要弹框的开关值 `showPowerAlertKey`
++ 获取配置信息 `- (QNConfig *)getConfig;`
++ 设置是否需要弹框的开关值 `showPowerAlertKey`
 3. 注册SDK `- (void)initSdk:(NSString *)appId firstDataFile:(NSString *)dataFile callback:(QNResultCallback)callback;`
 4. 遵守和实现所需的代理
 5. 设置扫描配置 （也可以在步骤2中设置）
- 	+ 获取配置信息 `- (QNConfig *)getConfig;`
-	+ 设置是否只扫描开机的秤 `onlyScreenOn`
-	+ 设置扫描到秤时是否返回多次 `allowDuplicates`
-	+ 设置扫描的时间 `duration`
++ 获取配置信息 `- (QNConfig *)getConfig;`
++ 设置是否只扫描开机的秤 `onlyScreenOn`
++ 设置扫描到秤时是否返回多次 `allowDuplicates`
++ 设置扫描的时间 `duration`
 6. 扫描设备 `- (void)startBleDeviceDiscovery:(QNResultCallback)callback;`
 7. 设置连接的配置 （也可以在步骤2或者步骤5中设置）
-	+ 获取配置信息 `- (QNConfig *)getConfig;`
-	+ 设置秤端显示的单位 `unit`
++ 获取配置信息 `- (QNConfig *)getConfig;`
++ 设置秤端显示的单位 `unit`
 8. 构建连接秤的用户对象 `- (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(QNResultCallback)callback`
 9. 连接设备 `- (void)connectDevice:(QNBleDevice *)device user:(QNUser *)user callback:(QNResultCallback)callback;`
 
