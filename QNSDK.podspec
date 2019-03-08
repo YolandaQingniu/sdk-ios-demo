@@ -22,6 +22,7 @@ s.ios.deployment_target = '8.0'
 
 s.source_files = 'QNDeviceSDK/**/*'
 s.vendored_libraries = 'QNDeviceSDK/libQNDeviceSDK.a'
+s.public_header_files = 'QNDeviceSDK/**/*.h'
 s.static_framework = true
 s.frameworks = 'CoreBluetooth'
 
