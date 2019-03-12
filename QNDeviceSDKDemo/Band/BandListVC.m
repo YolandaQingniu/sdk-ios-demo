@@ -13,6 +13,7 @@
 #import "BandMetricsVC.h"
 #import "BandAlarmVC.h"
 #import "BandSitRemindVC.h"
+#import "BandRealTimeVC.h"
 
 @interface BandListVC ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
@@ -55,6 +56,10 @@
 - (IBAction)turnToMetricsVc:(UIButton *)sender {
     BandMetricsVC *metricsVc = [[BandMetricsVC alloc] init];
     [self.navigationController pushViewController:metricsVc animated:YES];
+}
+- (IBAction)turnToRealTimeHeartRateVc:(UIButton *)sender {
+    BandRealTimeVC *vc = [[BandRealTimeVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)reboot:(UIButton *)sender {

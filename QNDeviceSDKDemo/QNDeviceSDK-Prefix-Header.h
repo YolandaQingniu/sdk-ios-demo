@@ -11,10 +11,10 @@
 
 #import "QNDeviceSDK.h"
 #import "BandMessage.h"
-#import <MBProgressHUD/MBProgressHUD.h>
-#import <FBLPromises/FBLPromises.h>
+#import "MBProgressHUD.h"
 #import "BLETool.h"
 #import "AppDelegate.h"
+#import <FBLPromises/FBLPromises.h>
 
 
 #endif /* QNDeviceSDK_Prefix_Header_h */
