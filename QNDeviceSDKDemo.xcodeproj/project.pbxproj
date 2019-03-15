@@ -14,7 +14,6 @@
 		D232D6542004DE2D00AABD67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D232D6532004DE2D00AABD67 /* Assets.xcassets */; };
 		D232D6572004DE2D00AABD67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D232D6552004DE2D00AABD67 /* LaunchScreen.storyboard */; };
 		D232D65A2004DE2D00AABD67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D232D6592004DE2D00AABD67 /* main.m */; };
-		D2568111223229BD0049356E /* QNSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D2568110223229BC0049356E /* QNSDK.podspec */; };
 		D2568166223237EB0049356E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2568165223237EB0049356E /* README.md */; };
 		D27FFD95223BBF45003D1058 /* libQNDeviceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D27FFD8D223BBF44003D1058 /* libQNDeviceSDK.a */; };
 		D27FFD96223BBF45003D1058 /* updateRemind.md in Resources */ = {isa = PBXBuildFile; fileRef = D27FFD8F223BBF44003D1058 /* updateRemind.md */; };
@@ -53,7 +52,6 @@
 		D232D6562004DE2D00AABD67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D232D6582004DE2D00AABD67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D232D6592004DE2D00AABD67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D2568110223229BC0049356E /* QNSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QNSDK.podspec; sourceTree = "<group>"; };
 		D2568165223237EB0049356E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D27FFD84223BBF43003D1058 /* QNCallBackConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNCallBackConst.h; sourceTree = "<group>"; };
 		D27FFD85223BBF43003D1058 /* QNBleDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDevice.h; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 		D232D63E2004DE2D00AABD67 = {
 			isa = PBXGroup;
 			children = (
-				D2568110223229BC0049356E /* QNSDK.podspec */,
 				D232D6492004DE2D00AABD67 /* QNDeviceSDKDemo */,
 				D232D6482004DE2D00AABD67 /* Products */,
 				D21FD20C205FABD6006450BC /* Frameworks */,
@@ -246,7 +243,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D27FFD96223BBF45003D1058 /* updateRemind.md in Resources */,
-				D2568111223229BD0049356E /* QNSDK.podspec in Resources */,
 				D2B9E98B20723DEC0020C2B6 /* DetectionViewController.xib in Resources */,
 				D2B9E98920723DEC0020C2B6 /* ScaleDataCell.xib in Resources */,
 				D232D6572004DE2D00AABD67 /* LaunchScreen.storyboard in Resources */,
