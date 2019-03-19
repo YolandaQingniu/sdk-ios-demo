@@ -91,7 +91,6 @@
 		D230F23C224085CB00DC01E9 /* QNScaleStoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleStoreData.h; sourceTree = "<group>"; };
 		D230F23D224085CB00DC01E9 /* QNCallBackConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNCallBackConst.h; sourceTree = "<group>"; };
 		D230F23E224085CB00DC01E9 /* QNScaleItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleItemData.h; sourceTree = "<group>"; };
-		D230F250224085FF00DC01E9 /* QNSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QNSDK.podspec; sourceTree = "<group>"; };
 		D232D6472004DE2D00AABD67 /* QNDeviceSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QNDeviceSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D232D64A2004DE2D00AABD67 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D232D64B2004DE2D00AABD67 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -181,7 +180,6 @@
 		D232D63E2004DE2D00AABD67 = {
 			isa = PBXGroup;
 			children = (
-				D230F250224085FF00DC01E9 /* QNSDK.podspec */,
 				D232D6492004DE2D00AABD67 /* QNDeviceSDKDemo */,
 				D230F2222240847500DC01E9 /* QNSDK */,
 				D232D6482004DE2D00AABD67 /* Products */,
