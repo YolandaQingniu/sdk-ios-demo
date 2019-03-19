@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D2048A5220A6E15600D943BC /* 123456789.qn in Resources */ = {isa = PBXBuildFile; fileRef = D2048A5120A6E15600D943BC /* 123456789.qn */; };
-		D230F2252240847600DC01E9 /* QNSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = D230F2232240847500DC01E9 /* QNSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D230F2282240847600DC01E9 /* QNSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D230F2212240847500DC01E9 /* QNSDK.framework */; };
 		D230F2292240847600DC01E9 /* QNSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D230F2212240847500DC01E9 /* QNSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D230F23F224085CB00DC01E9 /* QNDeviceSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = D230F22E224085CA00DC01E9 /* QNDeviceSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,7 +71,6 @@
 /* Begin PBXFileReference section */
 		D2048A5120A6E15600D943BC /* 123456789.qn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 123456789.qn; sourceTree = "<group>"; };
 		D230F2212240847500DC01E9 /* QNSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QNSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D230F2232240847500DC01E9 /* QNSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNSDK.h; sourceTree = "<group>"; };
 		D230F2242240847600DC01E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D230F22E224085CA00DC01E9 /* QNDeviceSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDeviceSDK.h; sourceTree = "<group>"; };
 		D230F22F224085CA00DC01E9 /* QNDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDataProtocol.h; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 		D230F2222240847500DC01E9 /* QNSDK */ = {
 			isa = PBXGroup;
 			children = (
-				D230F2232240847500DC01E9 /* QNSDK.h */,
 				D230F22D224085C300DC01E9 /* SDK */,
 				D230F2242240847600DC01E9 /* Info.plist */,
 			);
@@ -250,7 +247,6 @@
 				D230F240224085CB00DC01E9 /* QNDataProtocol.h in Headers */,
 				D230F24F224085CB00DC01E9 /* QNScaleItemData.h in Headers */,
 				D230F248224085CB00DC01E9 /* QNBleDevice.h in Headers */,
-				D230F2252240847600DC01E9 /* QNSDK.h in Headers */,
 				D230F246224085CB00DC01E9 /* QNConfig.h in Headers */,
 				D230F241224085CB00DC01E9 /* QNErrorCode.h in Headers */,
 				D230F243224085CB00DC01E9 /* QNBleApi.h in Headers */,
