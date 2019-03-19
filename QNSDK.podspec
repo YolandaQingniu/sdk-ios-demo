@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'QNSDK'
-s.version          = '0.5.0'
+s.version          = '0.5.1'
 s.summary          = '轻牛旗下设备通讯类'
 
 s.description      = '支持智能体脂秤、共享秤二维码数据解析'
@@ -20,9 +20,9 @@ s.source           = { :git => 'https://github.com/YolandaQingniu/sdk-ios-demo.g
 
 s.ios.deployment_target = '8.0'
 
-s.source_files = 'QNSDK/**/*'
-s.vendored_libraries = 'QNSDK/libQNDeviceSDK.a'
-s.public_header_files= 'QNSDK/**/*.h'
+s.source_files = 'QNSDK/SDK/**/*'
+s.vendored_libraries = 'QNSDK/SDK/libQNDeviceSDK.a'
+s.public_header_files= 'QNSDK/SDK/**/*.h'
 s.static_framework = true
 s.frameworks = 'CoreBluetooth'
 
