@@ -34,26 +34,26 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 
 @interface QNUser : NSObject
 /** userID */
-@property (nonatomic, strong, readonly) NSString *userId;
+@property (nonatomic, strong) NSString *userId;
 /** height */
-@property (nonatomic, assign, readonly) int height;
+@property (nonatomic, assign) int height;
 /** gender : male or female */
-@property (nonatomic, strong, readonly) NSString *gender;
+@property (nonatomic, strong) NSString *gender;
 /** brithday */
-@property (nonatomic, strong, readonly) NSDate *birthday;
+@property (nonatomic, strong) NSDate *birthday;
+/** clothesWeight */
+@property (nonatomic, assign) double clothesWeight;
 /**
  设置使用算法的类型
  1表示运动员算法，0是普通算法
  当用户年龄小于18岁时，即使设置为运动员模式，也是使用普通模式
  */
-@property (nonatomic, assign, readonly) YLAthleteType athleteType;
+@property (nonatomic, assign) YLAthleteType athleteType;
 
 /** 用户的身材 */
-@property (nonatomic, assign, readonly) YLUserShapeType shapeType;
+@property (nonatomic, assign) YLUserShapeType shapeType;
 /** 用户目标 */
-@property (nonatomic, assign, readonly) YLUserGoalType goalType;
-
-- (instancetype)init NS_UNAVAILABLE;
+@property (nonatomic, assign) YLUserGoalType goalType;
 
 /**
  建立用户模型
@@ -65,7 +65,7 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
  @param callback 结果的回调
  @return QNUser
  */
-+ (QNUser *)buildUserId:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(QNResultCallback)callback;
++ (QNUser *)buildUserId:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(QNResultCallback)callback NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "2.5.2版本开始不必使用指定的构建方法");
 
 /**
  建立用户模型
@@ -78,7 +78,7 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
  @param callback 结果的回调
  @return QNUser
  */
-+ (QNUser *)buildUserId:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday athleteType:(YLAthleteType)athleteType callback:(QNResultCallback)callback;
++ (QNUser *)buildUserId:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday athleteType:(YLAthleteType)athleteType callback:(QNResultCallback)callback NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "2.5.2版本开始不必使用指定的构建方法");
 
 /**
  建立用户模型
@@ -93,7 +93,7 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
  @param callback 回调
  @return QNUser
  */
-+ (QNUser *)buildUserId:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday athleteType:(YLAthleteType)athleteType shapeType:(YLUserShapeType)shapeType goalType:(YLUserGoalType)goalType callback:(QNResultCallback)callback;
++ (QNUser *)buildUserId:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday athleteType:(YLAthleteType)athleteType shapeType:(YLUserShapeType)shapeType goalType:(YLUserGoalType)goalType callback:(QNResultCallback)callback NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "2.5.2版本开始不必使用指定的构建方法");
 
 
 @end
