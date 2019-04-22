@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     
     QNConfig *config = [[QNBleApi sharedBleApi] getConfig];
-    config.showPowerAlertKey = YES;
+    config.showPowerAlertKey = NO;
 
     QNBleApi.debug = YES;
     NSString *file = [[NSBundle mainBundle] pathForResource:@"123456789" ofType:@"qn"];
