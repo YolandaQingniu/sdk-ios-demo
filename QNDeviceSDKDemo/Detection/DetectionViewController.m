@@ -16,12 +16,16 @@ typedef enum{
     DeviceStyleMeasuringHeartRate = 6, //测量心率
     DeviceStyleMeasuringSucceed = 7,     //测量完成
     DeviceStyleDisconnect = 8,         //断开连接/称关机
+    DeviceStyleWifiBleStartNetwork = 9,         //开始配网
+    DeviceStyleWifiBleNetworkSuccess = 10,         //配网成功
+    DeviceStyleWifiBleNetworkFail = 11,         //配网失败
 }DeviceStyle;
 
 
 #import "DetectionViewController.h"
 #import "DeviceTableViewCell.h"
 #import "ScaleDataCell.h"
+#import "WiFiTool.h"
 
 @interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
@@ -77,6 +81,15 @@ typedef enum{
         case DeviceStyleLingSucceed: //链接成功
             [self setLingSucceedStyleUI];
             break;
+        case DeviceStyleWifiBleStartNetwork: //开始配网
+            [self setStartNetworkStyleUI];
+            break;
+        case DeviceStyleWifiBleNetworkSuccess: //配网成功
+            [self setNetworkSuccessStyleUI];
+            break;
+        case DeviceStyleWifiBleNetworkFail: //配网失败
+            [self setNetworkFailStyleUI];
+            break;
         case DeviceStyleMeasuringWeight: //测量体重
             [self setMeasuringWeightStyleUI];
             break;
@@ -125,6 +138,24 @@ typedef enum{
     self.unstableWeightLabel.text = @"0.0";
     self.tableView.hidden = YES;
     self.headerView.hidden = YES;
+}
+
+#pragma mark 正在配网
+- (void)setStartNetworkStyleUI {
+    self.styleLabel.text = @"正在配网...";
+    self.unstableWeightLabel.text = nil;
+}
+
+#pragma mark 配网成功
+- (void)setNetworkSuccessStyleUI {
+    self.styleLabel.text = @"配网成功";
+    self.unstableWeightLabel.text = nil;
+}
+
+#pragma mark 配网失败
+- (void)setNetworkFailStyleUI {
+    self.styleLabel.text = @"配网失败";
+    self.unstableWeightLabel.text = nil;
 }
 
 #pragma mark 测量体重状态UI
@@ -191,6 +222,9 @@ typedef enum{
 
 #pragma mark - QNBleDeviceDiscorveryListener
 - (void)onDeviceDiscover:(QNBleDevice *)device {//该方法会在发现设备后回调
+    if ([device.bluetoothName isEqualToString:@"QN-S3"]) {
+        
+    }
     for (QNBleDevice *item in self.deviceAry) {
         if ([item.mac isEqualToString:device.mac]) {
             return;
@@ -204,6 +238,14 @@ typedef enum{
 - (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state{//秤连接或测量状态变化
     if (state == QNScaleStateConnected) {//链接成功
           self.currentStyle = DeviceStyleLingSucceed;
+    }else if (state == QNScaleStateWiFiBleStartNetwork){//开始配网
+        self.currentStyle = DeviceStyleWifiBleStartNetwork;
+    }else if (state == QNScaleStateWiFiBleNetworkSuccess){//配网成功
+        self.currentStyle = DeviceStyleWifiBleNetworkSuccess;
+    }else if (state == QNScaleStateWiFiBleNetworkFail){//配网失败
+        self.currentStyle = DeviceStyleWifiBleNetworkFail;
+    }else if (state == QNScaleStateRealTime){//测量体重
+        self.currentStyle = DeviceStyleMeasuringWeight;
     }else if (state == QNScaleStateRealTime){//测量体重
         self.currentStyle = DeviceStyleMeasuringWeight;
     }else if (state == QNScaleStateBodyFat){//测量阻抗
@@ -271,17 +313,67 @@ typedef enum{
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.currentStyle == DeviceStyleScanning) {
-        [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {
-            
-        }];
-        self.currentStyle = DeviceStyleLinging;
         QNBleDevice *device = self.deviceAry[indexPath.row];
-        [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
-            
-        }];
+        if (device.deviceType != QNDeviceTypeScaleWiFiBLE) {
+            if (device.deviceType == QNDeviceTypeScaleBleDefault) {
+                [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
+            }
+            self.currentStyle = DeviceStyleLinging;
+            [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
+                
+            }];
+        }else {
+            [self wifiBleNetworkRemindWithDevice:device];
+        }
+
     }else {
         
     }
+}
+
+- (void)wifiBleNetworkRemindWithDevice:(QNBleDevice *)device {
+    __weak __typeof(self)weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"双模秤配置" message:@"如不需要配网，请直接点击连接" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.text = [WiFiTool currentWifiName];
+        textField.textAlignment = NSTextAlignmentCenter;
+        textField.enabled = NO;
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    }];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"若该WiFi无密码，则无需输入";
+        textField.textAlignment = NSTextAlignmentCenter;
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction *connectAction = [UIAlertAction actionWithTitle:@"直接连接" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf.bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
+        [weakSelf.bleApi connectDevice:device user:weakSelf.user callback:^(NSError *error) {
+            
+        }];
+    }];
+    
+    UIAlertAction *networkAction = [UIAlertAction actionWithTitle:@"配网并连接" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *ssid = alert.textFields.firstObject.text;
+        NSString *pwd = alert.textFields[1].text;
+        QNWiFiConfig *config = [[QNWiFiConfig alloc] init];
+        config.ssid = ssid;
+        config.pwd = pwd;
+        [weakSelf.bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
+        [weakSelf.bleApi connectDeviceSetWiFiWithDevice:device user:weakSelf.user wifiConfig:config callback:^(NSError *error) {
+            
+        }];
+    }];
+    [alert addAction:connectAction];
+    [alert addAction:networkAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
 }
 
 - (IBAction)clickScanBtn:(UIButton *)sender {

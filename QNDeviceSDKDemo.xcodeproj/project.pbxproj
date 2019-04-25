@@ -17,6 +17,7 @@
 		D232D6572004DE2D00AABD67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D232D6552004DE2D00AABD67 /* LaunchScreen.storyboard */; };
 		D232D65A2004DE2D00AABD67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D232D6592004DE2D00AABD67 /* main.m */; };
 		D244245C2271BFF800F63F35 /* QNWiFiConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = D244245B2271BFF800F63F35 /* QNWiFiConfig.h */; };
+		D244245F2271CD0400F63F35 /* WiFiTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D244245E2271CD0400F63F35 /* WiFiTool.m */; };
 		D2568166223237EB0049356E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2568165223237EB0049356E /* README.md */; };
 		D264383F2244E33C0082F9E1 /* QNBleStateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = D264382E2244E33A0082F9E1 /* QNBleStateProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D26438402244E33C0082F9E1 /* libQNDeviceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D264382F2244E33B0082F9E1 /* libQNDeviceSDK.a */; };
@@ -84,6 +85,9 @@
 		D232D6582004DE2D00AABD67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D232D6592004DE2D00AABD67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D244245B2271BFF800F63F35 /* QNWiFiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNWiFiConfig.h; sourceTree = "<group>"; };
+		D244245D2271CD0400F63F35 /* WiFiTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WiFiTool.h; sourceTree = "<group>"; };
+		D244245E2271CD0400F63F35 /* WiFiTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WiFiTool.m; sourceTree = "<group>"; };
+		D24424602271CD3400F63F35 /* QNDeviceSDKDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QNDeviceSDKDemo.entitlements; sourceTree = "<group>"; };
 		D2568165223237EB0049356E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D264382E2244E33A0082F9E1 /* QNBleStateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleStateProtocol.h; sourceTree = "<group>"; };
 		D264382F2244E33B0082F9E1 /* libQNDeviceSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libQNDeviceSDK.a; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 		D232D6492004DE2D00AABD67 /* QNDeviceSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D24424602271CD3400F63F35 /* QNDeviceSDKDemo.entitlements */,
 				D2568165223237EB0049356E /* README.md */,
 				D2B9E97B20723DEC0020C2B6 /* Detection */,
 				D2B9E98520723DEC0020C2B6 /* PickerView.h */,
@@ -208,6 +213,8 @@
 				D232D64B2004DE2D00AABD67 /* AppDelegate.m */,
 				D232D64D2004DE2D00AABD67 /* ViewController.h */,
 				D232D64E2004DE2D00AABD67 /* ViewController.m */,
+				D244245D2271CD0400F63F35 /* WiFiTool.h */,
+				D244245E2271CD0400F63F35 /* WiFiTool.m */,
 				D232D6502004DE2D00AABD67 /* Main.storyboard */,
 				D232D6532004DE2D00AABD67 /* Assets.xcassets */,
 				D232D6552004DE2D00AABD67 /* LaunchScreen.storyboard */,
@@ -316,6 +323,11 @@
 					D232D6462004DE2D00AABD67 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -379,6 +391,7 @@
 			files = (
 				D232D64F2004DE2D00AABD67 /* ViewController.m in Sources */,
 				D232D65A2004DE2D00AABD67 /* main.m in Sources */,
+				D244245F2271CD0400F63F35 /* WiFiTool.m in Sources */,
 				D2B9E98C20723DEC0020C2B6 /* ScaleDataCell.m in Sources */,
 				D2B9E98820723DEC0020C2B6 /* DetectionViewController.m in Sources */,
 				D232D64C2004DE2D00AABD67 /* AppDelegate.m in Sources */,
@@ -596,6 +609,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QNDeviceSDKDemo/QNDeviceSDKDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4NX335G8BX;
 				ENABLE_BITCODE = YES;
@@ -620,6 +634,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QNDeviceSDKDemo/QNDeviceSDKDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4NX335G8BX;
 				ENABLE_BITCODE = YES;
