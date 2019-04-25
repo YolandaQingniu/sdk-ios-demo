@@ -10,8 +10,9 @@
 
 typedef NS_ENUM(NSUInteger, QNDeviceType) {
     QNDeviceTypeScaleBleDefault = 100, //普通蓝牙秤
-    QNDeviceTypeScaleBroadcastSingle = 120, //单向广播秤
-    QNDeviceTypeScaleBroadcastDouble = 121, //双向广播秤
+    QNDeviceTypeScaleBroadcastSingle = 120, //单向广播秤 不支持通过命令修改秤的单位
+    QNDeviceTypeScaleBroadcastDouble = 121, //双向广播秤 支持通过命令修改秤的单位
+    QNDeviceTypeScaleWiFiBLE = 130, //蓝牙WiFi双模秤
 };
 
 @interface QNBleDevice : NSObject

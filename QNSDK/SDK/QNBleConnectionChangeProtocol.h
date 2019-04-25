@@ -19,6 +19,9 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
     QNScaleStateBodyFat = 7, //正在测试生物阻抗
     QNScaleStateHeartRate = 8, //正在测试心率
     QNScaleStateMeasureCompleted = 9, //测量完成
+    QNScaleStateWiFiBleStartNetwork = 10, //WiFi蓝牙双模设备开始配网
+    QNScaleStateWiFiBleNetworkSuccess = 11, //WiFi蓝牙双模设备联网成功
+    QNScaleStateWiFiBleNetworkFail = 12, //WiFi蓝牙双模设备联网失败
 };
 
 @protocol QNBleConnectionChangeListener <NSObject>

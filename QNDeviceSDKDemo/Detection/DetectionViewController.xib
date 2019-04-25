@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -127,7 +127,7 @@
                     <rect key="frame" x="0.0" y="205" width="375" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="强度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mp-RO-1NC">
-                            <rect key="frame" x="320" y="0.0" width="30" height="40"/>
+                            <rect key="frame" x="310" y="0.0" width="30" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="DI3-JQ-rcS"/>
                             </constraints>
@@ -136,7 +136,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mac地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlI-uZ-NkR">
-                            <rect key="frame" x="170" y="0.0" width="150" height="40"/>
+                            <rect key="frame" x="160" y="0.0" width="150" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="150" id="QwP-L5-rYO"/>
                             </constraints>
@@ -145,7 +145,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="型号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XP-MH-C0b">
-                            <rect key="frame" x="124" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="114" y="0.0" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="Zhm-08-WEB"/>
                             </constraints>
@@ -154,7 +154,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQb-ex-2kH">
-                            <rect key="frame" x="0.0" y="0.0" width="121" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="111" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -171,7 +171,7 @@
                         <constraint firstItem="4mp-RO-1NC" firstAttribute="bottom" secondItem="zQb-ex-2kH" secondAttribute="bottom" id="cfq-3P-iCd"/>
                         <constraint firstItem="7XP-MH-C0b" firstAttribute="top" secondItem="zQb-ex-2kH" secondAttribute="top" id="fJy-MV-Y97"/>
                         <constraint firstItem="tlI-uZ-NkR" firstAttribute="leading" secondItem="7XP-MH-C0b" secondAttribute="trailing" constant="6" id="iub-ke-ml1"/>
-                        <constraint firstAttribute="trailing" secondItem="4mp-RO-1NC" secondAttribute="trailing" constant="25" id="kG3-Eg-amD"/>
+                        <constraint firstAttribute="trailing" secondItem="4mp-RO-1NC" secondAttribute="trailing" constant="35" id="kG3-Eg-amD"/>
                         <constraint firstAttribute="bottom" secondItem="zQb-ex-2kH" secondAttribute="bottom" id="l4t-WI-cQk"/>
                         <constraint firstItem="4mp-RO-1NC" firstAttribute="leading" secondItem="tlI-uZ-NkR" secondAttribute="trailing" id="lxo-8B-RGe"/>
                         <constraint firstItem="zQb-ex-2kH" firstAttribute="leading" secondItem="3Jh-KK-1x7" secondAttribute="leading" id="tqX-wj-xm3"/>

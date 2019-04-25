@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exd-ZA-c90" userLabel="数字">
-                        <rect key="frame" x="165" y="0.0" width="120" height="43.5"/>
+                        <rect key="frame" x="160" y="0.0" width="125" height="43.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -32,7 +32,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDf-nY-A12" userLabel="名称">
-                        <rect key="frame" x="15" y="0.0" width="150" height="43.5"/>
+                        <rect key="frame" x="10" y="0.0" width="150" height="43.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="RFX-ZI-tEi"/>
                         </constraints>
@@ -44,8 +44,8 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="exd-ZA-c90" secondAttribute="bottom" id="EfQ-4t-xMe"/>
                     <constraint firstItem="exd-ZA-c90" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LSV-d0-t0U"/>
-                    <constraint firstItem="vDf-nY-A12" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="RGV-nK-gS7"/>
                     <constraint firstAttribute="bottom" secondItem="vDf-nY-A12" secondAttribute="bottom" id="WE9-uo-Iv1"/>
+                    <constraint firstItem="vDf-nY-A12" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Whz-HH-k4X"/>
                     <constraint firstItem="lee-LH-ZDL" firstAttribute="leading" secondItem="exd-ZA-c90" secondAttribute="trailing" id="ZqI-HH-nvg"/>
                     <constraint firstItem="vDf-nY-A12" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gWI-E2-coj"/>
                     <constraint firstItem="lee-LH-ZDL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mqg-QQ-lbr"/>
@@ -57,6 +57,7 @@
                 <outlet property="name" destination="vDf-nY-A12" id="jMs-Ia-VAl"/>
                 <outlet property="value" destination="exd-ZA-c90" id="efr-HE-R30"/>
             </connections>
+            <point key="canvasLocation" x="132.80000000000001" y="154.72263868065968"/>
         </tableViewCell>
     </objects>
     <resources>
