@@ -14,11 +14,12 @@
 #import "QNDataProtocol.h"
 #import "QNUser.h"
 #import "QNConfig.h"
+#import "QNWiFiConfig.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 0.5.4 】
+ 当前版本【 0.6.0 】
  
  SDK最低配置8.0的系统
  
@@ -130,11 +131,10 @@
  连接设备
  
  @param device 连接的设备(该设备对象必须是搜索返回的设备对象)
- @param user 用户信息 (该用户信息对象，必须使用以下"buildUser"构建对象)
+ @param user 用户信息
  @param callback 结果回调
  */
 - (void)connectDevice:(QNBleDevice *)device user:(QNUser *)user callback:(QNResultCallback)callback;
-
 
 /**
  断开设备的连接
@@ -143,6 +143,27 @@
  @param callback 结果回调
  */
 - (void)disconnectDevice:(QNBleDevice *)device callback:(QNResultCallback)callback;
+
+/**
+ 
+ 对WiFi双模设备进行配网
+
+ @param device 需要配网的设备
+ @param user 用户信息
+ @param wifiConfig 配网的WiFi信息
+ @param callback 配网操作的回到  您可以通过监听“- (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state”方法获取配网的结果
+ */
+- (void)connectDeviceSetWiFiWithDevice:(QNBleDevice *)device user:(QNUser *)user wifiConfig:(QNWiFiConfig *)wifiConfig callback:(QNResultCallback)callback;
+
+/**
+ 向轻牛云注册WiFi蓝牙双模秤
+ 
+ 目前只允许注册WiFi蓝牙双模秤
+
+ @param device QNBleDevice
+ @param callback 注册结果
+ */
+- (void)registerWiFiBleDevice:(QNBleDevice *)device callback:(QNResultCallback)callback;
 
 
 /**

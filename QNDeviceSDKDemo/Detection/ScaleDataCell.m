@@ -8,7 +8,6 @@
 
 #import "ScaleDataCell.h"
 @interface ScaleDataCell ()
-
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *value;
 

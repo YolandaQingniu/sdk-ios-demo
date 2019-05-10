@@ -13,10 +13,13 @@
 @interface QNScaleData : NSObject
 
 /** 测量数据的拥有者 */
-@property (nonatomic, readonly, strong) QNUser *user;
+@property (nonatomic, strong, readonly) QNUser *user;
 
 /** 测量数据测量时间 */
-@property (nonatomic, readonly, strong) NSDate *measureTime;
+@property (nonatomic, strong, readonly) NSDate *measureTime;
+
+/** 数据标识 */
+@property (nonatomic, strong, readonly) NSString *hmac;
 
 /**
  通过调用该方法获取当个指标的详情
@@ -26,7 +29,6 @@
  */
 - (QNScaleItemData *)getItem:(QNScaleType)type;
 
-
 /**
  获取当个指标的数值
 
@@ -35,7 +37,6 @@
  */
 - (double)getItemValue:(QNScaleType)type;
 
-
 /**
  获取该次测量后的指标详情
 
@@ -43,5 +44,13 @@
  */
 - (NSArray <QNScaleItemData *> *)getAllItem;
 
+/**
+ 体脂变化控制
+
+ @param threshold 控制变化范围
+ @param hmac 上次测量的数据标识
+ @param callback 是否控制成功的回调
+ */
+- (void)setFatThreshold:(double)threshold hmac:(NSString *)hmac callBlock:(QNResultCallback)callback;
 
 @end

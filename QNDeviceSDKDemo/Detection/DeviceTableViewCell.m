@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *macLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RSSILabel;
 @property (weak, nonatomic) IBOutlet UILabel *modeIdLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *wifiImageView;
 
 @end
 @implementation DeviceTableViewCell
@@ -22,6 +23,7 @@
     self.macLabel.text = device.mac;
     self.RSSILabel.text = [device.RSSI stringValue];
     self.modeIdLabel.text = device.modeId;
+    self.wifiImageView.hidden = device.deviceType != QNDeviceTypeScaleWiFiBLE;
 }
 
 @end

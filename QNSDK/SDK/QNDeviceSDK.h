@@ -28,6 +28,7 @@ FOUNDATION_EXPORT const unsigned char QNDeviceSDKVersionString[];
 #import "QNConfig.h"
 #import "QNCallBackConst.h"
 #import "QNUtils.h"
+#import "QNWiFiConfig.h"
 
 
 
