@@ -17,6 +17,7 @@ FOUNDATION_EXPORT const unsigned char QNDeviceSDKVersionString[];
 #import "QNErrorCode.h"
 #import "QNBleApi.h"
 #import "QNDataProtocol.h"
+#import "QNLogProtocol.h"
 #import "QNBleStateProtocol.h"
 #import "QNBleDeviceDiscoveryProtocol.h"
 #import "QNBleConnectionChangeProtocol.h"

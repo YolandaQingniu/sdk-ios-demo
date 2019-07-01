@@ -12,6 +12,7 @@
 #import "QNBleDeviceDiscoveryProtocol.h"
 #import "QNBleConnectionChangeProtocol.h"
 #import "QNDataProtocol.h"
+#import "QNLogProtocol.h"
 #import "QNUser.h"
 #import "QNConfig.h"
 #import "QNWiFiConfig.h"
@@ -19,7 +20,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 0.6.3 】
+ 当前版本【 0.6.4 】
  
  SDK最低配置8.0的系统
  
@@ -73,6 +74,14 @@
  
  */
 @property (nonatomic, weak) id<QNBleConnectionChangeListener> connectionChangeListener;
+
+
+/**
+ 日志信息监听
+ 不需要收集日志时，可忽略该监听
+ 此处监听的回调不受 debug 开关的控制
+ */
+@property(nonatomic, weak) id<QNLogProtocol> logListener;
 
 /**
  测量数据的监听，该监听必须实现
