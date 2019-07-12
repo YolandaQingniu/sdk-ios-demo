@@ -26,4 +26,12 @@
     self.wifiImageView.hidden = device.deviceType != QNDeviceTypeScaleWiFiBLE;
 }
 
+- (void)setBroadcastDevice:(QNBleBroadcastDevice *)broadcastDevice {
+    _broadcastDevice = broadcastDevice;
+    self.nameLabel.text = broadcastDevice.name;
+    self.macLabel.text = broadcastDevice.mac;
+    self.RSSILabel.text = [broadcastDevice.RSSI stringValue];
+    self.modeIdLabel.text = broadcastDevice.modeId;
+    self.wifiImageView.hidden = YES;
+}
 @end

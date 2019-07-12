@@ -26,6 +26,7 @@ typedef enum{
 #import "DeviceTableViewCell.h"
 #import "ScaleDataCell.h"
 #import "WiFiTool.h"
+#import "NSTimer+YYAdd.h"
 
 @interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
@@ -36,9 +37,11 @@ typedef enum{
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (nonatomic, assign) DeviceStyle currentStyle;
-@property (nonatomic, strong) NSMutableArray *deviceAry; //扫描到外设数组
+@property (nonatomic, strong) NSMutableDictionary *scanDveices;
 @property (nonatomic, strong) NSMutableArray *scaleDataAry; //收到测量完成后数组
-
+@property(nonatomic, strong) QNBleBroadcastDevice *connectBroadcastDevice; //当前连接的设备
+@property(nonatomic, assign) int broadcastMesasureCompleteCount;
+@property(nonatomic, strong) NSTimer *broadcastTimer;
 @property (nonatomic, strong) QNBleApi *bleApi;
 @end
 
@@ -192,7 +195,7 @@ typedef enum{
 #pragma mark - 蓝牙状态处理
 #pragma mark 开始扫描附近设备
 - (void)startScanDevice {
-    [self.deviceAry removeAllObjects];
+    [self.scanDveices removeAllObjects];
     [self.tableView reloadData];
     [_bleApi startBleDeviceDiscovery:^(NSError *error) {
         
@@ -211,6 +214,9 @@ typedef enum{
     [_bleApi disconnectDevice:nil callback:^(NSError *error) {
         
     }];
+    if (self.connectBroadcastDevice) {
+        [self disconnectBroadcastDevice];
+    }
 }
 
 #pragma mark 停止扫描附近设备
@@ -222,16 +228,25 @@ typedef enum{
 
 #pragma mark - QNBleDeviceDiscorveryListener
 - (void)onDeviceDiscover:(QNBleDevice *)device {//该方法会在发现设备后回调
-    if ([device.bluetoothName isEqualToString:@"QN-S3"]) {
-        
+    if (device.deviceType == QNDeviceTypeScaleBroadcastDouble || device.deviceType == QNDeviceTypeScaleBroadcastSingle) {
+        //为了兼容0.6.5之前的版本，该处依然会有广播秤设备信息的回调
+        //当使用0.6.5及以上版本，不再建议监听广播秤设备对象。而是【onBroadcastDeviceDiscover】使用该回调监听自定义广播秤的测量逻辑
+        return;
     }
-    for (QNBleDevice *item in self.deviceAry) {
-        if ([item.mac isEqualToString:device.mac]) {
-            return;
-        }
+    
+    if (self.scanDveices[device.mac] == nil) {
+        self.scanDveices[device.mac] = device;
+        [self.tableView reloadData];
     }
-    [self.deviceAry addObject:device];
-    [self.tableView reloadData];
+}
+
+- (void)onBroadcastDeviceDiscover:(QNBleBroadcastDevice *)device {//该方法会回调扫描到的广播秤信息
+    [self measuringBroadcaseDevice:device];
+    if (self.connectBroadcastDevice) { return; }
+    if (self.scanDveices[device.mac] == nil) {
+        self.scanDveices[device.mac] = device;
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - QNBleConnectionChangeListener
@@ -283,22 +298,118 @@ typedef enum{
     
 }
 
+#pragma mark - 广播秤处理逻辑
+- (void)connectBroadcaseDevice:(QNBleBroadcastDevice *)device {
+    if (self.connectBroadcastDevice) {
+        return;
+    }
+    self.connectBroadcastDevice = device;
+    [self setLingingStyleUI];
+    [self setLingSucceedStyleUI];
+    //由于广播秤无连接过程，因此当我们开始测量时即可认为是已经连接成功，并设置个定时器，在指定时间内未收到设备的广播数据即可认为设备已经灭屏或者是用户未在使用设备
+    //时间间隔，可以更根据不同情况自行设置
+    [self setBroadcaseTimerWithInterval:5];
+}
+
+- (void)measuringBroadcaseDevice:(QNBleBroadcastDevice *)device {
+    if (self.connectBroadcastDevice == nil) {
+        return;
+    }
+    
+    //由于广播秤无连接过程，因此当开始某一台广播秤测量时，过滤其他设备信息，只获取开始测量时对应的那台设备的信息
+    if ([self.connectBroadcastDevice.mac isEqualToString:device.mac] == NO) {
+        return;
+    }
+    
+    //设置秤的单位信息
+    //当设备支持修改单位，并且秤上的单位与准备设备的单位时，修改设备的单位
+    //目前广播秤未支持ST,即便下发ST单位也会设置成lb,因此目前对于广播秤不建议下发ST
+    QNUnit unit = self.config.unit;
+    if (unit == QNUnitST) {
+        unit = QNUnitLB;
+    }
+    
+    if (device.supportUnitChange && device.unit != unit) {
+        [device syncUnitCallback:^(NSError *error) {
+            //但是方法调用异常时，会回复错误信息
+        }];
+    }
+    
+    //当收到指定的设备数据后，更新定时器，用于判断秤是否灭屏或者用户不在使用设备
+    [self setBroadcaseTimerWithInterval:5];
+    
+    double weight = [self.bleApi convertWeightWithTargetUnit:device.weight unit:[self.bleApi getConfig].unit];
+    self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f",weight];
+    
+    if (device.isComplete == NO) {
+        [self setMeasuringWeightStyleUI];
+    }
+    
+    //由于测量完成时，会收到多条完成的广播数据，此处用于避免收取重复数据的问题
+    if (device.isComplete && self.broadcastMesasureCompleteCount != device.measureCode) {
+        self.broadcastMesasureCompleteCount = device.measureCode;
+        //测量完成
+        QNScaleData *scaleData = [device generateScaleDataWithUser:self.user callback:^(NSError *error) {
+            
+        }];
+        [self.scaleDataAry removeAllObjects];
+        for (QNScaleItemData *item in [scaleData getAllItem]) {
+            [self.scaleDataAry addObject:item];
+        }
+        [self.tableView reloadData];
+        [self setMeasuringResistanceStyleUI];
+    }
+    
+}
+
+- (void)setBroadcaseTimerWithInterval:(NSTimeInterval)interval {
+    [self removeBroadcaseTimer];
+    __weak __typeof(self)weakSelf = self;
+    self.broadcastTimer = [NSTimer scheduledTimerWithTimeInterval:interval block:^(NSTimer * _Nonnull timer) {
+        //未接到新广播数据时，可认为不再测量体重（断开的意思）
+        [weakSelf disconnectBroadcastDevice];
+    } repeats:NO];
+}
+
+- (void)removeBroadcaseTimer {
+    [self.broadcastTimer invalidate];
+    self.broadcastTimer = nil;
+}
+
+
+- (void)disconnectBroadcastDevice {
+    self.connectBroadcastDevice = nil;
+    [self removeBroadcaseTimer];
+    [self setDisconnectStyleUI];
+    //此处断开后停止扫描，只是demo的处理逻辑
+    [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
+        
+    }];
+}
+
+
 #pragma mark - UITabelViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.currentStyle == DeviceStyleScanning) {
-        return self.deviceAry.count;
+    if (self.currentStyle == DeviceStyleScanning && self.connectBroadcastDevice == nil) {
+        return self.scanDveices.count;
     }else {
         return self.scaleDataAry.count;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.currentStyle == DeviceStyleScanning) {
+    if (self.currentStyle == DeviceStyleScanning && self.connectBroadcastDevice == nil) {
         DeviceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DeviceTableViewCell"];
         if (!cell) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"DeviceTableViewCell" owner:self options:nil]lastObject];
         }
-        cell.device = self.deviceAry[indexPath.row];
+        NSString *mac = self.scanDveices.allKeys[indexPath.row];
+        id device = self.scanDveices[mac];
+        if ([device isKindOfClass:[QNBleBroadcastDevice class]]) {
+            cell.broadcastDevice = device;
+        }else {
+            cell.device = device;
+        }
         return cell;
     }else {
         ScaleDataCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScaleDataCell"];
@@ -312,22 +423,24 @@ typedef enum{
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.currentStyle == DeviceStyleScanning) {
-        QNBleDevice *device = self.deviceAry[indexPath.row];
-        if (device.deviceType != QNDeviceTypeScaleWiFiBLE) {
-            if (device.deviceType == QNDeviceTypeScaleBleDefault) {
-                [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
-            }
-            self.currentStyle = DeviceStyleLinging;
-            [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
-                
-            }];
-        }else {
-            [self wifiBleNetworkRemindWithDevice:device];
+    if (self.currentStyle != DeviceStyleScanning) { return; }
+    DeviceTableViewCell *cell = (DeviceTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.broadcastDevice != nil) {
+        [self connectBroadcaseDevice:cell.broadcastDevice];
+        return;
+    }
+    
+    QNBleDevice *device = cell.device;
+    if (device.deviceType != QNDeviceTypeScaleWiFiBLE) {
+        if (device.deviceType == QNDeviceTypeScaleBleDefault) {
+            [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         }
-
+        self.currentStyle = DeviceStyleLinging;
+        [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
+            
+        }];
     }else {
-        
+        [self wifiBleNetworkRemindWithDevice:device];
     }
 }
 
@@ -394,11 +507,11 @@ typedef enum{
     }
 }
 
-- (NSMutableArray *)deviceAry {
-    if (!_deviceAry) {
-        _deviceAry = [NSMutableArray arrayWithCapacity:1];
+- (NSMutableDictionary *)scanDveices {
+    if (_scanDveices == nil) {
+        _scanDveices = [NSMutableDictionary dictionary];
     }
-    return _deviceAry;
+    return _scanDveices;
 }
 
 - (NSMutableArray *)scaleDataAry {

@@ -7,6 +7,7 @@
 //
 
 #import "QNBleDevice.h"
+#import "QNBleBroadcastDevice.h"
 
 @protocol QNBleDeviceDiscoveryListener <NSObject>
 
@@ -23,6 +24,14 @@
  */
 - (void)onDeviceDiscover:(QNBleDevice *)device;
 
+/**
+ 收到广播秤后的设备回调
+ 
+ 【0.6.5】及以上版本强烈建议对广播秤使用该监听方法
+ 
+ @param device QNBleDevice
+ */
+- (void)onBroadcastDeviceDiscover:(QNBleBroadcastDevice *)device;
 
 /**
  该方法会用户调用 "- (void)stopBleDeviceDiscorvery:(QNResultCallback)callback" 方法或者设置了扫描时间，扫描结束后回调

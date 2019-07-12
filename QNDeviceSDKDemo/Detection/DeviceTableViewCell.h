@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "QNBleDevice.h"
+#import "QNBleBroadcastDevice.h"
 
 @interface DeviceTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) QNBleDevice *device;
+
+@property (nonatomic, strong) QNBleBroadcastDevice *broadcastDevice;
 
 @end

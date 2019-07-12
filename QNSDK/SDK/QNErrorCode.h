@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, QNBleErrorCode) {
     QNBleErrorCodeDeviceType = 1211,
     QNBleErrorCodeWiFiParams = 1212,
     QNBleErrorCodeRegisterDevice = 1213,
+    QNBleErrorCodeNoComoleteMeasure = 1214,
+    QNBleErrorCodeNoSupportModify = 1215,
 
     QNBleErrorCoder = 1301,
     QNBleErrorCoderInvalid = 1302,

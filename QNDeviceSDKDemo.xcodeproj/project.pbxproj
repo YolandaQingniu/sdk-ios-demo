@@ -36,6 +36,8 @@
 		D232D6572004DE2D00AABD67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D232D6552004DE2D00AABD67 /* LaunchScreen.storyboard */; };
 		D232D65A2004DE2D00AABD67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D232D6592004DE2D00AABD67 /* main.m */; };
 		D244245F2271CD0400F63F35 /* WiFiTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D244245E2271CD0400F63F35 /* WiFiTool.m */; };
+		D248DC5822D853D400DA046C /* QNBleBroadcastDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D248DC5722D853D400DA046C /* QNBleBroadcastDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D248DC5B22D85DF200DA046C /* NSTimer+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = D248DC5A22D85DF200DA046C /* NSTimer+YYAdd.m */; };
 		D2568166223237EB0049356E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2568165223237EB0049356E /* README.md */; };
 		D2B9E98820723DEC0020C2B6 /* DetectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B9E97C20723DEC0020C2B6 /* DetectionViewController.m */; };
 		D2B9E98920723DEC0020C2B6 /* ScaleDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B9E97D20723DEC0020C2B6 /* ScaleDataCell.xib */; };
@@ -107,6 +109,9 @@
 		D244245D2271CD0400F63F35 /* WiFiTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WiFiTool.h; sourceTree = "<group>"; };
 		D244245E2271CD0400F63F35 /* WiFiTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WiFiTool.m; sourceTree = "<group>"; };
 		D24424602271CD3400F63F35 /* QNDeviceSDKDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QNDeviceSDKDemo.entitlements; sourceTree = "<group>"; };
+		D248DC5722D853D400DA046C /* QNBleBroadcastDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleBroadcastDevice.h; sourceTree = "<group>"; };
+		D248DC5922D85DF200DA046C /* NSTimer+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YYAdd.h"; sourceTree = "<group>"; };
+		D248DC5A22D85DF200DA046C /* NSTimer+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YYAdd.m"; sourceTree = "<group>"; };
 		D2568165223237EB0049356E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D2B9E97C20723DEC0020C2B6 /* DetectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectionViewController.m; sourceTree = "<group>"; };
 		D2B9E97D20723DEC0020C2B6 /* ScaleDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScaleDataCell.xib; sourceTree = "<group>"; };
@@ -166,6 +171,7 @@
 				D2198AFE22CB35D6008EC3D2 /* QNBleConnectionChangeProtocol.h */,
 				D2198B0022CB35D6008EC3D2 /* QNBleDevice.h */,
 				D2198B0522CB35D7008EC3D2 /* QNBleDeviceDiscoveryProtocol.h */,
+				D248DC5722D853D400DA046C /* QNBleBroadcastDevice.h */,
 				D2198B0322CB35D7008EC3D2 /* QNBleStateProtocol.h */,
 				D2198B0122CB35D6008EC3D2 /* QNCallBackConst.h */,
 				D2198B0422CB35D7008EC3D2 /* QNConfig.h */,
@@ -212,6 +218,8 @@
 				D2B9E98520723DEC0020C2B6 /* PickerView.h */,
 				D2B9E98620723DEC0020C2B6 /* PickerView.m */,
 				D2B9E98720723DEC0020C2B6 /* PickerView.xib */,
+				D248DC5922D85DF200DA046C /* NSTimer+YYAdd.h */,
+				D248DC5A22D85DF200DA046C /* NSTimer+YYAdd.m */,
 				D232D64A2004DE2D00AABD67 /* AppDelegate.h */,
 				D232D64B2004DE2D00AABD67 /* AppDelegate.m */,
 				D232D64D2004DE2D00AABD67 /* ViewController.h */,
@@ -261,6 +269,7 @@
 				D2198B1922CB35D7008EC3D2 /* QNBleApi.h in Headers */,
 				D2198B0722CB35D7008EC3D2 /* QNUtils.h in Headers */,
 				D2198B1722CB35D7008EC3D2 /* QNConfig.h in Headers */,
+				D248DC5822D853D400DA046C /* QNBleBroadcastDevice.h in Headers */,
 				D2198B1622CB35D7008EC3D2 /* QNBleStateProtocol.h in Headers */,
 				D2198B0B22CB35D7008EC3D2 /* QNScaleData.h in Headers */,
 				D2198B0822CB35D7008EC3D2 /* QNErrorCode.h in Headers */,
@@ -394,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D232D64F2004DE2D00AABD67 /* ViewController.m in Sources */,
+				D248DC5B22D85DF200DA046C /* NSTimer+YYAdd.m in Sources */,
 				D232D65A2004DE2D00AABD67 /* main.m in Sources */,
 				D244245F2271CD0400F63F35 /* WiFiTool.m in Sources */,
 				D2B9E98C20723DEC0020C2B6 /* ScaleDataCell.m in Sources */,

@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
 /** 是否只返回已开机（亮屏）的设备，默认为false */
 @property (nonatomic, assign) BOOL onlyScreenOn;
 
-/** 同一个设备是否返回多次，默认为false */
+/** 同一个设备是否返回多次，默认为false , 该设置对广播秤无效*/
 @property (nonatomic, assign) BOOL allowDuplicates;
 
 /**
@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
  */
 @property (nonatomic, assign) int duration;
 
-/** 端显示的单位，不设置的话，SDK默认为kg，设置后会保存本地，如果当前已经连接设备，会尽量实时更新秤端的单位显示 */
+/** 端显示的单位，不设置的话，SDK默认为kg，设置后会保存本地，如果当前已经连接设备，会尽量实时更新秤端的单位显示 ，该设置对广播秤无效，广播秤修改单位请前往【QNBleBroadcastDevice】*/
 @property (nonatomic, assign) QNUnit unit;
 
 /**
