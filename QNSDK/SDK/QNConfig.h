@@ -50,4 +50,9 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
  */
 @property (nonatomic, assign) BOOL showPowerAlertKey;
 
+/**
+ 强化广播秤信号
+ */
+@property (nonatomic, assign) BOOL enhanceBleBoradcast;
+
 @end
