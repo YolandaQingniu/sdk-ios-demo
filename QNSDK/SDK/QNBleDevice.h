@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "QNPScaleDevice.h"
 
 typedef NS_ENUM(NSUInteger, QNDeviceType) {
     QNDeviceTypeScaleBleDefault = 100, //普通蓝牙秤
@@ -30,5 +31,7 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
 @property (nonatomic, readonly, getter=isScreenOn, assign) BOOL screenOn;
 /** 设备类型 */
 @property (nonatomic, assign) QNDeviceType deviceType;
+/** 扫描设备 */
+@property (nonatomic, strong) QNPScaleDevice *publicDevice;
 
 @end

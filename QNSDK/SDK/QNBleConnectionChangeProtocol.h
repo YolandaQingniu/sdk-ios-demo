@@ -65,15 +65,5 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
  */
 - (void)onConnectError:(QNBleDevice *)device error:(NSError *)error;
 
-
-
-/**
- 秤连接或测量状态变化
-
- @param device QNBleDevice
- @param state 状态
- */
-- (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state;
-
 @end
 

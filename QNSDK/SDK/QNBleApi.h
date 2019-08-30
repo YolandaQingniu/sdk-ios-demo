@@ -11,11 +11,14 @@
 #import "QNBleStateProtocol.h"
 #import "QNBleDeviceDiscoveryProtocol.h"
 #import "QNBleConnectionChangeProtocol.h"
-#import "QNDataProtocol.h"
+#import "QNScaleDataProtocol.h"
 #import "QNLogProtocol.h"
 #import "QNUser.h"
 #import "QNConfig.h"
 #import "QNWiFiConfig.h"
+#import "QNBleProtocolDelegate.h"
+#import "QNBleProtocolHandler.h"
+#import "QNPProtocolData.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
@@ -85,10 +88,10 @@
 
 /**
  测量数据的监听，该监听必须实现
- 可在 QNDataProtocol.h 中查看详细信息
+ 可在 QNScaleDataProtocol.h 中查看详细信息
  
  */
-@property (nonatomic, weak) id<QNDataListener> dataListener;
+@property (nonatomic, weak) id<QNScaleDataListener> dataListener;
 
 /**
  系统蓝牙状态的监听
@@ -97,8 +100,18 @@
  */
 @property (nonatomic, weak) id<QNBleStateListener> bleStateListener;
 
+/**
+ 自己的蓝牙协议代理类
+ 可在 QNBleProtocolDelegate.h 中查看详细信息
+ 
+ */
+@property (nonatomic, weak) id<QNBleProtocolDelegate> bleProtocolListener;
+
 /** 当前SDK版本 */
 @property (nonatomic, strong) NSString *sdkVersion;
+
+/** 当前连接的设备 */
+@property (nonatomic, strong) QNBleDevice *connectDevice;
 
 /**
  初始化SDK
@@ -203,6 +216,44 @@
  @return QNUser
  */
 - (QNUser *)buildUser:(NSString *)userId height:(int)height gender:(NSString *)gender birthday:(NSDate *)birthday callback:(QNResultCallback)callback;
+
+/**
+ 创建SDK蓝牙对象
+ 
+ @param peripheral 外设对象
+ @param advertisementData 蓝牙广播数据
+ @param callback 结果的回调
+ @return QNBleDevice
+ */
+- (QNBleDevice *)buildDevice:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback;
+
+/**
+ 创建轻牛广播蓝牙秤设备对象
+ 
+ @param peripheral 外设对象
+ @param advertisementData 蓝牙广播数据
+ @param callback 结果的回调
+ @return QNBleBroadcastDevice
+ */
+- (QNBleBroadcastDevice *)buildBroadcastDevice:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback;
+
+/**
+ 创建蓝牙协议处理器
+ 
+ @param device 设备
+ @param user 用户模型
+ @param delegate 协议处理类
+ @param callback 结果的回调
+ @return QNBleProtocolHandler
+ */
+- (QNBleProtocolHandler *)buildProtocolHandler:(QNBleDevice *)device user:(QNUser *)user delegate:(id<QNBleProtocolDelegate>)delegate callback:(QNResultCallback)callback;
+
+/**
+ 解析协议数据
+ 
+ @param protocolData 协议数据模型
+ */
+- (void)handleProtocolData:(QNPProtocolData *)protocolData;
 
 @end
 

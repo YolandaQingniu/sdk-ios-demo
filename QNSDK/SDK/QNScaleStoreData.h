@@ -13,7 +13,7 @@
 /**
  该类为秤端存储数据类
  
- 存储数据通过数据代理(QNDataProtocol)回调 "- (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray <QNScaleStoreData *> *)storedDataList"
+ 存储数据通过数据代理(QNScaleDataProtocol)回调 "- (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray <QNScaleStoreData *> *)storedDataList"
  
  
  存储数据的产生的说明:

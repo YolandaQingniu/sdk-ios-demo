@@ -28,7 +28,7 @@ typedef enum{
 #import "WiFiTool.h"
 #import "NSTimer+YYAdd.h"
 
-@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
+@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
 @property (weak, nonatomic) IBOutlet UIButton *scanBtn;
 @property (weak, nonatomic) IBOutlet UILabel *styleLabel;
