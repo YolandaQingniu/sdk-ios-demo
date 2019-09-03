@@ -13,6 +13,19 @@
 #import "NSTimer+YYAdd.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#pragma mark - 常量
+//服务ID
+#define KQNScaleDeviceServiceUUID @"FFE0" //qn-scale 服务
+#define KQNScaleDeviceCharacteristicUUIDNotify @"FFE1"
+#define KQNScaleDeviceCharacteristicUUIDWrite @"FFE3"
+#define KQNScaleDeviceCharacteristicUUIDIndicate @"FFE2"
+#define KQNScaleDeviceCharacteristicUUIDStorageWrite @"FFE4"
+
+#define KQNPublic1Scale1SerivceUUID @"FFF0" //qn-scale1 服务
+#define KQNPublic1Scale1CharacteristicUUIDWrite @"FFF2"
+#define KQNPublic1Scale1CharacteristicUUIDNotify @"FFF1"
+
+//设备状态
 typedef enum{
     DeviceStyleNormal = 0,  //默认状态
     DeviceStyleScanning = 1,//正在扫描
@@ -28,7 +41,7 @@ typedef enum{
     DeviceStyleWifiBleNetworkFail = 11,         //配网失败
 }DeviceStyle;
 
-#pragma mark 系统蓝牙状态
+//系统蓝牙状态
 typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     DMBlueToothStateUnknown = 0,
     DMBlueToothStateResetting,
@@ -37,7 +50,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     DMBlueToothStatePoweredOff,
     DMBlueToothStatePoweredOn,
 };
-
+#pragma mark -
 
 @interface CustomDetectionVC ()<UITableViewDelegate,UITableViewDataSource,QNScaleDataListener,QNBleProtocolDelegate,CBCentralManagerDelegate,CBPeripheralDelegate>
 
@@ -45,19 +58,31 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
 @property (weak, nonatomic) IBOutlet UIButton *scanBtn;
 @property (weak, nonatomic) IBOutlet UILabel *styleLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UILabel *unstableWeightLabel;  //时时体重
+@property (weak, nonatomic) IBOutlet UILabel *unstableWeightLabel;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
+/** 当前设备状态 */
 @property (nonatomic, assign) DeviceStyle currentStyle;
+/** 扫描的设备数组 */
 @property (nonatomic, strong) NSMutableDictionary *scanDveices;
-@property (nonatomic, strong) NSMutableArray *scaleDataAry; //收到测量完成后数组
+/** 收到测量完成后数组 */
+@property (nonatomic, strong) NSMutableArray *scaleDataAry;
 
+/** 蓝牙api */
 @property (nonatomic, strong) QNBleApi *bleApi;
+/** 蓝牙管理中心类 自主管理蓝牙 */
 @property (nonatomic, strong) CBCentralManager *centralManager;
+/** 当前连接的蓝牙设备 */
 @property (nonatomic, strong) QNBleDevice *bleDevice;
+/** 蓝牙协议处理器 */
 @property (nonatomic, strong) QNBleProtocolHandler *protocolHandle;
-@property (nonatomic, strong) QNBleBroadcastDevice *connectBroadcastDevice; //当前连接的设备
+/** 当前连接的广播秤设备 */
+@property (nonatomic, strong) QNBleBroadcastDevice *connectBroadcastDevice;
+/** 当前连接的外设设备 */
+@property (nonatomic, strong) CBPeripheral *currentPeripheral;
+/** 广播秤测量完成数值记录 */
 @property (nonatomic, assign) int broadcastMesasureCompleteCount;
+/** 广播秤定时器 */
 @property (nonatomic, strong) NSTimer *broadcastTimer;
 
 @end
@@ -78,15 +103,17 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     
     self.bleApi = [QNBleApi sharedBleApi];
     self.bleApi.dataListener = self;
+    self.bleApi.isCallBackWriteData = YES;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 - (void)back {
-    [self cancelConnectDevicePeripheral:self.bleDevice.publicDevice.peripheral];
+    [self cancelConnectDevicePeripheral:self.currentPeripheral];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - 连接与断开
+#pragma mark - 扫描、连接与断开
+/** 开始扫描 */
 - (void)startScanDevice {
     [self.scanDveices removeAllObjects];
     [self.tableView reloadData];
@@ -96,31 +123,22 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     }
 }
 
+/** 停止扫描 */
 - (void)stopScanDevice {
     if ([self currentBlueToothState] == DMBlueToothStatePoweredOn) {
         [self.centralManager stopScan];
     }
 }
 
+/** 连接设备 */
 - (void)connectPeripheral:(QNBleDevice *)device user:(nonnull QNUser *)user {
     
-    QNPScaleConfig *scaleConfig = [[QNPScaleConfig alloc] init];
-    
-    scaleConfig.unitMode = QNPScaleUnitKG;
-    scaleConfig.readStorageDataFlag = YES;
-    
-    if (scaleConfig == nil) {
-        scaleConfig = [[QNPScaleConfig alloc] init];
-        scaleConfig.unitMode = QNPScaleUnitKG;
-        scaleConfig.readStorageDataFlag = YES;
-    }
-    
-    device.publicDevice.scaleHelp = [[QNPScaleHelp  alloc] init];
-    device.publicDevice.scaleHelp.scaleConfig = scaleConfig;
-    device.publicDevice.scaleHelp.scaleUser = [self transformQNPUser:user];
+    self.protocolHandle = [self.bleApi buildProtocolHandler:device user:user delegate:self callback:^(NSError *error) {
+    }];
     
     self.bleDevice = device;
-    self.bleDevice.publicDevice.peripheral.delegate = self;
+    self.currentPeripheral = self.protocolHandle.peripheral;
+    self.currentPeripheral.delegate = self;
     
     NSMutableDictionary *configDic = [NSMutableDictionary dictionary];
     [configDic setObject:[NSNumber numberWithBool:NO] forKey:CBConnectPeripheralOptionNotifyOnConnectionKey];
@@ -129,12 +147,10 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     [configDic setObject:[NSNumber numberWithBool:NO] forKey:CBConnectPeripheralOptionNotifyOnNotificationKey];
     
     [self onScaleStateChange:device scaleState:(QNScaleStateConnected)];
-    [self.centralManager connectPeripheral:device.publicDevice.peripheral options:configDic];
-    
-    self.protocolHandle = [self.bleApi buildProtocolHandler:device user:self.user delegate:self callback:^(NSError *error) {
-    }];
+    [self.centralManager connectPeripheral:self.currentPeripheral options:configDic];
 }
 
+/** 断开连接设备 */
 - (void)cancelConnectDevicePeripheral:(CBPeripheral *)peripheral {
     BOOL vail = [self currentBlueToothState] == DMBlueToothStatePoweredOn;
     if (@available(iOS 9.0, *)) {
@@ -151,7 +167,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     }
 }
 
-#pragma mark - private
+/** 当前蓝牙状态 */
 - (DMBlueToothState)currentBlueToothState {
     DMBlueToothState bleState = DMBlueToothStateUnknown;
     if (@available(iOS 10.0, *)) {
@@ -200,60 +216,15 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     return bleState;
 }
 
-#pragma mark - QNBleProtocolDelegate
-- (void)writeCharacteristicValue:(NSString *)serviceUUID characteristicUUID:(NSString *)characteristicUUID data:(NSData *)data {
-    
-    [self writeData:data uuidMode:characteristicUUID];
-}
-
-- (void)writeData:(NSData *)writeData uuidMode:(NSString *)writeUUIDMode{
-    const Byte *bytes = writeData.bytes;
-    NSString *dataStr = @"";
-    for (int i = 0; i < writeData.length; i ++) {
-        dataStr = [NSString stringWithFormat:@"%@ %02x",dataStr,bytes[i]];
-    }
-    
-    QNPScaleHelp *scaleHelp = self.bleDevice.publicDevice.scaleHelp;
-    
-    if (scaleHelp == nil) {
-        NSLog(@"设备为nil %lu 值为nil %@",(unsigned long)writeUUIDMode,dataStr);
-        return;
-    }
-    
-    CBCharacteristic *characteristic = nil;
-    if ([writeUUIDMode isEqualToString:@"FFE3"]) {
-        characteristic = scaleHelp.writeCharacteristic;
-    }else if ([writeUUIDMode isEqualToString:@"FFE4"]){
-        characteristic = scaleHelp.storageWriteCharacteristic;
-    }else if ([writeUUIDMode isEqualToString:@"FFF2"]){
-        characteristic = scaleHelp.writeCharacteristic;
-    }else if ([writeUUIDMode isEqualToString:@"FFE5"]){
-        characteristic = scaleHelp.productWriteCharacteristic;
-    }
-    
-    if (characteristic) {
-        
-        if (characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) {
-            [self.bleDevice.publicDevice.peripheral writeValue:writeData forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
-        }else{
-            [self.bleDevice.publicDevice.peripheral writeValue:writeData forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-        }
-    }else {
-        NSLog(@"特征 %lu 值为nil %@",(unsigned long)writeUUIDMode,dataStr);
-    }
-}
-
-- (void)readCharacteristicValue:(NSString *)serviceUUID characteristicUUID:(NSString *)characteristicUUID {
-    
-}
-
 #pragma mark - CBCentralManagerDelegate
 /** 系统蓝牙状态更新 */
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     
     DMBlueToothState bleState = [self currentBlueToothState];
     NSLog(@"系统蓝牙状态更新: %ld",(long)bleState);
-    if (bleState != DMBlueToothStatePoweredOn) {
+    if (bleState == DMBlueToothStatePoweredOn) {
+        [self startScanDevice];
+    }else {
         self.bleDevice = nil;
     }
 }
@@ -271,6 +242,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     }
 }
 
+/** 构建普通秤设备 */
 - (void)analysisPublicDevicePeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
     
     QNBleDevice *bleDevice = [self.bleApi buildDevice:peripheral advertisementData:advertisementData callback:^(NSError *error) {
@@ -278,11 +250,6 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     if (bleDevice == nil) return;
     
     [bleDevice setValue:RSSI forKeyPath:@"RSSI"];
-    if (bleDevice.deviceType == QNDeviceTypeScaleBroadcastDouble || bleDevice.deviceType == QNDeviceTypeScaleBroadcastSingle) {
-        //为了兼容0.6.5之前的版本，该处依然会有广播秤设备信息的回调
-        //当使用0.6.5及以上版本，不再建议监听广播秤设备对象。而是【onBroadcastDeviceDiscover】使用该回调监听自定义广播秤的测量逻辑
-        return;
-    }
     
     if (self.scanDveices[bleDevice.mac] == nil) {
         self.scanDveices[bleDevice.mac] = bleDevice;
@@ -290,6 +257,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     }
 }
 
+/** 构建广播秤设备 */
 - (void)analysisAdvertDevicePeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
     
     QNBleBroadcastDevice *broadcastDevice = [self.bleApi buildBroadcastDevice:peripheral advertisementData:advertisementData callback:^(NSError *error) {
@@ -347,22 +315,10 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
         
         NSLog(@"%@ 设备发现特征: %@",peripheral.name,uuidStr);
         
-        if ([uuidStr isEqualToString:@"FFE2"]) {
-            self.bleDevice.publicDevice.scaleHelp.indicateCharacteristic = characteristics;
+        if ([uuidStr isEqualToString:KQNScaleDeviceCharacteristicUUIDIndicate]) {
             [peripheral setNotifyValue:YES forCharacteristic:characteristics];
-        }else if ([uuidStr isEqualToString:@"FFE3"] || [uuidStr isEqualToString:@"FFF2"]){
-            self.bleDevice.publicDevice.scaleHelp.writeCharacteristic = characteristics;
-        }else if ([uuidStr isEqualToString:@"FFE1"] || [uuidStr isEqualToString:@"FFF1"]){
-            self.bleDevice.publicDevice.scaleHelp.notifyCharacteristic = characteristics;
+        }else if ([uuidStr isEqualToString:KQNScaleDeviceCharacteristicUUIDNotify] || [uuidStr isEqualToString:KQNPublic1Scale1CharacteristicUUIDNotify]){
             [peripheral setNotifyValue:YES forCharacteristic:characteristics];
-        }else if ([uuidStr isEqualToString:@"FFE4"]){
-            self.bleDevice.publicDevice.scaleHelp.storageWriteCharacteristic = characteristics;
-        }else if ([uuidStr isEqualToString:@"FFE5"]){
-            self.bleDevice.publicDevice.scaleHelp.productWriteCharacteristic = characteristics;
-        }
-        //电量
-        if ([service.UUID.UUIDString.uppercaseString isEqualToString:@"180F"]) {
-            self.bleDevice.publicDevice.scaleHelp.batteryCharacteristic = characteristics;
         }
     }
     [self.protocolHandle prepare:service.UUID.UUIDString];
@@ -379,29 +335,64 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
 /** 数据更新 */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *serviceUUID = @"FFE0";
-        if (self.bleDevice.publicDevice.scaleHelp.serverMode == QNPScaleServerFFF0) {
-            serviceUUID = @"FFF0";
+        
+        NSString *serviceUUID;
+        for (CBService *service in self.currentPeripheral.services) {
+            NSString *serviceUUIDStr = service.UUID.UUIDString;
+            if ([serviceUUIDStr isEqualToString:KQNScaleDeviceServiceUUID] || [serviceUUIDStr isEqualToString:KQNPublic1Scale1SerivceUUID]) {
+                serviceUUID = serviceUUIDStr;
+            }
         }
         [self.protocolHandle onGetBleData:serviceUUID characteristicUUID:characteristic.UUID.UUIDString data:characteristic.value];
     });
 }
 
-- (QNPUser *)transformQNPUser:(QNUser *)user {
-    QNPUser *puser = [QNPUser userHeight:user.height gender:[user.gender isEqualToString:@"female"] ? QNPUserGenderFemale : QNPUserGenderMale age:[self userAgeForBirthday:user.birthday]];
-    return puser;
+#pragma mark - QNBleProtocolDelegate
+- (void)writeCharacteristicValue:(NSString *)serviceUUID characteristicUUID:(NSString *)characteristicUUID data:(NSData *)data {
+    
+    [self writeData:data uuidMode:characteristicUUID];
 }
 
-- (int)userAgeForBirthday:(NSDate *)date {
-    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitYear fromDate:date];
-    int birthdayYear = (int)dateComponents.year;
-    dateComponents = [calendar components:NSCalendarUnitYear fromDate:[NSDate date]];
-    int age = (int)(dateComponents.year - birthdayYear);
-    return age;
+- (void)writeData:(NSData *)writeData uuidMode:(NSString *)writeUUIDMode{
+    const Byte *bytes = writeData.bytes;
+    NSString *dataStr = @"";
+    for (int i = 0; i < writeData.length; i ++) {
+        dataStr = [NSString stringWithFormat:@"%@ %02x",dataStr,bytes[i]];
+    }
+    
+    if (self.currentPeripheral == nil) {
+        NSLog(@"设备为nil %lu 值为nil %@",(unsigned long)writeUUIDMode,dataStr);
+        return;
+    }
+    
+    CBCharacteristic *characteristic = nil;
+    for (CBService *service in self.currentPeripheral.services) {
+        for (CBCharacteristic *characteristics in service.characteristics) {
+            NSString *uuidStr = characteristics.UUID.UUIDString.uppercaseString;
+            
+            if ([uuidStr isEqualToString:writeUUIDMode]) {
+                characteristic = characteristics;
+            }
+        }
+    }
+    if (characteristic) {
+        
+        if (characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) {
+            [self.currentPeripheral writeValue:writeData forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
+        }else{
+            [self.currentPeripheral writeValue:writeData forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+        }
+    }else {
+        NSLog(@"特征 %lu 值为nil %@",(unsigned long)writeUUIDMode,dataStr);
+    }
 }
 
-#pragma mark 设置设备各个阶段状态
+- (void)readCharacteristicValue:(NSString *)serviceUUID characteristicUUID:(NSString *)characteristicUUID {
+    
+}
+
+#pragma mark -
+#pragma mark - 设置设备各个阶段状态
 - (void)setCurrentStyle:(DeviceStyle)currentStyle {
     _currentStyle = currentStyle;
     switch (_currentStyle) {
@@ -438,7 +429,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
             break;
         case DeviceStyleDisconnect://断开连接/称关机
             [self setDisconnectStyleUI];
-            [self cancelConnectDevicePeripheral:self.bleDevice.publicDevice.peripheral];
+            [self cancelConnectDevicePeripheral:self.currentPeripheral];
             break;
         default: //默认状态
             [self setNormalStyleUI];
@@ -446,8 +437,8 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
             break;
     }
 }
-#pragma - UI处理
-#pragma mark 正在扫描状态UI
+#pragma mark - UI处理
+/** 正在扫描状态UI */
 - (void)setScanningStyleUI {
     [self.scanBtn setTitle:@"正在扫描" forState:UIControlStateNormal];
     self.headerView.hidden = NO;
@@ -456,7 +447,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     self.tableView.hidden = NO;
 }
 
-#pragma mark 正在链接状态UI
+/** 正在连接状态UI */
 - (void)setLingingStyleUI {
     [self.scanBtn setTitle:@"断开连接" forState:UIControlStateNormal];
     self.styleLabel.text = @"正在连接";
@@ -465,7 +456,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     self.headerView.hidden = YES;
 }
 
-#pragma mark 链接成功状态UI
+/** 连接成功状态UI */
 - (void)setLingSucceedStyleUI {
     [self.scanBtn setTitle:@"断开连接" forState:UIControlStateNormal];
     self.styleLabel.text = @"连接成功";
@@ -474,78 +465,53 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     self.headerView.hidden = YES;
 }
 
-#pragma mark 正在配网
+/** 正在配网 */
 - (void)setStartNetworkStyleUI {
     self.styleLabel.text = @"正在配网...";
     self.unstableWeightLabel.text = nil;
 }
 
-#pragma mark 配网成功
+/** 配网成功 */
 - (void)setNetworkSuccessStyleUI {
     self.styleLabel.text = @"配网成功";
     self.unstableWeightLabel.text = nil;
 }
 
-#pragma mark 配网失败
+/** 配网失败 */
 - (void)setNetworkFailStyleUI {
     self.styleLabel.text = @"配网失败";
     self.unstableWeightLabel.text = nil;
 }
 
-#pragma mark 测量体重状态UI
+/** 测量体重状态UI */
 - (void)setMeasuringWeightStyleUI {
     self.styleLabel.text = @"正在称量";
 }
 
-#pragma mark 测量阻抗状态UI
+/** 测量阻抗状态UI */
 - (void)setMeasuringSucceedStyleUI {
     self.styleLabel.text = @"正在测阻抗";
 }
 
-#pragma mark 测量完成状态UI
+/** 测量完成状态UI */
 - (void)setMeasuringResistanceStyleUI {
     self.styleLabel.text = @"测量完成";
     self.tableView.hidden = NO;
 }
 
-#pragma mark 断开连接/称关机状态UI
+/** 断开连接/称关机状态UI */
 - (void)setDisconnectStyleUI {
     [self.scanBtn setTitle:@"扫描" forState:UIControlStateNormal];
     self.styleLabel.text = @"连接已断开";
 }
 
-#pragma mark 默认状态UI
+/** 默认状态UI */
 - (void)setNormalStyleUI {
     [self.scanBtn setTitle:@"扫描" forState:UIControlStateNormal];
     self.styleLabel.text = @"";
     self.unstableWeightLabel.text = @"";
     self.tableView.hidden = YES;
     self.headerView.hidden = NO;
-}
-
-#pragma mark - QNBleConnectionChangeListener
-- (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state{//秤连接或测量状态变化
-    if (state == QNScaleStateConnected) {//链接成功
-        self.currentStyle = DeviceStyleLingSucceed;
-    }else if (state == QNScaleStateWiFiBleStartNetwork){//开始配网
-        self.currentStyle = DeviceStyleWifiBleStartNetwork;
-    }else if (state == QNScaleStateWiFiBleNetworkSuccess){//配网成功
-        self.currentStyle = DeviceStyleWifiBleNetworkSuccess;
-    }else if (state == QNScaleStateWiFiBleNetworkFail){//配网失败
-        self.currentStyle = DeviceStyleWifiBleNetworkFail;
-    }else if (state == QNScaleStateRealTime){//测量体重
-        self.currentStyle = DeviceStyleMeasuringWeight;
-    }else if (state == QNScaleStateRealTime){//测量体重
-        self.currentStyle = DeviceStyleMeasuringWeight;
-    }else if (state == QNScaleStateBodyFat){//测量阻抗
-        self.currentStyle = DeviceStyleMeasuringResistance;
-    }else if (state == QNScaleStateHeartRate){//测量心率
-        self.currentStyle = DeviceStyleMeasuringHeartRate;
-    }else if (state == QNScaleStateMeasureCompleted){//测量完成
-        self.currentStyle = DeviceStyleMeasuringSucceed;
-    }else if (state == QNScaleStateLinkLoss){//断开连接/称关机
-        self.currentStyle = DeviceStyleNormal;
-    }
 }
 
 #pragma mark - 测量QNDataListener处理
@@ -568,6 +534,30 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
 
 - (void)onGetElectric:(NSUInteger)electric device:(QNBleDevice *)device {
     
+}
+
+- (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state{//秤连接或测量状态变化
+    if (state == QNScaleStateConnected) {//链接成功
+        self.currentStyle = DeviceStyleLingSucceed;
+    }else if (state == QNScaleStateWiFiBleStartNetwork){//开始配网
+        self.currentStyle = DeviceStyleWifiBleStartNetwork;
+    }else if (state == QNScaleStateWiFiBleNetworkSuccess){//配网成功
+        self.currentStyle = DeviceStyleWifiBleNetworkSuccess;
+    }else if (state == QNScaleStateWiFiBleNetworkFail){//配网失败
+        self.currentStyle = DeviceStyleWifiBleNetworkFail;
+    }else if (state == QNScaleStateRealTime){//测量体重
+        self.currentStyle = DeviceStyleMeasuringWeight;
+    }else if (state == QNScaleStateRealTime){//测量体重
+        self.currentStyle = DeviceStyleMeasuringWeight;
+    }else if (state == QNScaleStateBodyFat){//测量阻抗
+        self.currentStyle = DeviceStyleMeasuringResistance;
+    }else if (state == QNScaleStateHeartRate){//测量心率
+        self.currentStyle = DeviceStyleMeasuringHeartRate;
+    }else if (state == QNScaleStateMeasureCompleted){//测量完成
+        self.currentStyle = DeviceStyleMeasuringSucceed;
+    }else if (state == QNScaleStateLinkLoss){//断开连接/称关机
+        self.currentStyle = DeviceStyleNormal;
+    }
 }
 
 #pragma mark - 广播秤处理逻辑
@@ -701,7 +691,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     }
     
     QNBleDevice *device = cell.device;
-    if (device.deviceType != QNDeviceTypeScaleWiFiBLE) {
+    if (!device.supportWifi) {
         if (device.deviceType == QNDeviceTypeScaleBleDefault) {
             [self stopScanDevice];
         }

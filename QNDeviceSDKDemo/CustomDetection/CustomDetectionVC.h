@@ -4,7 +4,7 @@
 //
 //  Created by JuneLee on 2019/8/29.
 //  Copyright © 2019 Yolanda. All rights reserved.
-//
+//  蓝牙自主管理demo
 
 #import <UIKit/UIKit.h>
 #import <QNSDK/QNDeviceSDK.h>

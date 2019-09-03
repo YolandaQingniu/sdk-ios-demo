@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QNBleProtocolHandler : NSObject
+
+/** 外设设备 */
+@property (nonatomic, strong) CBPeripheral *peripheral;
 
 /**
  通知协议处理器初始化

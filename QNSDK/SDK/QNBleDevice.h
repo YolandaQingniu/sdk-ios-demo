@@ -7,13 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "QNPScaleDevice.h"
 
 typedef NS_ENUM(NSUInteger, QNDeviceType) {
     QNDeviceTypeScaleBleDefault = 100, //普通蓝牙秤
-    QNDeviceTypeScaleBroadcastSingle = 120, //单向广播秤 不支持通过命令修改秤的单位  0.6.5及以上版本废弃
-    QNDeviceTypeScaleBroadcastDouble = 121, //双向广播秤 支持通过命令修改秤的单位 0.6.5及以上版本废弃
-    QNDeviceTypeScaleWiFiBLE = 130, //蓝牙WiFi双模秤
+    QNDeviceTypeScaleBroadcast = 120,  //广播秤
 };
 
 @interface QNBleDevice : NSObject
@@ -29,9 +26,9 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
 @property (nonatomic, readonly, strong) NSNumber *RSSI;
 /** 是否已开机 */
 @property (nonatomic, readonly, getter=isScreenOn, assign) BOOL screenOn;
+/** 是否支持WIFI */
+@property (nonatomic, readonly, getter=isSupportWifi, assign) BOOL supportWifi;
 /** 设备类型 */
 @property (nonatomic, assign) QNDeviceType deviceType;
-/** 扫描设备 */
-@property (nonatomic, strong) QNPScaleDevice *publicDevice;
 
 @end

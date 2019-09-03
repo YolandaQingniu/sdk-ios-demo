@@ -18,12 +18,12 @@
 #import "QNWiFiConfig.h"
 #import "QNBleProtocolDelegate.h"
 #import "QNBleProtocolHandler.h"
-#import "QNPProtocolData.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 0.6.6 】
+ 当前版本【 1.0.0-beta.1 】
  
  SDK最低配置8.0的系统
  
@@ -47,16 +47,30 @@
  
  
  使用流程:
- 1. 使用"+ (QNBleApi *)sharedBleApi"初始化SDK
- 2. 是否需要系统的蓝牙弹框（此弹框是系统在初始化蓝牙管理的时候会判断蓝牙是否打开，如果蓝牙为关闭状态，系统会自动弹框提示）,如果需要先调用"- (QNConfig *)getConfig"方法获取配置项，然后直接设置对应的属性，如果不需要弹框，直接跳过该步
- 2. 使用"- (void)initSdk:(NSString *)appId firstDataFile:(NSString *)dataFile callback:(QNResultCallback)callback"注册SDK
- 3. 遵循相应的代理并实现相应的代理方法
- 4. 调用"- (QNConfig *)getConfig"方法获取配置项，设置相应的开关，比如返回的设备类型、统一个设备是否返回多次等，该步也可以在第二步的时候一并设置
- 4. 调用扫描方法 "- (void)startBleDeviceDiscovery:(QNResultCallback)callback",app处理扫描的设备（比如加入数组实现列表扫描到设备等）
- 5. 调用连接方法，连接相应的设备 "- (void)connectDevice:(QNBleDevice *)device user:(QNUser *)user callback:(QNResultCallback)callback"
- 6. 代理方法回调测量的各个状态、存储数据、实时体重、测量结果等数据
- 7. 测量完毕后，可调用"- (void)disconnectDevice:(QNBleDevice *)device callback:(QNResultCallback)callback"方法，断开设备的连接
+ 一、普通蓝牙秤：
+     1. 使用"+ (QNBleApi *)sharedBleApi"初始化SDK
+     2. 是否需要系统的蓝牙弹框（此弹框是系统在初始化蓝牙管理的时候会判断蓝牙是否打开，如果蓝牙为关闭状态，系统会自动弹框提示）,如果需要先调用"- (QNConfig *)getConfig"方法获取配置项，然后直接设置对应的属性，如果不需要弹框，直接跳过该步
+     2. 使用"- (void)initSdk:(NSString *)appId firstDataFile:(NSString *)dataFile callback:(QNResultCallback)callback"注册SDK
+     3. 遵循相应的代理并实现相应的代理方法
+     4. 调用"- (QNConfig *)getConfig"方法获取配置项，设置相应的开关，比如返回的设备类型、统一个设备是否返回多次等，该步也可以在第二步的时候一并设置
+     4. 调用扫描方法 "- (void)startBleDeviceDiscovery:(QNResultCallback)callback",app处理扫描的设备（比如加入数组实现列表扫描到设备等）
+     5. 调用连接方法，连接相应的设备 "- (void)connectDevice:(QNBleDevice *)device user:(QNUser *)user callback:(QNResultCallback)callback"
+     6. 代理方法回调测量的各个状态、存储数据、实时体重、测量结果等数据
+     7. 测量完毕后，可调用"- (void)disconnectDevice:(QNBleDevice *)device callback:(QNResultCallback)callback"方法，断开设备的连接
  
+ 二、普通蓝牙秤-自主管理蓝牙：
+     1. 自己初始化蓝牙中心管理类，并设置代理实现相应的代理方法
+     2. 使用"+ (QNBleApi *)sharedBleApi"初始化SDK
+     3. 只需要遵循dataListener代理并实现方法
+     4. 设置isCallBackWriteData属性为YES，表示在解析数据时，需要回传方法，让demo自行写入数据
+     5. 自行操作扫描、连接、断开等方法
+     6. 在发现外设时，调用"- (QNBleDevice *)buildDevice:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback" 或者
+        "- (QNBleBroadcastDevice *)buildBroadcastDevice:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback"(广播秤)，
+        构建设备
+     7. 点击一个设备进行连接，并调用 "- (QNBleProtocolHandler *)buildProtocolHandler:(QNBleDevice *)device user:(QNUser *)user delegate:(id<QNBleProtocolDelegate>)delegate callback:(QNResultCallback)callback"方法，初始化协议处理器
+     8. 收到秤端数据后，调用"- (void)onGetBleData:(NSString *)serviceUUID characteristicUUID:(NSString *)characteristicUUID data:(NSData *)data"方法，让SDK解析数据
+     9. 解析到的数据通过 QNScaleDataListener 代理回调测量的各个状态、存储数据、实时体重、测量结果等数据
+     10. 测量完毕后，可自行断开设备连接
  */
 
 @interface QNBleApi : NSObject
@@ -112,6 +126,9 @@
 
 /** 当前连接的设备 */
 @property (nonatomic, strong) QNBleDevice *connectDevice;
+
+/** 是否回传写入数据回调 */
+@property (nonatomic, assign) BOOL isCallBackWriteData;
 
 /**
  初始化SDK
@@ -177,15 +194,15 @@
  */
 - (void)connectDeviceSetWiFiWithDevice:(QNBleDevice *)device user:(QNUser *)user wifiConfig:(QNWiFiConfig *)wifiConfig callback:(QNResultCallback)callback;
 
-/**
- 向轻牛云注册WiFi蓝牙双模秤
- 
- 目前只允许注册WiFi蓝牙双模秤
-
- @param device QNBleDevice
- @param callback 注册结果
- */
-- (void)registerWiFiBleDevice:(QNBleDevice *)device callback:(QNResultCallback)callback;
+///**
+// 向轻牛云注册WiFi蓝牙双模秤
+// 
+// 目前只允许注册WiFi蓝牙双模秤
+//
+// @param device QNBleDevice
+// @param callback 注册结果
+// */
+//- (void)registerWiFiBleDevice:(QNBleDevice *)device callback:(QNResultCallback)callback;
 
 
 /**
@@ -251,9 +268,11 @@
 /**
  解析协议数据
  
- @param protocolData 协议数据模型
+ @param serviceUUID 服务uuid
+ @param characteristicUUID 特征uuid
+ @param data 数据
  */
-- (void)handleProtocolData:(QNPProtocolData *)protocolData;
+- (void)handleProtocolData:(NSString *)serviceUUID characteristicUUID:(NSString *)characteristicUUID data:(NSData *)data;
 
 @end
 
