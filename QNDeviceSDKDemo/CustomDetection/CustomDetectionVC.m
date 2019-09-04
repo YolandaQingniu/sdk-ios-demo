@@ -131,9 +131,10 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
 }
 
 /** 连接设备 */
-- (void)connectPeripheral:(QNBleDevice *)device user:(nonnull QNUser *)user {
+- (void)connectPeripheral:(QNBleDevice *)device user:(nonnull QNUser *)user wifiConfig:(nonnull QNWiFiConfig *)wifiConfig{
     
-    self.protocolHandle = [self.bleApi buildProtocolHandler:device user:user delegate:self callback:^(NSError *error) {
+    self.protocolHandle = [self.bleApi buildProtocolHandler:device user:user wifiConfig:wifiConfig delegate:self callback:^(NSError *error) {
+        
     }];
     
     self.bleDevice = device;
@@ -696,7 +697,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
             [self stopScanDevice];
         }
         self.currentStyle = DeviceStyleLinging;
-        [self connectPeripheral:device user:self.user];
+        [self connectPeripheral:device user:self.user wifiConfig:nil];
     }else {
         [self wifiBleNetworkRemindWithDevice:device];
     }
@@ -723,7 +724,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     
     UIAlertAction *connectAction = [UIAlertAction actionWithTitle:@"直接连接" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [weakSelf stopScanDevice];
-        [weakSelf connectPeripheral:device user:weakSelf.user];
+        [weakSelf connectPeripheral:device user:weakSelf.user wifiConfig:nil];
     }];
     
     UIAlertAction *networkAction = [UIAlertAction actionWithTitle:@"配网并连接" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -735,7 +736,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
         
         //TODO...配网连接 待定
         [weakSelf stopScanDevice];
-        [weakSelf connectPeripheral:device user:weakSelf.user];
+        [weakSelf connectPeripheral:device user:weakSelf.user wifiConfig:config];
     }];
     [alert addAction:connectAction];
     [alert addAction:networkAction];

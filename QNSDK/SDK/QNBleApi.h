@@ -263,7 +263,7 @@
  @param callback 结果的回调
  @return QNBleProtocolHandler
  */
-- (QNBleProtocolHandler *)buildProtocolHandler:(QNBleDevice *)device user:(QNUser *)user delegate:(id<QNBleProtocolDelegate>)delegate callback:(QNResultCallback)callback;
+- (QNBleProtocolHandler *)buildProtocolHandler:(QNBleDevice *)device user:(QNUser *)user wifiConfig:(QNWiFiConfig *)wifiConfig delegate:(id<QNBleProtocolDelegate>)delegate callback:(QNResultCallback)callback;
 
 /**
  解析协议数据
