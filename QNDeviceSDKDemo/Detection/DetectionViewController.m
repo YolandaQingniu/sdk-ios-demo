@@ -241,7 +241,7 @@ typedef enum{
 }
 
 - (void)onBroadcastDeviceDiscover:(QNBleBroadcastDevice *)device {//该方法会回调扫描到的广播秤信息
-    [self measuringBroadcaseDevice:device];
+    [self measuringBroadcastDevice:device];
     if (self.connectBroadcastDevice) { return; }
     if (self.scanDveices[device.mac] == nil) {
         self.scanDveices[device.mac] = device;
@@ -299,7 +299,7 @@ typedef enum{
 }
 
 #pragma mark - 广播秤处理逻辑
-- (void)connectBroadcaseDevice:(QNBleBroadcastDevice *)device {
+- (void)connectBroadcastDevice:(QNBleBroadcastDevice *)device {
     if (self.connectBroadcastDevice) {
         return;
     }
@@ -308,10 +308,10 @@ typedef enum{
     [self setLingSucceedStyleUI];
     //由于广播秤无连接过程，因此当我们开始测量时即可认为是已经连接成功，并设置个定时器，在指定时间内未收到设备的广播数据即可认为设备已经灭屏或者是用户未在使用设备
     //时间间隔，可以更根据不同情况自行设置
-    [self setBroadcaseTimerWithInterval:5];
+    [self setBroadcastTimerWithInterval:5];
 }
 
-- (void)measuringBroadcaseDevice:(QNBleBroadcastDevice *)device {
+- (void)measuringBroadcastDevice:(QNBleBroadcastDevice *)device {
     if (self.connectBroadcastDevice == nil) {
         return;
     }
@@ -336,7 +336,7 @@ typedef enum{
     }
     
     //当收到指定的设备数据后，更新定时器，用于判断秤是否灭屏或者用户不在使用设备
-    [self setBroadcaseTimerWithInterval:5];
+    [self setBroadcastTimerWithInterval:5];
     
     double weight = [self.bleApi convertWeightWithTargetUnit:device.weight unit:[self.bleApi getConfig].unit];
     self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f",weight];
@@ -362,8 +362,8 @@ typedef enum{
     
 }
 
-- (void)setBroadcaseTimerWithInterval:(NSTimeInterval)interval {
-    [self removeBroadcaseTimer];
+- (void)setBroadcastTimerWithInterval:(NSTimeInterval)interval {
+    [self removeBroadcastTimer];
     __weak __typeof(self)weakSelf = self;
     self.broadcastTimer = [NSTimer scheduledTimerWithTimeInterval:interval block:^(NSTimer * _Nonnull timer) {
         //未接到新广播数据时，可认为不再测量体重（断开的意思）
@@ -371,7 +371,7 @@ typedef enum{
     } repeats:NO];
 }
 
-- (void)removeBroadcaseTimer {
+- (void)removeBroadcastTimer {
     [self.broadcastTimer invalidate];
     self.broadcastTimer = nil;
 }
@@ -379,7 +379,7 @@ typedef enum{
 
 - (void)disconnectBroadcastDevice {
     self.connectBroadcastDevice = nil;
-    [self removeBroadcaseTimer];
+    [self removeBroadcastTimer];
     [self setDisconnectStyleUI];
     //此处断开后停止扫描，只是demo的处理逻辑
     [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
@@ -426,7 +426,7 @@ typedef enum{
     if (self.currentStyle != DeviceStyleScanning) { return; }
     DeviceTableViewCell *cell = (DeviceTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.broadcastDevice != nil) {
-        [self connectBroadcaseDevice:cell.broadcastDevice];
+        [self connectBroadcastDevice:cell.broadcastDevice];
         return;
     }
     
