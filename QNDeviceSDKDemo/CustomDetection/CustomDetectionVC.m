@@ -103,7 +103,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     
     self.bleApi = [QNBleApi sharedBleApi];
     self.bleApi.dataListener = self;
-    self.bleApi.isCallBackWriteData = YES;
+    self.bleApi.bleProtocolListener = self;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 

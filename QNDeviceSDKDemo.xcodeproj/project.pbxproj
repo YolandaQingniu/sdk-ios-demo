@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0400A8492317D9E900594278 /* CustomDetectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0400A8472317D9E900594278 /* CustomDetectionVC.m */; };
 		0400A84A2317D9E900594278 /* CustomDetectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0400A8482317D9E900594278 /* CustomDetectionVC.xib */; };
+		04BEB2C52320ED5F0068BF52 /* QNSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D230F2212240847500DC01E9 /* QNSDK.framework */; };
 		04F30E302318FC050099EECE /* QNBleProtocolHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F30E2D2318FC050099EECE /* QNBleProtocolHandler.h */; };
 		04F30E312318FC050099EECE /* QNScaleDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F30E2E2318FC050099EECE /* QNScaleDataProtocol.h */; };
 		04F30E322318FC050099EECE /* QNBleProtocolDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F30E2F2318FC050099EECE /* QNBleProtocolDelegate.h */; };
@@ -31,8 +32,6 @@
 		D2198B1722CB35D7008EC3D2 /* QNConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = D2198B0422CB35D7008EC3D2 /* QNConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2198B1822CB35D7008EC3D2 /* QNBleDeviceDiscoveryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = D2198B0522CB35D7008EC3D2 /* QNBleDeviceDiscoveryProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2198B1922CB35D7008EC3D2 /* QNBleApi.h in Headers */ = {isa = PBXBuildFile; fileRef = D2198B0622CB35D7008EC3D2 /* QNBleApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D230F2282240847600DC01E9 /* QNSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D230F2212240847500DC01E9 /* QNSDK.framework */; };
-		D230F2292240847600DC01E9 /* QNSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D230F2212240847500DC01E9 /* QNSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D232D64C2004DE2D00AABD67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D232D64B2004DE2D00AABD67 /* AppDelegate.m */; };
 		D232D64F2004DE2D00AABD67 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D232D64E2004DE2D00AABD67 /* ViewController.m */; };
 		D232D6522004DE2D00AABD67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D232D6502004DE2D00AABD67 /* Main.storyboard */; };
@@ -52,30 +51,6 @@
 		D2B9E98E20723DEC0020C2B6 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B9E98620723DEC0020C2B6 /* PickerView.m */; };
 		D2B9E98F20723DEC0020C2B6 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B9E98720723DEC0020C2B6 /* PickerView.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D230F2262240847600DC01E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D232D63F2004DE2D00AABD67 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D230F2202240847500DC01E9;
-			remoteInfo = QNSDK;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		D245B142207230CB005184C2 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D230F2292240847600DC01E9 /* QNSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0400A8462317D9E900594278 /* CustomDetectionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomDetectionVC.h; sourceTree = "<group>"; };
@@ -149,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D230F2282240847600DC01E9 /* QNSDK.framework in Frameworks */,
+				04BEB2C52320ED5F0068BF52 /* QNSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,12 +307,10 @@
 				D232D6432004DE2D00AABD67 /* Sources */,
 				D232D6442004DE2D00AABD67 /* Frameworks */,
 				D232D6452004DE2D00AABD67 /* Resources */,
-				D245B142207230CB005184C2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D230F2272240847600DC01E9 /* PBXTargetDependency */,
 			);
 			name = QNDeviceSDKDemo;
 			productName = QNDeviceSDKDemo;
@@ -441,14 +414,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D230F2272240847600DC01E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D230F2202240847500DC01E9 /* QNSDK */;
-			targetProxy = D230F2262240847600DC01E9 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D232D6502004DE2D00AABD67 /* Main.storyboard */ = {

@@ -61,8 +61,8 @@
  二、普通蓝牙秤-自主管理蓝牙：
      1. 自己初始化蓝牙中心管理类，并设置代理实现相应的代理方法
      2. 使用"+ (QNBleApi *)sharedBleApi"初始化SDK
-     3. 只需要遵循dataListener代理并实现方法
-     4. 设置isCallBackWriteData属性为YES，表示在解析数据时，需要回传方法，让demo自行写入数据
+     3. 遵循dataListener,bleProtocolListener代理并实现方法
+     4. 遵循bleProtocolListener的代理并实现方法，表示在解析数据时，需要回传方法，让demo自行写入数据
      5. 自行操作扫描、连接、断开等方法
      6. 在发现外设时，调用"- (QNBleDevice *)buildDevice:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback" 或者
         "- (QNBleBroadcastDevice *)buildBroadcastDevice:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback"(广播秤)，
@@ -123,12 +123,6 @@
 
 /** 当前SDK版本 */
 @property (nonatomic, strong) NSString *sdkVersion;
-
-/** 当前连接的设备 */
-@property (nonatomic, strong) QNBleDevice *connectDevice;
-
-/** 是否回传写入数据回调 */
-@property (nonatomic, assign) BOOL isCallBackWriteData;
 
 /**
  初始化SDK
@@ -264,15 +258,6 @@
  @return QNBleProtocolHandler
  */
 - (QNBleProtocolHandler *)buildProtocolHandler:(QNBleDevice *)device user:(QNUser *)user wifiConfig:(QNWiFiConfig *)wifiConfig delegate:(id<QNBleProtocolDelegate>)delegate callback:(QNResultCallback)callback;
-
-/**
- 解析协议数据
- 
- @param serviceUUID 服务uuid
- @param characteristicUUID 特征uuid
- @param data 数据
- */
-- (void)handleProtocolData:(NSString *)serviceUUID characteristicUUID:(NSString *)characteristicUUID data:(NSData *)data;
 
 @end
 
