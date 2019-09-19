@@ -252,7 +252,7 @@ typedef enum{
 #pragma mark - QNBleConnectionChangeListener
 - (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state{//秤连接或测量状态变化
     if (state == QNScaleStateConnected) {//链接成功
-          self.currentStyle = DeviceStyleLingSucceed;
+        self.currentStyle = DeviceStyleLingSucceed;
     }else if (state == QNScaleStateWiFiBleStartNetwork){//开始配网
         self.currentStyle = DeviceStyleWifiBleStartNetwork;
     }else if (state == QNScaleStateWiFiBleNetworkSuccess){//配网成功
@@ -329,11 +329,9 @@ typedef enum{
         unit = QNUnitLB;
     }
     
-    if (device.supportUnitChange && device.unit != unit) {
-        [device syncUnitCallback:^(NSError *error) {
-            //但是方法调用异常时，会回复错误信息
-        }];
-    }
+    [device syncUnitCallback:^(NSError *error) {
+        //但是方法调用异常时，会回复错误信息
+    }];
     
     //当收到指定的设备数据后，更新定时器，用于判断秤是否灭屏或者用户不在使用设备
     [self setBroadcastTimerWithInterval:5];
