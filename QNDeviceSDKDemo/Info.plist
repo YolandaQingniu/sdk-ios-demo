@@ -27,6 +27,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>请允许使用蓝牙功能</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>请打开蓝牙使用设备</string>
 	<key>UILaunchStoryboardName</key>
