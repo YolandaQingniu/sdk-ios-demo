@@ -28,7 +28,7 @@ typedef enum{
 #import "WiFiTool.h"
 #import "NSTimer+YYAdd.h"
 
-@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
+@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
 @property (weak, nonatomic) IBOutlet UIButton *scanBtn;
 @property (weak, nonatomic) IBOutlet UILabel *styleLabel;
@@ -228,7 +228,7 @@ typedef enum{
 
 #pragma mark - QNBleDeviceDiscorveryListener
 - (void)onDeviceDiscover:(QNBleDevice *)device {//该方法会在发现设备后回调
-    if (device.deviceType == QNDeviceTypeScaleBroadcastDouble || device.deviceType == QNDeviceTypeScaleBroadcastSingle) {
+    if (device.deviceType == QNDeviceTypeScaleBroadcast) {
         //为了兼容0.6.5之前的版本，该处依然会有广播秤设备信息的回调
         //当使用0.6.5及以上版本，不再建议监听广播秤设备对象。而是【onBroadcastDeviceDiscover】使用该回调监听自定义广播秤的测量逻辑
         return;
@@ -429,7 +429,7 @@ typedef enum{
     }
     
     QNBleDevice *device = cell.device;
-    if (device.deviceType != QNDeviceTypeScaleWiFiBLE) {
+    if (!device.supportWifi) {
         if (device.deviceType == QNDeviceTypeScaleBleDefault) {
             [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         }
