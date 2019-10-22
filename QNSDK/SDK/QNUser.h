@@ -39,7 +39,7 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 @property (nonatomic, assign) int height;
 /** gender : male or female */
 @property (nonatomic, strong) NSString *gender;
-/** brithday */
+/** birthday */
 @property (nonatomic, strong) NSDate *birthday;
 /** clothesWeight */
 @property (nonatomic, assign) double clothesWeight;

@@ -131,7 +131,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
 }
 
 /** 连接设备 */
-- (void)connectPeripheral:(QNBleDevice *)device user:(nonnull QNUser *)user wifiConfig:(nonnull QNWiFiConfig *)wifiConfig{
+- (void)connectPeripheral:(QNBleDevice *)device user:(QNUser *)user wifiConfig:(QNWiFiConfig *)wifiConfig{
     
     self.protocolHandle = [self.bleApi buildProtocolHandler:device user:user wifiConfig:wifiConfig delegate:self callback:^(NSError *error) {
         
