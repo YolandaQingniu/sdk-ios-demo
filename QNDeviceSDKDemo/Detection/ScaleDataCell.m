@@ -7,9 +7,13 @@
 //
 
 #import "ScaleDataCell.h"
+#import "ScaleDataTargetTool.h"
+
 @interface ScaleDataCell ()
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *value;
+@property (weak, nonatomic) IBOutlet UILabel *levelNamesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentLevelLabel;
 
 @end
 @implementation ScaleDataCell
@@ -38,6 +42,22 @@
         }else{
             self.value.text = [NSString stringWithFormat:@"%.1f",value];
         }
+    }
+    
+    ScaleDataTargetModel *model = [ScaleDataTargetTool getScaleDataTargetModelWithScaleData:self.itemData user:self.user currentWeight:self.currentWeight];
+    
+    
+    if (model.levelNames.count > 0) {
+        NSString *levelNames = [model.levelNames componentsJoinedByString:@","];
+        self.levelNamesLabel.text = [NSString stringWithFormat:@"[%@]",levelNames];
+    }else {
+        self.levelNamesLabel.text = @"无";
+    }
+    
+    if (model.currentLevel.length > 0) {
+        self.currentLevelLabel.text = [NSString stringWithFormat:@"当前等级:%@",model.currentLevel];
+    }else {
+        self.currentLevelLabel.text = @"无";
     }
 }
 

@@ -526,6 +526,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     for (QNScaleItemData *item in [scaleData getAllItem]) {
         [self.scaleDataAry addObject:item];
     }
+    self.currentStyle = DeviceStyleMeasuringSucceed;
     [self.tableView reloadData];
 }
 
@@ -619,6 +620,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
         for (QNScaleItemData *item in [scaleData getAllItem]) {
             [self.scaleDataAry addObject:item];
         }
+        self.currentStyle = DeviceStyleMeasuringSucceed;
         [self.tableView reloadData];
         [self setMeasuringResistanceStyleUI];
     }
@@ -658,6 +660,14 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.currentStyle == DeviceStyleScanning && self.connectBroadcastDevice == nil) {
+        return 42;
+    }else {
+        return 90;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.currentStyle == DeviceStyleScanning && self.connectBroadcastDevice == nil) {
         DeviceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DeviceTableViewCell"];
@@ -677,6 +687,8 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
         if (!cell) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"ScaleDataCell" owner:self options:nil]lastObject];
         }
+        cell.user = self.user;
+        cell.currentWeight = ((QNScaleItemData *)self.scaleDataAry[0]).value;
         cell.itemData = self.scaleDataAry[indexPath.row];
         cell.unit = [self.bleApi getConfig].unit;
         return cell;

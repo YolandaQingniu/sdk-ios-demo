@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0400A8492317D9E900594278 /* CustomDetectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0400A8472317D9E900594278 /* CustomDetectionVC.m */; };
 		0400A84A2317D9E900594278 /* CustomDetectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0400A8482317D9E900594278 /* CustomDetectionVC.xib */; };
+		04A4208C235FFAE400716903 /* ScaleDataTargetTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4208B235FFAE400716903 /* ScaleDataTargetTool.m */; };
 		04BEB2C52320ED5F0068BF52 /* QNSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D230F2212240847500DC01E9 /* QNSDK.framework */; };
 		1BCE13D72334FAA300146E16 /* QNCallBackConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BCE13C12334FAA100146E16 /* QNCallBackConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BCE13D82334FAA300146E16 /* QNScaleDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BCE13C22334FAA100146E16 /* QNScaleDataProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -56,6 +57,8 @@
 		0400A8462317D9E900594278 /* CustomDetectionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomDetectionVC.h; sourceTree = "<group>"; };
 		0400A8472317D9E900594278 /* CustomDetectionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomDetectionVC.m; sourceTree = "<group>"; };
 		0400A8482317D9E900594278 /* CustomDetectionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomDetectionVC.xib; sourceTree = "<group>"; };
+		04A4208A235FFAE400716903 /* ScaleDataTargetTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScaleDataTargetTool.h; sourceTree = "<group>"; };
+		04A4208B235FFAE400716903 /* ScaleDataTargetTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScaleDataTargetTool.m; sourceTree = "<group>"; };
 		1BCE13C12334FAA100146E16 /* QNCallBackConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNCallBackConst.h; sourceTree = "<group>"; };
 		1BCE13C22334FAA100146E16 /* QNScaleDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleDataProtocol.h; sourceTree = "<group>"; };
 		1BCE13C32334FAA100146E16 /* QNBleDeviceDiscoveryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDeviceDiscoveryProtocol.h; sourceTree = "<group>"; };
@@ -141,6 +144,15 @@
 			path = CustomDetection;
 			sourceTree = "<group>";
 		};
+		04A42089235FFA7E00716903 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				04A4208A235FFAE400716903 /* ScaleDataTargetTool.h */,
+				04A4208B235FFAE400716903 /* ScaleDataTargetTool.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
 		D21FD20C205FABD6006450BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +220,7 @@
 		D232D6492004DE2D00AABD67 /* QNDeviceSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				04A42089235FFA7E00716903 /* Tool */,
 				D24424602271CD3400F63F35 /* QNDeviceSDKDemo.entitlements */,
 				D2568165223237EB0049356E /* README.md */,
 				0400A8452317D97C00594278 /* CustomDetection */,
@@ -407,6 +420,7 @@
 				D2B9E98C20723DEC0020C2B6 /* ScaleDataCell.m in Sources */,
 				D2B9E98820723DEC0020C2B6 /* DetectionViewController.m in Sources */,
 				D232D64C2004DE2D00AABD67 /* AppDelegate.m in Sources */,
+				04A4208C235FFAE400716903 /* ScaleDataTargetTool.m in Sources */,
 				0400A8492317D9E900594278 /* CustomDetectionVC.m in Sources */,
 				D2B9E98D20723DEC0020C2B6 /* DeviceTableViewCell.m in Sources */,
 				D2B9E98E20723DEC0020C2B6 /* PickerView.m in Sources */,

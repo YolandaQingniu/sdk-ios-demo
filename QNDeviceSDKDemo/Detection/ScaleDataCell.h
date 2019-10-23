@@ -14,4 +14,8 @@
 @property (nonatomic, assign) QNUnit unit;
 
 @property (nonatomic, strong) QNScaleItemData *itemData;
+
+@property (nonatomic, strong) QNUser *user;
+
+@property (nonatomic, assign) CGFloat currentWeight;
 @end
