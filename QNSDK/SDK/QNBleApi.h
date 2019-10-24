@@ -23,7 +23,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 1.0.0 】
+ 当前版本【 1.1.0 】
 
 
  SDK最低配置8.0的系统
@@ -202,11 +202,11 @@
 /**
  根据提供的kg数值的体重，转化为指定单位的数值
  
- @param kgWeight kg单位的体重
- @param unit QNUnit kg、lb，所有秤都能够支持这个单位; 斤，秤端如果不支持，则会显示kg (不支持ST的转换)
+ @param weight 默认单位的重量（体脂秤为KG 、厨房秤为G）
+ @param unit  KG、LB、JIN、ST 为体脂秤单位 (不支持ST的转换，查询文档获取相关转化方法)  G、ML、OZ、LBOZ 为厨房秤单位（不支持LBOZ的转换查询文档获取相关转化方法）
  @return 结果回调
  */
-- (double)convertWeightWithTargetUnit:(double)kgWeight unit:(QNUnit)unit;
+- (double)convertWeightWithTargetUnit:(double)weight unit:(QNUnit)unit;
 
 /**
  建立用户模型
@@ -224,21 +224,35 @@
  创建SDK蓝牙对象
  
  @param peripheral 外设对象
+ @param rssi 信号强度
  @param advertisementData 蓝牙广播数据
  @param callback 结果的回调
  @return QNBleDevice
  */
-- (QNBleDevice *)buildDevice:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback;
+- (QNBleDevice *)buildDevice:(CBPeripheral *)peripheral rssi:(NSNumber *)rssi advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback;
 
 /**
  创建轻牛广播蓝牙秤设备对象
  
  @param peripheral 外设对象
+ @param rssi 信号强度
  @param advertisementData 蓝牙广播数据
  @param callback 结果的回调
  @return QNBleBroadcastDevice
  */
-- (QNBleBroadcastDevice *)buildBroadcastDevice:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback;
+- (QNBleBroadcastDevice *)buildBroadcastDevice:(CBPeripheral *)peripheral rssi:(NSNumber *)rssi advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback;
+
+
+/**
+ 创建轻牛厨房广播蓝牙秤设备对象
+ 
+ @param peripheral 外设对象
+ @param rssi 信号强度
+ @param advertisementData 蓝牙广播数据
+ @param callback 结果的回调
+ @return QNBleKitchenDevice
+ */
+- (QNBleKitchenDevice *)buildKitchenDevice:(CBPeripheral *)peripheral rssi:(NSNumber *)rssi advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback;
 
 /**
  创建蓝牙协议处理器

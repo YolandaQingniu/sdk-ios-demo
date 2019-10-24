@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+        
     QNConfig *config = [[QNBleApi sharedBleApi] getConfig];
     config.showPowerAlertKey = NO;
 

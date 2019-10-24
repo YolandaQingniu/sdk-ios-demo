@@ -21,6 +21,11 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
     QNUnitLB = 1,
     QNUnitJIN = 2,
     QNUnitST = 3,
+    
+    QNUnitG = 10, //厨房秤专属
+    QNUnitML = 11, //厨房秤专属
+    QNUnitOZ = 12, //厨房秤专属
+    QNUnitLBOZ = 13, //厨房秤专属
 };
 
 /**

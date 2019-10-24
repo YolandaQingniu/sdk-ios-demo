@@ -110,7 +110,7 @@ typedef enum{
             [self disconnectDevice];
             break;
         default: //默认状态
-            [self setNormalStyleUI];
+//            [self setNormalStyleUI];
             [self stopScanDevice];
             break;
     }
@@ -270,7 +270,7 @@ typedef enum{
     }else if (state == QNScaleStateMeasureCompleted){//测量完成
         self.currentStyle = DeviceStyleMeasuringSucceed;
     }else if (state == QNScaleStateLinkLoss){//断开连接/称关机
-        self.currentStyle = DeviceStyleNormal;
+        self.currentStyle = DeviceStyleDisconnect;
     }
 }
 

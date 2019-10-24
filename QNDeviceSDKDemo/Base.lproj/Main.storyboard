@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F2X-eM-oUn">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F2X-eM-oUn">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +12,7 @@
             <objects>
                 <navigationController id="F2X-eM-oUn" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="n1M-Id-SOd">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -25,7 +23,7 @@
             </objects>
             <point key="canvasLocation" x="-1745" y="-172"/>
         </scene>
-        <!--设置-->
+        <!--Title-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
@@ -240,7 +238,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="im6-GL-mDI" userLabel="女Btn">
-                                                        <rect key="frame" x="202" y="8.5" width="35" height="35"/>
+                                                        <rect key="frame" x="202" y="8" width="35" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="3PY-2c-IWe"/>
                                                             <constraint firstAttribute="width" constant="35" id="4o4-o9-AX8"/>
@@ -255,7 +253,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ik1-Rp-K4Y" userLabel="男Btn">
-                                                        <rect key="frame" x="129" y="8.5" width="35" height="35"/>
+                                                        <rect key="frame" x="129" y="8" width="35" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="35" id="9ba-ie-Jml"/>
                                                             <constraint firstAttribute="height" constant="35" id="eNb-EV-sW2"/>
@@ -460,7 +458,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="首次" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak4-yo-iBP">
-                                                        <rect key="frame" x="155" y="5.5" width="38" height="30"/>
+                                                        <rect key="frame" x="155" y="5" width="38" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="38" id="Kjs-Z3-l9y"/>
                                                             <constraint firstAttribute="height" constant="30" id="ToC-XZ-yap"/>
@@ -575,7 +573,7 @@ st 英石，如果称端不支持会显示lb</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="st" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIH-K9-hdB">
-                                                        <rect key="frame" x="290" y="5.5" width="20" height="30"/>
+                                                        <rect key="frame" x="290" y="5" width="20" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="I8J-gZ-4Kd"/>
                                                             <constraint firstAttribute="height" constant="30" id="mPM-az-I0g"/>
@@ -712,7 +710,13 @@ st 英石，如果称端不支持会显示lb</string>
                             <constraint firstAttribute="bottom" secondItem="Z5H-sz-tvd" secondAttribute="bottom" id="tcB-K8-4cD"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="设置" id="jEW-Cm-03T"/>
+                    <navigationItem key="navigationItem" title="Title" id="ogn-Cb-Dgh">
+                        <barButtonItem key="rightBarButtonItem" title="kitchen" id="I43-ax-rab">
+                            <connections>
+                                <segue destination="MhU-AC-fu0" kind="push" id="wBf-Vr-oi8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="birthdayLabel" destination="yvQ-xc-TZD" id="idM-EN-6bF"/>
@@ -742,10 +746,73 @@ st 英石，如果称端不支持会显示lb</string>
             </objects>
             <point key="canvasLocation" x="-860.625" y="-172.18309859154931"/>
         </scene>
+        <!--KitchenVC-->
+        <scene sceneID="6b5-0b-DZn">
+            <objects>
+                <viewController id="MhU-AC-fu0" customClass="KitchenVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fym-Zf-Bdv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bcz-tH-8zv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fS9-fa-mW8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B39-Hv-Cew">
+                                <rect key="frame" x="46" y="94" width="228" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="去皮" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9T1-oa-hRJ">
+                                        <rect key="frame" x="15" y="15" width="35" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="CEB-Py-abM"/>
+                                            <constraint firstAttribute="width" constant="35" id="IVh-P9-vsn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.61960784310000006" green="0.91764705879999997" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNl-XL-aBF">
+                                        <rect key="frame" x="0.0" y="55" width="228" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="B8E-ZK-hzz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.54431710025380708" green="0.4938361714947247" blue="0.49562812095757247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="zNl-XL-aBF" firstAttribute="leading" secondItem="B39-Hv-Cew" secondAttribute="leading" id="PwQ-yC-0sa"/>
+                                    <constraint firstAttribute="height" constant="200" id="SKr-hA-Fa0"/>
+                                    <constraint firstAttribute="trailing" secondItem="zNl-XL-aBF" secondAttribute="trailing" id="U6Y-QU-lXd"/>
+                                    <constraint firstItem="zNl-XL-aBF" firstAttribute="centerY" secondItem="B39-Hv-Cew" secondAttribute="centerY" id="eez-f9-Bzy"/>
+                                    <constraint firstItem="9T1-oa-hRJ" firstAttribute="top" secondItem="B39-Hv-Cew" secondAttribute="top" constant="15" id="ftZ-uf-8Dl"/>
+                                    <constraint firstItem="9T1-oa-hRJ" firstAttribute="leading" secondItem="B39-Hv-Cew" secondAttribute="leading" constant="15" id="rZa-mO-PP5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="B39-Hv-Cew" firstAttribute="leading" secondItem="fS9-fa-mW8" secondAttribute="leadingMargin" constant="30" id="hDB-fr-OXf"/>
+                            <constraint firstItem="B39-Hv-Cew" firstAttribute="top" secondItem="fym-Zf-Bdv" secondAttribute="bottom" constant="50" id="p7A-Qc-ogq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="B39-Hv-Cew" secondAttribute="trailing" constant="30" id="uWZ-MW-pKU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jen-sv-7ha"/>
+                    <connections>
+                        <outlet property="peelLabel" destination="9T1-oa-hRJ" id="m0n-8g-9ds"/>
+                        <outlet property="weightLabel" destination="zNl-XL-aBF" id="tS3-aL-g3k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nae-2j-rY6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32" y="-176"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow_icon" width="21" height="21"/>
-        <image name="notSelect_icon" width="30" height="30"/>
-        <image name="select_icon" width="30" height="30"/>
+        <image name="notSelect_icon" width="30.5" height="30"/>
+        <image name="select_icon" width="30.5" height="30"/>
     </resources>
 </document>
