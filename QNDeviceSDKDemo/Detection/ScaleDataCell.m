@@ -45,7 +45,12 @@
     }
     
     ScaleDataTargetModel *model = [ScaleDataTargetTool getScaleDataTargetModelWithScaleData:self.itemData user:self.user currentWeight:self.currentWeight];
-    
+    if (self.itemData.value <= 0) {
+        
+        self.levelNamesLabel.text = @"无";
+        self.currentLevelLabel.text = @"无";
+        return;
+    }
     
     if (model.levelNames.count > 0) {
         NSString *levelNames = [model.levelNames componentsJoinedByString:@","];
