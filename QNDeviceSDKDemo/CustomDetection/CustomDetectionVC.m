@@ -245,8 +245,8 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
 
 /** 构建普通秤设备 */
 - (void)analysisPublicDevicePeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
-    
-    QNBleDevice *bleDevice = [self.bleApi buildDevice:peripheral advertisementData:advertisementData callback:^(NSError *error) {
+        
+    QNBleDevice *bleDevice = [self.bleApi buildDevice:peripheral rssi:RSSI advertisementData:advertisementData callback:^(NSError *error) {
     }];
     if (bleDevice == nil) return;
     
@@ -261,7 +261,7 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
 /** 构建广播秤设备 */
 - (void)analysisAdvertDevicePeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
     
-    QNBleBroadcastDevice *broadcastDevice = [self.bleApi buildBroadcastDevice:peripheral advertisementData:advertisementData callback:^(NSError *error) {
+    QNBleBroadcastDevice *broadcastDevice = [self.bleApi buildBroadcastDevice:peripheral rssi:RSSI advertisementData:advertisementData callback:^(NSError *error) {
     }];
     if (broadcastDevice == nil) return;
     
