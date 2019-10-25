@@ -40,11 +40,7 @@
     if (self.itemData.valueType == QNValueTypeInt) {
         self.value.text = [NSString stringWithFormat:@"%.0f",value];
     }else{
-        if (self.itemData.type == QNScaleTypeWeight) {
-            self.value.text = [NSString stringWithFormat:@"%.2f",value];
-        }else{
-            self.value.text = [NSString stringWithFormat:@"%.1f",value];
-        }
+        self.value.text = [NSString stringWithFormat:@"%.2f",value];
     }
     
     if (unitFlag) {
