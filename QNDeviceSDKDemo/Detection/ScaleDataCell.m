@@ -31,7 +31,10 @@
 - (void)updateCell {
     self.name.text = _itemData.name;
     double value = _itemData.value;
-    if (self.unit != QNUnitKG && (self.itemData.type == QNScaleTypeWeight || self.itemData.type == QNScaleTypeBoneMass || self.itemData.type == QNScaleTypeLeanBodyWeight || self.itemData.type == QNScaleTypeMuscleMass)) {
+    
+    BOOL unitFlag = self.itemData.type == QNScaleTypeWeight || self.itemData.type == QNScaleTypeBoneMass || self.itemData.type == QNScaleTypeLeanBodyWeight || self.itemData.type == QNScaleTypeMuscleMass;
+    
+    if (self.unit != QNUnitKG && unitFlag) {
         value = [[QNBleApi sharedBleApi] convertWeightWithTargetUnit:value unit:self.unit];
     }
     if (self.itemData.valueType == QNValueTypeInt) {
@@ -44,7 +47,20 @@
         }
     }
     
+    if (unitFlag) {
+        NSString *unitStr = self.value.text;
+        switch (self.unit) {
+            case QNUnitLB: unitStr = [unitStr stringByAppendingString:@" lb"]; break;
+            case QNUnitJIN: unitStr = [unitStr stringByAppendingString:@" 斤"]; break;
+            case QNUnitST: unitStr = [unitStr stringByAppendingString:@" lb"]; break;
+            default:
+                break;
+        }
+        self.value.text = unitStr;
+    }
+    
     ScaleDataTargetModel *model = [ScaleDataTargetTool getScaleDataTargetModelWithScaleData:self.itemData user:self.user currentWeight:self.currentWeight];
+
     if (self.itemData.value <= 0) {
         
         self.levelNamesLabel.text = @"无";

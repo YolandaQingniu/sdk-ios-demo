@@ -27,6 +27,7 @@ typedef enum{
 #import "ScaleDataCell.h"
 #import "WiFiTool.h"
 #import "NSTimer+YYAdd.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
@@ -43,6 +44,9 @@ typedef enum{
 @property(nonatomic, assign) int broadcastMesasureCompleteCount;
 @property(nonatomic, strong) NSTimer *broadcastTimer;
 @property (nonatomic, strong) QNBleApi *bleApi;
+
+@property(nonatomic, strong) CLLocationManager *locationManager;
+
 @end
 
 @implementation DetectionViewController
@@ -60,6 +64,23 @@ typedef enum{
     self.bleApi.dataListener = self;
     self.bleApi.bleStateListener = self;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    if (status == kCLAuthorizationStatusNotDetermined) {
+        [self.locationManager requestWhenInUseAuthorization];
+    } else if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"请授权定位权限以便使用WIFI配网功能" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertController addAction:action];
+        [self presentViewController:alertController animated:YES completion:^{
+            
+        }];
+    }
+    
+    
 }
 
 - (void)back {
@@ -277,7 +298,15 @@ typedef enum{
 #pragma mark - 测量QNDataListener处理
 - (void)onGetUnsteadyWeight:(QNBleDevice *)device weight:(double)weight {
     weight = [self.bleApi convertWeightWithTargetUnit:weight unit:[self.bleApi getConfig].unit];
-    self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f",weight];
+    NSString *unit = @"kg";
+    switch ([self.bleApi getConfig].unit) {
+        case QNUnitLB: unit = @"lb"; break;
+        case QNUnitJIN: unit = @"lb"; break;
+        case QNUnitST: unit = @"lb"; break;
+        default:
+            break;
+    }
+    self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f %@",weight,unit];
 }
 
 - (void)onGetScaleData:(QNBleDevice *)device data:(QNScaleData *)scaleData {

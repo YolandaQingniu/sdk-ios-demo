@@ -31,6 +31,8 @@
 	<string>请允许使用蓝牙功能</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>请打开蓝牙使用设备</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>请允许定位权限以使用WIFI秤</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -15,9 +15,7 @@
 @implementation ScaleDataTargetTool
 
 + (ScaleDataTargetModel *)getScaleDataTargetModelWithScaleData:(QNScaleItemData *)scaleData user:(QNUser *)user currentWeight:(CGFloat)currentWeight {
-    
     TargetType targetType = [self transToTargetType:scaleData.type];
-    
     ScaleDataTargetModel *model = [[ScaleDataTargetModel alloc] init];
     model.targetType = targetType;
     model.levelNames = [self getTargetLevelsWith:targetType];
@@ -86,14 +84,14 @@
         case TargetTypeSubfat:currentLevel = [self getSubFatCurrentLevel:scaleData user:user]; break;
         case TargetTypeVisfat: currentLevel = [self getVisfatCurrentLevel:scaleData]; break;
         case TargetTypeWater: currentLevel = [self getWaterCurrentLevel:scaleData user:user]; break;
-        case TargetTypeMuscle:currentLevel = [self getMuscleCurrentLevel:scaleData user:user]; break;
-        case TargetTypeBone:currentLevel = [self getBoneCurrentLevel:scaleData user:user currentWeight:currentWeight]; break;
+        case TargetTypeMuscle: currentLevel = [self getMuscleCurrentLevel:scaleData user:user]; break;
+        case TargetTypeBone: currentLevel = [self getBoneCurrentLevel:scaleData user:user currentWeight:currentWeight]; break;
         case TargetTypeBmr:break;
-        case TargetTypeBodyShape:break;
-        case TargetTypeProtein:currentLevel = [self getProteinCurrentLevel:scaleData user:user]; break;
-        case TargetTypeFatFreeWeight:currentLevel = @"标准"; break;
-        case TargetTypeSinew:currentLevel = [self getSinewCurrentLevel:scaleData user:user]; break;
-        case TargetTypeBodyage:currentLevel = @"达标"; break;
+        case TargetTypeBodyShape: currentLevel = [self getBodyShapeCurrentLevel:scaleData user:user]; break;
+        case TargetTypeProtein: currentLevel = [self getProteinCurrentLevel:scaleData user:user]; break;
+        case TargetTypeFatFreeWeight: currentLevel = @"标准"; break;
+        case TargetTypeSinew: currentLevel = [self getSinewCurrentLevel:scaleData user:user]; break;
+        case TargetTypeBodyage: currentLevel = @"达标"; break;
         case TargetTypeHeartRate:break;
         case TargetTypeCardiacIndex:break;
         case TargetTypeFatMass:break;
@@ -316,7 +314,21 @@
 
 /** 体型 */
 + (NSString *)getBodyShapeCurrentLevel:(QNScaleItemData *)scaleData user:(QNUser *)user {
+    int bodyShape = (int)scaleData.value;
     NSString *currentLevel = @"";
+    switch (bodyShape) {
+        case 1: currentLevel = @"隐形肥胖型";  break;
+        case 2: currentLevel = @"运动不足型";  break;
+        case 3: currentLevel = @"偏瘦型";  break;
+        case 4: currentLevel = @"标准型";  break;
+        case 5: currentLevel = @"偏瘦肌肉型";  break;
+        case 6: currentLevel = @"肥胖型";  break;
+        case 7: currentLevel = @"偏胖型";  break;
+        case 8: currentLevel = @"标准肌肉型";  break;
+        case 9: currentLevel = @"非常肌肉型";  break;
+        default:
+            break;
+    }
     return currentLevel;
 }
 
