@@ -55,7 +55,7 @@
             break;
             
         case QNUnitOZ:
-            weightStr = [NSString stringWithFormat:@"%.1f ml",[[QNBleApi sharedBleApi] convertWeightWithTargetUnit:device.weight unit:QNUnitOZ]];
+            weightStr = [NSString stringWithFormat:@"%.1f oz",[[QNBleApi sharedBleApi] convertWeightWithTargetUnit:device.weight unit:QNUnitOZ]];
             break;
         case QNUnitLBOZ:
         {
