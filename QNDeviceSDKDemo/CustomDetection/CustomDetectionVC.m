@@ -322,7 +322,9 @@ typedef NS_ENUM(NSUInteger, DMBlueToothState) {
             [peripheral setNotifyValue:YES forCharacteristic:characteristics];
         }
     }
-    [self.protocolHandle prepare:service.UUID.UUIDString];
+    if ([service.UUID.UUIDString isEqualToString:KQNScaleDeviceServiceUUID] || [service.UUID.UUIDString isEqualToString:KQNPublic1Scale1SerivceUUID]) {
+        [self.protocolHandle prepare:service.UUID.UUIDString];
+    }
 }
 
 /** 写数据的回应 */
