@@ -189,8 +189,8 @@
 #pragma mark - 点击确认跳转扫描
 - (IBAction)clickConfirm:(UIButton *)sender {
     
-    [self turnToCustomDetectionVC];
-    return;
+//    [self turnToCustomDetectionVC];
+//    return;
     
     int height = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
     QNUser *user = [_bleApi buildUser:self.userIdTF.text height:height gender:self.femaleBtn.selected ? @"female" : @"male" birthday:self.birthdayDate callback:^(NSError *error) {
