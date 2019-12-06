@@ -25,7 +25,9 @@ typedef NS_ENUM(NSInteger, QNBleErrorCode) {
     QNBleErrorCodeBluetoothUnauthorized = 1109,
     QNBleErrorCodeConnectFail = 1110,
     QNBleErrorCodePeripheralDisconnecting = 1111,
-    
+    QNBleErrorCodeBleNoneScan = 1112,
+    QNBleErrorBleConnectOvertime = 1113,
+
     QNBleErrorCodeIllegalArgument = 1201,
     QNBleErrorCodeMissDiscoveryListener = 1202,
     QNBleErrorCodeMissDataListener = 1203,

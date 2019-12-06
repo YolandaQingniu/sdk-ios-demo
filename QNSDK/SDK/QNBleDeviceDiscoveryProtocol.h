@@ -27,9 +27,7 @@
 
 /**
  收到广播秤后的设备回调
- 
- 【0.6.5】及以上版本强烈建议对广播秤使用该监听方法
- 
+  
  @param device QNBleDevice
  */
 - (void)onBroadcastDeviceDiscover:(QNBleBroadcastDevice *)device;
