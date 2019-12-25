@@ -23,7 +23,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 1.1.3-beta.1 】
+ 当前版本【 1.1.3 】
 
 
  SDK最低配置8.0的系统
@@ -161,6 +161,17 @@
  @param callback 配网操作的回到  您可以通过监听“- (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state”方法获取配网的结果
  */
 - (void)connectDeviceSetWiFiWithDevice:(QNBleDevice *)device user:(QNUser *)user wifiConfig:(QNWiFiConfig *)wifiConfig callback:(QNResultCallback)callback;
+
+/**
+ 向轻牛云注册WiFi蓝牙双模秤
+
+ 目前只允许注册WiFi蓝牙双模秤
+
+ @param device QNBleDevice
+ @param callback 注册结果
+ */
+- (void)registerWiFiBleDevice:(QNBleDevice *)device callback:(QNResultCallback)callback;
+
 
 /**
  获取SDK的当前设置情况
