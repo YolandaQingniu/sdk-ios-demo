@@ -44,6 +44,8 @@
 /** 储存数据所属秤的mac地址 */
 @property (nonatomic, readonly, strong) NSString *mac;
 
+/** 相关加密字符串 */
+@property (nonatomic, readonly, strong) NSString *hmac;
 
 /**
  设置该存储数据的拥有者

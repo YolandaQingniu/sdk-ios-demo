@@ -31,6 +31,7 @@ FOUNDATION_EXPORT const unsigned char QNDeviceSDKVersionString[];
 #import "QNUtils.h"
 #import "QNWiFiConfig.h"
 #import "QNBleBroadcastDevice.h"
+#import "QNBleKitchenDevice.h"
 #import "QNBleProtocolDelegate.h"
 #import "QNBleProtocolHandler.h"
 

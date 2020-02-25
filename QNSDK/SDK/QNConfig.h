@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
  该QNConfig类，用户设置后，SDK会自动保存设置信息，当再次用到类中的设置信息时，会采用用户上次设置的信息
  */
 
+/// <#Description#>
 @interface QNConfig : NSObject
 
 /** 是否只返回已开机（亮屏）的设备，默认为false */
@@ -59,5 +60,8 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
  强化广播秤信号
  */
 @property (nonatomic, assign) BOOL enhanceBleBoradcast;
+
+/// 保存设置信息
+- (void)save;
 
 @end
