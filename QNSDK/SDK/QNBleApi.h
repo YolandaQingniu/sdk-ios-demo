@@ -24,7 +24,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 1.1.5 】
+ 当前版本【 1.2.0-beta.1 】
 
 
  SDK最低配置8.0的系统
@@ -159,11 +159,10 @@
  连接轻牛Wsp设备
  
  @param device 需要连接的蓝牙设备
- @param user 连接设备时，使用的用户模型，包含了userId,和用户资料
  @param config 连接wsp设备时的配置项
  @param callback 结果回调
  */
-- (void)connectWspDevice:(QNBleDevice *)device user:(QNUser *)user config:(QNWspConfig *)config callback:(QNResultCallback)callback;
+- (void)connectWspDevice:(QNBleDevice *)device config:(QNWspConfig *)config callback:(QNResultCallback)callback;
 
 /**
  断开设备的连接

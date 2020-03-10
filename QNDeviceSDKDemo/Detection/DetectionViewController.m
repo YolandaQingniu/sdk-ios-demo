@@ -28,8 +28,10 @@ typedef enum{
 #import "WiFiTool.h"
 #import "NSTimer+YYAdd.h"
 #import <CoreLocation/CoreLocation.h>
+#import "WspConfigVC.h"
+#import "UIView+Toast.h"
 
-@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener>
+@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNWspScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
 @property (weak, nonatomic) IBOutlet UIButton *scanBtn;
 @property (weak, nonatomic) IBOutlet UILabel *styleLabel;
@@ -46,6 +48,8 @@ typedef enum{
 @property (nonatomic, strong) QNBleApi *bleApi;
 
 @property(nonatomic, strong) CLLocationManager *locationManager;
+
+@property(nonatomic, weak) WspConfigVC *wspConfigVC;
 
 @end
 
@@ -295,7 +299,7 @@ typedef enum{
     NSString *unit = @"kg";
     switch ([self.bleApi getConfig].unit) {
         case QNUnitLB: unit = @"lb"; break;
-        case QNUnitJIN: unit = @"lb"; break;
+        case QNUnitJIN: unit = @"斤"; break;
         case QNUnitST: unit = @"lb"; break;
         default:
             break;
@@ -315,6 +319,24 @@ typedef enum{
 - (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray<QNScaleStoreData *> *)storedDataList {
     
     
+}
+
+- (void)onScaleEventChange:(QNBleDevice *)device scaleEvent:(QNScaleEvent)scaleEvent {
+    NSString *log = nil;
+    if (scaleEvent == QNScaleEventRegistUserFail) {
+        log = @"注册用户失败";
+    } else if (scaleEvent == QNScaleEventVisitUserFail) {
+        log = @"访问用户失败";
+    } else if (scaleEvent == QNScaleEventDeleteUserFail) {
+        log = @"删除用户失败";
+    }
+    if (log) {
+        [self.view makeToast:log duration:2 position:CSToastPositionCenter];
+    }
+}
+
+- (void)wspRegisterUserComplete:(QNBleDevice *)device user:(QNUser *)user {
+    [self.view makeToast:[NSString stringWithFormat:@"当前序列号: %d",user.index] duration:3 position:CSToastPositionCenter];
 }
 
 #pragma mark - QNBleStateListener
@@ -466,13 +488,12 @@ typedef enum{
     QNBleDevice *device = cell.device;
     
     if (device.deviceType == QNDeviceTypeScaleWsp) {
-        
-    } else {
-        
-        
-    }
-    
-    if (!device.supportWifi) {
+        WspConfigVC *configVC = [[WspConfigVC alloc] init];
+        self.wspConfigVC = configVC;
+        self.wspConfigVC.bleDevice = device;
+        self.wspConfigVC.delegate = self;
+        [self presentViewController:self.wspConfigVC animated:YES completion:nil];
+    } else if (!device.supportWifi) {
         if (device.deviceType == QNDeviceTypeScaleBleDefault) {
             [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         }
@@ -561,4 +582,24 @@ typedef enum{
     }
     return _scaleDataAry;
 }
+
+#pragma mark -
+- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret device:(nonnull QNBleDevice *)device {
+    QNWspConfig *config = wspConfig;
+    self.currentStyle = DeviceStyleLinging;
+    self.user.index = userIndex;
+    self.user.secret = userSecret;
+    config.curUser = self.user;
+    
+    [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
+        
+    }];
+}
+
+- (void)dismissWspConfigVC {
+    [self.wspConfigVC dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 @end
