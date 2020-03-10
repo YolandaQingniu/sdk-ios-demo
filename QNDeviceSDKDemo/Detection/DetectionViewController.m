@@ -464,6 +464,14 @@ typedef enum{
     }
     
     QNBleDevice *device = cell.device;
+    
+    if (device.deviceType == QNDeviceTypeScaleWsp) {
+        
+    } else {
+        
+        
+    }
+    
     if (!device.supportWifi) {
         if (device.deviceType == QNDeviceTypeScaleBleDefault) {
             [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];

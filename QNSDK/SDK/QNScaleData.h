@@ -21,6 +21,8 @@
 /** 数据标识 */
 @property (nonatomic, strong, readonly) NSString *hmac;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  通过调用该方法获取当个指标的详情
 

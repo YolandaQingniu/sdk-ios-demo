@@ -6,10 +6,9 @@
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "QNUser.h"
 #import "QNConfig.h"
 #import "QNScaleData.h"
-#import "QNUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

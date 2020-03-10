@@ -44,15 +44,20 @@
 /** 储存数据所属秤的mac地址 */
 @property (nonatomic, readonly, strong) NSString *mac;
 
+/** 数据是否完整 */
+@property (nonatomic, readonly, assign) BOOL isDataComplete;
+
 /** 相关加密字符串 */
 @property (nonatomic, readonly, strong) NSString *hmac;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  设置该存储数据的拥有者
 
  @param user QNUser
  */
-- (void)setUser:(QNUser *)user;
+- (BOOL)setUser:(QNUser *)user;
 
 /**
  获取测量数据详情
