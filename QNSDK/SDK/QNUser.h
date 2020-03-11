@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 
 /** WSP设备专用，秤端该用户索引，该值由向秤注册用户成功时，秤端返回 */
 @property (nonatomic, assign) int index;
-/** WSP设备专用，秤端该用户秘钥 */
+/** WSP设备专用，秤端该用户秘钥，该秘钥由服务器下发 */
 @property (nonatomic, assign) int secret;
 
 
