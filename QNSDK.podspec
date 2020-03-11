@@ -16,7 +16,7 @@ s.description      = '支持智能体脂秤、共享秤二维码数据解析'
 s.homepage         = 'https://github.com/YolandaQingniu/sdk-ios-demo'
 s.license          = { :type => 'MIT', :file => 'LICENSE' }
 s.author           = { 'service@qnniu.com' => 'service@qnniu.com' }
-s.source           = { :git => 'https://github.com/YolandaQingniu/sdk-ios-demo.git', :tag => s.version.to_s }
+s.source           = { :git => 'https://github.com/YolandaQingniu/sdk-ios-demo.git', :tag => s.version.to_s, :branch => 'dev' }
 
 s.ios.deployment_target = '8.0'
 
