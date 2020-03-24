@@ -23,7 +23,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 1.1.6 】
+ 当前版本【 1.1.7 】
 
 
  SDK最低配置8.0的系统
@@ -128,6 +128,14 @@
  */
 - (void)initSdk:(NSString *)appId dataFileContent:(NSString *)dataFileContent callback:(QNResultCallback)callback;
 
+
+/**
+
+ 获取当前系统蓝牙转台
+
+@return QNUser
+*/
+- (QNBLEState)getCurSystemBleState;
 
 /**
  扫描设备
