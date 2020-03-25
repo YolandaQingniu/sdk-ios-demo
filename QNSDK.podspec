@@ -20,7 +20,7 @@ s.source           = { :git => 'https://github.com/YolandaQingniu/sdk-ios-demo.g
 
 s.ios.deployment_target = '8.0'
 
-s.source_files = 'QNSDK/SDK/**/*'
+s.source_files = 'QNSDK/SDK/**/*.{h,m}'
 s.vendored_libraries = 'QNSDK/SDK/libQNDeviceSDK.a'
 s.public_header_files= 'QNSDK/SDK/**/*.h'
 s.static_framework = true
