@@ -19,12 +19,12 @@
 #import "QNBleProtocolDelegate.h"
 #import "QNBleProtocolHandler.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "QNWspConfig.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 1.1.7 】
-
+ 当前版本【 2.0.0 】
 
  SDK最低配置8.0的系统
  
@@ -163,6 +163,15 @@
 - (void)connectDevice:(QNBleDevice *)device user:(QNUser *)user callback:(QNResultCallback)callback;
 
 /**
+ 连接轻牛Wsp设备
+ 
+ @param device 需要连接的蓝牙设备
+ @param config 连接wsp设备时的配置项
+ @param callback 结果回调
+ */
+- (void)connectWspDevice:(QNBleDevice *)device config:(QNWspConfig *)config callback:(QNResultCallback)callback;
+
+/**
  断开设备的连接
  
  @param device 当前连接的设备(可不传)
@@ -265,6 +274,21 @@
  @return QNBleProtocolHandler
  */
 - (QNBleProtocolHandler *)buildProtocolHandler:(QNBleDevice *)device user:(QNUser *)user wifiConfig:(QNWiFiConfig *)wifiConfig delegate:(id<QNBleProtocolDelegate>)delegate callback:(QNResultCallback)callback;
+
+/**
+ 生成测量数据方法（该方法只支持wsp设备使用）
+
+@param user 该条数据的所属用户
+@param modeId 型号标识
+@param weight 体重。单位为kg
+@param measureDate 测量时间
+@param resistance 50阻抗
+@param secResistance 500阻抗
+@param hmac 加密字段
+@param heartRate 心率值，若无则赋值0
+@return QNScaleData
+*/
+- (QNScaleData *)generateScaleData:(QNUser *)user modeId:(NSString *)modeId weight:(double)weight date:(NSDate *)measureDate resistance:(int)resistance secResistance:(int)secResistance hmac:(NSString *)hmac heartRate:(int)heartRate;
 
 @end
 
