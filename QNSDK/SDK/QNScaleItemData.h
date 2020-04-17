@@ -62,7 +62,6 @@ typedef NS_ENUM(NSInteger, QNScaleType) {
 
 
 /** 指标数值
- 当type == QNScaleTypeMineralLevel时， value == 0 未知 value == 1 缺乏  value == 2 正常  value == 3 充足
  */
 @property (nonatomic, readonly, assign) double value;
 
