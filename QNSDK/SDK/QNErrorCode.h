@@ -45,4 +45,10 @@ typedef NS_ENUM(NSInteger, QNBleErrorCode) {
 
     QNBleErrorCoder = 1301,
     QNBleErrorCoderInvalid = 1302,
+    
+    QNBleErrorCodeResponseOverTime = 1401, //相应超时
+    QNBleErrorCodeUnconnectedDevice = 1406, //未连接设备
+    QNBleErrorCodeUnsupport = 1407, //不支持使用
+    QNBleErrorCodeData = 1408, //数据异常
+    QNBleErrorCodeEventUnusual = 1409, //事件异常
 };
