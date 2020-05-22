@@ -2,7 +2,7 @@
 //  QNLogProtocol.h
 //  QNDeviceSDK
 //
-//  Created by donyau on 2019/7/1.
+//  Created by Yolanda on 2019/7/1.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

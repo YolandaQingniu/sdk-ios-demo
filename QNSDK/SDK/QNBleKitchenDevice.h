@@ -2,7 +2,7 @@
 //  QNBleKitchenDevice.h
 //  QNDeviceSDK
 //
-//  Created by qiudongquan on 2019/10/22.
+//  Created by Yolanda on 2019/10/22.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

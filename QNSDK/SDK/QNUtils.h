@@ -2,7 +2,7 @@
 //  QNUtils.h
 //  QNDeviceSDK
 //
-//  Created by donyau on 2019/1/27.
+//  Created by Yolanda on 2019/1/27.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

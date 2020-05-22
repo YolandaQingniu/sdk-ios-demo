@@ -2,7 +2,7 @@
 //  KitchenVC.h
 //  QNDeviceSDKDemo
 //
-//  Created by qiudongquan on 2019/10/24.
+//  Created by Yolanda on 2019/10/24.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

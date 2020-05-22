@@ -13,6 +13,7 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
     QNDeviceTypeScaleBroadcast = 120,  //广播秤
     QNDeviceTypeScaleKitchen = 130,  //厨房秤
     QNDeviceTypeScaleWsp = 140,  //wsp蓝牙秤
+
 };
 
 @interface QNBleDevice : NSObject

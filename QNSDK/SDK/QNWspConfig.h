@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// wifi配置对象
 @property (nullable, nonatomic, strong) QNWiFiConfig *wifiConfig;
 /// 需要删除的用户的indx集合
-@property (nullable, nonatomic, assign) NSArray<NSNumber *> *deleteUsers;
+@property (nullable, nonatomic, strong) NSArray<NSNumber *> *deleteUsers;
 /// 当前测量用户
 @property (nonatomic, strong) QNUser *curUser;
 /// 是否需要注册用户，与isChange属性，只允许其中一个为true

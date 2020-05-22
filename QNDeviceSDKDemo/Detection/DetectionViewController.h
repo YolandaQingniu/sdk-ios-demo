@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QNSDK/QNDeviceSDK.h>
+#import "QNDeviceSDK.h"
 
 @interface DetectionViewController : UIViewController
 

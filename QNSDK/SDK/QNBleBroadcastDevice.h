@@ -2,7 +2,7 @@
 //  QNBleBroadcastDevice.h
 //  QNDeviceSDK
 //
-//  Created by donyau on 2019/7/11.
+//  Created by Yolanda on 2019/7/11.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 

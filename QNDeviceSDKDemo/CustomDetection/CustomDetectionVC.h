@@ -7,7 +7,7 @@
 //  蓝牙自主管理demo
 
 #import <UIKit/UIKit.h>
-#import <QNSDK/QNDeviceSDK.h>
+#import "QNDeviceSDK.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

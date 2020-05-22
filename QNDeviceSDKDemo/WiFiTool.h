@@ -2,7 +2,7 @@
 //  WiFiTool.h
 //  QNDeviceSDKDemo
 //
-//  Created by donyau on 2019/4/25.
+//  Created by Yolanda on 2019/4/25.
 //  Copyright © 2019 Yolanda. All rights reserved.
 //
 
