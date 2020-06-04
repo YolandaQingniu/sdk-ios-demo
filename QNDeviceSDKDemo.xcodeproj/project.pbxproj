@@ -123,7 +123,6 @@
 		D232D6592004DE2D00AABD67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D244245D2271CD0400F63F35 /* WiFiTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WiFiTool.h; sourceTree = "<group>"; };
 		D244245E2271CD0400F63F35 /* WiFiTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WiFiTool.m; sourceTree = "<group>"; };
-		D24424602271CD3400F63F35 /* QNDeviceSDKDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QNDeviceSDKDemo.entitlements; sourceTree = "<group>"; };
 		D248DC5922D85DF200DA046C /* NSTimer+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YYAdd.h"; sourceTree = "<group>"; };
 		D248DC5A22D85DF200DA046C /* NSTimer+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YYAdd.m"; sourceTree = "<group>"; };
 		D2568165223237EB0049356E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -251,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				04A42089235FFA7E00716903 /* Tool */,
-				D24424602271CD3400F63F35 /* QNDeviceSDKDemo.entitlements */,
 				D2568165223237EB0049356E /* README.md */,
 				0400A8452317D97C00594278 /* CustomDetection */,
 				D2B9E97B20723DEC0020C2B6 /* Detection */,
@@ -695,7 +693,7 @@
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK";
 				MARKETING_VERSION = 1.2.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.deviceSDKTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -717,7 +715,7 @@
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK";
 				MARKETING_VERSION = 1.2.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.deviceSDKTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
