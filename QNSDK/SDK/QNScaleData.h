@@ -10,6 +10,11 @@
 #import "QNUser.h"
 #import "QNScaleItemData.h"
 
+typedef NS_ENUM(NSUInteger, QNHeightWeightMode) {
+    QNHeightWeightModeWeight = 0,
+    QNHeightWeightModeBodyfat = 1,
+};
+
 @interface QNScaleData : NSObject
 
 /** 测量数据的拥有者 */
@@ -20,6 +25,12 @@
 
 /** 数据标识 */
 @property (nonatomic, strong, readonly) NSString *hmac;
+
+/** 身高(身高体重秤专属) */
+@property (nonatomic, assign, readonly) double height;
+
+/** 模式(身高体重秤专属) */
+@property (nonatomic, assign, readonly) QNHeightWeightMode heightMode;
 
 - (instancetype)init NS_UNAVAILABLE;
 

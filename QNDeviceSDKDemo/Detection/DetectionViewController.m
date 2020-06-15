@@ -312,6 +312,14 @@ typedef enum{
     for (QNScaleItemData *item in [scaleData getAllItem]) {
         [self.scaleDataAry addObject:item];
     }
+    if (device.deviceType == QNDeviceTypeHeightScale) {
+        QNScaleItemData *heightItem = [[QNScaleItemData alloc] init];
+        heightItem.type = 0; //此次只是为了方便显示, 采用临时赋值
+        heightItem.value = scaleData.height;
+        heightItem.valueType = QNValueTypeDouble;
+        heightItem.name = @"height";
+        [self.scaleDataAry addObject:heightItem];
+    }
     self.currentStyle = DeviceStyleMeasuringSucceed;
     [self.tableView reloadData];
 }
@@ -493,7 +501,7 @@ typedef enum{
         self.wspConfigVC.bleDevice = device;
         self.wspConfigVC.delegate = self;
         [self presentViewController:self.wspConfigVC animated:YES completion:nil];
-    } else if (!device.supportWifi) {
+    } else if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
         if (device.deviceType == QNDeviceTypeScaleBleDefault) {
             [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         }

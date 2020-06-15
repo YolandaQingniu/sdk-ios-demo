@@ -23,7 +23,7 @@
     self.macLabel.text = device.mac;
     self.RSSILabel.text = [device.RSSI stringValue];
     self.modeIdLabel.text = device.modeId;
-    self.wifiImageView.hidden = !device.supportWifi;
+    self.wifiImageView.hidden = !device.supportWifi || device.deviceType == QNDeviceTypeHeightScale;
 }
 
 - (void)setBroadcastDevice:(QNBleBroadcastDevice *)broadcastDevice {

@@ -56,19 +56,12 @@ typedef NS_ENUM(NSInteger, QNScaleType) {
 @interface QNScaleItemData : NSObject
 
 /** 指标类型 */
-@property (nonatomic, readonly, assign) QNScaleType type;
-
-/**  */
-
-
-/** 指标数值
- */
-@property (nonatomic, readonly, assign) double value;
-
+@property (nonatomic, assign) QNScaleType type;
+/** 指标数值 */
+@property (nonatomic, assign) double value;
 /** 指标值类型 */
-@property (nonatomic, readonly, assign) QNValueType valueType;
-
+@property (nonatomic, assign) QNValueType valueType;
 /** 指标名称 */
-@property (nonatomic, readonly, strong) NSString *name ;
+@property (nonatomic, strong) NSString *name;
 
 @end
