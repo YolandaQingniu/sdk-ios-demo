@@ -47,6 +47,9 @@
 /** 数据是否完整 */
 @property (nonatomic, readonly, assign) BOOL isDataComplete;
 
+/** 身高(身高体重秤专属) */
+@property (nonatomic, assign, readonly) double height;
+
 /** 相关加密字符串 */
 @property (nonatomic, readonly, strong) NSString *hmac;
 
