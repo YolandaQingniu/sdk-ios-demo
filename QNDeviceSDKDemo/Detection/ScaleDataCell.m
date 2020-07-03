@@ -36,6 +36,9 @@
     
     if (self.unit != QNUnitKG && unitFlag) {
         value = [[QNBleApi sharedBleApi] convertWeightWithTargetUnit:value unit:self.unit];
+        if (self.unit == QNUnitST) {
+            value = value / 14.0;
+        }
     }
     if (self.itemData.valueType == QNValueTypeInt) {
         self.value.text = [NSString stringWithFormat:@"%.0f",value];
@@ -48,7 +51,7 @@
         switch (self.unit) {
             case QNUnitLB: unitStr = [unitStr stringByAppendingString:@" lb"]; break;
             case QNUnitJIN: unitStr = [unitStr stringByAppendingString:@" 斤"]; break;
-            case QNUnitST: unitStr = [unitStr stringByAppendingString:@" lb"]; break;
+            case QNUnitST: unitStr = [unitStr stringByAppendingString:@" st"]; break;
             default:
                 break;
         }

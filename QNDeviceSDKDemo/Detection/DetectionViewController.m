@@ -300,11 +300,15 @@ typedef enum{
     switch ([self.bleApi getConfig].unit) {
         case QNUnitLB: unit = @"lb"; break;
         case QNUnitJIN: unit = @"斤"; break;
-        case QNUnitST: unit = @"lb"; break;
+        case QNUnitST: unit = @"st"; break;
         default:
             break;
     }
-    self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f %@",weight,unit];
+    if ([unit isEqualToString:@"st"]) {
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f %@",weight / 14.0,unit];
+    } else {
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f %@",weight,unit];
+    }
 }
 
 - (void)onGetScaleData:(QNBleDevice *)device data:(QNScaleData *)scaleData {
