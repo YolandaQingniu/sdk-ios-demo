@@ -111,7 +111,7 @@
 		D2048A5120A6E15600D943BC /* 123456789.qn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 123456789.qn; sourceTree = "<group>"; };
 		D230F2212240847500DC01E9 /* QNSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QNSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D230F2242240847600DC01E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D232D6472004DE2D00AABD67 /* QNDeviceSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QNDeviceSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D232D6472004DE2D00AABD67 /* QNSDK 2.2.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QNSDK 2.2.1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D232D64A2004DE2D00AABD67 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D232D64B2004DE2D00AABD67 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D232D64D2004DE2D00AABD67 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 		D232D6482004DE2D00AABD67 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D232D6472004DE2D00AABD67 /* QNDeviceSDKDemo.app */,
+				D232D6472004DE2D00AABD67 /* QNSDK 2.2.1.app */,
 				D230F2212240847500DC01E9 /* QNSDK.framework */,
 			);
 			name = Products;
@@ -366,7 +366,7 @@
 			);
 			name = QNDeviceSDKDemo;
 			productName = QNDeviceSDKDemo;
-			productReference = D232D6472004DE2D00AABD67 /* QNDeviceSDKDemo.app */;
+			productReference = D232D6472004DE2D00AABD67 /* QNSDK 2.2.1.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -694,7 +694,7 @@
 				MARKETING_VERSION = 2.2.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "QNSDK 2.2.1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -716,7 +716,7 @@
 				MARKETING_VERSION = 2.2.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "QNSDK 2.2.1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
