@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "QNCallBackConst.h"
+#import "QNIndicateConfig.h"
 
 typedef NS_ENUM(NSUInteger,YLUserShapeType) {
     YLUserShapeNone = 0, //none 无
@@ -33,7 +34,7 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 };
 
 @interface QNUser : NSObject
-/** userID */
+/** userID(如果秤端支持用户名显示，则该字段内容会下发到设备) */
 @property (nonatomic, strong) NSString *userId;
 /** height */
 @property (nonatomic, assign) int height;
@@ -60,6 +61,7 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 /** WSP设备专用，秤端该用户秘钥，该秘钥由服务器下发 */
 @property (nonatomic, assign) int secret;
 
+@property(nonatomic, strong) QNIndicateConfig *indicateConfig;
 
 /**
  建立用户模型
