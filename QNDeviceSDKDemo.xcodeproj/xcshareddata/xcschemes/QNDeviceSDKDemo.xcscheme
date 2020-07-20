@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D232D6462004DE2D00AABD67"
-               BuildableName = "QNSDK 2.2.1.app"
+               BuildableName = "QNSDK 2.3.0.app"
                BlueprintName = "QNDeviceSDKDemo"
                ReferencedContainer = "container:QNDeviceSDKDemo.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D232D6462004DE2D00AABD67"
-            BuildableName = "QNSDK 2.2.1.app"
+            BuildableName = "QNSDK 2.3.0.app"
             BlueprintName = "QNDeviceSDKDemo"
             ReferencedContainer = "container:QNDeviceSDKDemo.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D232D6462004DE2D00AABD67"
-            BuildableName = "QNSDK 2.2.1.app"
+            BuildableName = "QNSDK 2.3.0.app"
             BlueprintName = "QNDeviceSDKDemo"
             ReferencedContainer = "container:QNDeviceSDKDemo.xcodeproj">
          </BuildableReference>

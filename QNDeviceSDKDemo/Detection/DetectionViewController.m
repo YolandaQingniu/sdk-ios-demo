@@ -608,7 +608,7 @@ typedef enum{
     wspConfig.latitude = @"-120.00";
 
     //设置指标控制，如秤支持则下发，否则即便设置也无效
-    //注意下发指标控制、与用户昵称时，需设置isChange为YES
+    //注意下发指标控制、与用户昵称时，需设置isChange为YESni
     QNIndicateConfig *indicateConfig = [[QNIndicateConfig alloc] init];
     config.curUser.indicateConfig = indicateConfig;
     [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {

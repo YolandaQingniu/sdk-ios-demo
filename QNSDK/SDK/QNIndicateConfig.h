@@ -11,12 +11,22 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QNIndicateConfig : NSObject
-/// 控制秤端骨量的显示
+/// 是否显示用户名
+@property(nonatomic, assign) BOOL showUserName;
+/// 是否显示BMI
+@property(nonatomic, assign) BOOL showBmi;
+/// 是否显示骨量
 @property(nonatomic, assign) BOOL showBone;
-/// 控制秤端肌肉量的显示
+/// 是否显示体脂率
+@property(nonatomic, assign) BOOL showFat;
+/// 是否显示肌肉量
 @property(nonatomic, assign) BOOL showMuscle;
-/// 控制秤端体水分的显示
+/// 是否显示体水分
 @property(nonatomic, assign) BOOL showWater;
+/// 是否显示心率
+@property(nonatomic, assign) BOOL showHeartRate;
+/// 是否显示天气
+@property(nonatomic, assign) BOOL showWeather;
 @end
 
 NS_ASSUME_NONNULL_END
