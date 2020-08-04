@@ -24,7 +24,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.3.0-beta.3 】
+ 当前版本【 2.2.1 】
 
  SDK最低配置8.0的系统
  
@@ -127,6 +127,7 @@
  @param callback 结果回调
  */
 - (void)initSdk:(NSString *)appId dataFileContent:(NSString *)dataFileContent callback:(QNResultCallback)callback;
+
 
 /**
 

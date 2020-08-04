@@ -602,15 +602,7 @@ typedef enum{
     self.user.index = userIndex;
     self.user.secret = userSecret;
     config.curUser = self.user;
-    
-    //设置经纬度，若秤支持则下发到设备
-    wspConfig.longitude = @"+089.90";
-    wspConfig.latitude = @"-120.00";
 
-    //设置指标控制，如秤支持则下发，否则即便设置也无效
-    //注意下发指标控制、与用户昵称时，需设置isChange为YESni
-    QNIndicateConfig *indicateConfig = [[QNIndicateConfig alloc] init];
-    config.curUser.indicateConfig = indicateConfig;
     [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
         
     }];
