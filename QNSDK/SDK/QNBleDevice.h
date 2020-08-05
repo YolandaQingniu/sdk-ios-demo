@@ -33,5 +33,9 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
 @property (nonatomic, readonly, getter=isSupportWifi, assign) BOOL supportWifi;
 /** 设备类型 */
 @property (nonatomic, readonly, assign) QNDeviceType deviceType;
+/** (WSP设备专属)wsp秤最大支持注册用户数 */
+@property(nonatomic, readonly, assign) int maxUserNum;
+/** (WSP设备专属)wsp秤已注册用户数 */
+@property(nonatomic, readonly, assign) int registeredUserNum;
 
 @end

@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, strong) QNWiFiConfig *wifiConfig;
 /// 需要删除的用户的indx集合
 @property (nullable, nonatomic, strong) NSArray<NSNumber *> *deleteUsers;
-/// 当前测量用户
-@property (nonatomic, strong) QNUser *curUser;
+/// 当前测量用户(若只需配网，无需测量，则无需设置用户)
+@property (nullable, nonatomic, strong) QNUser *curUser;
 /// 是否需要注册用户，与isChange属性，只允许其中一个为true
 @property (nonatomic, assign) BOOL isRegist;
 /// 是否需要修改用户信息，与isRegist属性，只允许其中一个为true
@@ -31,6 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, strong) NSString *otaUrl;
 /// 通讯秘钥
 @property (nullable, nonatomic, strong) NSString *encryption;
+/// 经度，长度必须为7，格式 +078.05
+@property(nonatomic, strong) NSString *longitude;
+/// 纬度，长度必须为7，格式 -169.90
+@property(nonatomic, strong) NSString *latitude;
+
 @end
 
 NS_ASSUME_NONNULL_END
