@@ -20,6 +20,9 @@ typedef NS_ENUM(NSInteger, QNScaleEvent) {
     QNScaleEventVisitUserFail = 7, //WSP秤专属，访问用户失败
     QNScaleEventDeleteUserSuccess = 8, //WSP秤专属，删除用户成功
     QNScaleEventDeleteUserFail = 9, //WSP秤专属，删除用户失败
+    QNScaleEventSyncUserInfoSuccess = 10, //WSP秤专属，同步用户信息成功
+    QNScaleEventSyncUserInfoFail = 11, //WSP秤专属，同步用户信息失败
+
 };
 
 @protocol QNScaleDataListener <NSObject>

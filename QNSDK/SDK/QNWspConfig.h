@@ -31,9 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, strong) NSString *otaUrl;
 /// 通讯秘钥
 @property (nullable, nonatomic, strong) NSString *encryption;
-/// 经度，长度必须为7，格式 +078.05
+/// 经度, 比如"123.4"、"-22"、"+0.5"
 @property(nonatomic, strong) NSString *longitude;
-/// 纬度，长度必须为7，格式 -169.90
+/// 纬度, 同上
 @property(nonatomic, strong) NSString *latitude;
 
 @end
