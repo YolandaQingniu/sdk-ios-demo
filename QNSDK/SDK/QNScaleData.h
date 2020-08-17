@@ -32,6 +32,13 @@ typedef NS_ENUM(NSUInteger, QNHeightWeightMode) {
 /** 模式(身高体重秤专属) */
 @property (nonatomic, assign, readonly) QNHeightWeightMode heightMode;
 
+@property(nonatomic, assign, readonly) double weight;
+
+@property(nonatomic, assign, readonly) NSInteger resistance50;
+
+@property(nonatomic, assign, readonly) NSInteger resistance500;
+
+
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
