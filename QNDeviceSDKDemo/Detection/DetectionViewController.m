@@ -510,7 +510,7 @@ typedef enum{
             [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         }
         self.currentStyle = DeviceStyleLinging;
-        [_bleApi connectDevice:device user:nil callback:^(NSError *error) {
+        [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
             
         }];
     }else {
