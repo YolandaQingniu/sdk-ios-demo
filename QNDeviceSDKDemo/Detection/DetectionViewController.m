@@ -602,7 +602,6 @@ typedef enum{
     self.user.index = userIndex;
     self.user.secret = userSecret;
     config.curUser = self.user;
-    
     [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
         
     }];

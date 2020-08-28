@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)wspRegisterUserComplete:(QNBleDevice *)device user:(QNUser *)user;
 
+- (void)wspLocationSyncStatus:(QNBleDevice *)device suceess:(BOOL)suceess;
+
+- (void)wspReadSnComplete:(QNBleDevice *)device sn:(NSString *)sn;
+
 @end
 
 NS_ASSUME_NONNULL_END
