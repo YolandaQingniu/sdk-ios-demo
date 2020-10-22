@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F2X-eM-oUn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F2X-eM-oUn">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17504.1"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -41,14 +42,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U0n-Sx-2zy" userLabel="确定">
                                         <rect key="frame" x="0.0" y="800" width="320" height="80"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldQ-KI-MRw">
-                                                <rect key="frame" x="80" y="20" width="160" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldQ-KI-MRw">
+                                                <rect key="frame" x="165" y="20" width="145" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="U3m-av-oxf"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                <state key="normal" title="确定">
+                                                <state key="normal" title="SDK">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -63,14 +64,40 @@
                                                     <action selector="clickConfirm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hhm-bM-pnP"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zX-78-pT0">
+                                                <rect key="frame" x="10" y="20" width="145" height="40"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="aJp-PU-ARS"/>
+                                                    <constraint firstAttribute="height" constant="40" id="qGh-G0-kaD"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                <state key="normal" title="自主管理">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="turnToManualVC:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qdm-9S-zG0"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="ldQ-KI-MRw" firstAttribute="leading" secondItem="U0n-Sx-2zy" secondAttribute="leading" constant="80" id="TXd-YI-x35"/>
-                                            <constraint firstItem="ldQ-KI-MRw" firstAttribute="centerY" secondItem="U0n-Sx-2zy" secondAttribute="centerY" id="Wqa-TA-fXb"/>
-                                            <constraint firstItem="ldQ-KI-MRw" firstAttribute="width" secondItem="U0n-Sx-2zy" secondAttribute="width" constant="-160" id="dQb-4Z-YGm"/>
-                                            <constraint firstAttribute="trailing" secondItem="ldQ-KI-MRw" secondAttribute="trailing" constant="80" id="h2u-w1-2VA"/>
+                                            <constraint firstItem="ldQ-KI-MRw" firstAttribute="top" secondItem="0zX-78-pT0" secondAttribute="top" id="Apa-Gt-nMB"/>
+                                            <constraint firstItem="0zX-78-pT0" firstAttribute="centerY" secondItem="U0n-Sx-2zy" secondAttribute="centerY" id="DXP-Ua-cTv"/>
+                                            <constraint firstAttribute="trailing" secondItem="ldQ-KI-MRw" secondAttribute="trailing" constant="10" id="Oja-qh-j9V"/>
+                                            <constraint firstItem="0zX-78-pT0" firstAttribute="leading" secondItem="U0n-Sx-2zy" secondAttribute="leading" constant="10" id="cBi-Bv-HkO"/>
+                                            <constraint firstItem="ldQ-KI-MRw" firstAttribute="width" secondItem="0zX-78-pT0" secondAttribute="width" id="nUt-0I-fC2"/>
+                                            <constraint firstItem="ldQ-KI-MRw" firstAttribute="bottom" secondItem="0zX-78-pT0" secondAttribute="bottom" id="pXh-Qy-epk"/>
                                             <constraint firstAttribute="height" constant="80" id="pmO-Nn-Qe0"/>
+                                            <constraint firstItem="ldQ-KI-MRw" firstAttribute="leading" secondItem="0zX-78-pT0" secondAttribute="trailing" constant="10" id="qgY-nP-361"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uz-9t-PNa" userLabel="用户资料">
@@ -681,7 +708,7 @@ st 英石，如果称端不支持会显示lb</string>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="1uz-9t-PNa" firstAttribute="centerX" secondItem="Z5H-sz-tvd" secondAttribute="centerX" id="5i3-Ls-SPV"/>
                                     <constraint firstItem="1uz-9t-PNa" firstAttribute="trailing" secondItem="Z5H-sz-tvd" secondAttribute="trailing" id="6Bu-vA-53s"/>
@@ -837,7 +864,7 @@ st 英石，如果称端不支持会显示lb</string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="pWz-zz-s5N" firstAttribute="leading" secondItem="Y5G-PV-WOI" secondAttribute="leading" id="0FE-eK-66o"/>
                             <constraint firstItem="Yjw-k8-Ck4" firstAttribute="top" secondItem="rFS-hn-j5I" secondAttribute="bottom" constant="10" id="0ai-ax-SjJ"/>
@@ -906,5 +933,11 @@ st 英石，如果称端不支持会显示lb</string>
         <image name="arrow_icon" width="21" height="21"/>
         <image name="notSelect_icon" width="30.5" height="30"/>
         <image name="select_icon" width="30.5" height="30"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

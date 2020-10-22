@@ -24,7 +24,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.3.0-beta.6 】
+ 当前版本【 2.3.0 】
 
  SDK最低配置8.0的系统
  
@@ -88,15 +88,6 @@
  
  */
 @property (nonatomic, weak) id<QNBleStateListener> bleStateListener;
-
-/**
- 自己的蓝牙协议代理类
- 可在 QNBleProtocolDelegate.h 中查看详细信息
-
- 非自主管理蓝牙不需要实现该代理
- 
- */
-@property (nonatomic, weak) id<QNBleProtocolDelegate> bleProtocolListener;
 
 /**
  初始化SDK
@@ -173,7 +164,7 @@
 /**
  断开设备的连接
  
- @param device 当前连接的设备(可不传)
+ @param device 当前连接的设备
  @param callback 结果回调
  */
 - (void)disconnectDevice:(QNBleDevice *)device callback:(QNResultCallback)callback;

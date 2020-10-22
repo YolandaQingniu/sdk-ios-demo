@@ -11,6 +11,7 @@
 #import "DetectionViewController.h"
 #import "QNBleApi.h"
 #import "CustomDetectionVC.h"
+#import "CustomBleManagerVC.h"
 
 @interface ViewController ()<PickerViewDelegate,UITextFieldDelegate>
 
@@ -185,6 +186,11 @@
     }
 }
 
+- (IBAction)turnToManualVC:(id)sender {
+    CustomBleManagerVC *vc = [[CustomBleManagerVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 #pragma mark - 点击确认跳转扫描
 - (IBAction)clickConfirm:(UIButton *)sender {
