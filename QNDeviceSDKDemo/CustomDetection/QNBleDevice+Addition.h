@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) CBCharacteristic *ffe4Write;
 @property(nonatomic, strong) CBCharacteristic *fff2Write;
 
-@property(nonatomic, weak) QNBleProtocolHandler *handler;
+@property(nonatomic, strong) QNBleProtocolHandler *handler;
 
 @end
 

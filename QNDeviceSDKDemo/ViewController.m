@@ -187,7 +187,12 @@
 }
 
 - (IBAction)turnToManualVC:(id)sender {
+    int height = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
+    QNUser *user = [_bleApi buildUser:self.userIdTF.text height:height gender:self.femaleBtn.selected ? @"female" : @"male" birthday:self.birthdayDate callback:^(NSError *error) {
+        
+    }];
     CustomBleManagerVC *vc = [[CustomBleManagerVC alloc] init];
+    vc.user = user;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -11,7 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol CustomDeviceCellDelegate <NSObject>
+
+- (void)disconnectDevice:(QNBleDevice *)device;
+
+@end
+
 @interface CustomDeviceCell : UITableViewCell
+@property(nonatomic, weak) id<CustomDeviceCellDelegate> delegate;
 
 @property(nonatomic, strong) QNBleDevice *device;
 

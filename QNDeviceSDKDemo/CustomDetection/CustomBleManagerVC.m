@@ -24,7 +24,7 @@
 #define KScale1CharacteristicUUIDWrite @"FFF2"
 #define KScale1CharacteristicUUIDNotify @"FFF1"
 
-@interface CustomBleManagerVC ()<CBCentralManagerDelegate, CBPeripheralDelegate, QNScaleDataListener, QNBleProtocolDelegate, QNBleProtocolDelegate, QNScaleDataListener, QNBleConnectionChangeListener, UITableViewDelegate, UITableViewDataSource>
+@interface CustomBleManagerVC ()<CBCentralManagerDelegate, CBPeripheralDelegate, QNScaleDataListener, QNBleProtocolDelegate, QNBleProtocolDelegate, QNScaleDataListener, QNBleConnectionChangeListener, UITableViewDelegate, UITableViewDataSource, CustomDeviceCellDelegate>
 
 @property(nonatomic, strong) CBCentralManager *centralManager;
 
@@ -92,8 +92,8 @@
     }];
     
     self.tableView = [[UITableView alloc] init];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.estimatedRowHeight = 30;
+    self.tableView.estimatedRowHeight = 46;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -102,13 +102,22 @@
         make.leading.trailing.equalTo(self.view);
         make.bottom.equalTo(self.view.mas_centerY).offset(40);
     }];
-    
+        
     self.textView = [[UITextView alloc] init];
     self.textView.editable = NO;
     [self.view addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self.view);
         make.top.equalTo(self.tableView.mas_bottom).offset(10);
+    }];
+    
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.equalTo(self.view);
+        make.bottom.equalTo(self.textView.mas_top);
+        make.height.mas_equalTo(1);
     }];
 }
 
@@ -139,6 +148,7 @@
     self.info = [NSString stringWithFormat:@"%@ 设备发起连接\n%@",device.mac, self.info];
     [self.connectedDeviceList addObject:device];
     [self.centralManager connectPeripheral:device.peripheral options:nil];
+    [self.tableView reloadData];
 }
 
 #pragma mark - QNBleProtocolDelegate
@@ -162,7 +172,7 @@
     
     if (bleDevice == nil || characteristic == nil) return;
 
-    if (characteristic.properties & CBCharacteristicWriteWithoutResponse) {
+    if (characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) {
         [bleDevice.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
     } else {
         [bleDevice.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
@@ -224,7 +234,7 @@
         default:
             break;
     }
-    self.info = [NSString stringWithFormat:@"%@\n%@ %@", self.info, device.mac, stateStr];
+    self.info = [NSString stringWithFormat:@"%@ %@\n%@", device.mac, stateStr, self.info];
 }
 
 - (void)onScaleEventChange:(QNBleDevice *)device scaleEvent:(QNScaleEvent)scaleEvent {
@@ -280,12 +290,13 @@
     for (QNBleDevice *device in self.connectedDeviceList) {
         if ([device.peripheral.identifier.UUIDString isEqualToString:peripheral.identifier.UUIDString]) {
             bleDevice = device;
-            return;
+            break;;
         }
     }
     if (bleDevice == nil) return;
     self.info = [NSString stringWithFormat:@"%@ 设备断开连接\n%@", bleDevice.mac, self.info];
     [self.connectedDeviceList removeObject:bleDevice];
+    [self.tableView reloadData];
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
@@ -299,6 +310,7 @@
     if (bleDevice == nil) return;
     self.info = [NSString stringWithFormat:@"%@ 设备连接失败\n%@", bleDevice.mac, self.info];
     [self.connectedDeviceList removeObject:bleDevice];
+    [self.tableView reloadData];
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
@@ -368,6 +380,14 @@
     }
 }
 
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    if (error) {
+        NSLog(@"写入数据失败 %@", error);
+    } else {
+        NSLog(@"写入数据成功");
+    }
+}
+
 #pragma mark - UITableViewDelegate、UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.scanDeviceList.count;
@@ -378,13 +398,25 @@
     if (cell == nil) {
         cell = [[CustomDeviceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"tableViewCellIdentifier"];
     }
+    cell.delegate = self;
     cell.device = self.scanDeviceList[indexPath.row];
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 41;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QNBleDevice *device = self.scanDeviceList[indexPath.row];
     [self connectDevice:device];
+}
+
+#pragma mark - CustomDeviceCellDelegate
+- (void)disconnectDevice:(QNBleDevice *)device {
+    if (device.peripheral) {
+        [self.centralManager cancelPeripheralConnection:device.peripheral];
+    }
 }
 
 @end

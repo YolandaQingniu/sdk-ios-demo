@@ -17,7 +17,7 @@ static char QNBleDevice_fff2_write_key;
 static char QNBleDevice_protocol_handler_key;
 
 - (void)setPeripheral:(CBPeripheral *)peripheral {
-    objc_setAssociatedObject(self, &QNBleDevice_peripheral_key, peripheral, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &QNBleDevice_peripheral_key, peripheral, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CBPeripheral *)peripheral {
@@ -25,7 +25,7 @@ static char QNBleDevice_protocol_handler_key;
 }
 
 - (void)setFfe3Write:(CBCharacteristic *)ffe3Write {
-    objc_setAssociatedObject(self, &QNBleDevice_ffe3_write_key, ffe3Write, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &QNBleDevice_ffe3_write_key, ffe3Write, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CBCharacteristic *)ffe3Write {
@@ -33,7 +33,7 @@ static char QNBleDevice_protocol_handler_key;
 }
 
 - (void)setFfe4Write:(CBCharacteristic *)ffe4Write {
-    objc_setAssociatedObject(self, &QNBleDevice_ffe4_write_key, ffe4Write, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &QNBleDevice_ffe4_write_key, ffe4Write, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CBCharacteristic *)ffe4Write {
@@ -41,7 +41,7 @@ static char QNBleDevice_protocol_handler_key;
 }
 
 - (void)setFff2Write:(CBCharacteristic *)fff2Write {
-    objc_setAssociatedObject(self, &QNBleDevice_fff2_write_key, fff2Write, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &QNBleDevice_fff2_write_key, fff2Write, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CBCharacteristic *)fff2Write {
@@ -49,7 +49,7 @@ static char QNBleDevice_protocol_handler_key;
 }
 
 - (void)setHandler:(QNBleProtocolHandler *)handler {
-    objc_setAssociatedObject(self, &QNBleDevice_protocol_handler_key, handler, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &QNBleDevice_protocol_handler_key, handler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (QNBleProtocolHandler *)handler{
