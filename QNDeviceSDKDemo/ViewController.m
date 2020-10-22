@@ -10,7 +10,6 @@
 #import "PickerView.h"
 #import "DetectionViewController.h"
 #import "QNBleApi.h"
-#import "CustomDetectionVC.h"
 #import "CustomBleManagerVC.h"
 
 @interface ViewController ()<PickerViewDelegate,UITextFieldDelegate>
@@ -200,9 +199,6 @@
 #pragma mark - 点击确认跳转扫描
 - (IBAction)clickConfirm:(UIButton *)sender {
     
-//    [self turnToCustomDetectionVC];
-//    return;
-    
     int height = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
     QNUser *user = [_bleApi buildUser:self.userIdTF.text height:height gender:self.femaleBtn.selected ? @"female" : @"male" birthday:self.birthdayDate callback:^(NSError *error) {
         
@@ -211,19 +207,6 @@
     detectionVC.user = user;
     detectionVC.config = self.config;
     [self.navigationController pushViewController:detectionVC animated:YES];
-}
-
-#pragma mark - 自主管理蓝牙入口
-- (void)turnToCustomDetectionVC {
-    
-    int height = [[self.heightLabel.text stringByReplacingOccurrencesOfString:@"cm" withString:@""] intValue];
-    QNUser *user = [_bleApi buildUser:self.userIdTF.text height:height gender:self.femaleBtn.selected ? @"female" : @"male" birthday:self.birthdayDate callback:^(NSError *error) {
-        
-    }];
-    CustomDetectionVC *vc = [[CustomDetectionVC alloc] init];
-    vc.user = user;
-    vc.config = self.config;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (PickerView *)pickerView {

@@ -130,6 +130,7 @@
     sender.selected = !sender.selected;
     if (sender.isSelected) {
         [self.scanDeviceList removeAllObjects];
+        [self.scanDeviceList addObjectsFromArray:self.connectedDeviceList];
         [self.tableView reloadData];
         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
     } else {
