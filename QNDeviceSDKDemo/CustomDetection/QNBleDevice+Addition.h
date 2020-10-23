@@ -2,7 +2,7 @@
 //  QNBleDevice+Addition.h
 //  QNDeviceSDKDemo
 //
-//  Created by qiudongquan on 2020/10/21.
+//  Created by Yolanda on 2020/10/21.
 //  Copyright © 2020 Yolanda. All rights reserved.
 //
 
