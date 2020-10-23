@@ -490,7 +490,10 @@ typedef enum{
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.currentStyle != DeviceStyleScanning) { return; }
+    if (self.currentStyle != DeviceStyleScanning) {
+        return;
+    }
+
     DeviceTableViewCell *cell = (DeviceTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.broadcastDevice != nil) {
         [self connectBroadcastDevice:cell.broadcastDevice];
@@ -500,6 +503,9 @@ typedef enum{
     QNBleDevice *device = cell.device;
     
     if (device.deviceType == QNDeviceTypeScaleWsp) {
+        [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
+                    
+        }];
         WspConfigVC *configVC = [[WspConfigVC alloc] init];
         self.wspConfigVC = configVC;
         self.wspConfigVC.bleDevice = device;
