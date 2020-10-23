@@ -18,8 +18,6 @@ s.license          = { :type => 'MIT', :file => 'LICENSE' }
 s.author           = { 'service@qnniu.com' => 'service@qnniu.com' }
 s.source           = { :git => 'https://github.com/YolandaQingniu/sdk-ios-demo.git', :tag => s.version.to_s}
 
-s.ios.deployment_target = '8.0'
-
 s.source_files = 'QNSDK/SDK/**/*.{h,m}'
 s.vendored_libraries = 'QNSDK/SDK/libQNDeviceSDK.a'
 s.public_header_files= 'QNSDK/SDK/**/*.h'
