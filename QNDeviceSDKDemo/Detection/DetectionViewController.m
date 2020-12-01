@@ -340,6 +340,8 @@ typedef enum{
         log = @"访问用户失败";
     } else if (scaleEvent == QNScaleEventDeleteUserFail) {
         log = @"删除用户失败";
+    } else if (scaleEvent == QNScaleEventDeleteUserSuccess) {
+        log = @"删除用户成功";
     }
     if (log) {
         [self.view makeToast:log duration:2 position:CSToastPositionCenter];
