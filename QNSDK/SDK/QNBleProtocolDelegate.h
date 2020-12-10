@@ -2,8 +2,8 @@
 //  QNBleProtocolDelegate.h
 //  QNDeviceSDK
 //
-//  Created by JuneLee on 2019/8/26.
-//  Copyright © 2019 Yolanda. All rights reserved.
+//  Created by com.qn.device on 2019/8/26.
+//  Copyright © 2019 com.qn.device. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

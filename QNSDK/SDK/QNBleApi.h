@@ -2,8 +2,8 @@
 //  QNBleApi.h
 //  QNDeviceSDK
 //
-//  Created by Yolanda on 2018/1/9.
-//  Copyright © 2018年 Yolanda. All rights reserved.
+//  Created by com.qn.device on 2018/1/9.
+//  Copyright © 2018年 com.qn.device. All rights reserved.
 //
 
 
@@ -24,7 +24,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.3.5 】
+ 当前版本【 2.3.6 】
 
  SDK最低配置8.0的系统
  

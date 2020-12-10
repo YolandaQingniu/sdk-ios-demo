@@ -2,8 +2,8 @@
 //  QNWspScaleDataProtocol.h
 //  QNDeviceSDK
 //
-//  Created by Yolanda on 2020/3/6.
-//  Copyright © 2020 Yolanda. All rights reserved.
+//  Created by com.qn.device on 2020/3/6.
+//  Copyright © 2020 com.qn.device. All rights reserved.
 //
 
 #import "QNScaleDataProtocol.h"

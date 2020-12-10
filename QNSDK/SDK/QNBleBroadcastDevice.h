@@ -2,8 +2,8 @@
 //  QNBleBroadcastDevice.h
 //  QNDeviceSDK
 //
-//  Created by Yolanda on 2019/7/11.
-//  Copyright © 2019 Yolanda. All rights reserved.
+//  Created by com.qn.device on 2019/7/11.
+//  Copyright © 2019 com.qn.device. All rights reserved.
 //
 
 #import "QNUser.h"

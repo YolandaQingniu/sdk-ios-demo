@@ -2,8 +2,8 @@
 //  QNWspConfig.h
 //  QNDeviceSDK
 //
-//  Created by JuneLee on 2020/2/19.
-//  Copyright © 2020 Yolanda. All rights reserved.
+//  Created by com.qn.device on 2020/2/19.
+//  Copyright © 2020 com.qn.device. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -37,7 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSString *longitude;
 /// 纬度, 同上
 @property(nonatomic, strong) NSString *latitude;
-
+/// 是否延迟显示屏熄屏时间(大约延时60s)，默认false
+@property(nonatomic, assign) BOOL isDelayScreenOff;
 @end
 
 NS_ASSUME_NONNULL_END

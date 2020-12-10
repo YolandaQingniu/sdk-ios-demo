@@ -2,8 +2,8 @@
 //  QNUtils.h
 //  QNDeviceSDK
 //
-//  Created by Yolanda on 2019/1/27.
-//  Copyright © 2019 Yolanda. All rights reserved.
+//  Created by com.qn.device on 2019/1/27.
+//  Copyright © 2019 com.qn.device. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

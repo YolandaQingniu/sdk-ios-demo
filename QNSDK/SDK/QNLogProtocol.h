@@ -2,8 +2,8 @@
 //  QNLogProtocol.h
 //  QNDeviceSDK
 //
-//  Created by Yolanda on 2019/7/1.
-//  Copyright © 2019 Yolanda. All rights reserved.
+//  Created by com.qn.device on 2019/7/1.
+//  Copyright © 2019 com.qn.device. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
