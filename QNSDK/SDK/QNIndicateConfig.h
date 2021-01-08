@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL showHeartRate;
 /// 是否显示天气
 @property(nonatomic, assign) BOOL showWeather;
+/// 是否显示体重趋势
+@property(nonatomic, assign) BOOL weightExtend;
 @end
 
 NS_ASSUME_NONNULL_END
