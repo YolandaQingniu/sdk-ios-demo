@@ -24,7 +24,7 @@
 }
 
 + (TargetType)transToTargetType:(QNScaleType)scaleType {
-    TargetType targetType = TargetTypeWeight;
+    TargetType targetType = 0;
     switch (scaleType) {
         case QNScaleTypeWeight: targetType = TargetTypeWeight; break;
         case QNScaleTypeBMI: targetType = TargetTypeBmi; break;

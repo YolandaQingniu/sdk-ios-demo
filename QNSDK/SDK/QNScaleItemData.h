@@ -51,6 +51,31 @@ typedef NS_ENUM(NSInteger, QNScaleType) {
     QNScaleTypeMuscleControlIndex = 30, //肌肉控制
     QNScaleTypeMuscleMassRate = 31, //肌肉率
     QNScaleTypeFattyLiverRisk = 32, //脂肪肝风险等级
+    QNScaleTypeResistance50KHZ = 33, //50阻抗
+    QNScaleTypeResistance500KHZ = 34, //500阻抗
+    
+    QNScaleTypeRightArmMucaleWeightIndex = 101, //右臂肌肉重量
+    QNScaleTypeLeftArmMucaleWeightIndex = 102, //左臂肌肉重量
+    QNScaleTypeTrunkMucaleWeightIndex = 103, //躯干肌肉重量
+    QNScaleTypeRightLegMucaleWeightIndex = 104, //右腿肌肉重量
+    QNScaleTypeLeftLegMucaleWeightIndex = 105, //左腿肌肉重量
+    QNScaleTypeRightArmFatIndex = 106, //右臂脂肪
+    QNScaleTypeLeftArmFatIndex = 107, //左臂脂肪
+    QNScaleTypeTrunkFatIndex = 108, //躯干脂肪
+    QNScaleTypeRightLegFatIndex = 109, //右腿脂肪
+    QNScaleTypeLeftLegFatIndex = 110, //左腿脂肪
+
+    QNScaleTypeRightArmResistance20Index = 111, //右臂20阻抗
+    QNScaleTypeLeftArmResistance20Index = 112, //左臂20阻抗
+    QNScaleTypeTrunkResistance20Index = 113, //躯干20阻抗
+    QNScaleTypeRightLegResistance20Index = 114, //右腿20阻抗
+    QNScaleTypeLeftLegResistance20Index = 115, //左腿20阻抗
+    
+    QNScaleTypeRightArmResistance100Index = 116, //右臂100阻抗
+    QNScaleTypeLeftArmResistance100Index = 117, //左臂100阻抗
+    QNScaleTypeTrunkResistance100Index = 118, //躯干100阻抗
+    QNScaleTypeRightLegResistance100Index = 119, //右腿100阻抗
+    QNScaleTypeLeftLegResistance100Index = 120, //左腿100阻抗
 };
 
 @interface QNScaleItemData : NSObject

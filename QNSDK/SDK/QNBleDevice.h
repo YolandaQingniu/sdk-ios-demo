@@ -37,5 +37,6 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
 @property(nonatomic, readonly, assign) int maxUserNum;
 /** (WSP设备专属)wsp秤已注册用户数 */
 @property(nonatomic, readonly, assign) int registeredUserNum;
-
+/** (WSP设备专属)是否支持八电极 */
+@property(nonatomic, readonly, assign) BOOL isSupportEightElectrodes;
 @end

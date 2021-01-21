@@ -330,6 +330,8 @@ typedef enum{
 
 - (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray<QNScaleStoreData *> *)storedDataList {
     
+    
+    
 }
 
 - (void)onScaleEventChange:(QNBleDevice *)device scaleEvent:(QNScaleEvent)scaleEvent {
