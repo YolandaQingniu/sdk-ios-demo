@@ -32,7 +32,7 @@
     self.name.text = _itemData.name;
     double value = _itemData.value;
     
-    BOOL unitFlag = self.itemData.type == QNScaleTypeWeight || self.itemData.type == QNScaleTypeBoneMass || self.itemData.type == QNScaleTypeLeanBodyWeight || self.itemData.type == QNScaleTypeMuscleMass;
+    BOOL unitFlag = self.itemData.type == QNScaleTypeWeight || self.itemData.type == QNScaleTypeBoneMass || self.itemData.type == QNScaleTypeLeanBodyWeight || self.itemData.type == QNScaleTypeMuscleMass || self.itemData.type == QNScaleTypeRightArmMucaleWeightIndex || self.itemData.type == QNScaleTypeLeftArmMucaleWeightIndex || self.itemData.type == QNScaleTypeTrunkMucaleWeightIndex || self.itemData.type == QNScaleTypeRightLegMucaleWeightIndex || self.itemData.type == QNScaleTypeLeftLegMucaleWeightIndex;
     
     if (self.unit != QNUnitKG && unitFlag) {
         value = [[QNBleApi sharedBleApi] convertWeightWithTargetUnit:value unit:self.unit];

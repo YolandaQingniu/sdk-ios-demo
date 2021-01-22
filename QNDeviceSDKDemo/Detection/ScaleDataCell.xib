@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="326" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exd-ZA-c90" userLabel="数字">
-                        <rect key="frame" x="160" y="0.0" width="131" height="42"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exd-ZA-c90" userLabel="数字">
+                        <rect key="frame" x="249.5" y="0.0" width="41.5" height="42"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -30,9 +31,8 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDf-nY-A12" userLabel="名称">
-                        <rect key="frame" x="10" y="0.0" width="150" height="42"/>
+                        <rect key="frame" x="10" y="0.0" width="41.5" height="42"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="RFX-ZI-tEi"/>
                             <constraint firstAttribute="height" constant="42" id="VLj-xO-E7h"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -40,18 +40,18 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[严重偏低,偏低,标准,偏高,严重偏高]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLV-ni-5Yj">
-                        <rect key="frame" x="10" y="42" width="176" height="38"/>
+                        <rect key="frame" x="10" y="42" width="175" height="38"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" systemColor="linkColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前等级：严重偏低" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jaa-79-zyg">
-                        <rect key="frame" x="191" y="42" width="120" height="38"/>
+                        <rect key="frame" x="190" y="42" width="120" height="38"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="120" id="74d-rk-MrF"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" systemColor="linkColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -70,7 +70,6 @@
                     <constraint firstAttribute="trailing" secondItem="lee-LH-ZDL" secondAttribute="trailing" constant="15" id="po0-r4-1bx"/>
                     <constraint firstItem="lee-LH-ZDL" firstAttribute="centerY" secondItem="exd-ZA-c90" secondAttribute="centerY" id="pyv-PP-2X9"/>
                     <constraint firstItem="Jaa-79-zyg" firstAttribute="leading" secondItem="SLV-ni-5Yj" secondAttribute="trailing" constant="5" id="xgB-f3-Lmw"/>
-                    <constraint firstItem="exd-ZA-c90" firstAttribute="leading" secondItem="vDf-nY-A12" secondAttribute="trailing" id="y3O-Yp-bs7"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -84,5 +83,8 @@
     </objects>
     <resources>
         <image name="arrow_icon" width="21" height="21"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
