@@ -51,6 +51,10 @@
     [super touchesEnded:touches withEvent:event];
     [self.userIndexField resignFirstResponder];
     [self.userSecretField resignFirstResponder];
+    [self.pwdField resignFirstResponder];
+    [self.dataUrlField resignFirstResponder];
+    [self.otaUrlField resignFirstResponder];
+    [self.encryptionField resignFirstResponder];
 }
 
 - (IBAction)selectUserIndex:(UIButton *)sender {
