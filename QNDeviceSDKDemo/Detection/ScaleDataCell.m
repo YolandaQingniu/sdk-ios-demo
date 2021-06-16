@@ -34,28 +34,36 @@
     
     BOOL unitFlag = self.itemData.type == QNScaleTypeWeight || self.itemData.type == QNScaleTypeBoneMass || self.itemData.type == QNScaleTypeLeanBodyWeight || self.itemData.type == QNScaleTypeMuscleMass || self.itemData.type == QNScaleTypeRightArmMucaleWeightIndex || self.itemData.type == QNScaleTypeLeftArmMucaleWeightIndex || self.itemData.type == QNScaleTypeTrunkMucaleWeightIndex || self.itemData.type == QNScaleTypeRightLegMucaleWeightIndex || self.itemData.type == QNScaleTypeLeftLegMucaleWeightIndex;
     
-    if (self.unit != QNUnitKG && unitFlag) {
-        value = [[QNBleApi sharedBleApi] convertWeightWithTargetUnit:value unit:self.unit];
-        if (self.unit == QNUnitST) {
-            value = value / 14.0;
-        }
-    }
     if (self.itemData.valueType == QNValueTypeInt) {
         self.value.text = [NSString stringWithFormat:@"%.0f",value];
-    }else{
+    } else{
         self.value.text = [NSString stringWithFormat:@"%.2f",value];
     }
     
     if (unitFlag) {
-        NSString *unitStr = self.value.text;
+        value = [[QNBleApi sharedBleApi] convertWeightWithTargetUnit:value unit:self.unit];
+        NSString *unitStr = nil;
         switch (self.unit) {
-            case QNUnitLB: unitStr = [unitStr stringByAppendingString:@" lb"]; break;
-            case QNUnitJIN: unitStr = [unitStr stringByAppendingString:@" 斤"]; break;
-            case QNUnitST: unitStr = [unitStr stringByAppendingString:@" st"]; break;
+            case QNUnitLB: unitStr = [NSString stringWithFormat:@"%.2f lb", value]; break;
+            case QNUnitJIN: unitStr = [NSString stringWithFormat:@"%.2f lb", value]; break;
+            case QNUnitStLb:
+            {
+                double st = value / 14.0;
+                unitStr = [NSString stringWithFormat:@"%.0f st %.1f lb", floor(st), (st - floor(st)) * 14];
+            }
+                break;
+            case QNUnitSt:
+            {
+                double st = value / 14.0;
+                unitStr = [NSString stringWithFormat:@"%.2f st", st];
+            }
+                break;
             default:
                 break;
         }
         self.value.text = unitStr;
+    } else {
+        
     }
     
     ScaleDataTargetModel *model = [ScaleDataTargetTool getScaleDataTargetModelWithScaleData:self.itemData user:self.user currentWeight:self.currentWeight];

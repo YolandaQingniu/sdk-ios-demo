@@ -14,14 +14,16 @@
  - QNUnitKG: 所有的设备都支持该单位的显示
  - QNUnitLB: 若设备不支持该单位的显示，即便设置为 "QNUnitLB" 类型也会显示 "QNUnitKG" 类型
  - QNUnitJIN: 若设备不支持该单位的显示，即便设置为 "QNUnitJIN" 类型也会显示 "QNUnitKG" 类型
- - QNUnitST: 若设备不支持该单位的显示，而支持 "QNUnitLB" 的显示，则会显示 "QNUnitLB", 倘若 "QNUnitLB" 也不支持，则会显示 "QNUnitKG"
+ - QNUnitSt: 若设备不支持该单位的显示，而支持 "QNUnitLB" 的显示，则会显示 "QNUnitLB"
+ - QNUnitStLb: 若设备不支持该单位的显示，而支持 "QNUnitLB" 的显示，则会显示 "QNUnitLB"
  */
 typedef NS_ENUM(NSUInteger, QNUnit) {
     QNUnitKG = 0,
     QNUnitLB = 1,
     QNUnitJIN = 2,
-    QNUnitST = 3,
-    
+    QNUnitStLb = 3,
+    QNUnitSt = 4,
+
     QNUnitG = 10, //厨房秤专属
     QNUnitML = 11, //厨房秤专属
     QNUnitOZ = 12, //厨房秤专属

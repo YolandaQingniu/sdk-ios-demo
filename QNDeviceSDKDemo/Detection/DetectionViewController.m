@@ -135,7 +135,7 @@ typedef enum{
             [self disconnectDevice];
             break;
         default: //默认状态
-//            [self setNormalStyleUI];
+            //            [self setNormalStyleUI];
             [self stopScanDevice];
             break;
     }
@@ -296,18 +296,16 @@ typedef enum{
 #pragma mark - 测量QNDataListener处理
 - (void)onGetUnsteadyWeight:(QNBleDevice *)device weight:(double)weight {
     weight = [self.bleApi convertWeightWithTargetUnit:weight unit:[self.bleApi getConfig].unit];
-    NSString *unit = @"kg";
-    switch ([self.bleApi getConfig].unit) {
-        case QNUnitLB: unit = @"lb"; break;
-        case QNUnitJIN: unit = @"斤"; break;
-        case QNUnitST: unit = @"st"; break;
-        default:
-            break;
-    }
-    if ([unit isEqualToString:@"st"]) {
-        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f %@",weight / 14.0,unit];
+    if ([self.bleApi getConfig].unit == QNUnitSt) {
+        double st = weight / 14.0;
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f st", st];
+    } else if ([self.bleApi getConfig].unit == QNUnitStLb) {
+        double st = weight / 14.0;
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.0f st %.1f lb", floor(st), (st - floor(st)) * 14];
+    } else if ([self.bleApi getConfig].unit == QNUnitJIN) {
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f 斤",weight];
     } else {
-        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f %@",weight,unit];
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f %@",weight,[self.bleApi getConfig].unit == QNUnitLB ? @"lb" : @"kg"];
     }
 }
 
@@ -386,7 +384,7 @@ typedef enum{
     //当设备支持修改单位，并且秤上的单位与准备设备的单位时，修改设备的单位
     //目前广播秤未支持ST,即便下发ST单位也会设置成lb,因此目前对于广播秤不建议下发ST
     QNUnit unit = self.config.unit;
-    if (unit == QNUnitST) {
+    if (unit == QNUnitSt) {
         unit = QNUnitLB;
     }
     
@@ -496,7 +494,7 @@ typedef enum{
     if (self.currentStyle != DeviceStyleScanning) {
         return;
     }
-
+    
     DeviceTableViewCell *cell = (DeviceTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.broadcastDevice != nil) {
         [self connectBroadcastDevice:cell.broadcastDevice];
@@ -507,7 +505,7 @@ typedef enum{
     
     if (device.deviceType == QNDeviceTypeScaleWsp) {
         [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
-                    
+            
         }];
         WspConfigVC *configVC = [[WspConfigVC alloc] init];
         self.wspConfigVC = configVC;

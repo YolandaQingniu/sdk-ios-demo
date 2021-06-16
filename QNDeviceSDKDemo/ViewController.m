@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *stBtn;
 @property (weak, nonatomic) IBOutlet UIButton *kgBtn;
 @property (weak, nonatomic) IBOutlet UIButton *lbBtn;
+@property (weak, nonatomic) IBOutlet UIButton *stlbBtn;
 
 @property (nonatomic, strong) PickerView *pickerView;
 @property (nonatomic, strong) QNBleApi *bleApi;
@@ -57,7 +58,7 @@
         case QNUnitLB:
             [self setSelectUnitWith:self.lbBtn];
             break;
-        case QNUnitST:
+        case QNUnitSt:
             [self setSelectUnitWith:self.stBtn];
             break;
         case QNUnitJIN:
@@ -159,24 +160,32 @@
     [self setSelectUnitWith:sender];
 }
 
+- (IBAction)selectedStLbBtn:(UIButton *)sender {
+    [self setSelectUnitWith:sender];
+}
+
 - (void)setSelectUnitWith:(UIButton *)sender {
     if (sender.isSelected) return;
     _selectBtn.selected = NO;
     sender.selected = YES;
     _selectBtn = sender;
-    //保存设置秤的单位 0 为 kg，默认值;  1 为 lb  2 为 斤 3 为 st
+    //保存设置秤的单位 0 为 kg，默认值;  1 为 lb  2 为 斤 3 为 stlb 4 st
     int index = (int)sender.tag - 100;
     switch (index) {
-            case 1:
+        case 1:
             self.config.unit = QNUnitLB;
             break;
             
-            case 2:
+        case 2:
             self.config.unit = QNUnitJIN;
             break;
             
-            case 3:
-            self.config.unit = QNUnitST;
+        case 3:
+            self.config.unit = QNUnitSt;
+            break;
+            
+        case 4:
+            self.config.unit = QNUnitStLb;
             break;
             
         default:

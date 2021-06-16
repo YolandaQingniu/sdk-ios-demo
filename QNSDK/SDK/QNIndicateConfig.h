@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL showWeather;
 /// 是否显示体重趋势
 @property(nonatomic, assign) BOOL weightExtend;
-/// 是否开启声音
+/// 是否开始声音
 @property(nonatomic, assign) BOOL sound;
 @end
 
