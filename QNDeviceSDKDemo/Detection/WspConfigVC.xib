@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -91,7 +92,7 @@
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected" title="1">
-                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" systemColor="systemPinkColor"/>
                     </state>
                     <connections>
                         <action selector="selectUserIndex:" destination="-1" eventType="touchUpInside" id="cIv-Uy-Yg3"/>
@@ -103,7 +104,7 @@
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" systemColor="systemPinkColor"/>
                     </state>
                     <connections>
                         <action selector="selectUserIndex:" destination="-1" eventType="touchUpInside" id="QGT-Yb-441"/>
@@ -115,7 +116,7 @@
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" systemColor="systemPinkColor"/>
                     </state>
                     <connections>
                         <action selector="selectUserIndex:" destination="-1" eventType="touchUpInside" id="trV-AW-o1V"/>
@@ -127,7 +128,7 @@
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" systemColor="systemPinkColor"/>
                     </state>
                     <connections>
                         <action selector="selectUserIndex:" destination="-1" eventType="touchUpInside" id="00s-1i-Okz"/>
@@ -139,7 +140,7 @@
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" systemColor="systemPinkColor"/>
                     </state>
                     <connections>
                         <action selector="selectUserIndex:" destination="-1" eventType="touchUpInside" id="Old-dF-4JZ"/>
@@ -151,7 +152,7 @@
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" systemColor="systemPinkColor"/>
                     </state>
                     <connections>
                         <action selector="selectUserIndex:" destination="-1" eventType="touchUpInside" id="gxe-db-1cL"/>
@@ -163,7 +164,7 @@
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" systemColor="systemPinkColor"/>
                     </state>
                     <connections>
                         <action selector="selectUserIndex:" destination="-1" eventType="touchUpInside" id="v0N-0a-bPr"/>
@@ -175,7 +176,7 @@
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" systemColor="systemPinkColor"/>
                     </state>
                     <connections>
                         <action selector="selectUserIndex:" destination="-1" eventType="touchUpInside" id="XJU-Og-hBQ"/>
@@ -257,14 +258,14 @@
                         <segment title="YES"/>
                     </segments>
                 </segmentedControl>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjd-2j-uXv">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjd-2j-uXv">
                     <rect key="frame" x="197.5" y="554" width="167.5" height="40"/>
                     <state key="normal" title="确定"/>
                     <connections>
                         <action selector="connectDevice:" destination="-1" eventType="touchUpInside" id="etJ-08-JGF"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emk-WT-yQk">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emk-WT-yQk">
                     <rect key="frame" x="10" y="554" width="167.5" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="xX9-LG-fR0"/>
@@ -394,4 +395,9 @@
             <point key="canvasLocation" x="131.8840579710145" y="151.33928571428569"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

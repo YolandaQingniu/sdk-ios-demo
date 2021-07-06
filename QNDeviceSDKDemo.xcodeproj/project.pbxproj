@@ -52,6 +52,8 @@
 		1B99EA482540393200EE7DFA /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B99EA3D2540393200EE7DFA /* MASViewAttribute.m */; };
 		1B99EA4E25403D6C00EE7DFA /* QNBleDevice+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B99EA4D25403D6C00EE7DFA /* QNBleDevice+Addition.m */; };
 		1B99EA572540FE3600EE7DFA /* CustomDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B99EA562540FE3600EE7DFA /* CustomDeviceCell.m */; };
+		7E2641BE2693F19D005CB29B /* EightElectrodesReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2641BC2693F19D005CB29B /* EightElectrodesReportVC.m */; };
+		7E2641BF2693F19D005CB29B /* EightElectrodesReportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E2641BD2693F19D005CB29B /* EightElectrodesReportVC.xib */; };
 		D2048A5220A6E15600D943BC /* 123456789.qn in Resources */ = {isa = PBXBuildFile; fileRef = D2048A5120A6E15600D943BC /* 123456789.qn */; };
 		D232D64C2004DE2D00AABD67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D232D64B2004DE2D00AABD67 /* AppDelegate.m */; };
 		D232D64F2004DE2D00AABD67 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D232D64E2004DE2D00AABD67 /* ViewController.m */; };
@@ -149,6 +151,9 @@
 		1B99EA4D25403D6C00EE7DFA /* QNBleDevice+Addition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "QNBleDevice+Addition.m"; sourceTree = "<group>"; };
 		1B99EA552540FE3600EE7DFA /* CustomDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomDeviceCell.h; sourceTree = "<group>"; };
 		1B99EA562540FE3600EE7DFA /* CustomDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomDeviceCell.m; sourceTree = "<group>"; };
+		7E2641BB2693F19D005CB29B /* EightElectrodesReportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EightElectrodesReportVC.h; sourceTree = "<group>"; };
+		7E2641BC2693F19D005CB29B /* EightElectrodesReportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EightElectrodesReportVC.m; sourceTree = "<group>"; };
+		7E2641BD2693F19D005CB29B /* EightElectrodesReportVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EightElectrodesReportVC.xib; sourceTree = "<group>"; };
 		D2048A5120A6E15600D943BC /* 123456789.qn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 123456789.qn; sourceTree = "<group>"; };
 		D230F2212240847500DC01E9 /* QNSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QNSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D230F2242240847600DC01E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -255,6 +260,16 @@
 			path = Masonry;
 			sourceTree = "<group>";
 		};
+		7E2641B72693EFF3005CB29B /* AnalysisReport */ = {
+			isa = PBXGroup;
+			children = (
+				7E2641BB2693F19D005CB29B /* EightElectrodesReportVC.h */,
+				7E2641BC2693F19D005CB29B /* EightElectrodesReportVC.m */,
+				7E2641BD2693F19D005CB29B /* EightElectrodesReportVC.xib */,
+			);
+			path = AnalysisReport;
+			sourceTree = "<group>";
+		};
 		D21FD20C205FABD6006450BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +341,7 @@
 		D232D6492004DE2D00AABD67 /* QNDeviceSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				7E2641B72693EFF3005CB29B /* AnalysisReport */,
 				1B99EA242540393200EE7DFA /* Masonry */,
 				04A42089235FFA7E00716903 /* Tool */,
 				D2568165223237EB0049356E /* README.md */,
@@ -505,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B1350EF2417395600E94394 /* WspConfigVC.xib in Resources */,
+				7E2641BF2693F19D005CB29B /* EightElectrodesReportVC.xib in Resources */,
 				D2B9E98B20723DEC0020C2B6 /* DetectionViewController.xib in Resources */,
 				D2B9E98920723DEC0020C2B6 /* ScaleDataCell.xib in Resources */,
 				D232D6572004DE2D00AABD67 /* LaunchScreen.storyboard in Resources */,
@@ -544,6 +561,7 @@
 				1B99EA482540393200EE7DFA /* MASViewAttribute.m in Sources */,
 				1B99EA572540FE3600EE7DFA /* CustomDeviceCell.m in Sources */,
 				1B99EA3F2540393200EE7DFA /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				7E2641BE2693F19D005CB29B /* EightElectrodesReportVC.m in Sources */,
 				D232D64C2004DE2D00AABD67 /* AppDelegate.m in Sources */,
 				04A4208C235FFAE400716903 /* ScaleDataTargetTool.m in Sources */,
 				1B99EA212540372C00EE7DFA /* CustomBleManagerVC.m in Sources */,

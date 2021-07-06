@@ -23,6 +23,7 @@ typedef enum{
 
 
 #import "DetectionViewController.h"
+#import "EightElectrodesReportVC.h"
 #import "DeviceTableViewCell.h"
 #import "ScaleDataCell.h"
 #import "WiFiTool.h"
@@ -324,6 +325,15 @@ typedef enum{
     }
     self.currentStyle = DeviceStyleMeasuringSucceed;
     [self.tableView reloadData];
+    
+    ///八电极设备 跳转专属分析报告
+    if (device.isSupportEightElectrodes) {
+        EightElectrodesReportVC *reportVC = [[EightElectrodesReportVC alloc] init];
+        reportVC.config = self.config;
+        reportVC.user = self.user;
+        reportVC.scaleDataAry = self.scaleDataAry;
+        [self.navigationController pushViewController:reportVC animated:YES];
+    }
 }
 
 - (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray<QNScaleStoreData *> *)storedDataList {
