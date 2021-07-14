@@ -26,10 +26,10 @@
 }
 @end
 
-@interface EightElectrodesReportVC ()
+@interface EightElectrodesReportVC ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation EightElectrodesReportVC
@@ -39,13 +39,13 @@
     [super viewDidLoad];
     NSString *configJson = [self configDataParams];
     NSString *measureDataJson =  [self measureDataParams];
-    
-    NSString *urlStr = [NSString stringWithFormat:@"https://app-h5.yolanda.hk/h5-business-demo/eight_electrodes_report.html?measureData=%@&&config=%@",measureDataJson,configJson];
+    NSString *urlStr = [NSString stringWithFormat:@"https://app-h5.yolanda.hk/h5-business-demo/eight_electrodes_report.html?measureData=%@&config=%@",measureDataJson,configJson];
     urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     //构建请求体
     NSURLRequestCachePolicy cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlStr] cachePolicy:cachePolicy timeoutInterval:20];
+    self.webView.delegate = self;
     [self.webView loadRequest:request];
 }
 
@@ -140,7 +140,7 @@
 
 #pragma mark BMI
 - (void)bmiWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"bmi"];
 }
 
@@ -182,7 +182,7 @@
 
 #pragma mark 基础代谢
 - (void)bmrWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
     [dic setValue:valueStr forKey:@"bmr"];
 }
 
@@ -212,61 +212,76 @@
 
 #pragma mark 右上肢肌肉量
 - (void)sinewRightArmWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"sinew_right_arm"];
 }
 
 #pragma mark 左上肢肌肉量
 - (void)sinewLeftArmWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"sinew_left_arm"];
 }
 
 #pragma mark 躯干肌肉量
 - (void)sinewTrunkWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"sinew_trunk"];
 }
 
 #pragma mark 右下肢肌肉量
 - (void)sinewRightLegWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"sinew_right_leg"];
 }
 
 #pragma mark 左下肢肌肉量
 - (void)sinewLeftLegWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"sinew_left_leg"];
 }
 
 #pragma mark 右上肢体脂率
 - (void)bodyfatRightArmWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"bodyfat_right_arm"];
 }
 
 #pragma mark 左上肢体脂率
 - (void)bodyfatLeftArmWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"bodyfat_left_arm"];
 }
 
 #pragma mark 躯干体脂率
 - (void)bodyfatTrunkWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"bodyfat_trunk"];
 }
 
 #pragma mark 右下肢体脂率
 - (void)bodyfatRightLegWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"bodyfat_right_leg"];
 }
 
 #pragma mark 左下肢体脂率
 - (void)bodyfatLeftLegWithItem:(QNScaleItemData *)item dic:(NSMutableDictionary *)dic {
-    NSString *valueStr = [NSString stringWithFormat:@"%0.0f",item.value];
+    NSString *valueStr = [NSString stringWithFormat:@"%0.2f",item.value];
     [dic setValue:valueStr forKey:@"bodyfat_left_leg"];
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [self.activityIndicator startAnimating];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidesWhenStopped:YES];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidesWhenStopped:YES];
 }
 @end

@@ -42,7 +42,7 @@
     
     if (unitFlag) {
         value = [[QNBleApi sharedBleApi] convertWeightWithTargetUnit:value unit:self.unit];
-        NSString *unitStr = nil;
+        NSString *unitStr = [NSString stringWithFormat:@"%.2f",value];
         switch (self.unit) {
             case QNUnitLB: unitStr = [NSString stringWithFormat:@"%.2f lb", value]; break;
             case QNUnitJIN: unitStr = [NSString stringWithFormat:@"%.2f lb", value]; break;

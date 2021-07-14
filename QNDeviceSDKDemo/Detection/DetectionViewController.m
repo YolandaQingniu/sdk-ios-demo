@@ -312,7 +312,12 @@ typedef enum{
 
 - (void)onGetScaleData:(QNBleDevice *)device data:(QNScaleData *)scaleData {
     [self.scaleDataAry removeAllObjects];
+    BOOL isShowEightReport = NO;
     for (QNScaleItemData *item in [scaleData getAllItem]) {
+        /// 当左臂肌肉数值大于零时 可以显示八电极报告
+        if (item.type == QNScaleTypeLeftArmMucaleWeightIndex && item.value > 0) {
+            isShowEightReport = YES;
+        }
         [self.scaleDataAry addObject:item];
     }
     if (device.deviceType == QNDeviceTypeHeightScale) {
@@ -327,7 +332,7 @@ typedef enum{
     [self.tableView reloadData];
     
     ///八电极设备 跳转专属分析报告
-    if (device.isSupportEightElectrodes) {
+    if (device.isSupportEightElectrodes && isShowEightReport) {
         EightElectrodesReportVC *reportVC = [[EightElectrodesReportVC alloc] init];
         reportVC.config = self.config;
         reportVC.user = self.user;

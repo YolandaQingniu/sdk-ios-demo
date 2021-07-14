@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EightElectrodesReportVC">
             <connections>
+                <outlet property="activityIndicator" destination="WtB-MF-eSg" id="qvA-wl-pye"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="YXP-NQ-E41" id="uyB-a3-lAM"/>
             </connections>
@@ -23,15 +24,24 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </webView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="WtB-MF-eSg">
+                    <rect key="frame" x="157" y="398" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="8Yi-Nc-DeG"/>
+                        <constraint firstAttribute="height" constant="100" id="UUi-Dc-9JL"/>
+                    </constraints>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="YXP-NQ-E41" secondAttribute="trailing" id="69i-zt-u0C"/>
                 <constraint firstItem="YXP-NQ-E41" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EfV-Il-Ssl"/>
+                <constraint firstItem="WtB-MF-eSg" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="R5D-e6-V3m"/>
+                <constraint firstItem="WtB-MF-eSg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qjb-nP-KrR"/>
                 <constraint firstItem="YXP-NQ-E41" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="s5b-4o-Jpw"/>
                 <constraint firstAttribute="bottom" secondItem="YXP-NQ-E41" secondAttribute="bottom" id="sbm-0x-hov"/>
             </constraints>
-            <point key="canvasLocation" x="162" y="-55"/>
+            <point key="canvasLocation" x="160.86956521739131" y="-55.580357142857139"/>
         </view>
     </objects>
     <resources>
