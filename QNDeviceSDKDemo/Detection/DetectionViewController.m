@@ -518,16 +518,19 @@ typedef enum{
     
     QNBleDevice *device = cell.device;
     
-    if (device.deviceType == QNDeviceTypeScaleWsp) {
-        [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
-            
-        }];
-        WspConfigVC *configVC = [[WspConfigVC alloc] init];
-        self.wspConfigVC = configVC;
-        self.wspConfigVC.bleDevice = device;
-        self.wspConfigVC.delegate = self;
-        [self presentViewController:self.wspConfigVC animated:YES completion:nil];
-    } else if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
+//    if (device.deviceType == QNDeviceTypeScaleWsp) {
+//        [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
+//
+//        }];
+//        WspConfigVC *configVC = [[WspConfigVC alloc] init];
+//        self.wspConfigVC = configVC;
+//        self.wspConfigVC.bleDevice = device;
+//        self.wspConfigVC.delegate = self;
+//        [self presentViewController:self.wspConfigVC animated:YES completion:nil];
+//    } else
+        
+       
+    if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
         if (device.deviceType == QNDeviceTypeScaleBleDefault) {
             [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         }
@@ -572,6 +575,9 @@ typedef enum{
         QNWiFiConfig *config = [[QNWiFiConfig alloc] init];
         config.ssid = ssid;
         config.pwd = pwd;
+        if (device.deviceType == QNDeviceTypeScaleWsp) {
+            config.serveUrl = @"http://wifi.yolanda.hk:80/wifi_api/wsps?code=";
+        }
         [weakSelf.bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         [weakSelf.bleApi connectDeviceSetWiFiWithDevice:device user:weakSelf.user wifiConfig:config callback:^(NSError *error) {
             
@@ -618,21 +624,21 @@ typedef enum{
 }
 
 #pragma mark -
-- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret device:(nonnull QNBleDevice *)device {
-    QNWspConfig *config = wspConfig;
-    self.currentStyle = DeviceStyleLinging;
-    self.user.index = userIndex;
-    self.user.secret = userSecret;
-    config.curUser = self.user;
-    [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
-        
-    }];
-}
-
-- (void)dismissWspConfigVC {
-    [self.wspConfigVC dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-}
+//- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret device:(nonnull QNBleDevice *)device {
+//    QNWspConfig *config = wspConfig;
+//    self.currentStyle = DeviceStyleLinging;
+//    self.user.index = userIndex;
+//    self.user.secret = userSecret;
+//    config.curUser = self.user;
+//    [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
+//        
+//    }];
+//}
+//
+//- (void)dismissWspConfigVC {
+//    [self.wspConfigVC dismissViewControllerAnimated:YES completion:^{
+//        
+//    }];
+//}
 
 @end

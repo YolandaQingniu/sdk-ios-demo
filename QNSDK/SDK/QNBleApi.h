@@ -159,7 +159,7 @@
  @param config 连接wsp设备时的配置项
  @param callback 结果回调
  */
-- (void)connectWspDevice:(QNBleDevice *)device config:(QNWspConfig *)config callback:(QNResultCallback)callback;
+- (void)connectWspDevice:(QNBleDevice *)device config:(QNWspConfig *)config callback:(QNResultCallback)callback NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "2.4.1版本开始废弃connectWspDevice:改为使用connectDevice:");
 
 /**
  断开设备的连接
