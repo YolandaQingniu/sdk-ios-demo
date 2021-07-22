@@ -517,18 +517,6 @@ typedef enum{
     }
     
     QNBleDevice *device = cell.device;
-    
-//    if (device.deviceType == QNDeviceTypeScaleWsp) {
-//        [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
-//
-//        }];
-//        WspConfigVC *configVC = [[WspConfigVC alloc] init];
-//        self.wspConfigVC = configVC;
-//        self.wspConfigVC.bleDevice = device;
-//        self.wspConfigVC.delegate = self;
-//        [self presentViewController:self.wspConfigVC animated:YES completion:nil];
-//    } else
-        
        
     if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
         if (device.deviceType == QNDeviceTypeScaleBleDefault) {
@@ -622,23 +610,4 @@ typedef enum{
     }
     return _scaleDataAry;
 }
-
-#pragma mark -
-//- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret device:(nonnull QNBleDevice *)device {
-//    QNWspConfig *config = wspConfig;
-//    self.currentStyle = DeviceStyleLinging;
-//    self.user.index = userIndex;
-//    self.user.secret = userSecret;
-//    config.curUser = self.user;
-//    [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
-//        
-//    }];
-//}
-//
-//- (void)dismissWspConfigVC {
-//    [self.wspConfigVC dismissViewControllerAnimated:YES completion:^{
-//        
-//    }];
-//}
-
 @end
