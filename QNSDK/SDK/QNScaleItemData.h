@@ -59,11 +59,19 @@ typedef NS_ENUM(NSInteger, QNScaleType) {
     QNScaleTypeTrunkMucaleWeightIndex = 103, //躯干肌肉重量
     QNScaleTypeRightLegMucaleWeightIndex = 104, //右腿肌肉重量
     QNScaleTypeLeftLegMucaleWeightIndex = 105, //左腿肌肉重量
-    QNScaleTypeRightArmFatIndex = 106, //右臂脂肪
-    QNScaleTypeLeftArmFatIndex = 107, //左臂脂肪
-    QNScaleTypeTrunkFatIndex = 108, //躯干脂肪
-    QNScaleTypeRightLegFatIndex = 109, //右腿脂肪
-    QNScaleTypeLeftLegFatIndex = 110, //左腿脂肪
+    QNScaleTypeRightArmFatIndex = 106, //右臂脂肪率
+    QNScaleTypeLeftArmFatIndex = 107, //左臂脂肪率
+    QNScaleTypeTrunkFatIndex = 108, //躯干脂肪率
+    QNScaleTypeRightLegFatIndex = 109, //右腿脂肪率
+    QNScaleTypeLeftLegFatIndex = 110, //左腿脂肪率
+ 
+    QNScaleTypeMineralSaltRate = 111, //无机盐百分比
+    QNScaleTypeSkeletalMuscleMass = 112, //骨骼肌量
+    QNScaleTypeRightArmFatMass = 113, //右臂脂肪量
+    QNScaleTypeLeftArmFatMass = 114, //左臂脂肪量
+    QNScaleTypeTrunkFatMass = 115, //躯干脂肪量
+    QNScaleTypeRightLegFatMass = 116, //右腿脂肪量
+    QNScaleTypeLeftLegFatMass = 117, //左腿脂肪量
 };
 
 @interface QNScaleItemData : NSObject
