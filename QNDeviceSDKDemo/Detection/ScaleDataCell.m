@@ -69,23 +69,22 @@
     ScaleDataTargetModel *model = [ScaleDataTargetTool getScaleDataTargetModelWithScaleData:self.itemData user:self.user currentWeight:self.currentWeight];
 
     if (self.itemData.value <= 0) {
-        
-        self.levelNamesLabel.text = @"无";
-        self.currentLevelLabel.text = @"无";
+        self.levelNamesLabel.text = self.isEightElectrodesData ? @"" : @"无";
+        self.currentLevelLabel.text = self.isEightElectrodesData ? @"" : @"无";
         return;
     }
     
     if (model.levelNames.count > 0) {
         NSString *levelNames = [model.levelNames componentsJoinedByString:@","];
-        self.levelNamesLabel.text = [NSString stringWithFormat:@"[%@]",levelNames];
+        self.levelNamesLabel.text = self.isEightElectrodesData ? @"" : [NSString stringWithFormat:@"[%@]",levelNames];
     }else {
-        self.levelNamesLabel.text = @"无";
+        self.levelNamesLabel.text = self.isEightElectrodesData ? @"" : @"无";
     }
     
     if (model.currentLevel.length > 0) {
-        self.currentLevelLabel.text = [NSString stringWithFormat:@"当前等级:%@",model.currentLevel];
+        self.currentLevelLabel.text = self.isEightElectrodesData ? @"" : [NSString stringWithFormat:@"当前等级:%@",model.currentLevel];
     }else {
-        self.currentLevelLabel.text = @"无";
+        self.currentLevelLabel.text = self.isEightElectrodesData ? @"" : @"无";
     }
 }
 

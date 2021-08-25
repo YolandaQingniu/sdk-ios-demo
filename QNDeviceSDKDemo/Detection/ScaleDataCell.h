@@ -18,4 +18,6 @@
 @property (nonatomic, strong) QNUser *user;
 
 @property (nonatomic, assign) CGFloat currentWeight;
+
+@property (nonatomic, assign) BOOL isEightElectrodesData;
 @end

@@ -51,6 +51,7 @@ typedef enum{
 @property(nonatomic, strong) CLLocationManager *locationManager;
 
 @property(nonatomic, weak) WspConfigVC *wspConfigVC;
+@property(nonatomic, assign) BOOL isEightElectrodesData; //八电极测量数据标识
 
 @end
 
@@ -313,6 +314,7 @@ typedef enum{
 - (void)onGetScaleData:(QNBleDevice *)device data:(QNScaleData *)scaleData {
     [self.scaleDataAry removeAllObjects];
     BOOL isShowEightReport = NO;
+    self.isEightElectrodesData = device.isSupportEightElectrodes;
     for (QNScaleItemData *item in [scaleData getAllItem]) {
         /// 当左臂肌肉数值大于零时 可以显示八电极报告
         if (item.type == QNScaleTypeLeftArmMucaleWeightIndex && item.value > 0) {
@@ -497,6 +499,7 @@ typedef enum{
         if (!cell) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"ScaleDataCell" owner:self options:nil]lastObject];
         }
+        cell.isEightElectrodesData = self.isEightElectrodesData;
         cell.user = self.user;
         cell.currentWeight = ((QNScaleItemData *)self.scaleDataAry[0]).value;
         cell.itemData = self.scaleDataAry[indexPath.row];
