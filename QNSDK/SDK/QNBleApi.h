@@ -24,7 +24,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.4.4 】
+ 当前版本【 2.4.5 】
 
  SDK最低配置8.0的系统
  
@@ -280,15 +280,5 @@
 */
 - (QNScaleData *)generateScaleData:(QNUser *)user modeId:(NSString *)modeId weight:(double)weight date:(NSDate *)measureDate resistance:(int)resistance secResistance:(int)secResistance hmac:(NSString *)hmac heartRate:(int)heartRate;
 
-/**
- 体质推算测量方法
-
- @param user 该条数据的所属用户
- @param area 区域
- @param weight 体重。单位为kg
- @param measureDate 测量时间
- @return QNScaleData
-*/
-- (QNScaleData *)physiqueCalculation:(QNUser *)user area:(YLAreaType)area weight:(double)weight date:(NSDate *)measureDate;
 @end
 

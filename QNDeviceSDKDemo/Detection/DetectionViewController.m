@@ -314,12 +314,6 @@ typedef enum{
 - (void)onGetScaleData:(QNBleDevice *)device data:(QNScaleData *)scaleData {
     [self.scaleDataAry removeAllObjects];
     
-    ///添加体质推算
-//    QNScaleData *tempData = [[QNBleApi sharedBleApi] physiqueCalculation:scaleData.user area:YLAreaTypeAsia weight:scaleData.weight date:scaleData.measureTime];
-//    if (tempData) {
-//        scaleData = tempData;
-//    }
-    
     BOOL isShowEightReport = NO;
     self.isEightElectrodesData = device.isSupportEightElectrodes;
     for (QNScaleItemData *item in [scaleData getAllItem]) {
@@ -351,8 +345,6 @@ typedef enum{
 }
 
 - (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray<QNScaleStoreData *> *)storedDataList {
-    
-//    NSLog(@"%@",storedDataList.firstObject.hmac);
     
 }
 

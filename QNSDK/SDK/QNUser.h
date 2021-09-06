@@ -33,11 +33,6 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
     YLAthleteSport, //运动员模式
 };
 
-typedef NS_ENUM(NSUInteger,YLAreaType) {
-    YLAreaTypeAsia = 0, // 亚洲
-    YLAreaTypeEuropeAndAmerica, //欧美
-};
-
 @interface QNUser : NSObject
 /** userID(如果秤端支持用户名显示，则该字段内容会下发到设备) */
 @property (nonatomic, strong) NSString *userId;
