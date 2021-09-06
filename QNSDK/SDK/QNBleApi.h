@@ -280,5 +280,15 @@
 */
 - (QNScaleData *)generateScaleData:(QNUser *)user modeId:(NSString *)modeId weight:(double)weight date:(NSDate *)measureDate resistance:(int)resistance secResistance:(int)secResistance hmac:(NSString *)hmac heartRate:(int)heartRate;
 
+/**
+ 体质推算测量方法
+
+ @param user 该条数据的所属用户
+ @param area 区域
+ @param weight 体重。单位为kg
+ @param measureDate 测量时间
+ @return QNScaleData
+*/
+- (QNScaleData *)physiqueCalculation:(QNUser *)user area:(YLAreaType)area weight:(double)weight date:(NSDate *)measureDate;
 @end
 
