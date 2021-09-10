@@ -32,13 +32,14 @@ typedef enum{
 #import "WspConfigVC.h"
 #import "UIView+Toast.h"
 
-@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNWspScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate>
+@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNWspScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
 @property (weak, nonatomic) IBOutlet UIButton *scanBtn;
 @property (weak, nonatomic) IBOutlet UILabel *styleLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *unstableWeightLabel;  //时时体重
 @property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIButton *peelBtn; //去皮按键
 
 @property (nonatomic, assign) DeviceStyle currentStyle;
 @property (nonatomic, strong) NSMutableDictionary *scanDveices;
@@ -60,6 +61,7 @@ typedef enum{
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"测量";
+    self.peelBtn.hidden = YES;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedRowHeight = 0;
@@ -69,6 +71,7 @@ typedef enum{
     self.bleApi.connectionChangeListener = self;
     self.bleApi.dataListener = self;
     self.bleApi.bleStateListener = self;
+    self.bleApi.bleKitchenListener = self;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
     self.locationManager = [[CLLocationManager alloc] init];
@@ -86,7 +89,7 @@ typedef enum{
         }];
     }
     
-    
+    [self.peelBtn addTarget:self action:@selector(clickPeelBtn) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)back {
@@ -96,6 +99,12 @@ typedef enum{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)clickPeelBtn {
+    QNBleKitchenConfig *config = [[QNBleKitchenConfig alloc] init];
+    config.unit = QNUnitOZ;
+    config.isPeel = YES;
+    [self.bleApi setBleKitchenDeviceConfig:config];
+}
 
 #pragma mark 设置设备各个阶段状态
 - (void)setCurrentStyle:(DeviceStyle)currentStyle {
@@ -261,6 +270,13 @@ typedef enum{
     }
 }
 
+- (void)onKitchenDeviceDiscover:(QNBleKitchenDevice *)device {
+    if (self.scanDveices[device.mac] == nil) {
+        self.scanDveices[device.mac] = device;
+        [self.tableView reloadData];
+    }
+}
+
 - (void)onBroadcastDeviceDiscover:(QNBleBroadcastDevice *)device {//该方法会回调扫描到的广播秤信息
     [self measuringBroadcastDevice:device];
     if (self.connectBroadcastDevice) { return; }
@@ -292,6 +308,7 @@ typedef enum{
         self.currentStyle = DeviceStyleMeasuringSucceed;
     }else if (state == QNScaleStateLinkLoss){//断开连接/称关机
         self.currentStyle = DeviceStyleDisconnect;
+        self.peelBtn.hidden = YES;
     }
 }
 
@@ -345,7 +362,11 @@ typedef enum{
 }
 
 - (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray<QNScaleStoreData *> *)storedDataList {
-    
+    QNScaleStoreData *data = storedDataList.firstObject;
+    QNScaleStoreData *temp = [QNScaleStoreData buildStoreDataWithWeight:data.weight measureTime:data.measureTime mac:data.mac hmac:data.hmac callBlock:^(NSError *error) {
+        
+    }];
+    NSLog(@"%@",temp.hmac);
 }
 
 - (void)onScaleEventChange:(QNBleDevice *)device scaleEvent:(QNScaleEvent)scaleEvent {
@@ -366,6 +387,31 @@ typedef enum{
 
 - (void)wspRegisterUserComplete:(QNBleDevice *)device user:(QNUser *)user {
     [self.view makeToast:[NSString stringWithFormat:@"当前序列号: %d",user.index] duration:3 position:CSToastPositionCenter];
+}
+
+#pragma mark - QNBleKitchenDataListener
+- (void)onGetBleKitchenWeight:(QNBleKitchenDevice *)device weight:(double)weight {
+    weight = [self.bleApi convertWeightWithTargetUnit:weight unit:device.unit];
+    if (device.unit == QNUnitMilkML) {
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f ml", weight];
+    } else if (device.unit == QNUnitML) {
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f ml", weight];
+    } else if (device.unit == QNUnitOZ) {
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f oz",weight];
+    } else {
+        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f g", weight];
+    }
+}
+
+- (void)onBleKitchenStateChange:(QNBleKitchenDevice *)device scaleState:(QNScaleState)state {
+    if (state == QNScaleStateConnected) {//链接成功
+        self.currentStyle = DeviceStyleLingSucceed;
+    }else if (state == QNScaleStateRealTime){//测量重量
+        self.currentStyle = DeviceStyleMeasuringWeight;
+    }else if (state == QNScaleStateLinkLoss){//断开连接/称关机
+        self.currentStyle = DeviceStyleDisconnect;
+        self.peelBtn.hidden = YES;
+    }
 }
 
 #pragma mark - QNBleStateListener
@@ -489,7 +535,9 @@ typedef enum{
         id device = self.scanDveices[mac];
         if ([device isKindOfClass:[QNBleBroadcastDevice class]]) {
             cell.broadcastDevice = device;
-        }else {
+        }else if ([device isKindOfClass:[QNBleKitchenDevice class]]) {
+            cell.kitchenDevice = device;
+        } else {
             cell.device = device;
         }
         return cell;
@@ -518,8 +566,15 @@ typedef enum{
         return;
     }
     
+    if (cell.kitchenDevice != nil) {
+        self.currentStyle = DeviceStyleLinging;
+        self.peelBtn.hidden = NO;
+        [_bleApi connectBleKitchenDevice:cell.kitchenDevice callback:^(NSError *error) {
+        
+        }];
+    }
+    
     QNBleDevice *device = cell.device;
-       
     if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
         if (device.deviceType == QNDeviceTypeScaleBleDefault) {
             [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];

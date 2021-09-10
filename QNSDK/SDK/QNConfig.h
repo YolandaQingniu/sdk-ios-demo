@@ -28,6 +28,13 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
     QNUnitML = 11, //厨房秤专属
     QNUnitOZ = 12, //厨房秤专属
     QNUnitLBOZ = 13, //厨房秤专属
+    QNUnitMilkML = 14, //蓝牙厨房秤专属
+};
+
+
+typedef NS_ENUM(NSUInteger,YLAreaType) {
+    YLAreaTypeAsia = 0, // 亚洲
+    YLAreaTypeOther,    //其他
 };
 
 /**

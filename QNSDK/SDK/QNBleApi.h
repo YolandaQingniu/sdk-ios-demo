@@ -12,6 +12,7 @@
 #import "QNBleDeviceDiscoveryProtocol.h"
 #import "QNBleConnectionChangeProtocol.h"
 #import "QNScaleDataProtocol.h"
+#import "QNBleKitchenProtocol.h"
 #import "QNLogProtocol.h"
 #import "QNUser.h"
 #import "QNConfig.h"
@@ -20,11 +21,12 @@
 #import "QNBleProtocolHandler.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "QNWspConfig.h"
+#import "QNBleKitchenConfig.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.4.5 】
+ 当前版本【 2.5.0 】
 
  SDK最低配置8.0的系统
  
@@ -83,8 +85,15 @@
 @property (nonatomic, weak) id<QNScaleDataListener> dataListener;
 
 /**
+ 蓝牙厨房秤测量数据的监听
+ 可在 QNBleKitchenDataProtocol.h 中查看详细信息
+ 
+ */
+@property (nonatomic, weak) id<QNBleKitchenListener> bleKitchenListener;
+
+/**
  系统蓝牙状态的监听
- 可在 QQNBleStateProtocol.h 中查看详细信息
+ 可在 QNBleStateProtocol.h 中查看详细信息
  
  */
 @property (nonatomic, weak) id<QNBleStateListener> bleStateListener;
@@ -166,8 +175,15 @@
  
  @param device 当前连接的设备
  @param callback 结果回调
- */
+*/
 - (void)disconnectDevice:(QNBleDevice *)device callback:(QNResultCallback)callback;
+
+/**
+ 断开设备的连接
+ @param mac 当前连接的设备mac
+ @param callback 结果回调
+ */
+- (void)disconnectDeviceWithMac:(NSString *)mac callback:(QNResultCallback)callback;
 
 /**
  
@@ -190,14 +206,12 @@
  */
 - (void)registerWiFiBleDevice:(QNBleDevice *)device callback:(QNResultCallback)callback;
 
-
 /**
  获取SDK的当前设置情况
  
  @return QNConfig
  */
 - (QNConfig *)getConfig;
-
 
 /**
  根据提供的kg数值的体重，转化为指定单位的数值
@@ -242,7 +256,6 @@
  */
 - (QNBleBroadcastDevice *)buildBroadcastDevice:(CBPeripheral *)peripheral rssi:(NSNumber *)rssi advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback;
 
-
 /**
  创建轻牛厨房广播蓝牙秤设备对象
  
@@ -268,17 +281,32 @@
 /**
  生成测量数据方法（该方法只支持wsp设备使用）
 
-@param user 该条数据的所属用户
-@param modeId 型号标识
-@param weight 体重。单位为kg
-@param measureDate 测量时间
-@param resistance 50阻抗
-@param secResistance 500阻抗
-@param hmac 加密字段
-@param heartRate 心率值，若无则赋值0
-@return QNScaleData
+ @param user 该条数据的所属用户
+ @param modeId 型号标识
+ @param weight 体重。单位为kg
+ @param measureDate 测量时间
+ @param resistance 50阻抗
+ @param secResistance 500阻抗
+ @param hmac 加密字段
+ @param heartRate 心率值，若无则赋值0
+ @return QNScaleData
 */
 - (QNScaleData *)generateScaleData:(QNUser *)user modeId:(NSString *)modeId weight:(double)weight date:(NSDate *)measureDate resistance:(int)resistance secResistance:(int)secResistance hmac:(NSString *)hmac heartRate:(int)heartRate;
+
+/**
+ 连接蓝牙厨房秤
+ 
+ @param device 连接的设备(该设备对象必须是搜索返回的蓝牙厨房秤设备对象)
+ @param callback 结果回调
+ */
+- (void)connectBleKitchenDevice:(QNBleKitchenDevice *)device callback:(QNResultCallback)callback;
+
+/**
+ 设置蓝牙厨房秤信息
+ 
+ @param config 设置信息
+ */
+- (void)setBleKitchenDeviceConfig:(QNBleKitchenConfig *)config;
 
 @end
 

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, strong) NSString *mac;
 /** name */
 @property (nonatomic, readonly, strong) NSString *name;
-/** name */
+/** modeId */
 @property (nonatomic, readonly, strong) NSString *modeId;
 /** 信号强度 */
 @property (nonatomic, readonly, strong) NSNumber *RSSI;
@@ -30,6 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly, assign) BOOL isNegative;
 /** 是否超载 */
 @property(nonatomic, readonly, assign) BOOL isOverload;
+/** 是否是蓝牙厨房秤 */
+@property(nonatomic, readonly, assign) BOOL isBluetooth;
+/** 测量重量是否稳定, 针对蓝牙厨房秤有效 */
+@property(nonatomic, readonly, assign) BOOL isStable;
+/** 蓝牙名称, 针对蓝牙厨房秤有效 */
+@property (nonatomic, readonly, strong) NSString *bluetoothName;
+
 @end
 
 NS_ASSUME_NONNULL_END

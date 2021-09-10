@@ -34,4 +34,13 @@
     self.modeIdLabel.text = broadcastDevice.modeId;
     self.wifiImageView.hidden = YES;
 }
+
+- (void)setKitchenDevice:(QNBleKitchenDevice *)kitchenDevice {
+    _kitchenDevice = kitchenDevice;
+    self.nameLabel.text = kitchenDevice.name;
+    self.macLabel.text = kitchenDevice.mac;
+    self.RSSILabel.text = [kitchenDevice.RSSI stringValue];
+    self.modeIdLabel.text = kitchenDevice.modeId;
+    self.wifiImageView.hidden = YES;
+}
 @end
