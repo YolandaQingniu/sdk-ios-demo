@@ -507,6 +507,30 @@ typedef enum{
     }];
 }
 
+#pragma mark - QNBleConnectionChangeListener
+- (void)onConnecting:(QNBleDevice *)device {
+    
+}
+
+- (void)onConnected:(QNBleDevice *)device {
+    
+}
+
+- (void)onServiceSearchComplete:(QNBleDevice *)device {
+    
+}
+
+- (void)onDisconnecting:(QNBleDevice *)device {
+    
+}
+
+- (void)onDisconnected:(QNBleDevice *)device {
+    
+}
+
+- (void)onConnectError:(QNBleDevice *)device error:(NSError *)error {
+    
+}
 
 #pragma mark - UITabelViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

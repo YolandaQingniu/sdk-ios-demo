@@ -259,6 +259,10 @@
     
 }
 
+- (void)onDisconnected:(QNBleDevice *)device {
+    
+}
+
 - (void)onConnectError:(QNBleDevice *)device error:(NSError *)error {
     
 }

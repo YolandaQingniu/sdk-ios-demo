@@ -57,6 +57,13 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
  */
 - (void)onDisconnecting:(QNBleDevice *)device;
 
+/**
+ 设备断开连接
+ 
+ @param device QNBleDevice
+ */
+- (void)onDisconnected:(QNBleDevice *)device;
+
 
 /**
  连接错误
