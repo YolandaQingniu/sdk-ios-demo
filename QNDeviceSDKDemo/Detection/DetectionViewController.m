@@ -330,6 +330,11 @@ typedef enum{
 
 - (void)onGetScaleData:(QNBleDevice *)device data:(QNScaleData *)scaleData {
     [self.scaleDataAry removeAllObjects];
+    ///判断是否进行体质推算
+//    QNScaleData *tempData = [[QNBleApi sharedBleApi] physiqueCalculation:scaleData.user area:YLAreaTypeAsia weight:scaleData.weight date:scaleData.measureTime];
+//    if (tempData) {
+//        scaleData = tempData;
+//    }
     
     BOOL isShowEightReport = NO;
     self.isEightElectrodesData = device.isSupportEightElectrodes;
