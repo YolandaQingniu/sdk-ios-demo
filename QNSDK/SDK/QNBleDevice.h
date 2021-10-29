@@ -39,4 +39,11 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
 @property(nonatomic, readonly, assign) int registeredUserNum;
 /** (WSP设备专属)是否支持八电极 */
 @property(nonatomic, readonly, assign) BOOL isSupportEightElectrodes;
+/** (WSP设备专属)是否支持OTA */
+@property(nonatomic, readonly, assign) BOOL isSupportBleOTA;
+/** (WSP设备专属)固件版本 */
+@property(nonatomic, readonly, assign) int firmwareVer;
+/** (WSP设备专属)硬件版本 */
+@property(nonatomic, readonly, assign) int hardwareVer;
+
 @end

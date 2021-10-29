@@ -618,12 +618,14 @@ typedef enum{
 }
 
 #pragma mark -
-- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret device:(nonnull QNBleDevice *)device {
+- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret measureFat:(BOOL)measureFat indicateDis:(BOOL)indicateDis device:(QNBleDevice *)device{
     QNWspConfig *config = wspConfig;
     self.currentStyle = DeviceStyleLinging;
     self.user.index = userIndex;
     self.user.secret = userSecret;
     config.curUser = self.user;
+    config.curUser.measureFat = measureFat;
+    config.curUser.indicateDis = indicateDis;
     [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
         
     }];

@@ -24,6 +24,9 @@
 @property(nonatomic, strong) QNWspConfig *wspConfig;
 
 @property(nonatomic, strong) NSMutableArray<NSNumber *> *deleteUsers;
+@property (weak, nonatomic) IBOutlet UISwitch *fatMeasurementSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *indicatorsSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *bleOtaSwitch;
 
 @end
 
@@ -123,10 +126,16 @@
         secret = [self.userSecretField.text intValue];
     }
     
+    if (self.bleOtaSwitch.isOn) {
+        QNBleOTAConfig *otaConfig = [[QNBleOTAConfig alloc] init];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"C21002E1X_BOTA_V03" ofType:@"bin"];
+        otaConfig.OTAData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
+        otaConfig.OTAVer = 3;
+        self.wspConfig.otaConfig = otaConfig;
+    }
     
-    
-    if ([self.delegate respondsToSelector:@selector(selectWspConfig:userIndex:userSecret:device:)]) {
-        [self.delegate selectWspConfig:self.wspConfig userIndex:index userSecret:secret device:self.bleDevice];
+    if ([self.delegate respondsToSelector:@selector(selectWspConfig:userIndex:userSecret:measureFat:indicateDis:device:)]) {
+        [self.delegate selectWspConfig:self.wspConfig userIndex:index userSecret:secret measureFat:self.fatMeasurementSwitch.isOn indicateDis:self.indicatorsSwitch.isOn device:self.bleDevice];
     }
     
     if ([self.delegate respondsToSelector:@selector(dismissWspConfigVC)]) {

@@ -63,6 +63,11 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 
 @property(nonatomic, strong) QNIndicateConfig *indicateConfig;
 
+/** WSP 设备专用, 控制秤端是否进行测量脂肪*/
+@property(nonatomic, assign) BOOL measureFat;
+/** WSP 设备专用, 控制秤端是否进行显示测量后除体重与BMI以外的指标）*/
+@property(nonatomic, assign) BOOL indicateDis;
+
 /**
  建立用户模型
  

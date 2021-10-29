@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
     QNScaleStateWiFiBleStartNetwork = 10, //WiFi蓝牙双模设备开始配网
     QNScaleStateWiFiBleNetworkSuccess = 11, //WiFi蓝牙双模设备联网成功
     QNScaleStateWiFiBleNetworkFail = 12, //WiFi蓝牙双模设备联网失败
+    QNScaleStateBleKitchenPeeled = 13, //蓝牙厨房秤称端去皮
 };
 
 @protocol QNBleConnectionChangeListener <NSObject>
@@ -55,6 +56,13 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
  @param device QNBleDevice
  */
 - (void)onDisconnecting:(QNBleDevice *)device;
+
+/**
+ 设备断开连接
+ 
+ @param device QNBleDevice
+ */
+- (void)onDisconnected:(QNBleDevice *)device;
 
 
 /**

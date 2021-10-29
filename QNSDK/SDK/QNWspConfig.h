@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "QNWiFiConfig.h"
 #import "QNUser.h"
+#import "QNBleOTAConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,6 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSString *latitude;
 /// 是否延迟显示屏熄屏时间(大约延时60s)，默认false
 @property(nonatomic, assign) BOOL isDelayScreenOff;
+
+/// 蓝牙ota固件数据(当 value 值为 null 时，不进行OTA ；当 value 值为 QNOtaConfig 对象时，根据对象中的值进行OTA)
+@property(nonatomic, strong, nullable) QNBleOTAConfig *otaConfig;
 @end
 
 NS_ASSUME_NONNULL_END
