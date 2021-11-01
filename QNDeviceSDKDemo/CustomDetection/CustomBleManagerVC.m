@@ -279,6 +279,7 @@
     QNBleDevice *device = [self.bleApi buildDevice:peripheral rssi:RSSI advertisementData:advertisementData callback:^(NSError *error) {
         //自行处理错误，一般为参数
     }];
+    
     if (device == nil) return;
     for (QNBleDevice *item in self.scanDeviceList) {
         if ([item.mac isEqualToString:device.mac]) {
