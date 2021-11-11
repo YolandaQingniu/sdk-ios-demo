@@ -64,6 +64,10 @@
             ozNum = ozNum - lbNum * 16;
             weightStr = [NSString stringWithFormat:@"%d lb %.1f oz",lbNum,ozNum];
         }
+        case QNUnitMilkML:
+        {
+            weightStr = [NSString stringWithFormat:@"%.1f ml",[[QNBleApi sharedBleApi] convertWeightWithTargetUnit:device.weight unit:QNUnitMilkML]];
+        }
             break;
         default:
             weightStr = [NSString stringWithFormat:@"%.1f g",device.weight];
