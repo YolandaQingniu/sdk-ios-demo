@@ -24,6 +24,11 @@
 #define KScale1CharacteristicUUIDWrite @"FFF2"
 #define KScale1CharacteristicUUIDNotify @"FFF1"
 
+//CP30B
+#define QNHeightScaleSerivceUUID @"ABF0"
+#define QNHeightScaleCharacteristicUUIDWrite @"ABF2"
+#define QNHeightScaleCharacteristicUUIDNotify @"ABF1"
+
 @interface CustomBleManagerVC ()<CBCentralManagerDelegate, CBPeripheralDelegate, QNScaleDataListener, QNBleProtocolDelegate, QNBleProtocolDelegate, QNScaleDataListener, QNBleConnectionChangeListener, UITableViewDelegate, UITableViewDataSource, CustomDeviceCellDelegate>
 
 @property(nonatomic, strong) CBCentralManager *centralManager;
@@ -169,6 +174,8 @@
         characteristic = bleDevice.ffe4Write;
     } else if ([bleDevice.fff2Write.UUID.UUIDString isEqualToString:characteristicUUID]) {
         characteristic = bleDevice.fff2Write;
+    } else if ([bleDevice.abf2Write.UUID.UUIDString isEqualToString:characteristicUUID]) {
+        characteristic = bleDevice.abf2Write;
     }
     
     if (bleDevice == nil || characteristic == nil) return;
@@ -196,6 +203,8 @@
         characteristic = bleDevice.ffe4Write;
     } else if ([bleDevice.fff2Write.UUID.UUIDString isEqualToString:characteristicUUID]) {
         characteristic = bleDevice.fff2Write;
+    } else if ([bleDevice.abf2Write.UUID.UUIDString isEqualToString:characteristicUUID]) {
+        characteristic = bleDevice.abf2Write;
     }
     
     if (bleDevice == nil || characteristic == nil) return;
@@ -209,6 +218,9 @@
 
 - (void)onGetScaleData:(QNBleDevice *)device data:(QNScaleData *)scaleData {
     NSString *info = [device.mac stringByAppendingString:@" 测量结果:"];
+    if (device.deviceType == QNDeviceTypeHeightScale) {
+        info = [NSString stringWithFormat:@"%@ %@: %.1f", info, @"height", scaleData.height];
+    }
     NSArray<QNScaleItemData *> *itemDataList = [scaleData getAllItem];
     for (QNScaleItemData *item in itemDataList) {
         info = [NSString stringWithFormat:@"%@ %@: %.2f", info, item.name, item.value];
@@ -354,6 +366,8 @@
         [device.handler prepare:KScaleDeviceServiceUUID];
     } else if ([service.UUID.UUIDString isEqualToString:KScale1SerivceUUID]) {
         [device.handler prepare:KScale1SerivceUUID];
+    } else if ([service.UUID.UUIDString isEqualToString:QNHeightScaleSerivceUUID]) {
+        [device.handler prepare:QNHeightScaleSerivceUUID];
     }
     
     for (CBCharacteristic *item in service.characteristics) {
@@ -363,11 +377,15 @@
             device.ffe4Write = item;
         } else if ([item.UUID.UUIDString isEqualToString:KScale1CharacteristicUUIDWrite]) {
             device.fff2Write = item;
+        } else if ([item.UUID.UUIDString isEqualToString:QNHeightScaleCharacteristicUUIDWrite]) {
+            device.abf2Write = item;
         } else if ([item.UUID.UUIDString isEqualToString:KScaleDeviceCharacteristicUUIDNotify]) {
             [peripheral setNotifyValue:YES forCharacteristic:item];
         } else if ([item.UUID.UUIDString isEqualToString:KScaleDeviceCharacteristicUUIDIndicate]) {
             [peripheral setNotifyValue:YES forCharacteristic:item];
         } else if ([item.UUID.UUIDString isEqualToString:KScale1CharacteristicUUIDNotify]) {
+            [peripheral setNotifyValue:YES forCharacteristic:item];
+        }else if ([item.UUID.UUIDString isEqualToString:QNHeightScaleCharacteristicUUIDNotify]) {
             [peripheral setNotifyValue:YES forCharacteristic:item];
         }
     }
