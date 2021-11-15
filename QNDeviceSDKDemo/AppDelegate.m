@@ -25,7 +25,8 @@
     NSString *file = [[NSBundle mainBundle] pathForResource:@"123456789" ofType:@"qn"];
     [[QNBleApi sharedBleApi] initSdk:@"123456789" firstDataFile:file callback:^(NSError *error) {
         
-    }];    
+    }];
+    self.window.backgroundColor = [UIColor whiteColor];
     return YES;
 }
 
