@@ -605,16 +605,7 @@ typedef enum{
     
     QNBleDevice *device = cell.device;
     
-    if (device.deviceType == QNDeviceTypeScaleWsp) {
-        [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
-            
-        }];
-        WspConfigVC *configVC = [[WspConfigVC alloc] init];
-        self.wspConfigVC = configVC;
-        self.wspConfigVC.bleDevice = device;
-        self.wspConfigVC.delegate = self;
-        [self presentViewController:self.wspConfigVC animated:YES completion:nil];
-    } else if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
+   if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
         if (device.deviceType == QNDeviceTypeScaleBleDefault) {
             [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         }
@@ -707,23 +698,23 @@ typedef enum{
     return _scaleDataAry;
 }
 
-#pragma mark -
-- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret measureFat:(BOOL)measureFat indicateDis:(BOOL)indicateDis device:(QNBleDevice *)device{
-    QNWspConfig *config = wspConfig;
-    self.currentStyle = DeviceStyleLinging;
-    self.user.index = userIndex;
-    self.user.secret = userSecret;
-    config.curUser = self.user;
-    config.curUser.measureFat = measureFat;
-    config.curUser.indicateDis = indicateDis;
-    [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
-        
-    }];
-}
-
-- (void)dismissWspConfigVC {
-    [self.wspConfigVC dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-}
+//#pragma mark -
+//- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret measureFat:(BOOL)measureFat indicateDis:(BOOL)indicateDis device:(QNBleDevice *)device{
+//    QNWspConfig *config = wspConfig;
+//    self.currentStyle = DeviceStyleLinging;
+//    self.user.index = userIndex;
+//    self.user.secret = userSecret;
+//    config.curUser = self.user;
+//    config.curUser.measureFat = measureFat;
+//    config.curUser.indicateDis = indicateDis;
+//    [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
+//
+//    }];
+//}
+//
+//- (void)dismissWspConfigVC {
+//    [self.wspConfigVC dismissViewControllerAnimated:YES completion:^{
+//
+//    }];
+//}
 @end

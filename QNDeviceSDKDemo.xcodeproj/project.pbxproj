@@ -57,6 +57,7 @@
 		7E40D938272BEB4200D4B319 /* QNBleOTAProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E40D936272BEB4200D4B319 /* QNBleOTAProtocol.h */; };
 		7E41A1EC26E89CF800567B06 /* QNBleKitchenConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E41A1EA26E89CF800567B06 /* QNBleKitchenConfig.h */; };
 		7E41A1FA26E9F35E00567B06 /* QNBleKitchenProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E41A1F926E9F35E00567B06 /* QNBleKitchenProtocol.h */; };
+		7EB6157A27427E4B00DE8173 /* QNBleOTAConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EB6157927427E4B00DE8173 /* QNBleOTAConfig.h */; };
 		7ECFF808269EB945007581D6 /* QNSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7ECFF807269EB945007581D6 /* QNSDK.podspec */; };
 		D2048A5220A6E15600D943BC /* 123456789.qn in Resources */ = {isa = PBXBuildFile; fileRef = D2048A5120A6E15600D943BC /* 123456789.qn */; };
 		D232D64C2004DE2D00AABD67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D232D64B2004DE2D00AABD67 /* AppDelegate.m */; };
@@ -161,6 +162,7 @@
 		7E40D936272BEB4200D4B319 /* QNBleOTAProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleOTAProtocol.h; sourceTree = "<group>"; };
 		7E41A1EA26E89CF800567B06 /* QNBleKitchenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleKitchenConfig.h; sourceTree = "<group>"; };
 		7E41A1F926E9F35E00567B06 /* QNBleKitchenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleKitchenProtocol.h; sourceTree = "<group>"; };
+		7EB6157927427E4B00DE8173 /* QNBleOTAConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleOTAConfig.h; sourceTree = "<group>"; };
 		7ECFF807269EB945007581D6 /* QNSDK.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = QNSDK.podspec; sourceTree = SOURCE_ROOT; };
 		D2048A5120A6E15600D943BC /* 123456789.qn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 123456789.qn; sourceTree = "<group>"; };
 		D230F2212240847500DC01E9 /* QNSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QNSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -297,6 +299,7 @@
 		D230F22D224085C300DC01E9 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				7EB6157927427E4B00DE8173 /* QNBleOTAConfig.h */,
 				7E40D936272BEB4200D4B319 /* QNBleOTAProtocol.h */,
 				1B8AD1AE25F5D9DA00EDFE32 /* libQNDeviceSDK.a */,
 				1B8AD1AF25F5D9DA00EDFE32 /* QNBleApi.h */,
@@ -432,6 +435,7 @@
 				1B8AD1CB25F5D9DB00EDFE32 /* QNScaleStoreData.h in Headers */,
 				1B8AD1C125F5D9DB00EDFE32 /* QNUser.h in Headers */,
 				1B8AD1CC25F5D9DB00EDFE32 /* QNWiFiConfig.h in Headers */,
+				7EB6157A27427E4B00DE8173 /* QNBleOTAConfig.h in Headers */,
 				1B8AD1CD25F5D9DB00EDFE32 /* QNUtils.h in Headers */,
 				1B8AD1CA25F5D9DB00EDFE32 /* QNConfig.h in Headers */,
 				1B8AD1BA25F5D9DB00EDFE32 /* QNScaleDataProtocol.h in Headers */,
