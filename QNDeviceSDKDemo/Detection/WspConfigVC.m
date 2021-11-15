@@ -127,11 +127,11 @@
     }
     
     if (self.bleOtaSwitch.isOn) {
-        QNBleOTAConfig *otaConfig = [[QNBleOTAConfig alloc] init];
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"C21002E1X_BOTA_V03" ofType:@"bin"];
-        otaConfig.OTAData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
-        otaConfig.OTAVer = 3;
-        self.wspConfig.otaConfig = otaConfig;
+//        QNBleOTAConfig *otaConfig = [[QNBleOTAConfig alloc] init];
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"C21002E1X_BOTA_V03" ofType:@"bin"];
+//        otaConfig.OTAData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
+//        otaConfig.OTAVer = 3;
+//        self.wspConfig.otaConfig = otaConfig;
     }
     
     if ([self.delegate respondsToSelector:@selector(selectWspConfig:userIndex:userSecret:measureFat:indicateDis:device:)]) {

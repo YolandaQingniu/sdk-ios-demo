@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "QNBleDevice.h"
 #import "QNBleBroadcastDevice.h"
+#import "QNBleKitchenDevice.h"
 
 @interface DeviceTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) QNBleDevice *device;
 
 @property (nonatomic, strong) QNBleBroadcastDevice *broadcastDevice;
+
+@property (nonatomic, strong) QNBleKitchenDevice *kitchenDevice;
 
 @end
