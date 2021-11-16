@@ -42,6 +42,10 @@ typedef NS_ENUM(NSInteger, QNBleErrorCode) {
     QNBleErrorCodeRegisterDevice = 1213,
     QNBleErrorCodeNoComoleteMeasure = 1214,
     QNBleErrorCodeNoSupportModify = 1215,
+    QNBleErrorWSPUserIndex = 1216,
+    QNBleErrorWSPUserSecret = 1217,
+    QNBleErrorWSPOTAFirmwareFail = 1218,
+    QNBleErrorWSPOtaLowPower = 1219,
 
     QNBleErrorCoder = 1301,
     QNBleErrorCoderInvalid = 1302,
