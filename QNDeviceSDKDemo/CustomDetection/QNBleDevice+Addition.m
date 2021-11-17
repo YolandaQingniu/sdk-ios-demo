@@ -14,6 +14,7 @@ static char QNBleDevice_peripheral_key;
 static char QNBleDevice_ffe3_write_key;
 static char QNBleDevice_ffe4_write_key;
 static char QNBleDevice_fff2_write_key;
+static char QNBleDevice_abf2_write_key;
 static char QNBleDevice_protocol_handler_key;
 
 - (void)setPeripheral:(CBPeripheral *)peripheral {
@@ -46,6 +47,13 @@ static char QNBleDevice_protocol_handler_key;
 
 - (CBCharacteristic *)fff2Write {
     return objc_getAssociatedObject(self, &QNBleDevice_fff2_write_key);
+}
+
+- (void)setAbf2Write:(CBCharacteristic *)abf2Write {
+    objc_setAssociatedObject(self, &QNBleDevice_abf2_write_key, abf2Write, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (CBCharacteristic *)abf2Write {
+    return objc_getAssociatedObject(self, &QNBleDevice_abf2_write_key);
 }
 
 - (void)setHandler:(QNBleProtocolHandler *)handler {
