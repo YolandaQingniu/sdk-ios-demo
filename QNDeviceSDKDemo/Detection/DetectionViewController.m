@@ -31,8 +31,9 @@ typedef enum{
 #import <CoreLocation/CoreLocation.h>
 #import "WspConfigVC.h"
 #import "UIView+Toast.h"
+#import "AdjustResistanceVC.h"
 
-@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNWspScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener>
+@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNUserScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener,AdjustResistanceDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
 @property (weak, nonatomic) IBOutlet UIButton *scanBtn;
 @property (weak, nonatomic) IBOutlet UILabel *styleLabel;
@@ -54,6 +55,8 @@ typedef enum{
 @property(nonatomic, weak) WspConfigVC *wspConfigVC;
 @property(nonatomic, assign) BOOL isEightElectrodesData; //八电极测量数据标识
 
+/// 当前测量数据
+@property (nonatomic, strong) QNScaleData *scaleData;
 @end
 
 @implementation DetectionViewController
@@ -358,11 +361,14 @@ typedef enum{
     
     ///八电极设备 跳转专属分析报告
     if (device.isSupportEightElectrodes && isShowEightReport) {
+        self.scaleData = scaleData;
         EightElectrodesReportVC *reportVC = [[EightElectrodesReportVC alloc] init];
         reportVC.config = self.config;
         reportVC.user = self.user;
         reportVC.scaleDataAry = self.scaleDataAry;
         [self.navigationController pushViewController:reportVC animated:YES];
+    }else {
+        self.scaleData = nil;
     }
 }
 
@@ -390,7 +396,7 @@ typedef enum{
     }
 }
 
-- (void)wspRegisterUserComplete:(QNBleDevice *)device user:(QNUser *)user {
+- (void)registerUserComplete:(QNBleDevice *)device user:(QNUser *)user {
     [self.view makeToast:[NSString stringWithFormat:@"当前序列号: %d",user.index] duration:3 position:CSToastPositionCenter];
 }
 
@@ -605,17 +611,27 @@ typedef enum{
     
     QNBleDevice *device = cell.device;
     
-   if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
-        if (device.deviceType == QNDeviceTypeScaleBleDefault) {
-            [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
+    if (device.deviceType == QNDeviceTypeUserScale) {
+        
+            [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
+                
+            }];
+            WspConfigVC *configVC = [[WspConfigVC alloc] init];
+            self.wspConfigVC = configVC;
+            self.wspConfigVC.bleDevice = device;
+            self.wspConfigVC.delegate = self;
+            [self presentViewController:self.wspConfigVC animated:YES completion:nil];
+        } else if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
+            if (device.deviceType == QNDeviceTypeScaleBleDefault) {
+                [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
+            }
+            self.currentStyle = DeviceStyleLinging;
+            [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
+                
+            }];
+        }else {
+            [self wifiBleNetworkRemindWithDevice:device];
         }
-        self.currentStyle = DeviceStyleLinging;
-        [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
-            
-        }];
-    }else {
-        [self wifiBleNetworkRemindWithDevice:device];
-    }
 }
 
 - (void)wifiBleNetworkRemindWithDevice:(QNBleDevice *)device {
@@ -650,7 +666,7 @@ typedef enum{
         QNWiFiConfig *config = [[QNWiFiConfig alloc] init];
         config.ssid = ssid;
         config.pwd = pwd;
-        if (device.deviceType == QNDeviceTypeScaleWsp) {
+        if (device.deviceType == QNDeviceTypeUserScale) {
             config.serveUrl = @"http://wifi.yolanda.hk:80/wifi_api/wsps?code=";
         }
         [weakSelf.bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
@@ -698,23 +714,44 @@ typedef enum{
     return _scaleDataAry;
 }
 
-//#pragma mark -
-//- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret measureFat:(BOOL)measureFat indicateDis:(BOOL)indicateDis device:(QNBleDevice *)device{
-//    QNWspConfig *config = wspConfig;
-//    self.currentStyle = DeviceStyleLinging;
-//    self.user.index = userIndex;
-//    self.user.secret = userSecret;
-//    config.curUser = self.user;
-//    config.curUser.measureFat = measureFat;
-//    config.curUser.indicateDis = indicateDis;
-//    [_bleApi connectWspDevice:device config:config callback:^(NSError *error) {
-//
-//    }];
-//}
-//
-//- (void)dismissWspConfigVC {
-//    [self.wspConfigVC dismissViewControllerAnimated:YES completion:^{
-//
-//    }];
-//}
+#pragma mark -
+- (void)selectUserConfig:(QNUserScaleConfig *)userConfig userIndex:(int)userIndex userSecret:(int)userSecret device:(QNBleDevice *)device {
+    QNUserScaleConfig *config = userConfig;
+    self.currentStyle = DeviceStyleLinging;
+    self.user.index = userIndex;
+    self.user.secret = userSecret;
+    config.curUser = self.user;
+    [_bleApi connectUserScaleDevice:device config:config callback:^(NSError *error) {
+        
+    }];
+}
+
+- (void)dismissWspConfigVC {
+    [self.wspConfigVC dismissViewControllerAnimated:YES completion:^{
+
+    }];
+}
+
+/// 跳转阻抗调整
+- (IBAction)toImpedanceAdjustment:(id)sender {
+    if (self.scaleData == nil) {
+        [self.view makeToast:@"请选择八电极测量数据 进行调整" duration:3 position:CSToastPositionCenter];
+        return;
+    }
+    
+    AdjustResistanceVC *vc = [[AdjustResistanceVC alloc] init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)adjustResistanceWithHmac:(NSString *)hmac {
+    [self.scaleData setFatThreshold:2 hmac:hmac callBlock:^(NSError *error) {
+        
+    }];
+    [self.scaleDataAry removeAllObjects];
+    for (QNScaleItemData *item in [self.scaleData getAllItem]) {
+        [self.scaleDataAry addObject:item];
+    }
+    [self.tableView reloadData];
+}
 @end

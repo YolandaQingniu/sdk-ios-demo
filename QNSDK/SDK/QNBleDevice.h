@@ -12,7 +12,8 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
     QNDeviceTypeScaleBleDefault = 100, //普通蓝牙秤
     QNDeviceTypeScaleBroadcast = 120,  //广播秤
     QNDeviceTypeScaleKitchen = 130,  //厨房秤
-    QNDeviceTypeScaleWsp = 140,  //wsp蓝牙秤
+    QNDeviceTypeUserScale = 140,  //用户蓝牙秤
+    QNDeviceTypeScaleWsp API_DEPRECATED_WITH_REPLACEMENT("QNDeviceTypeUserScale", ios(4.0, 8.0)) = QNDeviceTypeUserScale,
     QNDeviceTypeHeightScale = 160,  //身高体重秤
 };
 
@@ -33,11 +34,11 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
 @property (nonatomic, readonly, getter=isSupportWifi, assign) BOOL supportWifi;
 /** 设备类型 */
 @property (nonatomic, readonly, assign) QNDeviceType deviceType;
-/** (WSP设备专属)wsp秤最大支持注册用户数 */
+/** 秤最大支持注册用户数 */
 @property(nonatomic, readonly, assign) int maxUserNum;
-/** (WSP设备专属)wsp秤已注册用户数 */
+/** 秤已注册用户数 */
 @property(nonatomic, readonly, assign) int registeredUserNum;
-/** (WSP设备专属)是否支持八电极 */
+/** 是否支持八电极 */
 @property(nonatomic, readonly, assign) BOOL isSupportEightElectrodes;
 /** (WSP设备专属)是否支持OTA */
 @property(nonatomic, readonly, assign) BOOL isSupportBleOTA;

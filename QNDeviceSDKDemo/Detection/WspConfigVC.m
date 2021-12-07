@@ -16,32 +16,28 @@
 @property (weak, nonatomic) IBOutlet UITextField *otaUrlField;
 @property (weak, nonatomic) IBOutlet UITextField *encryptionField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *isPairWifiSegControl;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *userEventSegControl;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *updateInfoSegControl;
 @property (weak, nonatomic) IBOutlet UITextField *userIndexField;
 @property (weak, nonatomic) IBOutlet UITextField *userSecretField;
 
-@property(nonatomic, strong) QNWspConfig *wspConfig;
+@property(nonatomic, strong) QNUserScaleConfig *userConfig;
 
-@property(nonatomic, strong) NSMutableArray<NSNumber *> *deleteUsers;
-@property (weak, nonatomic) IBOutlet UISwitch *fatMeasurementSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *indicatorsSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *bleOtaSwitch;
+@property(nonatomic, strong) NSMutableArray *userList;
+@property (weak, nonatomic) IBOutlet UISwitch *isVisitorSwitch;
 
 @end
 
 @implementation WspConfigVC
 
-- (NSMutableArray<NSNumber *> *)deleteUsers {
-    if (_deleteUsers == nil) {
-        _deleteUsers = [NSMutableArray<NSNumber *> array];
+- (NSMutableArray *)userList {
+    if (_userList == nil) {
+        _userList = [NSMutableArray array];
     }
-    return _deleteUsers;
+    return _userList;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.wspConfig = [[QNWspConfig alloc] init];
+    self.userConfig = [[QNUserScaleConfig alloc] init];
     self.ssidLabel.text = [WiFiTool currentWifiName];
     //一下三处根据自身服务配置
     self.dataUrlField.text = @"http://wifi.test.hk:80/wsps?code=";
@@ -63,16 +59,10 @@
 - (IBAction)selectUserIndex:(UIButton *)sender {
     sender.selected = !sender.isSelected;
     NSNumber *index = [NSNumber numberWithInteger:sender.tag - 100];
-    if ([self.deleteUsers containsObject:index]) {
-        [self.deleteUsers removeObject:index];
+    if ([self.userList containsObject:index]) {
+        [self.userList removeObject:index];
     } else {
-        [self.deleteUsers addObject:index];
-    }
-}
-
-- (IBAction)selectUserEvent:(UISegmentedControl *)sender {
-    if (sender.selectedSegmentIndex != 0) {
-        self.updateInfoSegControl.selectedSegmentIndex = 1;
+        [self.userList addObject:index];
     }
 }
 
@@ -87,33 +77,21 @@
         QNWiFiConfig *wifiConfig = [[QNWiFiConfig alloc] init];
         wifiConfig.ssid = [WiFiTool currentWifiName];
         wifiConfig.pwd = self.pwdField.text;
-        self.wspConfig.wifiConfig = wifiConfig;
+        self.userConfig.wifiConfig = wifiConfig;
         
-        self.wspConfig.dataUrl = self.dataUrlField.text;
-        self.wspConfig.otaUrl = self.otaUrlField.text;
-        self.wspConfig.encryption = self.encryptionField.text;
+        self.userConfig.dataUrl = self.dataUrlField.text;
+        self.userConfig.otaUrl = self.otaUrlField.text;
+        self.userConfig.encryption = self.encryptionField.text;
     }
     
-    self.wspConfig.deleteUsers = self.deleteUsers;
-    
-    switch (self.userEventSegControl.selectedSegmentIndex) {
-        case 1: {
-            self.wspConfig.isRegist = YES;
-            self.wspConfig.isVisitor = NO;
-        }
-            break;
-        case 2: {
-            self.wspConfig.isRegist = NO;
-            self.wspConfig.isVisitor = YES;
-        }
-            break;
-        default:
-            self.wspConfig.isRegist = NO;
-            self.wspConfig.isVisitor = NO;
-            break;
+    NSMutableArray *users = [NSMutableArray array];
+    for (NSNumber *index in self.userList) {
+        QNUser *user = [[QNUser alloc] init];
+        user.index = [index intValue];
+        [users addObject:user];
     }
-    
-    self.wspConfig.isChange = self.updateInfoSegControl.selectedSegmentIndex == 1;
+    self.userConfig.userlist = users;
+    self.userConfig.isVisitor = self.isVisitorSwitch.isOn;
     
     int index = 0;
     int secret = 0;
@@ -126,16 +104,8 @@
         secret = [self.userSecretField.text intValue];
     }
     
-    if (self.bleOtaSwitch.isOn) {
-//        QNBleOTAConfig *otaConfig = [[QNBleOTAConfig alloc] init];
-//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"C21002E1X_BOTA_V03" ofType:@"bin"];
-//        otaConfig.OTAData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
-//        otaConfig.OTAVer = 3;
-//        self.wspConfig.otaConfig = otaConfig;
-    }
-    
-    if ([self.delegate respondsToSelector:@selector(selectWspConfig:userIndex:userSecret:measureFat:indicateDis:device:)]) {
-        [self.delegate selectWspConfig:self.wspConfig userIndex:index userSecret:secret measureFat:self.fatMeasurementSwitch.isOn indicateDis:self.indicatorsSwitch.isOn device:self.bleDevice];
+    if ([self.delegate respondsToSelector:@selector(selectUserConfig:userIndex:userSecret:device:)]) {
+        [self.delegate selectUserConfig:self.userConfig userIndex:index userSecret:secret device:self.bleDevice];
     }
     
     if ([self.delegate respondsToSelector:@selector(dismissWspConfigVC)]) {

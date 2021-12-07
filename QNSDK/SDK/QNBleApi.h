@@ -21,13 +21,14 @@
 #import "QNBleProtocolHandler.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "QNWspConfig.h"
+#import "QNUserScaleConfig.h"
 #import "QNBleKitchenConfig.h"
 #import "QNBleOTAProtocol.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.5.12 】
+ 当前版本【 2.5.10 】
 
  SDK最低配置8.0的系统
  
@@ -57,6 +58,13 @@
 @property (nonatomic, assign, class) BOOL debug;
 
 /**
+ 系统蓝牙状态的监听
+ 可在 QNBleStateProtocol.h 中查看详细信息
+ 
+ */
+@property (nonatomic, weak) id<QNBleStateListener> bleStateListener;
+
+/**
  发现设备监听，该监听必须实现，否则无法获取搜索到的设备信息
  可在 QNBleDeviceDiscorveryProtocol.h 中查看详细信息
  
@@ -69,14 +77,6 @@
  
  */
 @property (nonatomic, weak) id<QNBleConnectionChangeListener> connectionChangeListener;
-
-
-/**
- 日志信息监听
- 不需要收集日志时，可忽略该监听
- 此处监听的回调不受 debug 开关的控制
- */
-@property(nonatomic, weak) id<QNLogProtocol> logListener;
 
 /**
  测量数据的监听，该监听必须实现
@@ -93,11 +93,11 @@
 @property (nonatomic, weak) id<QNBleKitchenListener> bleKitchenListener;
 
 /**
- 系统蓝牙状态的监听
- 可在 QNBleStateProtocol.h 中查看详细信息
- 
+ 日志信息监听
+ 不需要收集日志时，可忽略该监听
+ 此处监听的回调不受 debug 开关的控制
  */
-@property (nonatomic, weak) id<QNBleStateListener> bleStateListener;
+@property(nonatomic, weak) id<QNLogProtocol> logListener;
 
 /**
  升级固件的监听(WSP专属)
@@ -112,7 +112,6 @@
  @return QNBleApi
  */
 + (QNBleApi *)sharedBleApi;
-
 
 /**
  注册SDK
@@ -170,13 +169,22 @@
 - (void)connectDevice:(QNBleDevice *)device user:(QNUser *)user callback:(QNResultCallback)callback;
 
 /**
+ 连接轻牛用户秤设备
+ 
+ @param device 需要连接的蓝牙设备
+ @param config 连接用户秤设备时的配置项
+ @param callback 结果回调
+ */
+- (void)connectUserScaleDevice:(QNBleDevice *)device config:(QNUserScaleConfig *)config callback:(QNResultCallback)callback;
+
+/**
  连接轻牛Wsp设备
  
  @param device 需要连接的蓝牙设备
  @param config 连接wsp设备时的配置项
  @param callback 结果回调
  */
-- (void)connectWspDevice:(QNBleDevice *)device config:(QNWspConfig *)config callback:(QNResultCallback)callback NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "2.4.2版本开始废弃connectWspDevice:改为使用connectDevice:");
+- (void)connectWspDevice:(QNBleDevice *)device config:(QNWspConfig *)config callback:(QNResultCallback)callback;
 
 /**
  断开设备的连接
@@ -332,6 +340,6 @@
  @param measureDate 测量时间
  @return QNScaleData
 */
-- (nullable QNScaleData *)physiqueCalculation:(nonnull QNUser *)user area:(YLAreaType)area weight:(double)weight date:(nonnull NSDate *)measureDate;
+- (QNScaleData *)physiqueCalculation:(QNUser *)user area:(YLAreaType)area weight:(double)weight date:(NSDate *)measureDate;
 @end
 
