@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -91,7 +91,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEN-tQ-TzR" userLabel="链接状态">
-                            <rect key="frame" x="100" y="140" width="105" height="40"/>
+                            <rect key="frame" x="100" y="140" width="195" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="z2K-Z8-779"/>
                             </constraints>
@@ -99,22 +99,8 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSW-bp-H3n">
-                            <rect key="frame" x="285" y="140" width="82" height="40"/>
-                            <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="82" id="vxb-Io-518"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="阻抗调整"/>
-                            <connections>
-                                <action selector="toImpedanceAdjustment:" destination="-1" eventType="touchUpInside" id="YEV-oy-8gQ"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sfa-Nw-FLl">
-                            <rect key="frame" x="215" y="140" width="60" height="40"/>
+                            <rect key="frame" x="305" y="140" width="60" height="40"/>
                             <color key="backgroundColor" systemColor="systemBlueColor"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="FZD-VW-eLz"/>
@@ -134,16 +120,13 @@
                         <constraint firstAttribute="height" constant="200" id="5cH-R1-1Xx"/>
                         <constraint firstItem="aSu-Td-Yu6" firstAttribute="leading" secondItem="1IZ-Uz-Mov" secondAttribute="leading" constant="15" id="8Hh-c4-gID"/>
                         <constraint firstItem="t1b-Is-NBC" firstAttribute="top" secondItem="BIF-et-v9j" secondAttribute="bottom" constant="20" id="G8S-F5-rq9"/>
-                        <constraint firstItem="iSW-bp-H3n" firstAttribute="leading" secondItem="Sfa-Nw-FLl" secondAttribute="trailing" constant="10" id="HgD-g1-TTY"/>
-                        <constraint firstItem="iSW-bp-H3n" firstAttribute="top" secondItem="Sfa-Nw-FLl" secondAttribute="top" id="IFJ-XG-aID"/>
                         <constraint firstItem="BIF-et-v9j" firstAttribute="centerY" secondItem="aSu-Td-Yu6" secondAttribute="centerY" id="If0-66-cKE"/>
-                        <constraint firstItem="iSW-bp-H3n" firstAttribute="bottom" secondItem="Sfa-Nw-FLl" secondAttribute="bottom" id="Uwl-iH-vnH"/>
+                        <constraint firstAttribute="trailing" secondItem="Sfa-Nw-FLl" secondAttribute="trailing" constant="10" id="U2C-e6-KKV"/>
                         <constraint firstItem="vEN-tQ-TzR" firstAttribute="leading" secondItem="t1b-Is-NBC" secondAttribute="trailing" id="XNR-q7-eGx"/>
                         <constraint firstItem="Sfa-Nw-FLl" firstAttribute="leading" secondItem="vEN-tQ-TzR" secondAttribute="trailing" constant="10" id="Xml-8u-udD"/>
                         <constraint firstItem="BIF-et-v9j" firstAttribute="leading" secondItem="aSu-Td-Yu6" secondAttribute="trailing" id="ZCr-8v-DTH"/>
                         <constraint firstItem="Sfa-Nw-FLl" firstAttribute="top" secondItem="BIF-et-v9j" secondAttribute="bottom" constant="20" id="i8v-5y-FdY"/>
                         <constraint firstItem="aSu-Td-Yu6" firstAttribute="top" secondItem="1IZ-Uz-Mov" secondAttribute="top" constant="80" id="wUM-qd-Mqq"/>
-                        <constraint firstAttribute="trailing" secondItem="iSW-bp-H3n" secondAttribute="trailing" constant="8" id="xdg-9j-AUo"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rPG-zo-wNw">
@@ -237,9 +220,6 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

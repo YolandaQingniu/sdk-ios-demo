@@ -40,10 +40,10 @@
     self.userConfig = [[QNUserScaleConfig alloc] init];
     self.ssidLabel.text = [WiFiTool currentWifiName];
     //一下三处根据自身服务配置
-    self.dataUrlField.text = @"http://wifi.test.hk:80/wsps?code=";
-    self.otaUrlField.text = @"https://ota.test.hk";
-    self.encryptionField.text = @"mUm3PKiL94Ebh1dh";
-    self.userSecretField.text = @"999";
+    self.dataUrlField.text = @"http://sit-wsp-full.yolanda.hk:80/yolanda/wsp?code=";
+    self.otaUrlField.text = @"https://ota.yolanda.hk";
+    self.encryptionField.text = @"yolandakitnewhdr";
+    self.userSecretField.text = @"1000";
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

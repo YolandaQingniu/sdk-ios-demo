@@ -31,9 +31,8 @@ typedef enum{
 #import <CoreLocation/CoreLocation.h>
 #import "WspConfigVC.h"
 #import "UIView+Toast.h"
-#import "AdjustResistanceVC.h"
 
-@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNUserScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener,AdjustResistanceDelegate>
+@interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNUserScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
 @property (weak, nonatomic) IBOutlet UIButton *scanBtn;
 @property (weak, nonatomic) IBOutlet UILabel *styleLabel;
@@ -730,18 +729,6 @@ typedef enum{
     [self.wspConfigVC dismissViewControllerAnimated:YES completion:^{
 
     }];
-}
-
-/// 跳转阻抗调整
-- (IBAction)toImpedanceAdjustment:(id)sender {
-    if (self.scaleData == nil) {
-        [self.view makeToast:@"请选择八电极测量数据 进行调整" duration:3 position:CSToastPositionCenter];
-        return;
-    }
-    
-    AdjustResistanceVC *vc = [[AdjustResistanceVC alloc] init];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)adjustResistanceWithHmac:(NSString *)hmac {
