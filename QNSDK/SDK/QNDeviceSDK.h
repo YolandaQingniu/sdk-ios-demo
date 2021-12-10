@@ -36,6 +36,7 @@ FOUNDATION_EXPORT const unsigned char QNDeviceSDKVersionString[];
 #import "QNBleProtocolHandler.h"
 #import "QNWspConfig.h"
 #import "QNWspScaleDataProtocol.h"
+#import "QNUserScaleDataProtocol.h"
 
 
 

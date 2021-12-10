@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol WspConfigVCDelegate <NSObject>
 
-- (void)selectWspConfig:(QNWspConfig *)wspConfig userIndex:(int)userIndex userSecret:(int)userSecret measureFat:(BOOL)measureFat indicateDis:(BOOL)indicateDis device:(QNBleDevice *)device;
+- (void)selectUserConfig:(QNUserScaleConfig *)userConfig userIndex:(int)userIndex userSecret:(int)userSecret device:(QNBleDevice *)device;
 - (void)dismissWspConfigVC;
 @end
 

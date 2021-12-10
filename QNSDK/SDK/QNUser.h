@@ -56,9 +56,9 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 /** 用户目标 */
 @property (nonatomic, assign) YLUserGoalType goalType;
 
-/** WSP设备专用，秤端该用户索引，该值由向秤注册用户成功时，秤端返回 */
+/** 秤端该用户索引，该值由向秤注册用户成功时，秤端返回 */
 @property (nonatomic, assign) int index;
-/** WSP设备专用，秤端该用户秘钥，该秘钥由服务器下发 */
+/** 秤端该用户秘钥，默认1000 */
 @property (nonatomic, assign) int secret;
 
 @property(nonatomic, strong) QNIndicateConfig *indicateConfig;
