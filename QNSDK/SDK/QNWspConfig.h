@@ -43,6 +43,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 蓝牙ota固件数据(当 value 值为 null 时，不进行OTA ；当 value 值为 QNOtaConfig 对象时，根据对象中的值进行OTA)
 @property(nonatomic, strong, nullable) QNBleOTAConfig *otaConfig;
+
+/// 是否隐藏秤端体重，默认不隐藏
+@property(nonatomic, assign) BOOL isHideWeight;
+
 @end
 
 NS_ASSUME_NONNULL_END

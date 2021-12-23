@@ -14,11 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol QNWspScaleDataListener <QNScaleDataListener>
 
+@optional
 - (void)wspRegisterUserComplete:(QNBleDevice *)device user:(QNUser *)user;
 
 - (void)wspLocationSyncStatus:(QNBleDevice *)device suceess:(BOOL)suceess;
 
 - (void)wspReadSnComplete:(QNBleDevice *)device sn:(NSString *)sn;
+
+- (void)wspRestoreFactorySettings:(QNBleDevice *)device suceess:(BOOL)suceess;
 
 @end
 

@@ -28,7 +28,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.6.1 】
+ 当前版本【 2.6.2 】
 
  SDK最低配置8.0的系统
  
@@ -184,7 +184,7 @@
  @param config 连接wsp设备时的配置项
  @param callback 结果回调
  */
-- (void)connectWspDevice:(QNBleDevice *)device config:(QNWspConfig *)config callback:(QNResultCallback)callback NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "2.6.1版本开始废弃connectWspDevice:改为使用connectUserScaleDevice:");
+- (void)connectWspDevice:(QNBleDevice *)device config:(QNWspConfig *)config callback:(QNResultCallback)callback;
 
 /**
  断开设备的连接
