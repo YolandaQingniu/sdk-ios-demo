@@ -47,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否隐藏秤端体重，默认不隐藏
 @property(nonatomic, assign) BOOL isHideWeight;
 
+/// 是否关闭秤端测量心率功能（秤需要支持才行），默认不关闭
+@property(nonatomic, assign) BOOL isCloseHeartRate;
+
 @end
 
 NS_ASSUME_NONNULL_END
