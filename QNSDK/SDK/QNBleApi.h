@@ -28,7 +28,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.6.5 】
+ 当前版本【 2.6.7 】
 
  SDK最低配置8.0的系统
  
@@ -341,5 +341,15 @@
  @return QNScaleData
 */
 - (QNScaleData *)physiqueCalculation:(QNUser *)user area:(YLAreaType)area weight:(double)weight date:(NSDate *)measureDate;
+
+/// 切换用户秤访问用户
+/// @param user 用户信息
+/// @param callback 结果的回调
+- (void)switchUserScaleUser:(QNUser *)user callback:(QNResultCallback)callback;
+
+/// 更新用户秤用户识别体重
+/// @param weight 体重
+/// @param callback 结果的回调
+- (void)updateUserScaleIdentifyWeight:(double)weight callback:(QNResultCallback)callback;
 @end
 

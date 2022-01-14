@@ -14,15 +14,16 @@ typedef NS_ENUM(NSInteger, QNScaleEvent) {
     QNScaleEventWiFiBleStartNetwork = 1, //WiFi蓝牙双模设备开始配网
     QNScaleEventWiFiBleNetworkSuccess = 2, //WiFi蓝牙双模设备联网成功
     QNScaleEventWiFiBleNetworkFail = 3, //WiFi蓝牙双模设备联网失败
-    QNScaleEventRegistUserSuccess = 4, //WSP秤专属，注册用户成功
-    QNScaleEventRegistUserFail = 5, //WSP秤专属，注册用户失败
-    QNScaleEventVisitUserSuccess = 6, //WSP秤专属，访问用户成功
-    QNScaleEventVisitUserFail = 7, //WSP秤专属，访问用户失败
-    QNScaleEventDeleteUserSuccess = 8, //WSP秤专属，删除用户成功
-    QNScaleEventDeleteUserFail = 9, //WSP秤专属，删除用户失败
-    QNScaleEventSyncUserInfoSuccess = 10, //WSP秤专属，同步用户信息成功
-    QNScaleEventSyncUserInfoFail = 11, //WSP秤专属，同步用户信息失败
-
+    QNScaleEventRegistUserSuccess = 4, //用户秤专属，注册用户成功
+    QNScaleEventRegistUserFail = 5, //用户秤专属，注册用户失败
+    QNScaleEventVisitUserSuccess = 6, //用户秤专属，访问用户成功
+    QNScaleEventVisitUserFail = 7, //用户秤专属，访问用户失败
+    QNScaleEventDeleteUserSuccess = 8, //用户秤专属，删除用户成功
+    QNScaleEventDeleteUserFail = 9, //用户秤专属，删除用户失败
+    QNScaleEventSyncUserInfoSuccess = 10, //用户秤专属，同步用户信息成功
+    QNScaleEventSyncUserInfoFail = 11, //用户秤专属，同步用户信息失败
+    QNScaleEventUpdateIdentifyWeightSuccess = 12, //用户秤专属，更新用户识别体重成功
+    QNScaleEventUpdateIdentifyWeightFail = 13, //用户秤专属，更新用户识别体重失败
 };
 
 @protocol QNScaleDataListener <NSObject>

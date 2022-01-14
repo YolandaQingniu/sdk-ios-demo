@@ -32,6 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 用户地区(部分设备支持)用来控制秤上显示体脂标准
 @property (nonatomic, assign) YLAreaType areaType;
+
+/// 关闭测量脂肪(部分设备支持)，默认 NO，测量脂肪
+@property(nonatomic, assign) BOOL isCloseMeasureFat;
+/// 关闭测量脂肪是否是长期有效(部分设备支持)，默认 NO，单次链接有效
+@property(nonatomic, assign) BOOL isLongTimeValid;
 @end
 
 NS_ASSUME_NONNULL_END
