@@ -28,7 +28,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.6.8 】
+ 当前版本【 2.6.9 】
 
  SDK最低配置8.0的系统
  
@@ -351,5 +351,10 @@
 /// @param weight 体重
 /// @param callback 结果的回调
 - (void)updateUserScaleIdentifyWeight:(double)weight callback:(QNResultCallback)callback;
+
+/// 删除用户秤秤端用户信息
+/// @param indexList 用户索引数组
+/// @param callback 结果的回调
+- (void)deleteScaleUsers:(NSArray <NSNumber *>*)indexList callback:(QNResultCallback)callback;
 @end
 

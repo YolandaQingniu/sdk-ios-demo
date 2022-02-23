@@ -68,6 +68,9 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 /** WSP 设备专用, 控制秤端是否进行显示测量后除体重与BMI以外的指标）*/
 @property(nonatomic, assign) BOOL indicateDis;
 
+/** 用户特性*/
+@property(nonatomic, assign) int selfhood;
+
 /**
  建立用户模型
  

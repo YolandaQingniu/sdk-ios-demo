@@ -46,5 +46,7 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
 @property(nonatomic, readonly, assign) int firmwareVer;
 /** (WSP设备专属)硬件版本 */
 @property(nonatomic, readonly, assign) int hardwareVer;
+/** (WSP设备专属)软件版本 */
+@property(nonatomic, readonly, assign) int softwareVer;
 
 @end

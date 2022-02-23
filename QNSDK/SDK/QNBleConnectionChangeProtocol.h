@@ -51,7 +51,6 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
  */
 - (void)onServiceSearchComplete:(QNBleDevice *)device;
 
-
 /**
  正在断开连接
  
@@ -74,6 +73,14 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
  @param error 错误代码
  */
 - (void)onConnectError:(QNBleDevice *)device error:(NSError *)error;
+
+/**
+ 设备开始交互
+ 
+ @param device QNBleDevice
+ */
+@optional
+- (void)onStartInteracting:(QNBleDevice *)device;
 
 @end
 
