@@ -28,7 +28,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.7.0 】
+ 当前版本【 2.7.1 】
 
  SDK最低配置8.0的系统
  
@@ -356,5 +356,12 @@
 /// @param indexList 用户索引数组
 /// @param callback 结果的回调
 - (void)deleteScaleUsers:(NSArray <NSNumber *>*)indexList callback:(QNResultCallback)callback;
+
+
+/// 设置秤端是否测脂
+/// @param state 开关状态
+/// @param longTerm 是否长期有效
+/// @param callback 结果的回调
+- (void)setFatMeasurementSwitch:(BOOL)state longTerm:(BOOL)longTerm callback:(QNResultCallback)callback;
 @end
 

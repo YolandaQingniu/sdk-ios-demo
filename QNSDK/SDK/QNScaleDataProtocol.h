@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, QNScaleEvent) {
     QNScaleEventSyncUserInfoFail = 11, //用户秤专属，同步用户信息失败
     QNScaleEventUpdateIdentifyWeightSuccess = 12, //用户秤专属，更新用户识别体重成功
     QNScaleEventUpdateIdentifyWeightFail = 13, //用户秤专属，更新用户识别体重失败
+    QNScaleEventUpdateScaleConfigSuccess = 14, //用户秤专属，更新秤端设置成功
+    QNScaleEventUpdateScaleConfigFail = 15, //用户秤专属，更新秤端设置失败
 };
 
 @protocol QNScaleDataListener <NSObject>
