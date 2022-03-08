@@ -28,7 +28,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.7.1 】
+ 当前版本【 2.7.3 】
 
  SDK最低配置8.0的系统
  
@@ -340,7 +340,7 @@
  @param measureDate 测量时间
  @return QNScaleData
 */
-- (QNScaleData *)physiqueCalculation:(QNUser *)user area:(YLAreaType)area weight:(double)weight date:(NSDate *)measureDate;
+- (QNScaleData *)physiqueCalculation:(QNUser *)user area:(QNAreaType)area weight:(double)weight date:(NSDate *)measureDate;
 
 /// 切换用户秤访问用户
 /// @param user 用户信息
@@ -356,7 +356,6 @@
 /// @param indexList 用户索引数组
 /// @param callback 结果的回调
 - (void)deleteScaleUsers:(NSArray <NSNumber *>*)indexList callback:(QNResultCallback)callback;
-
 
 /// 设置秤端是否测脂
 /// @param state 开关状态

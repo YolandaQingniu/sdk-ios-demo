@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL isDelayScreenOff;
 
 /// 用户地区(部分设备支持)用来控制秤上显示体脂标准
-@property (nonatomic, assign) YLAreaType areaType;
+@property (nonatomic, assign) QNAreaType areaType;
 
 /// 关闭测量脂肪(部分设备支持)，默认 NO，测量脂肪
 @property(nonatomic, assign) BOOL isCloseMeasureFat;

@@ -32,9 +32,9 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
 };
 
 
-typedef NS_ENUM(NSUInteger,YLAreaType) {
-    YLAreaTypeOther = 0,    //其他
-    YLAreaTypeAsia = 1,     // 亚洲
+typedef NS_ENUM(NSUInteger,QNAreaType) {
+    QNAreaTypeOther = 0,    //其他
+    QNAreaTypeAsia = 1,     // 亚洲
 };
 
 /**
