@@ -14,8 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol QNUserScaleDataListener <QNScaleDataListener>
 
+@optional
 - (void)registerUserComplete:(QNBleDevice *)device user:(QNUser *)user;
 
+- (NSString *)getLastDataHmac:(QNBleDevice *)device user:(QNUser *)user;
 @end
 
 NS_ASSUME_NONNULL_END

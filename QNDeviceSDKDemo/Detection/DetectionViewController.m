@@ -31,6 +31,8 @@ typedef enum{
 #import <CoreLocation/CoreLocation.h>
 #import "WspConfigVC.h"
 #import "UIView+Toast.h"
+#import "QNAESCrypt.h"
+#import "QNDataTool.h"
 
 @interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNUserScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
@@ -56,6 +58,9 @@ typedef enum{
 
 /// 当前测量数据
 @property (nonatomic, strong) QNScaleData *scaleData;
+
+@property (weak, nonatomic) IBOutlet UITextField *lastHmacLabel;
+
 @end
 
 @implementation DetectionViewController
@@ -397,6 +402,29 @@ typedef enum{
 
 - (void)registerUserComplete:(QNBleDevice *)device user:(QNUser *)user {
     [self.view makeToast:[NSString stringWithFormat:@"当前序列号: %d",user.index] duration:3 position:CSToastPositionCenter];
+}
+
+
+- (NSString *)getLastDataHmac:(QNBleDevice *)device user:(QNUser *)user {
+    NSArray *dataAry = [self.lastHmacLabel.text componentsSeparatedByString:@","];
+    if (dataAry.count < 11 ) {
+        return @"";
+    }
+    NSMutableDictionary *hmacJson = [NSMutableDictionary dictionary];
+    hmacJson[@"res20_left_arm"] = dataAry[0];
+    hmacJson[@"res20_right_arm"] = dataAry[1];
+    hmacJson[@"res20_left_leg"] = dataAry[2];
+    hmacJson[@"res20_right_leg"] = dataAry[3];
+    hmacJson[@"res20_trunk"] = dataAry[4];
+    
+    hmacJson[@"res100_left_arm"] = dataAry[5];
+    hmacJson[@"res100_right_arm"] = dataAry[6];
+    hmacJson[@"res100_left_leg"] = dataAry[7];
+    hmacJson[@"res100_right_leg"] = dataAry[8];
+    hmacJson[@"res100_trunk"] = dataAry[9];
+    
+    hmacJson[@"weight"] = dataAry[10];
+    return [QNAESCrypt AES128Encrypt:[[QNDataTool sharedDataTool] dictionaryToJson:hmacJson]];
 }
 
 #pragma mark - QNBleKitchenDataListener

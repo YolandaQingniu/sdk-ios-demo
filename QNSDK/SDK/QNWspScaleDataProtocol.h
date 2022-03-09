@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)wspRestoreFactorySettings:(QNBleDevice *)device suceess:(BOOL)suceess;
 
+- (NSString *)wspGetLastDataHmac:(QNBleDevice *)device user:(QNUser *)user;
 @end
 
 NS_ASSUME_NONNULL_END
