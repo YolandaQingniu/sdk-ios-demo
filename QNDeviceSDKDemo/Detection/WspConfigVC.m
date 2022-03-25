@@ -40,7 +40,7 @@
     self.userConfig = [[QNUserScaleConfig alloc] init];
     self.ssidLabel.text = [WiFiTool currentWifiName];
     //一下三处根据自身服务配置
-    self.dataUrlField.text = @"http://sit-wsp-full.yolanda.hk:80/yolanda/wsp?code=";
+    self.dataUrlField.text = @"http://wsp-lite.yolanda.hk:80/yolanda/wsp?code=";
     self.otaUrlField.text = @"https://ota.yolanda.hk";
     self.encryptionField.text = @"yolandakitnewhdr";
     self.userSecretField.text = @"1000";
@@ -91,7 +91,6 @@
     }
     self.userConfig.userlist = users;
     self.userConfig.isVisitor = self.isVisitorSwitch.isOn;
-    
     int index = 0;
     int secret = 0;
     //此处只为展示使用，secret的值为服务器下发

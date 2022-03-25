@@ -377,7 +377,12 @@ typedef enum{
     QNScaleStoreData *temp = [QNScaleStoreData buildStoreDataWithWeight:data.weight measureTime:data.measureTime mac:data.mac hmac:data.hmac callBlock:^(NSError *error) {
         
     }];
-    NSLog(@"%@",temp.hmac);
+    NSString *string = [NSString stringWithFormat:@"收到存储数据 %ld 条：",storedDataList.count];
+    for (int i = 0; i < storedDataList.count; i++) {
+        QNScaleStoreData *storeData = storedDataList[i];
+        string = [string stringByAppendingFormat:@"\n第%d条数据，测量时间：%@",i+1,storeData.measureTime];
+    }
+    [self.view makeToast:string duration:10 position:CSToastPositionCenter];
 }
 
 - (void)onScaleEventChange:(QNBleDevice *)device scaleEvent:(QNScaleEvent)scaleEvent {
