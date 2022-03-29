@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'QNSDK'
-s.version          = '2.7.6'
+s.version          = '2.7.7'
 s.summary          = '轻牛旗下设备通讯类'
 
 s.description      = '支持智能体脂秤、共享秤二维码数据解析'
