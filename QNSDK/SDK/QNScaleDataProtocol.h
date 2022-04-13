@@ -78,4 +78,13 @@ typedef NS_ENUM(NSInteger, QNScaleEvent) {
  @param scaleEvent 秤事件
  */
 - (void)onScaleEventChange:(QNBleDevice *)device scaleEvent:(QNScaleEvent)scaleEvent;
+
+@optional
+/**
+ 普通蓝牙称读取设备SN码
+ 
+ @param device QNBleDevice
+ @param sn sn
+ */
+- (void)readSnComplete:(QNBleDevice *)device sn:(NSString *)sn;
 @end

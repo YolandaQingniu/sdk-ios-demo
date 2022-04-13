@@ -409,6 +409,10 @@ typedef enum{
     return @"";
 }
 
+- (void)readSnComplete:(QNBleDevice *)device sn:(NSString *)sn {
+//    [self.view makeToast:[NSString stringWithFormat:@"sn: %@",sn] duration:3 position:CSToastPositionBottom];
+}
+
 #pragma mark - QNBleKitchenDataListener
 - (void)onGetBleKitchenWeight:(QNBleKitchenDevice *)device weight:(double)weight {
     weight = [self.bleApi convertWeightWithTargetUnit:weight unit:device.unit];
