@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *birthdayLabel;
 @property (weak, nonatomic) IBOutlet UIButton *femaleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *maleBtn;
+@property (weak, nonatomic) IBOutlet UIButton *isAthleteBtn;
+@property (weak, nonatomic) IBOutlet UIButton *notAthleteBtn;
 
 @property (nonatomic, strong) NSDate *birthdayDate;
 
@@ -121,6 +123,20 @@
     sender.selected = YES;
     self.femaleBtn.selected = NO;
 }
+#pragma mark 选中是运动员
+- (IBAction)selectIsAthlete:(UIButton *)sender {
+    
+    if (sender.isSelected) return;
+    sender.selected = YES;
+    self.notAthleteBtn.selected = NO;
+}
+
+#pragma mark 选中不是运动员
+- (IBAction)selectNotAthlete:(UIButton *)sender {
+    if (sender.isSelected) return;
+    sender.selected = YES;
+    self.isAthleteBtn.selected = NO;
+}
 
 #pragma mark - 选扫描模式
 #pragma mark 选中扫描模式-每次
@@ -212,6 +228,8 @@
     QNUser *user = [_bleApi buildUser:self.userIdTF.text height:height gender:self.femaleBtn.selected ? @"female" : @"male" birthday:self.birthdayDate callback:^(NSError *error) {
         
     }];
+    user.athleteType = self.isAthleteBtn.selected ? YLAthleteSport:YLAthleteDefault;
+    
     DetectionViewController *detectionVC = [[DetectionViewController alloc] init];
     detectionVC.user = user;
     detectionVC.config = self.config;

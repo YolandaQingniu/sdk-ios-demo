@@ -845,7 +845,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK";
-				MARKETING_VERSION = 2.7.15.1;
+				MARKETING_VERSION = 2.7.16.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
 				PRODUCT_NAME = "QNSDK 2.2.2";
@@ -869,7 +869,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK";
-				MARKETING_VERSION = 2.7.15.1;
+				MARKETING_VERSION = 2.7.16.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
 				PRODUCT_NAME = "QNSDK 2.2.2";
