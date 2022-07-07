@@ -24,11 +24,12 @@
 #import "QNUserScaleConfig.h"
 #import "QNBleKitchenConfig.h"
 #import "QNBleOTAProtocol.h"
+#import "QNBleRulerProtocol.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.7.16 】
+ 当前版本【 2.8.0 】
 
  SDK最低配置8.0的系统
  
@@ -105,6 +106,13 @@
  
  */
 @property (nonatomic, weak) id<QNBleOTAListener> bleOTAListener;
+
+/**
+ 蓝牙围度监听
+ 可在 QNBleRulerProtocol.h 中查看详细信息
+ 
+ */
+@property (nonatomic, weak) id<QNBleRulerListener> bleRulerListener;
 
 /**
  初始化SDK
@@ -308,6 +316,14 @@
  @param config 设置信息
  */
 - (void)setBleKitchenDeviceConfig:(QNBleKitchenConfig *)config;
+
+/**
+ 连接蓝牙围度尺
+ 
+ @param device 连接的设备(该设备对象必须是搜索返回的蓝牙围度尺设备对象)
+ @param callback 结果回调
+ */
+- (void)connectRulerDevice:(QNBleRulerDevice *)device callback:(QNResultCallback)callback;
 
 /**
  WSP设备恢复出厂设置

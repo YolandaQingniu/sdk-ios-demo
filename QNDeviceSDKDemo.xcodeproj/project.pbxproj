@@ -60,6 +60,10 @@
 		7E41A1FA26E9F35E00567B06 /* QNBleKitchenProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E41A1F926E9F35E00567B06 /* QNBleKitchenProtocol.h */; };
 		7E5B63C02750BE590006D82F /* QNUserScaleConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5B63BE2750BE590006D82F /* QNUserScaleConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E5B63C12750BE5A0006D82F /* QNUserScaleDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5B63BF2750BE590006D82F /* QNUserScaleDataProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8C4C9528743A8C0030A042 /* QNBleRulerData.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8C4C9228743A8C0030A042 /* QNBleRulerData.h */; };
+		7E8C4C9628743A8C0030A042 /* QNBleRulerDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8C4C9328743A8C0030A042 /* QNBleRulerDevice.h */; };
+		7E8C4C9728743A8C0030A042 /* QNBleRulerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8C4C9428743A8C0030A042 /* QNBleRulerProtocol.h */; };
+		7E8C4CA028743CD40030A042 /* BleRulerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C4C9E28743CD40030A042 /* BleRulerVC.m */; };
 		7EB6157A27427E4B00DE8173 /* QNBleOTAConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EB6157927427E4B00DE8173 /* QNBleOTAConfig.h */; };
 		7ECFF808269EB945007581D6 /* QNSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7ECFF807269EB945007581D6 /* QNSDK.podspec */; };
 		D2048A5220A6E15600D943BC /* 123456789.qn in Resources */ = {isa = PBXBuildFile; fileRef = D2048A5120A6E15600D943BC /* 123456789.qn */; };
@@ -168,6 +172,11 @@
 		7E41A1F926E9F35E00567B06 /* QNBleKitchenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleKitchenProtocol.h; sourceTree = "<group>"; };
 		7E5B63BE2750BE590006D82F /* QNUserScaleConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUserScaleConfig.h; sourceTree = "<group>"; };
 		7E5B63BF2750BE590006D82F /* QNUserScaleDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUserScaleDataProtocol.h; sourceTree = "<group>"; };
+		7E8C4C9228743A8C0030A042 /* QNBleRulerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleRulerData.h; sourceTree = "<group>"; };
+		7E8C4C9328743A8C0030A042 /* QNBleRulerDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleRulerDevice.h; sourceTree = "<group>"; };
+		7E8C4C9428743A8C0030A042 /* QNBleRulerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleRulerProtocol.h; sourceTree = "<group>"; };
+		7E8C4C9D28743CD40030A042 /* BleRulerVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BleRulerVC.h; sourceTree = "<group>"; };
+		7E8C4C9E28743CD40030A042 /* BleRulerVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BleRulerVC.m; sourceTree = "<group>"; };
 		7EB6157927427E4B00DE8173 /* QNBleOTAConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleOTAConfig.h; sourceTree = "<group>"; };
 		7ECFF807269EB945007581D6 /* QNSDK.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = QNSDK.podspec; sourceTree = SOURCE_ROOT; };
 		D2048A5120A6E15600D943BC /* 123456789.qn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 123456789.qn; sourceTree = "<group>"; };
@@ -305,6 +314,9 @@
 		D230F22D224085C300DC01E9 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				7E8C4C9228743A8C0030A042 /* QNBleRulerData.h */,
+				7E8C4C9328743A8C0030A042 /* QNBleRulerDevice.h */,
+				7E8C4C9428743A8C0030A042 /* QNBleRulerProtocol.h */,
 				1B8AD1AE25F5D9DA00EDFE32 /* libQNDeviceSDK.a */,
 				1B8AD1AF25F5D9DA00EDFE32 /* QNBleApi.h */,
 				1B8AD19E25F5D9DA00EDFE32 /* QNBleBroadcastDevice.h */,
@@ -383,6 +395,8 @@
 				D232D64E2004DE2D00AABD67 /* ViewController.m */,
 				1B09711D2361523200025284 /* KitchenVC.h */,
 				1B09711E2361523200025284 /* KitchenVC.m */,
+				7E8C4C9D28743CD40030A042 /* BleRulerVC.h */,
+				7E8C4C9E28743CD40030A042 /* BleRulerVC.m */,
 				D244245D2271CD0400F63F35 /* WiFiTool.h */,
 				D244245E2271CD0400F63F35 /* WiFiTool.m */,
 				D232D6502004DE2D00AABD67 /* Main.storyboard */,
@@ -429,6 +443,7 @@
 				1B8AD1C325F5D9DB00EDFE32 /* QNWspConfig.h in Headers */,
 				7E41A1EC26E89CF800567B06 /* QNBleKitchenConfig.h in Headers */,
 				1B8AD1C425F5D9DB00EDFE32 /* QNBleDeviceDiscoveryProtocol.h in Headers */,
+				7E8C4C9728743A8C0030A042 /* QNBleRulerProtocol.h in Headers */,
 				1B8AD1C025F5D9DB00EDFE32 /* QNWspScaleDataProtocol.h in Headers */,
 				1B8AD1C525F5D9DB00EDFE32 /* QNBleStateProtocol.h in Headers */,
 				1B8AD1C625F5D9DB00EDFE32 /* QNBleDevice.h in Headers */,
@@ -442,7 +457,9 @@
 				1B8AD1B825F5D9DB00EDFE32 /* QNBleBroadcastDevice.h in Headers */,
 				7E41A1FA26E9F35E00567B06 /* QNBleKitchenProtocol.h in Headers */,
 				1B8AD1BD25F5D9DB00EDFE32 /* QNScaleItemData.h in Headers */,
+				7E8C4C9628743A8C0030A042 /* QNBleRulerDevice.h in Headers */,
 				1B8AD1CB25F5D9DB00EDFE32 /* QNScaleStoreData.h in Headers */,
+				7E8C4C9528743A8C0030A042 /* QNBleRulerData.h in Headers */,
 				1B8AD1C125F5D9DB00EDFE32 /* QNUser.h in Headers */,
 				1B8AD1CC25F5D9DB00EDFE32 /* QNWiFiConfig.h in Headers */,
 				7EB6157A27427E4B00DE8173 /* QNBleOTAConfig.h in Headers */,
@@ -509,6 +526,7 @@
 					};
 					D232D6462004DE2D00AABD67 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1320;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.AccessWiFi = {
@@ -597,6 +615,7 @@
 				D232D64C2004DE2D00AABD67 /* AppDelegate.m in Sources */,
 				04A4208C235FFAE400716903 /* ScaleDataTargetTool.m in Sources */,
 				1B99EA212540372C00EE7DFA /* CustomBleManagerVC.m in Sources */,
+				7E8C4CA028743CD40030A042 /* BleRulerVC.m in Sources */,
 				1B99EA432540393200EE7DFA /* MASLayoutConstraint.m in Sources */,
 				1B99EA472540393200EE7DFA /* MASViewConstraint.m in Sources */,
 				1B99EA442540393200EE7DFA /* NSArray+MASAdditions.m in Sources */,
@@ -834,6 +853,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = QNDeviceSDKDemo/QNDeviceSDKDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -845,10 +865,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK";
-				MARKETING_VERSION = 2.7.16.2;
+				MARKETING_VERSION = 2.8.0.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
 				PRODUCT_NAME = "QNSDK 2.2.2";
+				SWIFT_OBJC_BRIDGING_HEADER = "QNDeviceSDKDemo/Detection/QNDeviceSDKDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -858,6 +881,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = QNDeviceSDKDemo/QNDeviceSDKDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -869,10 +893,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK";
-				MARKETING_VERSION = 2.7.16.2;
+				MARKETING_VERSION = 2.8.0.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
 				PRODUCT_NAME = "QNSDK 2.2.2";
+				SWIFT_OBJC_BRIDGING_HEADER = "QNDeviceSDKDemo/Detection/QNDeviceSDKDemo-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
