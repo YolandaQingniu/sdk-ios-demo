@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#define kAppid @"123456789"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

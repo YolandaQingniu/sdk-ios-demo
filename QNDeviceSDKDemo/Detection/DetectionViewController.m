@@ -21,7 +21,7 @@ typedef enum{
     DeviceStyleWifiBleNetworkFail = 11,         //配网失败
 }DeviceStyle;
 
-
+#import "AppDelegate.h"
 #import "DetectionViewController.h"
 #import "EightElectrodesReportVC.h"
 #import "DeviceTableViewCell.h"
@@ -64,6 +64,7 @@ typedef enum{
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"测量";
+    self.appIdLabel.text = kAppid;
     self.peelBtn.hidden = YES;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
