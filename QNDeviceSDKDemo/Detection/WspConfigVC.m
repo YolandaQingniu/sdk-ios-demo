@@ -89,7 +89,9 @@
         user.index = [index intValue];
         [users addObject:user];
     }
-    self.userConfig.userlist = users;
+    if (users.count > 0) {
+        self.userConfig.userlist = users;
+    }
     self.userConfig.isVisitor = self.isVisitorSwitch.isOn;
     int index = 0;
     int secret = 0;

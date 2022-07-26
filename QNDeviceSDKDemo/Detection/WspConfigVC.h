@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "QNDeviceSDK.h"
-
+#define kFittingResistance @"fittingResistance"
+#define kFittingResistanceFlag @"fittingResistanceFlag"
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol WspConfigVCDelegate <NSObject>
