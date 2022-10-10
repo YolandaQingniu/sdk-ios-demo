@@ -50,6 +50,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否关闭秤端测量心率功能（秤需要支持才行），默认不关闭
 @property(nonatomic, assign) BOOL isCloseHeartRate;
 
+/// 关闭测量脂肪(部分设备支持)，默认 NO，测量脂肪
+@property(nonatomic, assign) BOOL isCloseMeasureFat;
+/// 关闭测量脂肪是否是长期有效(部分设备支持)，默认 NO，单次链接有效
+@property(nonatomic, assign) BOOL isLongTimeValid;
 @end
 
 NS_ASSUME_NONNULL_END
