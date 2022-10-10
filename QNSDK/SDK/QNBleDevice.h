@@ -49,4 +49,9 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
 /** (WSP设备专属)软件版本 */
 @property(nonatomic, readonly, assign) int softwareVer;
 
+/** 控制测脂功能 */
+@property(nonatomic, readonly, assign) BOOL isSupportControlFatMeasurement;
+/** 更新识别体重 */
+@property(nonatomic, readonly, assign) BOOL isSupportUpdateIdentifyWeight;
+
 @end
