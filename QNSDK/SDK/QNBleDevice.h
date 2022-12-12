@@ -17,6 +17,11 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
     QNDeviceTypeHeightScale = 160,  //身高体重秤
 };
 
+typedef NS_ENUM(NSUInteger, QNDisplayModuleType) {
+    QNDisplayModuleTypeDefault = 0, //秤端显示数据模块类型：88888
+    QNDisplayModuleTypeSimple,  //秤端显示数据模块类型：18888
+};
+
 @interface QNBleDevice : NSObject
 /** mac地址 */
 @property (nonatomic, readonly, strong) NSString *mac;
@@ -49,9 +54,11 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
 /** (WSP设备专属)软件版本 */
 @property(nonatomic, readonly, assign) int softwareVer;
 
-/** 控制测脂功能 */
-@property(nonatomic, readonly, assign) BOOL isSupportControlFatMeasurement;
-/** 更新识别体重 */
+/** (用户秤设备专属)更新识别体重 */
 @property(nonatomic, readonly, assign) BOOL isSupportUpdateIdentifyWeight;
+/** (用户秤设备专属，设备开始交互生效)控制测脂功能 */
+@property(nonatomic, readonly, assign) BOOL isSupportControlFatMeasurement;
+/** 显示模块类型*/
+@property(nonatomic, readonly, assign) QNDisplayModuleType displayModuleType;
 
 @end

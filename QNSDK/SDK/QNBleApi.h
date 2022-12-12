@@ -29,7 +29,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.8.6 】
+ 当前版本【 2.8.10 】
 
  SDK最低配置8.0的系统
  
@@ -245,6 +245,15 @@
  @return 结果回调
  */
 - (double)convertWeightWithTargetUnit:(double)weight unit:(QNUnit)unit;
+
+/**
+ 根据提供的kg数值的体重，转化为指定单位的数值
+ 
+ @param weight 默认单位的重量（体脂秤为KG）
+ @param unit  KG、LB、JIN、ST、STLB 为体脂秤单位 (不支持ST的转换，查询文档获取相关转化方法)  
+ @return 结果回调
+ */
+- (double)convertWeight:(double)weight unit:(QNUnit)unit;
 
 /**
  建立用户模型

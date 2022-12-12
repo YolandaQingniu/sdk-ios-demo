@@ -324,7 +324,14 @@ typedef enum{
         self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f st", st];
     } else if ([self.bleApi getConfig].unit == QNUnitStLb) {
         double st = weight / 14.0;
-        self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.0f st %.1f lb", floor(st), (st - floor(st)) * 14];
+        double tempSt = floor(st);
+        double tempLd = (st - floor(st)) * 14;
+        if (device.displayModuleType == QNDisplayModuleTypeSimple && tempSt >= 20 && tempLd >= 10) {
+            self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.0f st %.0f lb", tempSt, tempLd];
+        } else {
+            self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.0f st %.1f lb", tempSt, tempLd];
+        }
+        
     } else if ([self.bleApi getConfig].unit == QNUnitJIN) {
         self.unstableWeightLabel.text = [NSString stringWithFormat:@"%.2f 斤",weight];
     } else {
