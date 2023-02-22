@@ -71,6 +71,9 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 /** 用户特性*/
 @property(nonatomic, assign) int selfhood;
 
+/** 是否调整体年龄显示（部分秤支持，NO：不调整；Yes：调整）*/
+@property (nonatomic, assign) BOOL isAdjustBodyAge;
+
 /**
  建立用户模型
  
