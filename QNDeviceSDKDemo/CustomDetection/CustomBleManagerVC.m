@@ -26,6 +26,8 @@
 
 //CP30B
 #define QNHeightScaleSerivceUUID @"ABF0"
+//CP30C
+#define QNHeightScaleCP30CSerivceUUID @"ABF1"
 #define QNHeightScaleCharacteristicUUIDWrite @"ABF2"
 #define QNHeightScaleCharacteristicUUIDNotify @"ABF1"
 
@@ -60,6 +62,11 @@
     [self createUI];
     self.centralManager =  [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey : @YES}];
     self.bleApi = [QNBleApi sharedBleApi];
+    /// 修改单位
+//    QNConfig *config = [self.bleApi getConfig];
+//    config.heightUnit = QNHeightUnitFtIn;
+//    config.unit = QNUnitJIN;
+//    [config save];
     self.bleApi.dataListener = self;
     self.bleApi.connectionChangeListener = self;
     self.info = @"";
@@ -368,6 +375,8 @@
         [device.handler prepare:KScale1SerivceUUID];
     } else if ([service.UUID.UUIDString isEqualToString:QNHeightScaleSerivceUUID]) {
         [device.handler prepare:QNHeightScaleSerivceUUID];
+    } else if ([service.UUID.UUIDString isEqualToString:QNHeightScaleCP30CSerivceUUID]) {
+        [device.handler prepare:QNHeightScaleCP30CSerivceUUID];
     }
     
     for (CBCharacteristic *item in service.characteristics) {

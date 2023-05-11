@@ -31,6 +31,14 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
     QNUnitMilkML = 14, //蓝牙厨房秤专属
 };
 
+/**
+ 身高秤秤端身高单位，仅有CP30C设备支持设置
+ */
+typedef NS_ENUM(NSUInteger, QNHeightUnit) {
+    QNHeightUnitCM = 0,
+    QNHeightUnitFtIn  = 1,
+};
+
 
 typedef NS_ENUM(NSUInteger,QNAreaType) {
     QNAreaTypeOther = 0,    //其他
@@ -67,6 +75,11 @@ typedef NS_ENUM(NSUInteger,QNAreaType) {
  强化广播秤信号
  */
 @property (nonatomic, assign) BOOL enhanceBleBoradcast;
+
+/**
+ CP30C身高秤端显示的身高单位
+ */
+@property (nonatomic, assign) QNHeightUnit heightUnit;
 
 /// 保存设置信息
 - (BOOL)save;

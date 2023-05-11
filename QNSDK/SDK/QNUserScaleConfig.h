@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL isCloseMeasureFat;
 /// 关闭测量脂肪是否是长期有效(部分设备支持)，默认 NO，单次链接有效
 @property(nonatomic, assign) BOOL isLongTimeValid;
+
+/// 抱婴模式(部分设备支持)，默认 NO。需要QNBleDevice.isSupportBabyCarryingModel == true开启抱婴模式，秤端只显示体重。
+@property(nonatomic, assign) BOOL isBabyCarryingModel;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -29,7 +29,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.8.17 】
+ 当前版本【 2.8.18 】
 
  SDK最低配置8.0的系统
  
@@ -382,11 +382,16 @@
 /// @param callback 结果的回调
 - (void)deleteScaleUsers:(NSArray <NSNumber *>*)indexList callback:(QNResultCallback)callback;
 
-/// 设置秤端是否测脂
+/// 设置用户秤秤端是否测脂
 /// @param state 开关状态
 /// @param longTerm 是否长期有效
 /// @param callback 结果的回调
 - (void)setFatMeasurementSwitch:(BOOL)state longTerm:(BOOL)longTerm callback:(QNResultCallback)callback;
+
+/// 设置用户秤进入抱婴模式
+/// @param state 开关状态
+/// @param callback 结果的回调
+- (void)setBabyCarryingModelSwitch:(BOOL)state callback:(QNResultCallback)callback;
 
 /// 读取授权设备信息列表
 - (NSDictionary *)readAuthDeviceInfoList;

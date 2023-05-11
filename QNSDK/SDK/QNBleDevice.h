@@ -63,4 +63,7 @@ typedef NS_ENUM(NSUInteger, QNDisplayModuleType) {
 /** (用户秤设备专属)是否支持调整体年龄显示标识（部分秤支持，NO：不支持；Yes：支持）如果支持，可以设置用户秤在显示体年龄时会-2*/
 @property (nonatomic, readonly, assign) BOOL isSupportAdjustBodyAge;
 
+/** (用户秤设备专属)是否支持抱婴模式标识（部分秤支持，NO：不支持；Yes：支持）如果支持，可以设置用户秤单次称量进入抱婴模式，秤面只会显示体重数据*/
+@property (nonatomic, readonly, assign) BOOL isSupportBabyCarryingModel;
+
 @end
