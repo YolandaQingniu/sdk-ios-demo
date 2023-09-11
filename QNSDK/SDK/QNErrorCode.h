@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, QNBleErrorCode) {
     QNBleErrorCodeConnectFail = 1110,
     QNBleErrorCodePeripheralDisconnecting = 1111,
     QNBleErrorCodeBleNoneScan = 1112,
-    QNBleErrorBleConnectOvertime = 1113,
+    QNBleErrorCodeBleConnectOvertime = 1113,
 
     QNBleErrorCodeIllegalArgument = 1201,
     QNBleErrorCodeMissDiscoveryListener = 1202,
@@ -42,14 +42,18 @@ typedef NS_ENUM(NSInteger, QNBleErrorCode) {
     QNBleErrorCodeRegisterDevice = 1213,
     QNBleErrorCodeNoComoleteMeasure = 1214,
     QNBleErrorCodeNoSupportModify = 1215,
-    QNBleErrorUserIndex = 1216,
-    QNBleErrorUserSecret = 1217,
-    QNBleErrorWSPOTAFirmwareFail = 1218,
-    QNBleErrorWSPOtaLowPower = 1219,
+    QNBleErrorCodeUserIndex = 1216,
+    QNBleErrorCodeUserSecret = 1217,
+    QNBleErrorCodeWSPOTAFirmwareFail = 1218,
+    QNBleErrorCodeWSPOtaLowPower = 1219,
 
     QNBleErrorCoder = 1301,
     QNBleErrorCoderInvalid = 1302,
     
-    QNBleErrorWSPUserIndex API_DEPRECATED_WITH_REPLACEMENT("QNBleErrorUserIndex", ios(4.0, 8.0)) = QNBleErrorUserIndex,
-    QNBleErrorWSPUserSecret API_DEPRECATED_WITH_REPLACEMENT("QNBleErrorUserSecret", ios(4.0, 8.0)) = QNBleErrorUserSecret,
+    QNBleErrorCodeShouldEnableResEncrypt = 1400,
+    QNBleErrorCodeInvalidateHmac = 1401,
+    QNBleErrorCodeDataValidationFailed = 1402,
+    
+    QNBleErrorWSPUserIndex API_DEPRECATED_WITH_REPLACEMENT("QNBleErrorUserIndex", ios(4.0, 8.0)) = QNBleErrorCodeUserIndex,
+    QNBleErrorWSPUserSecret API_DEPRECATED_WITH_REPLACEMENT("QNBleErrorUserSecret", ios(4.0, 8.0)) = QNBleErrorCodeUserSecret,
 };

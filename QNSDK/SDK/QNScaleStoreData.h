@@ -53,6 +53,10 @@
 /** 相关加密字符串 */
 @property (nonatomic, readonly, strong) NSString *hmac;
 
+@property(nonatomic, assign, readonly) NSInteger resistance50;
+
+@property(nonatomic, assign, readonly) NSInteger resistance500;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

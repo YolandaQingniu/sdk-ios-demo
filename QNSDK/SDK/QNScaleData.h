@@ -73,4 +73,6 @@ typedef NS_ENUM(NSUInteger, QNHeightWeightMode) {
  */
 - (void)setFatThreshold:(double)threshold hmac:(NSString *)hmac callBlock:(QNResultCallback)callback;
 
+
+
 @end

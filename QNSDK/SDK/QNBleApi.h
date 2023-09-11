@@ -29,7 +29,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.9.0 】
+ 当前版本【 2.10.0 】
 
  SDK最低配置8.0的系统
  
@@ -355,6 +355,16 @@
  @return QNScaleData
 */
 - (QNScaleData *)generateScaleData:(QNUser *)user modeId:(NSString *)modeId weight:(double)weight date:(NSDate *)measureDate resistance:(int)resistance secResistance:(int)secResistance hmac:(NSString *)hmac heartRate:(int)heartRate;
+
+/**
+ 重算测量数据
+ @param user 该条数据的所属用户
+ @param resistance 50阻抗
+ @param secResistance 500阻抗
+ @param hmac 加密字段
+ @param callback 构建结果
+ */
+- (QNScaleData *)recalculateScaleData:(QNUser *)user resistance:(NSInteger)resistance secResistance:(NSInteger)secResistance hmac:(NSString *)hmac callback:(QNResultCallback)callback;
 
 /**
  体质推算测量方法
