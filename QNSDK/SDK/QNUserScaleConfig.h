@@ -13,6 +13,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(int, QNBuzzerMode) {
+    QNBuzzerModeDefault  = 0,  // 默认，不做修改，使用秤端记录蜂鸣器工作状态
+    QNBuzzerModeClose,         // 设置关闭秤端蜂鸣器
+    QNBuzzerModeOpen,          // 设置开启秤端蜂鸣器
+};
+
 @interface QNUserScaleConfig : NSObject
 
 /// wifi配置对象
@@ -40,6 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 抱婴模式(部分设备支持)，默认 NO。需要QNBleDevice.isSupportBabyCarryingModel == true开启抱婴模式，秤端只显示体重。
 @property(nonatomic, assign) BOOL isBabyCarryingModel;
+
+//  秤端蜂鸣器设置项(部分设备支持)，需要QNBleDevice.isSupportBuzzer == true时设置才生效
+@property(nonatomic, assign) QNBuzzerMode buzzerMode;
+
 @end
 
 NS_ASSUME_NONNULL_END
