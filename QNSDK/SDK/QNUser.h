@@ -33,6 +33,14 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
     YLAthleteSport, //运动员模式
 };
 
+/**
+ 用于计算其他指标（除了体重、身高和BMI外的其他指标） 说明：针对身高体重秤，BMI指标值是测量身高与测量体重计算得出的
+ */
+typedef NS_ENUM(NSUInteger,YLHeightDecision) {
+    YLHeightDecisionScaleDataHeight = 0,// 测量数据身高，即设备测量得到的身高值
+    YLHeightDecisionUserInfoHeight = 1 //用户信息身高，即传入的用户身高值
+};
+
 @interface QNUser : NSObject
 /** userID(如果秤端支持用户名显示，则该字段内容会下发到设备) */
 @property (nonatomic, strong) NSString *userId;
@@ -73,6 +81,9 @@ typedef NS_ENUM(NSUInteger,YLAthleteType) {
 
 /** 是否调整体年龄显示（部分秤支持，NO：不调整；Yes：调整）*/
 @property (nonatomic, assign) BOOL isAdjustBodyAge;
+
+/** 身高体重秤（身高体重一体机） 设备专用，用于计算其他指标（除了体重、身高和BMI外的其他指标），默认使用测量数据身高 */
+@property (nonatomic, assign) YLHeightDecision heightDecision;
 
 /**
  建立用户模型
