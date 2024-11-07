@@ -29,8 +29,8 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.19.2 】
-
+ 当前版本【 2.20.0 】
+ 
  SDK最低配置8.0的系统
  
  工程的配置说明:
@@ -365,6 +365,13 @@
  @param callback 构建结果
  */
 - (QNScaleData *)recalculateScaleData:(QNUser *)user resistance:(NSInteger)resistance secResistance:(NSInteger)secResistance hmac:(NSString *)hmac callback:(QNResultCallback)callback;
+
+/// 重算数据指标
+/// @param user 重算数据指标的目标用户
+/// @param hmac 重算数据的hmac
+/// @param lastEightHmac 上次测量数据的hmac，八电极设备拟合要用
+/// @param callback 回调
+- (QNScaleData *)calculateScaleDataByHmac:(QNUser *)user hmac:(NSString *)hmac lastEightHmac:(nullable NSString *)lastEightHmac callback:(QNResultCallback)callback;
 
 /**
  体质推算测量方法

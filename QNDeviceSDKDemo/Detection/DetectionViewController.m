@@ -391,6 +391,15 @@ typedef enum{
 //        string = [string stringByAppendingFormat:@"\n第%d条数据，测量时间：%@",i+1,storeData.measureTime];
 //    }
 //    [self.view makeToast:string duration:10 position:CSToastPositionCenter];
+    
+//    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"共收到[%lu]条存储数据",(unsigned long)storedDataList.count] preferredStyle:(UIAlertControllerStyleAlert)];
+//    for (QNScaleStoreData *data in storedDataList) {
+//        [alertC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//            textField.text = data.hmac;
+//        }];
+//    }
+//    [alertC addAction:[UIAlertAction actionWithTitle:@"OK" style:(UIAlertActionStyleCancel) handler:nil]];
+//    [self presentViewController:alertC animated:true completion:nil];
 }
 
 - (void)onScaleEventChange:(QNBleDevice *)device scaleEvent:(QNScaleEvent)scaleEvent {
