@@ -7,7 +7,8 @@
 //
 
 #import "KitchenVC.h"
-#import "QNDeviceSDK.h"
+#import <QNDeviceSDK/QNDeviceSDK.h>
+
 
 @interface KitchenVC ()<QNBleDeviceDiscoveryListener>
 @property (weak, nonatomic) IBOutlet UILabel *macLabel;

@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "QNDeviceSDK.h"
+#import <QNDeviceSDK/QNDeviceSDK.h>
+
 
 @interface AppDelegate ()
 

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Yolanda. All rights reserved.
 //
 
-#import "QNDeviceSDK.h"
+#import <QNDeviceSDK/QNDeviceSDK.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
 NS_ASSUME_NONNULL_BEGIN

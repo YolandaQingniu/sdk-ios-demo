@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "EightElectrodesReportVC.h"
-#import "QNScaleItemData.h"
+#import <QNDeviceSDK/QNScaleItemData.h>
 
 @interface NSDictionary (Extension)
 - (NSString *)toJsonStr;

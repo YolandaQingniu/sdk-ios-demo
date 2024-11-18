@@ -7,7 +7,8 @@
 //  测量数据指标工具类
 
 #import <Foundation/Foundation.h>
-#import "QNDeviceSDK.h"
+#import <QNDeviceSDK/QNDeviceSDK.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, TargetType) {

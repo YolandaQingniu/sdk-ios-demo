@@ -7,9 +7,9 @@
 //  外设信息cell 
 
 #import <UIKit/UIKit.h>
-#import "QNBleDevice.h"
-#import "QNBleBroadcastDevice.h"
-#import "QNBleKitchenDevice.h"
+#import <QNDeviceSDK/QNBleDevice.h>
+#import <QNDeviceSDK/QNBleBroadcastDevice.h>
+#import <QNDeviceSDK/QNBleKitchenDevice.h>
 
 @interface DeviceTableViewCell : UITableViewCell
 

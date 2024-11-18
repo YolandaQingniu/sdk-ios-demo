@@ -7,7 +7,8 @@
 //
 
 #import "CustomBleManagerVC.h"
-#import "QNDeviceSDK.h"
+#import <QNDeviceSDK/QNDeviceSDK.h>
+
 #import "Masonry.h"
 #import "UIView+Toast.h"
 #import "QNBleDevice+Addition.h"

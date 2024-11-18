@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "PickerView.h"
 #import "DetectionViewController.h"
-#import "QNBleApi.h"
+#import <QNDeviceSDK/QNDeviceSDK.h>
 #import "CustomBleManagerVC.h"
 
 @interface ViewController ()<PickerViewDelegate,UITextFieldDelegate>

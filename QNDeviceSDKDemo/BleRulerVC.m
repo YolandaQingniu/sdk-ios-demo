@@ -7,7 +7,8 @@
 //
 
 #import "BleRulerVC.h"
-#import "QNDeviceSDK.h"
+#import <QNDeviceSDK/QNDeviceSDK.h>
+
 
 @interface BleRulerVC ()<QNBleStateListener,QNBleRulerListener>
 @property (weak, nonatomic) IBOutlet UILabel *macLabel;

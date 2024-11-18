@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QNDeviceSDK.h"
+#import <QNDeviceSDK/QNDeviceSDK.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
