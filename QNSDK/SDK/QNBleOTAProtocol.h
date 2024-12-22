@@ -8,7 +8,6 @@
 
 #import "QNBleDevice.h"
 #import "QNErrorCode.h"
-#import "QNVaScaleEnum.h"
 
 @protocol QNBleOTAListener <NSObject>
 

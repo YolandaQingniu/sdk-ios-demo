@@ -49,41 +49,41 @@
 		D2B9E98D20723DEC0020C2B6 /* DeviceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B9E98420723DEC0020C2B6 /* DeviceTableViewCell.m */; };
 		D2B9E98E20723DEC0020C2B6 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B9E98620723DEC0020C2B6 /* PickerView.m */; };
 		D2B9E98F20723DEC0020C2B6 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B9E98720723DEC0020C2B6 /* PickerView.xib */; };
-		F68B857A2D1867CB00E6259F /* libQNDeviceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F68B85792D1867CB00E6259F /* libQNDeviceSDK.a */; };
-		F68B859D2D1867DC00E6259F /* QNScaleStoreData.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B857B2D1867D600E6259F /* QNScaleStoreData.h */; };
-		F68B859E2D1867DC00E6259F /* QNBleOTAProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B857C2D1867D600E6259F /* QNBleOTAProtocol.h */; };
-		F68B859F2D1867DC00E6259F /* QNUser.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B857D2D1867D600E6259F /* QNUser.h */; };
-		F68B85A02D1867DC00E6259F /* QNIndicateConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B857E2D1867D600E6259F /* QNIndicateConfig.h */; };
-		F68B85A12D1867DC00E6259F /* QNBleKitchenDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B857F2D1867D600E6259F /* QNBleKitchenDevice.h */; };
-		F68B85A22D1867DC00E6259F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F68B85802D1867D700E6259F /* README.md */; };
-		F68B85A32D1867DC00E6259F /* QNBleRulerData.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85812D1867D700E6259F /* QNBleRulerData.h */; };
-		F68B85A42D1867DC00E6259F /* QNWspConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85822D1867D700E6259F /* QNWspConfig.h */; };
-		F68B85A52D1867DC00E6259F /* QNBleStateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85832D1867D700E6259F /* QNBleStateProtocol.h */; };
-		F68B85A62D1867DC00E6259F /* QNUserScaleDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85842D1867D700E6259F /* QNUserScaleDataProtocol.h */; };
-		F68B85A72D1867DC00E6259F /* QNBleRulerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85852D1867D700E6259F /* QNBleRulerProtocol.h */; };
-		F68B85A82D1867DC00E6259F /* QNLogProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85862D1867D700E6259F /* QNLogProtocol.h */; };
-		F68B85A92D1867DC00E6259F /* QNWiFiConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85872D1867D700E6259F /* QNWiFiConfig.h */; };
-		F68B85AA2D1867DC00E6259F /* QNScaleItemData.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85882D1867D700E6259F /* QNScaleItemData.h */; };
-		F68B85AB2D1867DC00E6259F /* QNBleKitchenConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85892D1867D800E6259F /* QNBleKitchenConfig.h */; };
-		F68B85AC2D1867DC00E6259F /* QNBleConnectionChangeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B858A2D1867D800E6259F /* QNBleConnectionChangeProtocol.h */; };
-		F68B85AD2D1867DC00E6259F /* QNBleKitchenProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B858B2D1867D800E6259F /* QNBleKitchenProtocol.h */; };
-		F68B85AE2D1867DC00E6259F /* QNBleApi.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B858C2D1867D800E6259F /* QNBleApi.h */; };
-		F68B85AF2D1867DC00E6259F /* QNBleOTAConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B858D2D1867D800E6259F /* QNBleOTAConfig.h */; };
-		F68B85B02D1867DC00E6259F /* QNBleBroadcastDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B858E2D1867D800E6259F /* QNBleBroadcastDevice.h */; };
-		F68B85B12D1867DC00E6259F /* QNErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B858F2D1867D800E6259F /* QNErrorCode.h */; };
-		F68B85B22D1867DC00E6259F /* QNWspScaleDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85902D1867D900E6259F /* QNWspScaleDataProtocol.h */; };
-		F68B85B32D1867DC00E6259F /* QNBleProtocolHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85912D1867D900E6259F /* QNBleProtocolHandler.h */; };
-		F68B85B42D1867DC00E6259F /* QNBleDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85922D1867D900E6259F /* QNBleDevice.h */; };
-		F68B85B52D1867DC00E6259F /* QNBleProtocolDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85932D1867D900E6259F /* QNBleProtocolDelegate.h */; };
-		F68B85B62D1867DC00E6259F /* QNConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85942D1867DB00E6259F /* QNConfig.h */; };
-		F68B85B72D1867DC00E6259F /* QNBleDeviceDiscoveryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85952D1867DB00E6259F /* QNBleDeviceDiscoveryProtocol.h */; };
-		F68B85B82D1867DC00E6259F /* QNScaleData.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85962D1867DB00E6259F /* QNScaleData.h */; };
-		F68B85B92D1867DC00E6259F /* QNCallBackConst.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85972D1867DB00E6259F /* QNCallBackConst.h */; };
-		F68B85BA2D1867DC00E6259F /* QNDeviceSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85982D1867DC00E6259F /* QNDeviceSDK.h */; };
-		F68B85BB2D1867DC00E6259F /* QNScaleDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85992D1867DC00E6259F /* QNScaleDataProtocol.h */; };
-		F68B85BC2D1867DC00E6259F /* QNBleRulerDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B859A2D1867DC00E6259F /* QNBleRulerDevice.h */; };
-		F68B85BD2D1867DC00E6259F /* QNUserScaleConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B859B2D1867DC00E6259F /* QNUserScaleConfig.h */; };
-		F68B85BE2D1867DC00E6259F /* QNUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B859C2D1867DC00E6259F /* QNUtils.h */; };
+		F68B85C02D186A3000E6259F /* libQNDeviceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F68B85BF2D186A3000E6259F /* libQNDeviceSDK.a */; };
+		F68B85E32D186A3F00E6259F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F68B85C12D186A3B00E6259F /* README.md */; };
+		F68B85E42D186A3F00E6259F /* QNBleOTAProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85C22D186A3C00E6259F /* QNBleOTAProtocol.h */; };
+		F68B85E52D186A3F00E6259F /* QNBleDeviceDiscoveryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85C32D186A3C00E6259F /* QNBleDeviceDiscoveryProtocol.h */; };
+		F68B85E62D186A3F00E6259F /* QNCallBackConst.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85C42D186A3C00E6259F /* QNCallBackConst.h */; };
+		F68B85E72D186A3F00E6259F /* QNUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85C52D186A3C00E6259F /* QNUtils.h */; };
+		F68B85E82D186A3F00E6259F /* QNBleOTAConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85C62D186A3C00E6259F /* QNBleOTAConfig.h */; };
+		F68B85E92D186A3F00E6259F /* QNBleConnectionChangeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85C72D186A3C00E6259F /* QNBleConnectionChangeProtocol.h */; };
+		F68B85EA2D186A3F00E6259F /* QNErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85C82D186A3C00E6259F /* QNErrorCode.h */; };
+		F68B85EB2D186A3F00E6259F /* QNLogProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85C92D186A3C00E6259F /* QNLogProtocol.h */; };
+		F68B85EC2D186A3F00E6259F /* QNWspScaleDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85CA2D186A3C00E6259F /* QNWspScaleDataProtocol.h */; };
+		F68B85ED2D186A3F00E6259F /* QNIndicateConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85CB2D186A3C00E6259F /* QNIndicateConfig.h */; };
+		F68B85EE2D186A3F00E6259F /* QNBleDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85CC2D186A3D00E6259F /* QNBleDevice.h */; };
+		F68B85EF2D186A3F00E6259F /* QNUser.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85CD2D186A3D00E6259F /* QNUser.h */; };
+		F68B85F02D186A3F00E6259F /* QNBleRulerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85CE2D186A3D00E6259F /* QNBleRulerProtocol.h */; };
+		F68B85F12D186A3F00E6259F /* QNBleStateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85CF2D186A3D00E6259F /* QNBleStateProtocol.h */; };
+		F68B85F22D186A3F00E6259F /* QNBleKitchenConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D02D186A3D00E6259F /* QNBleKitchenConfig.h */; };
+		F68B85F32D186A3F00E6259F /* QNDeviceSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D12D186A3D00E6259F /* QNDeviceSDK.h */; };
+		F68B85F42D186A3F00E6259F /* QNBleApi.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D22D186A3D00E6259F /* QNBleApi.h */; };
+		F68B85F52D186A3F00E6259F /* QNBleBroadcastDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D32D186A3D00E6259F /* QNBleBroadcastDevice.h */; };
+		F68B85F62D186A3F00E6259F /* QNUserScaleDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D42D186A3D00E6259F /* QNUserScaleDataProtocol.h */; };
+		F68B85F72D186A3F00E6259F /* QNBleRulerDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D52D186A3D00E6259F /* QNBleRulerDevice.h */; };
+		F68B85F82D186A3F00E6259F /* QNBleProtocolHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D62D186A3D00E6259F /* QNBleProtocolHandler.h */; };
+		F68B85F92D186A3F00E6259F /* QNScaleItemData.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D72D186A3E00E6259F /* QNScaleItemData.h */; };
+		F68B85FA2D186A3F00E6259F /* QNScaleDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D82D186A3E00E6259F /* QNScaleDataProtocol.h */; };
+		F68B85FB2D186A3F00E6259F /* QNUserScaleConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85D92D186A3E00E6259F /* QNUserScaleConfig.h */; };
+		F68B85FC2D186A3F00E6259F /* QNBleProtocolDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85DA2D186A3E00E6259F /* QNBleProtocolDelegate.h */; };
+		F68B85FD2D186A3F00E6259F /* QNScaleData.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85DB2D186A3E00E6259F /* QNScaleData.h */; };
+		F68B85FE2D186A3F00E6259F /* QNBleRulerData.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85DC2D186A3E00E6259F /* QNBleRulerData.h */; };
+		F68B85FF2D186A3F00E6259F /* QNWspConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85DD2D186A3E00E6259F /* QNWspConfig.h */; };
+		F68B86002D186A3F00E6259F /* QNBleKitchenDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85DE2D186A3E00E6259F /* QNBleKitchenDevice.h */; };
+		F68B86012D186A3F00E6259F /* QNScaleStoreData.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85DF2D186A3E00E6259F /* QNScaleStoreData.h */; };
+		F68B86022D186A3F00E6259F /* QNBleKitchenProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85E02D186A3E00E6259F /* QNBleKitchenProtocol.h */; };
+		F68B86032D186A3F00E6259F /* QNWiFiConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85E12D186A3E00E6259F /* QNWiFiConfig.h */; };
+		F68B86042D186A3F00E6259F /* QNConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F68B85E22D186A3F00E6259F /* QNConfig.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,41 +174,41 @@
 		D2B9E98520723DEC0020C2B6 /* PickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView.h; sourceTree = "<group>"; };
 		D2B9E98620723DEC0020C2B6 /* PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerView.m; sourceTree = "<group>"; };
 		D2B9E98720723DEC0020C2B6 /* PickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
-		F68B85792D1867CB00E6259F /* libQNDeviceSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libQNDeviceSDK.a; sourceTree = "<group>"; };
-		F68B857B2D1867D600E6259F /* QNScaleStoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleStoreData.h; sourceTree = "<group>"; };
-		F68B857C2D1867D600E6259F /* QNBleOTAProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleOTAProtocol.h; sourceTree = "<group>"; };
-		F68B857D2D1867D600E6259F /* QNUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUser.h; sourceTree = "<group>"; };
-		F68B857E2D1867D600E6259F /* QNIndicateConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNIndicateConfig.h; sourceTree = "<group>"; };
-		F68B857F2D1867D600E6259F /* QNBleKitchenDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleKitchenDevice.h; sourceTree = "<group>"; };
-		F68B85802D1867D700E6259F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F68B85812D1867D700E6259F /* QNBleRulerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleRulerData.h; sourceTree = "<group>"; };
-		F68B85822D1867D700E6259F /* QNWspConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNWspConfig.h; sourceTree = "<group>"; };
-		F68B85832D1867D700E6259F /* QNBleStateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleStateProtocol.h; sourceTree = "<group>"; };
-		F68B85842D1867D700E6259F /* QNUserScaleDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUserScaleDataProtocol.h; sourceTree = "<group>"; };
-		F68B85852D1867D700E6259F /* QNBleRulerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleRulerProtocol.h; sourceTree = "<group>"; };
-		F68B85862D1867D700E6259F /* QNLogProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNLogProtocol.h; sourceTree = "<group>"; };
-		F68B85872D1867D700E6259F /* QNWiFiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNWiFiConfig.h; sourceTree = "<group>"; };
-		F68B85882D1867D700E6259F /* QNScaleItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleItemData.h; sourceTree = "<group>"; };
-		F68B85892D1867D800E6259F /* QNBleKitchenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleKitchenConfig.h; sourceTree = "<group>"; };
-		F68B858A2D1867D800E6259F /* QNBleConnectionChangeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleConnectionChangeProtocol.h; sourceTree = "<group>"; };
-		F68B858B2D1867D800E6259F /* QNBleKitchenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleKitchenProtocol.h; sourceTree = "<group>"; };
-		F68B858C2D1867D800E6259F /* QNBleApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleApi.h; sourceTree = "<group>"; };
-		F68B858D2D1867D800E6259F /* QNBleOTAConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleOTAConfig.h; sourceTree = "<group>"; };
-		F68B858E2D1867D800E6259F /* QNBleBroadcastDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleBroadcastDevice.h; sourceTree = "<group>"; };
-		F68B858F2D1867D800E6259F /* QNErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNErrorCode.h; sourceTree = "<group>"; };
-		F68B85902D1867D900E6259F /* QNWspScaleDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNWspScaleDataProtocol.h; sourceTree = "<group>"; };
-		F68B85912D1867D900E6259F /* QNBleProtocolHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleProtocolHandler.h; sourceTree = "<group>"; };
-		F68B85922D1867D900E6259F /* QNBleDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDevice.h; sourceTree = "<group>"; };
-		F68B85932D1867D900E6259F /* QNBleProtocolDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleProtocolDelegate.h; sourceTree = "<group>"; };
-		F68B85942D1867DB00E6259F /* QNConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNConfig.h; sourceTree = "<group>"; };
-		F68B85952D1867DB00E6259F /* QNBleDeviceDiscoveryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDeviceDiscoveryProtocol.h; sourceTree = "<group>"; };
-		F68B85962D1867DB00E6259F /* QNScaleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleData.h; sourceTree = "<group>"; };
-		F68B85972D1867DB00E6259F /* QNCallBackConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNCallBackConst.h; sourceTree = "<group>"; };
-		F68B85982D1867DC00E6259F /* QNDeviceSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDeviceSDK.h; sourceTree = "<group>"; };
-		F68B85992D1867DC00E6259F /* QNScaleDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleDataProtocol.h; sourceTree = "<group>"; };
-		F68B859A2D1867DC00E6259F /* QNBleRulerDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleRulerDevice.h; sourceTree = "<group>"; };
-		F68B859B2D1867DC00E6259F /* QNUserScaleConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUserScaleConfig.h; sourceTree = "<group>"; };
-		F68B859C2D1867DC00E6259F /* QNUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUtils.h; sourceTree = "<group>"; };
+		F68B85BF2D186A3000E6259F /* libQNDeviceSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libQNDeviceSDK.a; sourceTree = "<group>"; };
+		F68B85C12D186A3B00E6259F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F68B85C22D186A3C00E6259F /* QNBleOTAProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleOTAProtocol.h; sourceTree = "<group>"; };
+		F68B85C32D186A3C00E6259F /* QNBleDeviceDiscoveryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDeviceDiscoveryProtocol.h; sourceTree = "<group>"; };
+		F68B85C42D186A3C00E6259F /* QNCallBackConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNCallBackConst.h; sourceTree = "<group>"; };
+		F68B85C52D186A3C00E6259F /* QNUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUtils.h; sourceTree = "<group>"; };
+		F68B85C62D186A3C00E6259F /* QNBleOTAConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleOTAConfig.h; sourceTree = "<group>"; };
+		F68B85C72D186A3C00E6259F /* QNBleConnectionChangeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleConnectionChangeProtocol.h; sourceTree = "<group>"; };
+		F68B85C82D186A3C00E6259F /* QNErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNErrorCode.h; sourceTree = "<group>"; };
+		F68B85C92D186A3C00E6259F /* QNLogProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNLogProtocol.h; sourceTree = "<group>"; };
+		F68B85CA2D186A3C00E6259F /* QNWspScaleDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNWspScaleDataProtocol.h; sourceTree = "<group>"; };
+		F68B85CB2D186A3C00E6259F /* QNIndicateConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNIndicateConfig.h; sourceTree = "<group>"; };
+		F68B85CC2D186A3D00E6259F /* QNBleDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleDevice.h; sourceTree = "<group>"; };
+		F68B85CD2D186A3D00E6259F /* QNUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUser.h; sourceTree = "<group>"; };
+		F68B85CE2D186A3D00E6259F /* QNBleRulerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleRulerProtocol.h; sourceTree = "<group>"; };
+		F68B85CF2D186A3D00E6259F /* QNBleStateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleStateProtocol.h; sourceTree = "<group>"; };
+		F68B85D02D186A3D00E6259F /* QNBleKitchenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleKitchenConfig.h; sourceTree = "<group>"; };
+		F68B85D12D186A3D00E6259F /* QNDeviceSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDeviceSDK.h; sourceTree = "<group>"; };
+		F68B85D22D186A3D00E6259F /* QNBleApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleApi.h; sourceTree = "<group>"; };
+		F68B85D32D186A3D00E6259F /* QNBleBroadcastDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleBroadcastDevice.h; sourceTree = "<group>"; };
+		F68B85D42D186A3D00E6259F /* QNUserScaleDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUserScaleDataProtocol.h; sourceTree = "<group>"; };
+		F68B85D52D186A3D00E6259F /* QNBleRulerDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleRulerDevice.h; sourceTree = "<group>"; };
+		F68B85D62D186A3D00E6259F /* QNBleProtocolHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleProtocolHandler.h; sourceTree = "<group>"; };
+		F68B85D72D186A3E00E6259F /* QNScaleItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleItemData.h; sourceTree = "<group>"; };
+		F68B85D82D186A3E00E6259F /* QNScaleDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleDataProtocol.h; sourceTree = "<group>"; };
+		F68B85D92D186A3E00E6259F /* QNUserScaleConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUserScaleConfig.h; sourceTree = "<group>"; };
+		F68B85DA2D186A3E00E6259F /* QNBleProtocolDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleProtocolDelegate.h; sourceTree = "<group>"; };
+		F68B85DB2D186A3E00E6259F /* QNScaleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleData.h; sourceTree = "<group>"; };
+		F68B85DC2D186A3E00E6259F /* QNBleRulerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleRulerData.h; sourceTree = "<group>"; };
+		F68B85DD2D186A3E00E6259F /* QNWspConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNWspConfig.h; sourceTree = "<group>"; };
+		F68B85DE2D186A3E00E6259F /* QNBleKitchenDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleKitchenDevice.h; sourceTree = "<group>"; };
+		F68B85DF2D186A3E00E6259F /* QNScaleStoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNScaleStoreData.h; sourceTree = "<group>"; };
+		F68B85E02D186A3E00E6259F /* QNBleKitchenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNBleKitchenProtocol.h; sourceTree = "<group>"; };
+		F68B85E12D186A3E00E6259F /* QNWiFiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNWiFiConfig.h; sourceTree = "<group>"; };
+		F68B85E22D186A3F00E6259F /* QNConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNConfig.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,7 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F68B857A2D1867CB00E6259F /* libQNDeviceSDK.a in Frameworks */,
+				F68B85C02D186A3000E6259F /* libQNDeviceSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,41 +314,41 @@
 		D230F22D224085C300DC01E9 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				F68B85792D1867CB00E6259F /* libQNDeviceSDK.a */,
-				F68B858C2D1867D800E6259F /* QNBleApi.h */,
-				F68B858E2D1867D800E6259F /* QNBleBroadcastDevice.h */,
-				F68B858A2D1867D800E6259F /* QNBleConnectionChangeProtocol.h */,
-				F68B85922D1867D900E6259F /* QNBleDevice.h */,
-				F68B85952D1867DB00E6259F /* QNBleDeviceDiscoveryProtocol.h */,
-				F68B85892D1867D800E6259F /* QNBleKitchenConfig.h */,
-				F68B857F2D1867D600E6259F /* QNBleKitchenDevice.h */,
-				F68B858B2D1867D800E6259F /* QNBleKitchenProtocol.h */,
-				F68B858D2D1867D800E6259F /* QNBleOTAConfig.h */,
-				F68B857C2D1867D600E6259F /* QNBleOTAProtocol.h */,
-				F68B85932D1867D900E6259F /* QNBleProtocolDelegate.h */,
-				F68B85912D1867D900E6259F /* QNBleProtocolHandler.h */,
-				F68B85812D1867D700E6259F /* QNBleRulerData.h */,
-				F68B859A2D1867DC00E6259F /* QNBleRulerDevice.h */,
-				F68B85852D1867D700E6259F /* QNBleRulerProtocol.h */,
-				F68B85832D1867D700E6259F /* QNBleStateProtocol.h */,
-				F68B85972D1867DB00E6259F /* QNCallBackConst.h */,
-				F68B85942D1867DB00E6259F /* QNConfig.h */,
-				F68B85982D1867DC00E6259F /* QNDeviceSDK.h */,
-				F68B858F2D1867D800E6259F /* QNErrorCode.h */,
-				F68B857E2D1867D600E6259F /* QNIndicateConfig.h */,
-				F68B85862D1867D700E6259F /* QNLogProtocol.h */,
-				F68B85962D1867DB00E6259F /* QNScaleData.h */,
-				F68B85992D1867DC00E6259F /* QNScaleDataProtocol.h */,
-				F68B85882D1867D700E6259F /* QNScaleItemData.h */,
-				F68B857B2D1867D600E6259F /* QNScaleStoreData.h */,
-				F68B857D2D1867D600E6259F /* QNUser.h */,
-				F68B859B2D1867DC00E6259F /* QNUserScaleConfig.h */,
-				F68B85842D1867D700E6259F /* QNUserScaleDataProtocol.h */,
-				F68B859C2D1867DC00E6259F /* QNUtils.h */,
-				F68B85872D1867D700E6259F /* QNWiFiConfig.h */,
-				F68B85822D1867D700E6259F /* QNWspConfig.h */,
-				F68B85902D1867D900E6259F /* QNWspScaleDataProtocol.h */,
-				F68B85802D1867D700E6259F /* README.md */,
+				F68B85BF2D186A3000E6259F /* libQNDeviceSDK.a */,
+				F68B85D22D186A3D00E6259F /* QNBleApi.h */,
+				F68B85D32D186A3D00E6259F /* QNBleBroadcastDevice.h */,
+				F68B85C72D186A3C00E6259F /* QNBleConnectionChangeProtocol.h */,
+				F68B85CC2D186A3D00E6259F /* QNBleDevice.h */,
+				F68B85C32D186A3C00E6259F /* QNBleDeviceDiscoveryProtocol.h */,
+				F68B85D02D186A3D00E6259F /* QNBleKitchenConfig.h */,
+				F68B85DE2D186A3E00E6259F /* QNBleKitchenDevice.h */,
+				F68B85E02D186A3E00E6259F /* QNBleKitchenProtocol.h */,
+				F68B85C62D186A3C00E6259F /* QNBleOTAConfig.h */,
+				F68B85C22D186A3C00E6259F /* QNBleOTAProtocol.h */,
+				F68B85DA2D186A3E00E6259F /* QNBleProtocolDelegate.h */,
+				F68B85D62D186A3D00E6259F /* QNBleProtocolHandler.h */,
+				F68B85DC2D186A3E00E6259F /* QNBleRulerData.h */,
+				F68B85D52D186A3D00E6259F /* QNBleRulerDevice.h */,
+				F68B85CE2D186A3D00E6259F /* QNBleRulerProtocol.h */,
+				F68B85CF2D186A3D00E6259F /* QNBleStateProtocol.h */,
+				F68B85C42D186A3C00E6259F /* QNCallBackConst.h */,
+				F68B85E22D186A3F00E6259F /* QNConfig.h */,
+				F68B85D12D186A3D00E6259F /* QNDeviceSDK.h */,
+				F68B85C82D186A3C00E6259F /* QNErrorCode.h */,
+				F68B85CB2D186A3C00E6259F /* QNIndicateConfig.h */,
+				F68B85C92D186A3C00E6259F /* QNLogProtocol.h */,
+				F68B85DB2D186A3E00E6259F /* QNScaleData.h */,
+				F68B85D82D186A3E00E6259F /* QNScaleDataProtocol.h */,
+				F68B85D72D186A3E00E6259F /* QNScaleItemData.h */,
+				F68B85DF2D186A3E00E6259F /* QNScaleStoreData.h */,
+				F68B85CD2D186A3D00E6259F /* QNUser.h */,
+				F68B85D92D186A3E00E6259F /* QNUserScaleConfig.h */,
+				F68B85D42D186A3D00E6259F /* QNUserScaleDataProtocol.h */,
+				F68B85C52D186A3C00E6259F /* QNUtils.h */,
+				F68B85E12D186A3E00E6259F /* QNWiFiConfig.h */,
+				F68B85DD2D186A3E00E6259F /* QNWspConfig.h */,
+				F68B85CA2D186A3C00E6259F /* QNWspScaleDataProtocol.h */,
+				F68B85C12D186A3B00E6259F /* README.md */,
 			);
 			path = SDK;
 			sourceTree = "<group>";
@@ -436,39 +436,39 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F68B85B72D1867DC00E6259F /* QNBleDeviceDiscoveryProtocol.h in Headers */,
-				F68B85A32D1867DC00E6259F /* QNBleRulerData.h in Headers */,
-				F68B85BA2D1867DC00E6259F /* QNDeviceSDK.h in Headers */,
-				F68B859F2D1867DC00E6259F /* QNUser.h in Headers */,
-				F68B85BB2D1867DC00E6259F /* QNScaleDataProtocol.h in Headers */,
-				F68B85BD2D1867DC00E6259F /* QNUserScaleConfig.h in Headers */,
-				F68B85AF2D1867DC00E6259F /* QNBleOTAConfig.h in Headers */,
-				F68B85AC2D1867DC00E6259F /* QNBleConnectionChangeProtocol.h in Headers */,
-				F68B85A62D1867DC00E6259F /* QNUserScaleDataProtocol.h in Headers */,
-				F68B859E2D1867DC00E6259F /* QNBleOTAProtocol.h in Headers */,
-				F68B85B22D1867DC00E6259F /* QNWspScaleDataProtocol.h in Headers */,
-				F68B85A92D1867DC00E6259F /* QNWiFiConfig.h in Headers */,
-				F68B85AD2D1867DC00E6259F /* QNBleKitchenProtocol.h in Headers */,
-				F68B85AE2D1867DC00E6259F /* QNBleApi.h in Headers */,
-				F68B85AA2D1867DC00E6259F /* QNScaleItemData.h in Headers */,
-				F68B85B82D1867DC00E6259F /* QNScaleData.h in Headers */,
-				F68B85A02D1867DC00E6259F /* QNIndicateConfig.h in Headers */,
-				F68B85BE2D1867DC00E6259F /* QNUtils.h in Headers */,
-				F68B85B52D1867DC00E6259F /* QNBleProtocolDelegate.h in Headers */,
-				F68B85B32D1867DC00E6259F /* QNBleProtocolHandler.h in Headers */,
-				F68B859D2D1867DC00E6259F /* QNScaleStoreData.h in Headers */,
-				F68B85A12D1867DC00E6259F /* QNBleKitchenDevice.h in Headers */,
-				F68B85A42D1867DC00E6259F /* QNWspConfig.h in Headers */,
-				F68B85B62D1867DC00E6259F /* QNConfig.h in Headers */,
-				F68B85A72D1867DC00E6259F /* QNBleRulerProtocol.h in Headers */,
-				F68B85A52D1867DC00E6259F /* QNBleStateProtocol.h in Headers */,
-				F68B85B02D1867DC00E6259F /* QNBleBroadcastDevice.h in Headers */,
-				F68B85B42D1867DC00E6259F /* QNBleDevice.h in Headers */,
-				F68B85AB2D1867DC00E6259F /* QNBleKitchenConfig.h in Headers */,
-				F68B85BC2D1867DC00E6259F /* QNBleRulerDevice.h in Headers */,
-				F68B85A82D1867DC00E6259F /* QNLogProtocol.h in Headers */,
-				F68B85B92D1867DC00E6259F /* QNCallBackConst.h in Headers */,
-				F68B85B12D1867DC00E6259F /* QNErrorCode.h in Headers */,
+				F68B85F82D186A3F00E6259F /* QNBleProtocolHandler.h in Headers */,
+				F68B85FA2D186A3F00E6259F /* QNScaleDataProtocol.h in Headers */,
+				F68B85EF2D186A3F00E6259F /* QNUser.h in Headers */,
+				F68B85EC2D186A3F00E6259F /* QNWspScaleDataProtocol.h in Headers */,
+				F68B86042D186A3F00E6259F /* QNConfig.h in Headers */,
+				F68B86012D186A3F00E6259F /* QNScaleStoreData.h in Headers */,
+				F68B85FD2D186A3F00E6259F /* QNScaleData.h in Headers */,
+				F68B85EB2D186A3F00E6259F /* QNLogProtocol.h in Headers */,
+				F68B85FF2D186A3F00E6259F /* QNWspConfig.h in Headers */,
+				F68B86032D186A3F00E6259F /* QNWiFiConfig.h in Headers */,
+				F68B86002D186A3F00E6259F /* QNBleKitchenDevice.h in Headers */,
+				F68B85FB2D186A3F00E6259F /* QNUserScaleConfig.h in Headers */,
+				F68B85E52D186A3F00E6259F /* QNBleDeviceDiscoveryProtocol.h in Headers */,
+				F68B85F32D186A3F00E6259F /* QNDeviceSDK.h in Headers */,
+				F68B85F02D186A3F00E6259F /* QNBleRulerProtocol.h in Headers */,
+				F68B86022D186A3F00E6259F /* QNBleKitchenProtocol.h in Headers */,
+				F68B85E62D186A3F00E6259F /* QNCallBackConst.h in Headers */,
+				F68B85FC2D186A3F00E6259F /* QNBleProtocolDelegate.h in Headers */,
+				F68B85F52D186A3F00E6259F /* QNBleBroadcastDevice.h in Headers */,
+				F68B85F72D186A3F00E6259F /* QNBleRulerDevice.h in Headers */,
+				F68B85F42D186A3F00E6259F /* QNBleApi.h in Headers */,
+				F68B85FE2D186A3F00E6259F /* QNBleRulerData.h in Headers */,
+				F68B85EE2D186A3F00E6259F /* QNBleDevice.h in Headers */,
+				F68B85F12D186A3F00E6259F /* QNBleStateProtocol.h in Headers */,
+				F68B85F22D186A3F00E6259F /* QNBleKitchenConfig.h in Headers */,
+				F68B85F62D186A3F00E6259F /* QNUserScaleDataProtocol.h in Headers */,
+				F68B85F92D186A3F00E6259F /* QNScaleItemData.h in Headers */,
+				F68B85ED2D186A3F00E6259F /* QNIndicateConfig.h in Headers */,
+				F68B85EA2D186A3F00E6259F /* QNErrorCode.h in Headers */,
+				F68B85E42D186A3F00E6259F /* QNBleOTAProtocol.h in Headers */,
+				F68B85E72D186A3F00E6259F /* QNUtils.h in Headers */,
+				F68B85E82D186A3F00E6259F /* QNBleOTAConfig.h in Headers */,
+				F68B85E92D186A3F00E6259F /* QNBleConnectionChangeProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +560,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F68B85A22D1867DC00E6259F /* README.md in Resources */,
+				F68B85E32D186A3F00E6259F /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
