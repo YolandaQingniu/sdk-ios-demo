@@ -8,6 +8,7 @@
 
 #import "QNBleDevice.h"
 #import "QNErrorCode.h"
+#import "QNVaScaleEnum.h"
 
 @protocol QNBleOTAListener <NSObject>
 
@@ -43,9 +44,9 @@
 /**
  固件升级进度
  
-  @param device QNBleDevice
-  @param progress 升级进度（0 ~ 1）
+ @param device QNBleDevice
+ @param progress 升级进度（0 ~ 1）
+ @param stage OTA阶段
  */
-
-- (void)onOTAProgress:(QNBleDevice *)device progress:(double)progress;
+- (void)onOTAProgress:(QNBleDevice *)device progress:(double)progress stage:(int)stage;
 @end

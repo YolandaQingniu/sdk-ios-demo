@@ -87,4 +87,9 @@ typedef NS_ENUM(NSInteger, QNScaleEvent) {
  @param sn sn
  */
 - (void)readSnComplete:(QNBleDevice *)device sn:(NSString *)sn;
+
+/// 收到秤端固件版本号
+/// @param device QNBleDevice
+/// @param bleVer 固件版本号
+- (void)onGetBleVer:(QNBleDevice *)device bleVer:(int)bleVer;
 @end

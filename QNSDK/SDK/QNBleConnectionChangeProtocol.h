@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, QNScaleState) {
     QNScaleStateWiFiBleNetworkFail = 12, //WiFi蓝牙双模设备联网失败
     QNScaleStateBleKitchenPeeled = 13, //蓝牙厨房秤称端去皮
     QNScaleStateHeightScaleMeasureFail = 14, //身高体重秤测量失败
-    
+    QNScaleStateNeedOta = 15, //设备需要OTA
 };
 
 @protocol QNBleConnectionChangeListener <NSObject>

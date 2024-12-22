@@ -29,7 +29,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.20.0 】
+ 当前版本【 2.21.0 】
  
  SDK最低配置8.0的系统
  
@@ -416,5 +416,8 @@
 
 /// 读取SDK授权配置信息
 - (NSString *)readSDKConfigurationInfo;
+
+/// 下发OTA固件
+- (void)applyOta:(NSData *)otaData callback:(QNResultCallback)callback;
 @end
 
