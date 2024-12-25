@@ -430,6 +430,11 @@ typedef enum{
 //    [self.view makeToast:[NSString stringWithFormat:@"sn: %@",sn] duration:3 position:CSToastPositionBottom];
 }
 
+/// 收到秤端电量百分比（部分设备支持）
+- (void)onGetBatteryLevel:(NSUInteger)batteryLevel isLowLevel:(BOOL)isLowLevel device:(QNBleDevice *)device {
+    [self.view makeToast:[NSString stringWithFormat:@"设备电量[%lu]、是否低电[%d]", (unsigned long)batteryLevel, isLowLevel]];
+}
+
 #pragma mark - QNBleKitchenDataListener
 - (void)onGetBleKitchenWeight:(QNBleKitchenDevice *)device weight:(double)weight {
     weight = [self.bleApi convertWeightWithTargetUnit:weight unit:device.unit];
