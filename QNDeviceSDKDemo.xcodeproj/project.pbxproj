@@ -49,7 +49,7 @@
 		D2B9E98D20723DEC0020C2B6 /* DeviceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B9E98420723DEC0020C2B6 /* DeviceTableViewCell.m */; };
 		D2B9E98E20723DEC0020C2B6 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B9E98620723DEC0020C2B6 /* PickerView.m */; };
 		D2B9E98F20723DEC0020C2B6 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B9E98720723DEC0020C2B6 /* PickerView.xib */; };
-		F649E4E82CEB84E300A5D5CA /* QNDeviceSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F649E4E72CEB84E300A5D5CA /* QNDeviceSDK.xcframework */; };
+		F66648082D3365EC003A928E /* QNDeviceSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66648072D3365EB003A928E /* QNDeviceSDK.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +61,19 @@
 			remoteInfo = QNSDK;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F66648062D336563003A928E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		04A4208A235FFAE400716903 /* ScaleDataTargetTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScaleDataTargetTool.h; sourceTree = "<group>"; };
@@ -140,7 +153,7 @@
 		D2B9E98520723DEC0020C2B6 /* PickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView.h; sourceTree = "<group>"; };
 		D2B9E98620723DEC0020C2B6 /* PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerView.m; sourceTree = "<group>"; };
 		D2B9E98720723DEC0020C2B6 /* PickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
-		F649E4E72CEB84E300A5D5CA /* QNDeviceSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = QNDeviceSDK.xcframework; sourceTree = "<group>"; };
+		F66648072D3365EB003A928E /* QNDeviceSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = QNDeviceSDK.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F649E4E82CEB84E300A5D5CA /* QNDeviceSDK.xcframework in Frameworks */,
+				F66648082D3365EC003A928E /* QNDeviceSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +259,7 @@
 		D230F22D224085C300DC01E9 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				F649E4E72CEB84E300A5D5CA /* QNDeviceSDK.xcframework */,
+				F66648072D3365EB003A928E /* QNDeviceSDK.xcframework */,
 			);
 			path = SDK;
 			sourceTree = "<group>";
@@ -348,6 +361,7 @@
 				D230F21D2240847500DC01E9 /* Sources */,
 				D230F21E2240847500DC01E9 /* Frameworks */,
 				D230F21F2240847500DC01E9 /* Resources */,
+				F66648062D336563003A928E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -538,7 +552,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK/SDK";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK/SDK";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = QNSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -547,15 +561,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/QNSDK/SDK",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = Yolanda.QNSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -581,7 +593,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK/SDK";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK/SDK";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = QNSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -590,14 +602,12 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/QNSDK/SDK",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				MACH_O_TYPE = staticlib;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = Yolanda.QNSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -723,7 +733,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BV3EPFW3GV;
 				ENABLE_BITCODE = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/QNDeviceSDKDemo";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK/SDK";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = QNDeviceSDKDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -731,9 +741,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK";
+				LIBRARY_SEARCH_PATHS = "";
 				MARKETING_VERSION = 2.20.0;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
 				PRODUCT_NAME = "QNSDK 2.8.2";
 				SWIFT_OBJC_BRIDGING_HEADER = "QNDeviceSDKDemo/Detection/QNDeviceSDKDemo-Bridging-Header.h";
@@ -754,7 +767,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BV3EPFW3GV;
 				ENABLE_BITCODE = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/QNDeviceSDKDemo";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK/SDK";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = QNDeviceSDKDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -762,9 +775,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/QNSDK";
+				LIBRARY_SEARCH_PATHS = "";
 				MARKETING_VERSION = 2.20.0;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingniu.test;
 				PRODUCT_NAME = "QNSDK 2.8.2";
 				SWIFT_OBJC_BRIDGING_HEADER = "QNDeviceSDKDemo/Detection/QNDeviceSDKDemo-Bridging-Header.h";
