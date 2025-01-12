@@ -1,4 +1,3 @@
-
 framework module QNDeviceSDK {
   umbrella header "QNDeviceSDK.h"
   export *
