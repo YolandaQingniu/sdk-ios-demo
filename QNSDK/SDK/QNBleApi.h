@@ -29,7 +29,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.21.6 】
+ 当前版本【 2.23.0 】
  
  SDK最低配置8.0的系统
  
@@ -122,7 +122,7 @@
 + (QNBleApi *)sharedBleApi;
 
 /**
- 注册SDK
+ 初始化SDK：注册SDK +  初始化蓝牙管理类，等效于“registerSdk” + “initBleManager”
  必须先注册SDK后使用其他操作
  appid以及初始配置文件请向轻牛官方洽谈
  
@@ -133,7 +133,7 @@
 - (void)initSdk:(NSString *)appId firstDataFile:(NSString *)dataFile callback:(QNResultCallback)callback;
 
 /**
- 注册SDK
+ 初始化SDK：注册SDK + 初始化蓝牙管理类，等效于“registerSdk” + “initBleManager”
  必须先注册SDK后使用其他操作
  appid以及初始配置文件请向轻牛官方洽谈
  
@@ -142,6 +142,23 @@
  @param callback 结果回调
  */
 - (void)initSdk:(NSString *)appId dataFileContent:(NSString *)dataFileContent callback:(QNResultCallback)callback;
+
+
+/// 注册SDK（初始化SDK分为两步，满足某些客户需要在特定页面（例如二级页面）才去授权并使用蓝牙功能的场景，第一步是注册SDK，即registerSdk，第二步是初始化蓝牙管理类，即initBleManager）
+/// @param appId 授权appid，如果没有，则需要向官方获取正确的appid
+/// @param dataFile 授权文件，官方授权后会提供授权文件
+/// @param callback 结果回调
+- (void)registerSdk:(NSString *)appId firstDataFile:(NSString *)dataFile callback:(QNResultCallback)callback;
+
+/// 注册SDK（初始化SDK分为两步，满足某些客户需要在特定页面（例如二级页面）才去授权并使用蓝牙功能的场景，第一步是注册SDK，即registerSdk，第二步是初始化蓝牙管理类，即initBleManager）
+/// @param appId appId 授权appid，如果没有，则需要向官方获取正确的appid
+/// @param dataFileContent 授权文件内容，官方授权后会提供授权文件
+/// @param callback 结果回调
+- (void)registerSdk:(NSString *)appId dataFileContent:(NSString *)dataFileContent callback:(QNResultCallback)callback;
+
+/// 初始化蓝牙管理类（该操作之前，需要先注册SDK，即registerSdk方法）
+/// @param callback 结果回调
+- (void)initBleManagerWithCallback:(QNResultCallback)callback;
 
 /**
 
