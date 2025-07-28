@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'QNSDK'
-s.version          = '2.24.0'
+s.version          = '2.24.1'
 s.summary          = '轻牛旗下设备通讯类'
 
 s.description      = '支持智能体脂秤、共享秤二维码数据解析'
@@ -24,11 +24,17 @@ s.vendored_libraries = 'QNSDK/SDK/libQNDeviceSDK.a'
 s.public_header_files= 'QNSDK/SDK/**/*.h'
 s.static_framework = true
 s.frameworks = 'CoreBluetooth'
-s.xcconfig = {'BITCODE_GENERATION_MODE' => 'bitcode'}
-s.pod_target_xcconfig = {
-    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
-    'VALID_ARCHS' => 'arm64'
+s.xcconfig = {
+  'BITCODE_GENERATION_MODE' => 'bitcode',
+  'VALID_ARCHS' => 'arm64 x86_64'
 }
-s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+s.pod_target_xcconfig = {
+  'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
+  'VALID_ARCHS[sdk=iphoneos*]' => 'arm64',
+  'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64'
+}
+s.user_target_xcconfig = {
+  'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+}
 
 end

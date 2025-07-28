@@ -657,7 +657,7 @@ typedef enum{
             self.wspConfigVC.delegate = self;
             [self presentViewController:self.wspConfigVC animated:YES completion:nil];
         } else if (!device.supportWifi || device.deviceType == QNDeviceTypeHeightScale) {
-            if (device.deviceType == QNDeviceTypeScaleBleDefault) {
+            if (device.deviceType == QNDeviceTypeScaleBleDefault || device.deviceType == QNDeviceTypeHeightScale ) {
                 [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
             }
             self.currentStyle = DeviceStyleLinging;
