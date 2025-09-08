@@ -9,6 +9,7 @@
 #import "QNBleDevice.h"
 #import "QNScaleData.h"
 #import "QNScaleStoreData.h"
+#import "QNHeightDeviceConfig.h"
 
 typedef NS_ENUM(NSInteger, QNScaleEvent) {
     QNScaleEventWiFiBleStartNetwork = 1, //WiFi蓝牙双模设备开始配网
@@ -98,4 +99,26 @@ typedef NS_ENUM(NSInteger, QNScaleEvent) {
 /// @param isLowLevel 设备是否处于低电状态
 /// @param device QNBleDevice
 - (void)onGetBatteryLevel:(NSUInteger)batteryLevel isLowLevel:(BOOL)isLowLevel device:(QNBleDevice *)device;
+
+/// 条形码数据回调(CP30专属)
+/// @param barCode 条形码数据
+/// @param mac mac
+- (void)onGetBarCode:(NSString *)barCode mac:(NSString *)mac;
+
+/// 条形码数据回调(CP30专属)
+/// @param barCode 条形码数据
+/// @param mac mac
+- (void)onGetBarCodeFail:(NSString *)barCode mac:(NSString *)mac;
+
+/// 扫码枪连接状态(CP30专属)
+/// @param isConnect 条形码数据
+/// @param mac mac
+- (void)onGetBarCodeGunState:(BOOL)isConnect mac:(NSString *)mac;
+
+
+/// 秤端功能设置结果（CP30专属）
+/// @param setResult 设置结果（成功或失败）
+/// @param error 错误
+- (void)onGetResultToHeightScaleFunctionSetting:(QNHeightDeviceSetFunctionResult)setResult error:(nullable NSError *)error;
+
 @end

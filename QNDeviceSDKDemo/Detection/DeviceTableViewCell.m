@@ -19,7 +19,7 @@
 @implementation DeviceTableViewCell
 - (void)setDevice:(QNBleDevice *)device {
     _device = device;
-    self.nameLabel.text = device.name;
+    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@",device.bluetoothName,device.name];
     self.macLabel.text = device.mac;
     self.RSSILabel.text = [device.RSSI stringValue];
     self.modeIdLabel.text = device.modeId;

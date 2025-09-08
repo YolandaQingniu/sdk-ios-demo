@@ -25,11 +25,12 @@
 #import "QNBleKitchenConfig.h"
 #import "QNBleOTAProtocol.h"
 #import "QNBleRulerProtocol.h"
+#import "QNHeightDeviceConfig.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
  
- 当前版本【 2.25.0 】
+ 当前版本【 2.24.1 】
  
  SDK最低配置8.0的系统
  
@@ -210,6 +211,16 @@
  @param callback 结果回调
  */
 - (void)connectWspDevice:(QNBleDevice *)device config:(QNWspConfig *)config callback:(QNResultCallback)callback;
+
+/**
+ 连接轻牛身高秤设备
+ 
+ @param device 需要连接的蓝牙设备
+ @param config 连接身高秤设备时的配置项
+ @param callback 结果回调
+ */
+- (void)connectHeightScaleDevice:(QNBleDevice *)device config:(QNHeightDeviceConfig *)config callback:(QNResultCallback)callback;
+
 
 /**
  断开设备的连接
@@ -436,5 +447,15 @@
 
 /// 下发OTA固件
 - (void)applyOta:(NSData *)otaData callback:(QNResultCallback)callback;
+
+/// 用于扫码枪模式下，更新使用身高体重一体秤的用户信息 （体重身高一体秤专用）
+/// @param user 更新用户
+/// @param callback 结果的回调
+- (void)switchHeightScaleUser:(nonnull QNUser *)user callback:(QNResultCallback )callback;
+
+/// 设置身高体重一体秤的秤端信息 （体重身高一体秤专用）
+/// @param setFunction 更新秤端信息
+/// @param callback 结果的回调
+- (void)setHeightScaleFunction:(QNHeightDeviceSetFunction)setFunction callback:(QNResultCallback)callback;
 @end
 

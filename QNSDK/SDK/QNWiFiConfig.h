@@ -19,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 数据传输地址。WSP设备设置有效，其他设备可设为 null*/
 @property(nonatomic, strong, nullable) NSString *serveUrl;
+/** ota地址。heightScale设备设置有效，其他设备可设为 null*/
+@property (nonatomic, strong,nullable) NSString *fotaUrl;
+/** 密钥。heightScale设备设置有效，其他设备可设为 null*/
+@property (nonatomic, strong,nullable) NSString *encryptionKey;
+
+
 
 /** 检查WiFi名称的有效性 */
 - (BOOL)checkSSIDVail;

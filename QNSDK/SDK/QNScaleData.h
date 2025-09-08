@@ -38,6 +38,8 @@ typedef NS_ENUM(NSUInteger, QNHeightWeightMode) {
 
 @property(nonatomic, assign, readonly) NSInteger resistance500;
 
+/// (身高体重一体秤专属)条形码信息
+@property (nonatomic, strong) NSString *barCode;
 
 - (instancetype)init NS_UNAVAILABLE;
 
