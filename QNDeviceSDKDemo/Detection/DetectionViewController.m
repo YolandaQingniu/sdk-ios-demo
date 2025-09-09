@@ -34,6 +34,7 @@ typedef enum{
 #import "UIView+Toast.h"
 #import "HeightStorageDataVC.h"
 #import "HeightSetFunctionVC.h"
+#import "NSDate+ChangeExtension.h"
 
 @interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNUserScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener,QNScaleDataListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
@@ -57,7 +58,7 @@ typedef enum{
 @property(nonatomic, weak) WspConfigVC *wspConfigVC;
 @property(nonatomic, assign) BOOL isEightElectrodesData; //八电极测量数据标识
 
-@property (nonatomic, strong) QNBleDevice *connectBleDevice;
+@property (nonatomic, strong, nullable) QNBleDevice *connectedBleDevice;
 
 /// 当前测量数据
 @property (nonatomic, strong) QNScaleData *scaleData;
@@ -70,7 +71,8 @@ typedef enum{
     [super viewDidLoad];
     self.navigationItem.title = @"测量";
     UIBarButtonItem *buttonItem1 = [[UIBarButtonItem alloc] initWithTitle:@"设置秤端功能" style:UIBarButtonItemStylePlain target:self action:@selector(setFunctionAction)];
-    self.navigationItem.rightBarButtonItems = @[buttonItem1];
+    UIBarButtonItem *buttonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"更新用户" style:UIBarButtonItemStylePlain target:self action:@selector(switchUserAction)];
+    self.navigationItem.rightBarButtonItems = @[buttonItem1,buttonItem2];
     self.appIdLabel.text = kAppid;
     self.peelBtn.hidden = YES;
     self.unstableWeightLabel.numberOfLines = 0;
@@ -118,8 +120,36 @@ typedef enum{
     [self.bleApi setBleKitchenDeviceConfig:config];
 }
 
+#pragma mark - 更新用户
+- (void)switchUserAction {
+    if (!self.connectedBleDevice) {
+        [self.view makeToast:@"设备未连接，请先连接设备！" duration:2.5f position:CSToastPositionCenter];
+        return;
+    }
+    NSString *userInfo = [NSString stringWithFormat:@"当前用户生日: %@ 性别: %@",[self.user.birthday convertStringWithFormatter:QNDateFormatter10], self.user.gender];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"更新用户信息"
+                                                                     message:userInfo
+                                                              preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.bleApi switchHeightScaleUser:self.user callback:^(NSError *error) {
+            if (error) {
+                [self.view makeToast:error.localizedDescription duration:2.0f position:CSToastPositionCenter];
+            }
+        }];
+    }];
+    [alertVC addAction:cancelAction];
+    [alertVC addAction:confirmAction];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
 #pragma mark - 设置秤端功能
 - (void)setFunctionAction {
+    if (!self.connectedBleDevice) {
+        [self.view makeToast:@"设备未连接，请先连接设备！" duration:2.5f position:CSToastPositionCenter];
+        return;
+    }
+    
     HeightSetFunctionVC *vc = [[HeightSetFunctionVC alloc]init];
     __weak typeof(self) weakSelf = self;
     vc.submitCallback = ^(NSInteger set1, NSInteger set2, NSInteger set3, NSInteger set4) {
@@ -167,81 +197,6 @@ typedef enum{
         }];
     };
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)wifiPairAction {
-    NSString *wifiName = @"King";
-    NSString *pwd = @"987654321";
-    NSString *serviceUrl = @"https://sit-wspmock.yolanda.hk/aios/measurements/get_cp30b_data?";
-    NSString *encryption = @"yolandakitnewhdr";
-    NSString *otaUrl = @"https://ota.yolanda.hk";
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"设备配网"
-                                                                     message:@"如不需要配网，请点击取消"
-                                                              preferredStyle:UIAlertControllerStyleAlert];
-    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull wifiNameTextField) {
-        wifiNameTextField.text = wifiName;
-        wifiNameTextField.textAlignment = NSTextAlignmentCenter;
-        wifiNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    }];
-    
-    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull wifiPwdTextField) {
-        wifiPwdTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        wifiPwdTextField.textAlignment = NSTextAlignmentCenter;
-        wifiPwdTextField.placeholder = @"若该WiFi无密码则无需输入";
-        wifiPwdTextField.text = pwd;
-    }];
-    
-    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull serverUrlTF) {
-        serverUrlTF.text = serviceUrl;
-        serverUrlTF.placeholder = @"serverURL";
-        serverUrlTF.textAlignment = NSTextAlignmentCenter;
-        serverUrlTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    }];
-    
-    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull encryptionTF) {
-        encryptionTF.text = encryption;
-        encryptionTF.placeholder = @"请输入encryption";
-        encryptionTF.textAlignment = NSTextAlignmentCenter;
-        encryptionTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    }];
-    
-    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull otaUrlTF) {
-        otaUrlTF.text = otaUrl;
-        otaUrlTF.textAlignment = NSTextAlignmentCenter;
-        otaUrlTF.placeholder = @"otaURL";
-        otaUrlTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    }];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:nil];
-    
-    UIAlertAction *pairAction = [UIAlertAction actionWithTitle:@"连接并配网"
-                                                                   style:UIAlertActionStyleDefault
-                                                                 handler:^(UIAlertAction * _Nonnull action) {
-        
-        NSString *wifiName = alertVC.textFields[0].text;
-        NSString *wifiPwd = alertVC.textFields[1].text;
-        NSString *serverUrl = alertVC.textFields[2].text;
-        NSString *encryption = alertVC.textFields[3].text;
-        NSString *otaUrl = alertVC.textFields[4].text;
-        
-        // 创建 QNWiFiConfig 对象并配置属性
-        QNWiFiConfig *scaleWifiConfig = [[QNWiFiConfig alloc] init];
-        scaleWifiConfig.ssid = wifiName;
-        scaleWifiConfig.pwd = wifiPwd;
-        scaleWifiConfig.serveUrl = serverUrl;
-        scaleWifiConfig.encryptionKey = encryption;
-        scaleWifiConfig.fotaUrl = otaUrl;
-        
-        
-    }];
-    
-    [alertVC addAction:pairAction];
-    [alertVC addAction:cancelAction];
-    
-    // 呈现 UIAlertController
-    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 #pragma mark 设置设备各个阶段状态
@@ -437,13 +392,7 @@ typedef enum{
 - (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state{//秤连接或测量状态变化
     if (state == QNScaleStateConnected) {//链接成功
         self.currentStyle = DeviceStyleLingSucceed;
-//        NSLog(@"连接成功，开始设置User");
-//        QNUser *user = self.user;
-//        [_bleApi switchHeightScaleUser:user callback:^(NSError *error) {
-//            if (error) {
-//                NSLog(@"%@",error.localizedDescription);
-//            }
-//        }];
+        self.connectedBleDevice = device;
     }else if (state == QNScaleStateWiFiBleStartNetwork){//开始配网
         self.currentStyle = DeviceStyleWifiBleStartNetwork;
     }else if (state == QNScaleStateWiFiBleNetworkSuccess){//配网成功
@@ -464,6 +413,7 @@ typedef enum{
         self.currentStyle = DeviceStyleMeasuringFail;
     }else if (state == QNScaleStateLinkLoss){//断开连接/称关机
         self.currentStyle = DeviceStyleDisconnect;
+        self.connectedBleDevice = nil;
         self.peelBtn.hidden = YES;
     }
 }

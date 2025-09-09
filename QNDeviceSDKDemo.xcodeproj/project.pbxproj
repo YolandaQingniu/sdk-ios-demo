@@ -50,6 +50,7 @@
 		D2B9E98E20723DEC0020C2B6 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B9E98620723DEC0020C2B6 /* PickerView.m */; };
 		D2B9E98F20723DEC0020C2B6 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B9E98720723DEC0020C2B6 /* PickerView.xib */; };
 		F572A5412E6AFA8600AAF0D4 /* libQNDeviceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F572A5402E6AFA8600AAF0D4 /* libQNDeviceSDK.a */; };
+		F58271B82E6FC5D600AB6767 /* NSDate+ChangeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F58271B72E6FC5D600AB6767 /* NSDate+ChangeExtension.m */; };
 		F5BEBA702E6EAE1A006866BA /* HeightStorageDataVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BEBA6E2E6EAE1A006866BA /* HeightStorageDataVC.m */; };
 		F5BEBA712E6EAE1A006866BA /* HeightStorageDataVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5BEBA6F2E6EAE1A006866BA /* HeightStorageDataVC.xib */; };
 		F5BEBA772E6F006C006866BA /* HeightSetFunctionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BEBA762E6F006C006866BA /* HeightSetFunctionVC.m */; };
@@ -178,6 +179,8 @@
 		F572A5612E6AFA9500AAF0D4 /* QNWiFiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNWiFiConfig.h; sourceTree = "<group>"; };
 		F572A5622E6AFA9500AAF0D4 /* QNWspConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNWspConfig.h; sourceTree = "<group>"; };
 		F572A5632E6AFA9500AAF0D4 /* QNWspScaleDataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNWspScaleDataProtocol.h; sourceTree = "<group>"; };
+		F58271B62E6FC5D600AB6767 /* NSDate+ChangeExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+ChangeExtension.h"; sourceTree = "<group>"; };
+		F58271B72E6FC5D600AB6767 /* NSDate+ChangeExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ChangeExtension.m"; sourceTree = "<group>"; };
 		F5BEBA6D2E6EAE1A006866BA /* HeightStorageDataVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeightStorageDataVC.h; sourceTree = "<group>"; };
 		F5BEBA6E2E6EAE1A006866BA /* HeightStorageDataVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeightStorageDataVC.m; sourceTree = "<group>"; };
 		F5BEBA6F2E6EAE1A006866BA /* HeightStorageDataVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeightStorageDataVC.xib; sourceTree = "<group>"; };
@@ -221,6 +224,7 @@
 		04A42089235FFA7E00716903 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				F58271B52E6FC55900AB6767 /* Category */,
 				04A4208A235FFAE400716903 /* ScaleDataTargetTool.h */,
 				04A4208B235FFAE400716903 /* ScaleDataTargetTool.m */,
 			);
@@ -371,7 +375,6 @@
 				1B09711E2361523200025284 /* KitchenVC.m */,
 				7E8C4C9D28743CD40030A042 /* BleRulerVC.h */,
 				7E8C4C9E28743CD40030A042 /* BleRulerVC.m */,
-				F572A53D2E6AF80500AAF0D4 /* HeightScalePart */,
 				D244245D2271CD0400F63F35 /* WiFiTool.h */,
 				D244245E2271CD0400F63F35 /* WiFiTool.m */,
 				D232D6502004DE2D00AABD67 /* Main.storyboard */,
@@ -400,6 +403,7 @@
 				D2B9E97F20723DEC0020C2B6 /* ScaleDataCell.h */,
 				D2B9E98320723DEC0020C2B6 /* ScaleDataCell.m */,
 				D2B9E97D20723DEC0020C2B6 /* ScaleDataCell.xib */,
+				F572A53D2E6AF80500AAF0D4 /* HeightScalePart */,
 			);
 			path = Detection;
 			sourceTree = "<group>";
@@ -414,6 +418,15 @@
 				F5BEBA762E6F006C006866BA /* HeightSetFunctionVC.m */,
 			);
 			path = HeightScalePart;
+			sourceTree = "<group>";
+		};
+		F58271B52E6FC55900AB6767 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				F58271B62E6FC5D600AB6767 /* NSDate+ChangeExtension.h */,
+				F58271B72E6FC5D600AB6767 /* NSDate+ChangeExtension.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -577,6 +590,7 @@
 				1B99EA442540393200EE7DFA /* NSArray+MASAdditions.m in Sources */,
 				1B1350EE2417395600E94394 /* WspConfigVC.m in Sources */,
 				1B99EA422540393200EE7DFA /* MASConstraintMaker.m in Sources */,
+				F58271B82E6FC5D600AB6767 /* NSDate+ChangeExtension.m in Sources */,
 				D2B9E98D20723DEC0020C2B6 /* DeviceTableViewCell.m in Sources */,
 				1B99EA4E25403D6C00EE7DFA /* QNBleDevice+Addition.m in Sources */,
 				D2B9E98E20723DEC0020C2B6 /* PickerView.m in Sources */,
