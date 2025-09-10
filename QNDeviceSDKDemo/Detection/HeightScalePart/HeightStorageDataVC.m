@@ -39,7 +39,7 @@
     if (!cell) {
         cell = (UITableViewCell *)[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     }
-    QNScaleStoreData *data = self.storageList[indexPath.row];
+    QNScaleStoreData *data = (QNScaleStoreData *)self.storageList[indexPath.row];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
     cell.textLabel.text = [NSString stringWithFormat:@"weight:%lf  height:%lf  50阻抗:%ld  500阻抗:%ld   条形码内容:%@ ",data.weight,data.height,data.resistance50,data.resistance500,data.barCode];

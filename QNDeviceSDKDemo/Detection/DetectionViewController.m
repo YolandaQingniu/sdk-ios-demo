@@ -437,15 +437,22 @@ typedef enum{
 }
 
 - (void)onGetStoredScale:(QNBleDevice *)device data:(NSArray<QNScaleStoreData *> *)storedDataList {
+    for (int i = 0; i < storedDataList.count; i++) {
+        QNScaleStoreData *data = storedDataList[i];
+        NSLog(@"******* %ld - %ld ******",data.resistance50,data.resistance500);
+        [self.view makeToast:[NSString stringWithFormat:@"******* %ld - %ld ******",data.resistance50,data.resistance500]];
+    }
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"存储数据" message:[NSString stringWithFormat:@"一共收到[%lu]条存储数据",(unsigned long)storedDataList.count] preferredStyle:(UIAlertControllerStyleAlert)];
     [alertC addAction:[UIAlertAction actionWithTitle:@"前往查看" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         NSMutableArray *storageList = [NSMutableArray array];
         HeightStorageDataVC *storageVC = [[HeightStorageDataVC alloc] init];
         for (int i = 0; i < storedDataList.count; i++) {
             QNScaleStoreData *data = storedDataList[i];
+            NSLog(@"******* %ld - %ld ******",data.resistance50,data.resistance500);
+            [self.view makeToast:[NSString stringWithFormat:@"******* %ld - %ld ******",data.resistance50,data.resistance500]];
             [storageList addObject:data];
         }
-        storageVC.storageList = [storageList copy];
+        storageVC.storageList = [NSArray arrayWithArray:storedDataList];
         [self.navigationController pushViewController:storageVC animated:YES];
     }]];
     [alertC addAction:[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil]];
