@@ -453,9 +453,5 @@
 /// @param callback 结果的回调
 - (void)switchHeightScaleUser:(nonnull QNUser *)user callback:(QNResultCallback )callback;
 
-/// 设置身高体重一体秤的秤端信息 （体重身高一体秤专用）
-/// @param setFunction 更新秤端信息
-/// @param callback 结果的回调
-- (void)setHeightScaleFunction:(QNHeightDeviceSetFunction)setFunction callback:(QNResultCallback)callback;
 @end
 

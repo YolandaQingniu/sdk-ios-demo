@@ -18,6 +18,7 @@
  - QNUnitStLb: 若设备不支持该单位的显示，而支持 "QNUnitLB" 的显示，则会显示 "QNUnitLB"
  */
 typedef NS_ENUM(NSUInteger, QNUnit) {
+    QNUnitNone = -1,
     QNUnitKG = 0,
     QNUnitLB = 1,
     QNUnitJIN = 2,
@@ -32,11 +33,24 @@ typedef NS_ENUM(NSUInteger, QNUnit) {
 };
 
 /**
- 身高秤秤端身高单位，仅有CP30C设备支持设置
+ 身高秤秤端身高单位，仅有CP30C/CP30B/CP30G设备支持设置
  */
 typedef NS_ENUM(NSUInteger, QNHeightUnit) {
-    QNHeightUnitCM = 0,
-    QNHeightUnitFtIn  = 1,
+    QNHeightUnitNone = -1,
+    QNHeightUnitCM = 0,      // cm
+    QNHeightUnitFtIn  = 1,   // FtIn
+    QNHeightUnitIn = 2,
+    QNHeightUnitFt = 3,
+};
+
+/**
+ 身高秤秤端身高单位，仅有CP30C/CP30B/CP30G设备支持设置
+ */
+typedef NS_ENUM(NSUInteger, QNLanguage) {
+    QNLanguageNone  = -1,
+    QNLanguageZH  = 0,   // 中文
+    QNLanguageEN  = 1,   // 英文
+    QNLanguageArabic = 2, // 阿拉伯语
 };
 
 

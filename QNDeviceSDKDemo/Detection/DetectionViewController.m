@@ -70,9 +70,8 @@ typedef enum{
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"测量";
-    UIBarButtonItem *buttonItem1 = [[UIBarButtonItem alloc] initWithTitle:@"设置秤端功能" style:UIBarButtonItemStylePlain target:self action:@selector(setFunctionAction)];
-    UIBarButtonItem *buttonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"更新用户" style:UIBarButtonItemStylePlain target:self action:@selector(switchUserAction)];
-    self.navigationItem.rightBarButtonItems = @[buttonItem1,buttonItem2];
+    UIBarButtonItem *buttonItem1 = [[UIBarButtonItem alloc] initWithTitle:@"更新用户" style:UIBarButtonItemStylePlain target:self action:@selector(switchUserAction)];
+    self.navigationItem.rightBarButtonItems = @[buttonItem1];
     self.appIdLabel.text = kAppid;
     self.peelBtn.hidden = YES;
     self.unstableWeightLabel.numberOfLines = 0;
@@ -126,15 +125,20 @@ typedef enum{
         [self.view makeToast:@"设备未连接，请先连接设备！" duration:2.5f position:CSToastPositionCenter];
         return;
     }
-    NSString *userInfo = [NSString stringWithFormat:@"当前用户生日: %@ 性别: %@",[self.user.birthday convertStringWithFormatter:QNDateFormatter10], self.user.gender];
+    QNUser *user = [[QNUser alloc]init];
+    user.gender = @"female";
+    user.birthday = [NSDate dateWithString:@"1995-01-01" format:@"yyyy-MM-dd"];
+    NSString *userInfo = [NSString stringWithFormat:@"当前用户生日: %@ 性别: %@",[user.birthday convertStringWithFormatter:QNDateFormatter10], user.gender];
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"更新用户信息"
                                                                      message:userInfo
                                                               preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self.bleApi switchHeightScaleUser:self.user callback:^(NSError *error) {
+        [self.bleApi switchHeightScaleUser:user callback:^(NSError *error) {
             if (error) {
                 [self.view makeToast:error.localizedDescription duration:2.0f position:CSToastPositionCenter];
+            }else{
+                [self.view makeToast:@"设置成功" duration:2.0f position:CSToastPositionCenter];
             }
         }];
     }];
@@ -143,68 +147,15 @@ typedef enum{
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
-#pragma mark - 设置秤端功能
-- (void)setFunctionAction {
-    if (!self.connectedBleDevice) {
-        [self.view makeToast:@"设备未连接，请先连接设备！" duration:2.5f position:CSToastPositionCenter];
-        return;
-    }
-    
-    HeightSetFunctionVC *vc = [[HeightSetFunctionVC alloc]init];
-    __weak typeof(self) weakSelf = self;
-    vc.submitCallback = ^(NSInteger set1, NSInteger set2, NSInteger set3, NSInteger set4) {
-        // 获取设备的信息
-        QNHeightDeviceSetFunction setFunction = {QNHeightWeightUnitNone, QNHeightHeightUnitNone, QNHeightVoiceLanguageTypeNone, QNHeightUserModeNone};
-        
-        if (set1 == 0) {
-            setFunction.weightUnit = QNHeightWeightUnitKg;
-        } else if (set1 == 1) {
-            setFunction.weightUnit = QNHeightWeightUnitLb;
-        } else if (set1 == 2) {
-            setFunction.weightUnit = QNHeightWeightUnitJin;
-        } else if (set1 == 3) {
-            setFunction.weightUnit = QNHeightWeightUnitStLb;
-        }
-        
-        if (set2 == 0) {
-            setFunction.heightUnit = QNHeightHeightUnitCm;
-        } else if (set2 == 1) {
-            setFunction.heightUnit = QNHeightHeightUnitFtIn;
-        } else if (set2 == 2) {
-            setFunction.heightUnit = QNHeightHeightUnitIn;
-        } else if (set2 == 3) {
-            setFunction.heightUnit = QNHeightHeightUnitFt;
-        }
-        
-        if (set3 == 0) {
-            setFunction.voiceLanguage = QNHeightVoiceLanguageTypeZH;
-        } else if (set3 == 1) {
-            setFunction.voiceLanguage = QNHeightVoiceLanguageTypeEN;
-        } else if (set3 == 2) {
-            setFunction.voiceLanguage = QNHeightVoiceLanguageTypeARABIC;
-        }
-        
-        if (set4 == 0) {
-            setFunction.userMode = QNHeightUserModeHousehold;
-        } else if (set4 == 1) {
-            setFunction.userMode = QNHeightUserModeCommercial;
-        }
-        
-        [weakSelf.bleApi setHeightScaleFunction:setFunction callback:^(NSError *error) {
-            if (error) {
-                [self.view makeToast:[NSString stringWithFormat:@"%@",error.localizedDescription] duration:2 position:CSToastPositionCenter];
-            }
-        }];
-    };
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 #pragma mark 设置设备各个阶段状态
 - (void)setCurrentStyle:(DeviceStyle)currentStyle {
     _currentStyle = currentStyle;
     switch (_currentStyle) {
         case DeviceStyleScanning: //正在扫描
             [self setScanningStyleUI];
+            if (self.connectedBleDevice) {
+                [self disconnectDevice];
+            }
             [self startScanDevice];
             break;
         case DeviceStyleLinging: //正在链接
@@ -349,6 +300,7 @@ typedef enum{
 
 #pragma mark 断开设备
 - (void)disconnectDevice {
+    NSLog(@"************************ 已经发送断开连接 **************************");
     [_bleApi disconnectDevice:nil callback:^(NSError *error) {
         
     }];
@@ -449,6 +401,8 @@ typedef enum{
 //        scaleData = tempData;
 //    }
     
+    self.unstableWeightLabel.text = [NSString stringWithFormat:@"当前测量的阻抗：%ld - %ld",scaleData.resistance50,scaleData.resistance500];
+    
     BOOL isShowEightReport = NO;
     self.isEightElectrodesData = device.isSupportEightElectrodes;
     for (QNScaleItemData *item in [scaleData getAllItem]) {
@@ -546,10 +500,6 @@ typedef enum{
     }else {
         self.unstableWeightLabel.text = @"扫码枪断开连接";
     }
-}
-
-- (void)onGetResultToHeightScaleFunctionSetting:(QNHeightDeviceSetFunctionResult)setResult error:(NSError *)error {
-    self.unstableWeightLabel.text = [NSString stringWithFormat:@"设置重量单位:%@ ,设置身高单位:%@ ,设置播报语种:%@ ,设置用户模式:%@",setResult.weightUnitSetResult?@"成功":@"失败",setResult.heighUnitSetResult?@"成功":@"失败",setResult.voiceLanguageSetResult?@"成功":@"失败",setResult.userModeSetResult?@"成功":@"失败"];
 }
 
 
@@ -789,11 +739,12 @@ typedef enum{
         }
 }
 
-
 - (void)wifiBleNetworkRemindWithHeightScale:(QNBleDevice *)device {
     NSString *wifiName = @"King";
-    NSString *pwd = @"9876543210";
-    NSString *serviceUrl = @"https://sit-wspmock.yolanda.hk/aios/measurements/get_cp30b_data?";
+    NSString *pwd = @"987654321";
+    // https://sit-wspmock.yolanda.hk/aios/measurements/get_cp30b_data?
+    // http://wsp-lite.yolanda.hk/yolanda/aios?code=
+    NSString *serviceUrl = @"http://wsp-lite.yolanda.hk/yolanda/aios?code=";
     NSString *encryption = @"yolandakitnewhdr";
     NSString *otaUrl = @"https://ota.yolanda.hk";
     
@@ -868,6 +819,7 @@ typedef enum{
         // 创建并配置 HeightConnectVC
         QNHeightDeviceConfig *config = [[QNHeightDeviceConfig alloc]init];
         config.wifiConfig = scaleWifiConfig;
+        config.curUser = self.user;
         [_bleApi connectHeightScaleDevice:device config:config callback:^(NSError *error) {
             if (error) {
                 NSLog(@"%@", error.localizedDescription);
@@ -879,6 +831,7 @@ typedef enum{
                                                           handler:^(UIAlertAction * _Nonnull action) {
         [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         QNHeightDeviceConfig *config = [[QNHeightDeviceConfig alloc]init];
+        config.curUser = self.user;
         [_bleApi connectHeightScaleDevice:device config:config callback:^(NSError *error) {
             if (error) {
                 NSLog(@"%@", error.localizedDescription);

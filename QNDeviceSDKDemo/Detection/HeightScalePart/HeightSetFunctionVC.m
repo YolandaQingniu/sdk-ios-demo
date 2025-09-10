@@ -34,7 +34,7 @@
     self.languageSegment = [[UISegmentedControl alloc] initWithItems:@[@"中文播报", @"英文播报", @"阿拉伯语播报", @"不设置"]];
     
     // 使用场景切换：1-家庭模式；2-商用共享模式(0xFF时该项不生效)
-    self.mapSegment = [[UISegmentedControl alloc] initWithItems:@[@"家庭模式", @"商用共享模式", @"不设置"]];
+    self.mapSegment = [[UISegmentedControl alloc] initWithItems:@[@"家庭模式", @"商用共享模式", @"扫码枪模式",@"不设置"]];
     
     // 设置体重单位
     UILabel *unitLabel = [[UILabel alloc] init];
@@ -72,7 +72,7 @@
     [self.view addSubview:mapLabel];
     [self.view addSubview:self.mapSegment];
     
-    CGFloat segmentWidth = 450;
+    CGFloat segmentWidth = 250;
     
     [unitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(100);

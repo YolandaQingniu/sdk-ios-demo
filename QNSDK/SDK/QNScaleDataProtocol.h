@@ -106,19 +106,12 @@ typedef NS_ENUM(NSInteger, QNScaleEvent) {
 - (void)onGetBarCode:(NSString *)barCode mac:(NSString *)mac;
 
 /// 条形码数据回调(CP30专属)
-/// @param barCode 条形码数据
 /// @param mac mac
-- (void)onGetBarCodeFail:(NSString *)barCode mac:(NSString *)mac;
+- (void)onGetBarCodeFail:(NSString *)mac;
 
 /// 扫码枪连接状态(CP30专属)
 /// @param isConnect 条形码数据
 /// @param mac mac
 - (void)onGetBarCodeGunState:(BOOL)isConnect mac:(NSString *)mac;
-
-
-/// 秤端功能设置结果（CP30专属）
-/// @param setResult 设置结果（成功或失败）
-/// @param error 错误
-- (void)onGetResultToHeightScaleFunctionSetting:(QNHeightDeviceSetFunctionResult)setResult error:(nullable NSError *)error;
 
 @end
