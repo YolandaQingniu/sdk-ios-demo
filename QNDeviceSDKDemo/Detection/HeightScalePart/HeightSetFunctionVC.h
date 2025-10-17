@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QNDeviceSDK.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^SubmitCallback)(NSInteger set1,NSInteger set2,NSInteger set3,NSInteger set4);
-
 @interface HeightSetFunctionVC : UIViewController
-@property (nonatomic, copy) SubmitCallback submitCallback;
+@property (nonatomic, strong) QNBleDevice *connectedDevice;
+@property (nonatomic, strong) QNWiFiConfig *wifiConfig;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,6 +10,7 @@
 #import "QNScaleData.h"
 #import "QNScaleStoreData.h"
 #import "QNHeightDeviceConfig.h"
+#import "QNHeightDeviceFunction.h"
 
 typedef NS_ENUM(NSInteger, QNScaleEvent) {
     QNScaleEventWiFiBleStartNetwork = 1, //WiFi蓝牙双模设备开始配网
@@ -113,5 +114,38 @@ typedef NS_ENUM(NSInteger, QNScaleEvent) {
 /// @param isConnect 条形码数据
 /// @param mac mac
 - (void)onGetBarCodeGunState:(BOOL)isConnect mac:(NSString *)mac;
+
+/// 设置秤端功能结果的回调
+/// @param isLanguageSuccess 语音播放语言是否设置功能
+/// @param isWeightUnitSuccess 语音播放语言是否设置功能
+/// @param isHeightUnitSuccess 语音播放语言是否设置功能
+/// @param isVolumeSuccess 语音播放语言是否设置功能
+- (void)onSetHeightScaleConfigState:(BOOL)isLanguageSuccess isWeightUnitSuccess:(BOOL)isWeightUnitSuccess isHeightUnitSuccess:(BOOL)isHeightUnitSuccess  isVolumeSuccess:(BOOL)isVolumeSuccess device:(QNBleDevice *)device;
+
+/// 获取秤端功能结果的回调
+/// @param function 秤端功能详情
+- (void)onGetHeightScaleConfig:(QNHeightDeviceFunction *)function device:(QNBleDevice *)device;
+
+/// 身高秤复位设置成功告知的回调
+/// @param state true: 设置成功, false: 设置失败
+- (void)onResetHeightScaleState:(BOOL)state device:(QNBleDevice *)device;
+
+/// 获取身高秤wifi配置信息（只返回ssid信息）
+/// @param state true: 获取成功, false: 获取失败
+/// @param ssid WiFi的ssid(如果获取失败，ssid为nil)
+- (void)onGetHeightScaleWifiConfig:(BOOL)state ssid:(NSString * _Nullable)ssid device:(QNBleDevice *)device;
+
+/// 身高秤清除wifi配置成功告知的回调
+/// @param state true: 设置成功, false: 设置失败
+- (void)onClearHeightScaleWifiConfigState:(BOOL)state device:(QNBleDevice *)device;
+
+/// 扫描身高秤可用的WiFi名称的回调（扫描到一个可用wifi回调调用一次）
+/// @param ssid 可用的WiFi名称
+/// @param rssi wifi的信号强度
+- (void)onScanHeightScaleWifiSsidResult:(NSString *)ssid rssi:(int)rssi device:(QNBleDevice *)device;
+
+/// 扫描身高秤可用wifi结束的回调
+/// @param state 0: 扫描失败（不管是否有扫描到WiFi还是其他原因）, 1: 表示体重秤完成
+- (void)onScanHeightScaleWifiSsidFinish:(int)state device:(QNBleDevice *)device;
 
 @end

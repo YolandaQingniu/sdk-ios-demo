@@ -53,6 +53,7 @@ typedef NS_ENUM(NSInteger, QNBleErrorCode) {
     QNBleErrorCodeShouldEnableResEncrypt = 1400,
     QNBleErrorCodeInvalidateHmac = 1401,
     QNBleErrorCodeDataValidationFailed = 1402,
+    QNBleErrorCodeNotSupportDeviceFunction = 1403,
     
     QNBleErrorWSPUserIndex API_DEPRECATED_WITH_REPLACEMENT("QNBleErrorUserIndex", ios(4.0, 8.0)) = QNBleErrorCodeUserIndex,
     QNBleErrorWSPUserSecret API_DEPRECATED_WITH_REPLACEMENT("QNBleErrorUserSecret", ios(4.0, 8.0)) = QNBleErrorCodeUserSecret,
