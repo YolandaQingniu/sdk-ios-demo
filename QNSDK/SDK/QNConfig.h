@@ -59,6 +59,14 @@ typedef NS_ENUM(NSUInteger,QNAreaType) {
     QNAreaTypeAsia = 1,     // 亚洲
 };
 
+typedef NS_ENUM(NSUInteger,QNVolume) {
+    QNVolumeNone = -1,     // 不更改
+    QNVolumeZero = 0,    // 静音
+    QNVolumeOne = 1,     // 一档音量
+    QNVolumeTwo = 2,     // 二档音量
+    QNVolumeThree = 3,   // 三档音量
+};
+
 /**
  该QNConfig类，用户设置后，SDK会自动保存设置信息，当再次用到类中的设置信息时，会采用用户上次设置的信息
  */

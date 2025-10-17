@@ -35,6 +35,7 @@ typedef enum{
 #import "HeightStorageDataVC.h"
 #import "HeightSetFunctionVC.h"
 #import "NSDate+ChangeExtension.h"
+#import "Masonry.h"
 
 @interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNUserScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener,QNScaleDataListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
@@ -44,6 +45,8 @@ typedef enum{
 @property (weak, nonatomic) IBOutlet UILabel *unstableWeightLabel;  //时时体重
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *peelBtn; //去皮按键
+
+@property (nonatomic, strong) UIButton *setHeightScaleBtn;
 
 @property (nonatomic, assign) DeviceStyle currentStyle;
 @property (nonatomic, strong) NSMutableDictionary *scanDveices;
@@ -103,7 +106,30 @@ typedef enum{
     }
     
     [self.peelBtn addTarget:self action:@selector(clickPeelBtn) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self createUI];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.bleApi.dataListener = self;
+}
+
+- (void)createUI {
+    self.setHeightScaleBtn = [[UIButton alloc]init];
+    [self.setHeightScaleBtn setTitle:@"设置身高秤" forState:UIControlStateNormal];
+    [self.setHeightScaleBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.setHeightScaleBtn addTarget:self action:@selector(clickSetHeightScaleAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.setHeightScaleBtn sizeToFit];
+    self.setHeightScaleBtn.hidden = YES;
+    [self.view addSubview:self.setHeightScaleBtn];
+    
+    [self.setHeightScaleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.appIdLabel);
+        make.trailing.mas_equalTo(-5.0);
+    }];
+}
+
 
 - (void)back {
     [self.bleApi disconnectDevice:nil callback:^(NSError *error) {
@@ -117,6 +143,11 @@ typedef enum{
     config.unit = QNUnitOZ;
     config.isPeel = YES;
     [self.bleApi setBleKitchenDeviceConfig:config];
+}
+
+- (void)clickSetHeightScaleAction {
+    HeightSetFunctionVC *vc = [[HeightSetFunctionVC alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 更新用户
@@ -345,6 +376,11 @@ typedef enum{
     if (state == QNScaleStateConnected) {//链接成功
         self.currentStyle = DeviceStyleLingSucceed;
         self.connectedBleDevice = device;
+        if (device.deviceType == QNDeviceTypeHeightScale) {
+            self.setHeightScaleBtn.hidden = NO;
+        }else {
+            self.setHeightScaleBtn.hidden = YES;
+        }
     }else if (state == QNScaleStateWiFiBleStartNetwork){//开始配网
         self.currentStyle = DeviceStyleWifiBleStartNetwork;
     }else if (state == QNScaleStateWiFiBleNetworkSuccess){//配网成功
@@ -367,6 +403,7 @@ typedef enum{
         self.currentStyle = DeviceStyleDisconnect;
         self.connectedBleDevice = nil;
         self.peelBtn.hidden = YES;
+        self.setHeightScaleBtn.hidden = YES;
     }
 }
 

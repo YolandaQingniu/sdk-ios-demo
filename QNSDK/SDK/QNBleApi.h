@@ -26,11 +26,12 @@
 #import "QNBleOTAProtocol.h"
 #import "QNBleRulerProtocol.h"
 #import "QNHeightDeviceConfig.h"
+#import "QNHeightDeviceFunction.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
 
- 当前版本【 2.26.3 - 20250917】
+ 当前版本【 2.27.0 - 20251017】
  
  SDK最低配置8.0的系统
  
@@ -452,6 +453,36 @@
 /// @param user 更新用户
 /// @param callback 结果的回调
 - (void)switchHeightScaleUser:(nonnull QNUser *)user callback:(QNResultCallback )callback;
+
+/// 设置身高秤的秤端功能信息
+/// @param function 需要设置的秤端功能信息
+/// @param callback 结果的回调
+- (void)setHeightScaleConfig:(QNHeightDeviceFunction * _Nonnull )function callback:(QNResultCallback _Nonnull )callback;
+
+/// 获取身高秤的秤端功能信息（目前仅支持CP30G）
+/// @param callback 结果的回调
+- (void)getHeightScaleConfig:(QNResultCallback _Nonnull )callback;
+
+/// 恢复出厂设置（目前仅支持CP30G）
+/// @param callback 结果的回调
+- (void)resetHeightScale:(QNResultCallback _Nonnull )callback;
+
+/// 清除Wifi配置（目前仅支持CP30G）
+/// @param callback 结果的回调
+- (void)clearHeightScaleWifiConfig:(QNResultCallback _Nonnull )callback;
+
+/// 获取Wifi配置ssid（目前仅支持CP30G）
+/// @param callback 结果的回调
+- (void)getHeightScaleWifiConfig:(QNResultCallback _Nonnull )callback;
+
+/// 开始身高秤的wifi配网
+/// @param wifiConfig wifi配网信息
+/// @param callback 结果的回调
+- (void)startPairHeightScaleWifi:(QNWiFiConfig * _Nonnull )wifiConfig callback:(QNResultCallback _Nonnull )callback;
+
+/// 扫描Wifi（目前仅支持CP30G）
+/// @param callback 结果的回调
+- (void)scanHeightScaleWifiSsid:(QNResultCallback _Nonnull )callback;
 
 @end
 
