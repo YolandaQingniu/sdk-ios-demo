@@ -6,13 +6,6 @@
 //  Copyright © 2025 Yolanda. All rights reserved.
 //
 
-//
-//  HeightConnectVC.m
-//  QNDeviceSDKDemo
-//
-//  Created by yolanda on 2025/9/1.
-//  Copyright © 2025 Yolanda. All rights reserved.
-//
 
 #import "HeightSetFunctionVC.h"
 #import "Masonry.h"
@@ -253,6 +246,10 @@
         btn.backgroundColor = [UIColor systemBlueColor];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            btn.titleLabel.font = [UIFont systemFontOfSize:8];
+        }
+        
         btn.layer.cornerRadius = 5;
         btn.tag = i;
         [btn addTarget:self action:@selector(indexButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -325,6 +322,17 @@
     
     // Constraints
     CGFloat segmentWidth = 450;
+    /// 如果是iPhone手机，根据屏幕的长度来决定segmentWidth
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        // 减去左边距20 + 标签宽度约110 + 间距10，剩余宽度作为segment宽度
+        segmentWidth = screenWidth - 20 - 110 - 10;
+        // 设置最小宽度，确保segment能正常显示
+        if (segmentWidth < 200) {
+            segmentWidth = 200;
+        }
+    }
+    
     
     [unitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topView.mas_bottom).offset(20);
