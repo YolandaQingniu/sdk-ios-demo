@@ -491,7 +491,7 @@
 - (void)wifiPairAction {
     NSString *wifiName = @"King";
     NSString *pwd = @"987654321";
-    NSString *serviceUrl = @"https://sit-wspmock.yolanda.hk/aios/measurements/get_cp30b_data?";
+    NSString *serviceUrl = @"http://wsp-lite.yolanda.hk/yolanda/aios?code=";
     NSString *encryption = @"yolandakitnewhdr";
     NSString *otaUrl = @"https://ota.yolanda.hk";
     

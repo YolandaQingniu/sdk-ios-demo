@@ -48,9 +48,9 @@ typedef NS_ENUM(NSUInteger, QNHeightUnit) {
  */
 typedef NS_ENUM(NSUInteger, QNLanguage) {
     QNLanguageNone  = -1,
-    QNLanguageZH  = 0,   // 中文
-    QNLanguageEN  = 1,   // 英文
-    QNLanguageArabic = 2, // 阿拉伯语
+    QNLanguageZH  = 1,   // 中文
+    QNLanguageEN  = 2,   // 英文
+    QNLanguageArabic = 3, // 阿拉伯语
 };
 
 
