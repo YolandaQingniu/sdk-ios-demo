@@ -27,11 +27,14 @@
 #import "QNBleRulerProtocol.h"
 #import "QNHeightDeviceConfig.h"
 #import "QNHeightDeviceFunction.h"
+#import "QNSlimUserSlimConfig.h"
+#import "QNSlimDeviceConfig.h"
+#import "QNSlimUserCurveData.h"
 
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
 
- 当前版本【 2.27.0 - 20251017】
+ 当前版本【 2.28.0 - 20251031】
  
  SDK最低配置8.0的系统
  
@@ -364,7 +367,7 @@
 - (void)connectRulerDevice:(QNBleRulerDevice *)device callback:(QNResultCallback)callback;
 
 /**
- WSP设备恢复出厂设置
+ 恢复出厂设置
 
  @param callback 结果的回调
  */
@@ -413,17 +416,17 @@
 */
 - (QNScaleData *)physiqueCalculation:(QNUser *)user area:(QNAreaType)area weight:(double)weight date:(NSDate *)measureDate;
 
-/// 切换用户秤访问用户
+/// 切换用户秤访问用户(用户秤，包含减重秤)
 /// @param user 用户信息
 /// @param callback 结果的回调
 - (void)switchUserScaleUser:(QNUser *)user callback:(QNResultCallback)callback;
 
-/// 更新用户秤用户识别体重
+/// 更新用户秤用户识别体重(用户秤，包含减重秤)
 /// @param weight 体重
 /// @param callback 结果的回调
 - (void)updateUserScaleIdentifyWeight:(double)weight callback:(QNResultCallback)callback;
 
-/// 删除用户秤秤端用户信息
+/// 删除用户秤秤端用户信息(用户秤，包含减重秤)
 /// @param indexList 用户索引数组
 /// @param callback 结果的回调
 - (void)deleteScaleUsers:(NSArray <NSNumber *>*)indexList callback:(QNResultCallback)callback;
@@ -483,6 +486,24 @@
 /// 扫描Wifi（目前仅支持CP30G）
 /// @param callback 结果的回调
 - (void)scanHeightScaleWifiSsid:(QNResultCallback _Nonnull )callback;
+
+
+/// 更新减重秤设备设置
+/// @param config 减重秤的设备配置
+/// @param callback 结果的回调
+- (void)updateSlimDeviceConfig:(QNSlimDeviceConfig *_Nonnull)config callback:(QNResultCallback _Nonnull)callback;
+
+/// 更新秤端已注册用户的曲线体重数据
+/// @param data 用户曲线体重数据
+/// @param userIndex 用户坑位索引
+/// @param callback 结果的回调
+- (void)updateUserCurveData:(QNSlimUserCurveData *_Nonnull)data userIndex:(int)userIndex callback:(QNResultCallback _Nonnull)callback NS_SWIFT_NAME(update(userCurveData:userIndex:callback:));
+
+/// 更新秤端已注册用户的减重配置信息
+/// @param config 已注册用户的减重配置信息
+/// @param userIndex 用户坑位索引
+/// @param callback 结果的回调
+- (void)updateUserSlimConfig:(QNSlimUserSlimConfig *_Nonnull)config userIndex:(int)userIndex callback:(QNResultCallback _Nonnull)callback NS_SWIFT_NAME(update(userSlimConfig:userIndex:callback:));
 
 @end
 

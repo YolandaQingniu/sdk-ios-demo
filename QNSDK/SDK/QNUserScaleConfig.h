@@ -10,6 +10,7 @@
 #import "QNWiFiConfig.h"
 #import "QNConfig.h"
 #import "QNUser.h"
+#import "QNSlimDeviceConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,6 +30,9 @@ typedef NS_ENUM(int, QNBuzzerMode) {
 @property (nullable, nonatomic, strong) QNUser *curUser;
 /// 是否是访客模式，当使用访客模式是，可以不设置用户对象中的index与secret
 @property (nonatomic, assign) BOOL isVisitor;
+/// 减重秤的设备配置信息类
+@property (nullable, nonatomic, strong) QNSlimDeviceConfig  *slimDeviceConfig;
+
 /// OTA升级地址
 @property (nullable, nonatomic, strong) NSString *otaUrl;
 /// 通讯秘钥

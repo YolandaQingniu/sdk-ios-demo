@@ -146,8 +146,15 @@ typedef enum{
 }
 
 - (void)clickSetHeightScaleAction {
-    HeightSetFunctionVC *vc = [[HeightSetFunctionVC alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.connectedBleDevice.deviceType == QNDeviceTypeHeightScale) {
+        HeightSetFunctionVC *vc = [[HeightSetFunctionVC alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if (self.connectedBleDevice.deviceType == QNDeviceTypeSlimScale) {
+        
+    }
+    
 }
 
 #pragma mark - 更新用户
@@ -376,7 +383,7 @@ typedef enum{
     if (state == QNScaleStateConnected) {//链接成功
         self.currentStyle = DeviceStyleLingSucceed;
         self.connectedBleDevice = device;
-        if (device.deviceType == QNDeviceTypeHeightScale) {
+        if (device.deviceType == QNDeviceTypeHeightScale || device.deviceType == QNDeviceTypeSlimScale) {
             self.setHeightScaleBtn.hidden = NO;
         }else {
             self.setHeightScaleBtn.hidden = YES;
@@ -760,27 +767,39 @@ typedef enum{
     
     if (device.deviceType == QNDeviceTypeUserScale) {
         
-            [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
-                
-            }];
-            WspConfigVC *configVC = [[WspConfigVC alloc] init];
-            self.wspConfigVC = configVC;
-            self.wspConfigVC.bleDevice = device;
-            self.wspConfigVC.delegate = self;
-            [self presentViewController:self.wspConfigVC animated:YES completion:nil];
-        } else if (!device.supportWifi) {
-            if (device.deviceType == QNDeviceTypeScaleBleDefault) {
-                [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
-            }
-            self.currentStyle = DeviceStyleLinging;
-            [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
-                
-            }];
-        }else if(device.deviceType == QNDeviceTypeHeightScale) {
-            [self wifiBleNetworkRemindWithHeightScale:device];
-        }else {
-            [self wifiBleNetworkRemindWithDevice:device];
+        [self.bleApi stopBleDeviceDiscorvery:^(NSError *error) {
+            
+        }];
+        WspConfigVC *configVC = [[WspConfigVC alloc] init];
+        self.wspConfigVC = configVC;
+        self.wspConfigVC.bleDevice = device;
+        self.wspConfigVC.delegate = self;
+        [self presentViewController:self.wspConfigVC animated:YES completion:nil];
+    }else if(device.deviceType == QNDeviceTypeSlimScale) {
+        
+        QNUserScaleConfig *config = [[QNUserScaleConfig alloc]init];
+        config.curUser = self.user;
+        
+        [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
+        [_bleApi connectUserScaleDevice:device config:config callback:^(NSError *error) {
+            
+        }];
+        
+    }else if (!device.supportWifi) {
+        if (device.deviceType == QNDeviceTypeScaleBleDefault) {
+            [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         }
+        self.currentStyle = DeviceStyleLinging;
+        [_bleApi connectDevice:device user:self.user callback:^(NSError *error) {
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+    }else if(device.deviceType == QNDeviceTypeHeightScale) {
+        [self wifiBleNetworkRemindWithHeightScale:device];
+    }else {
+        [self wifiBleNetworkRemindWithDevice:device];
+    }
 }
 
 - (void)wifiBleNetworkRemindWithHeightScale:(QNBleDevice *)device {
