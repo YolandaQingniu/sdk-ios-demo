@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, QNDeviceType) {
     QNDeviceTypeUserScale = 140,  //用户蓝牙秤
     QNDeviceTypeScaleWsp API_DEPRECATED_WITH_REPLACEMENT("QNDeviceTypeUserScale", ios(4.0, 8.0)) = QNDeviceTypeUserScale,
     QNDeviceTypeHeightScale = 160,  //身高体重秤
+    QNDeviceTypeSlimScale = 180,    //用户减重秤
 };
 
 typedef NS_ENUM(NSUInteger, QNDisplayModuleType) {
