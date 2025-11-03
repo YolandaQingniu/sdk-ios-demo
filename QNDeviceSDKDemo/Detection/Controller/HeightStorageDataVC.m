@@ -42,7 +42,15 @@
     QNScaleStoreData *data = (QNScaleStoreData *)self.storageList[indexPath.row];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
-    cell.textLabel.text = [NSString stringWithFormat:@"weight:%lf  height:%lf  50阻抗:%ld  500阻抗:%ld   条形码内容:%@ ",data.weight,data.height,data.resistance50,data.resistance500,data.barCode];
+    if (self.deviceType == QNDeviceTypeHeightScale) {
+        cell.textLabel.text = [NSString stringWithFormat:@"weight:%lf  height:%lf  50阻抗:%ld  500阻抗:%ld   条形码内容:%@ ",data.weight,data.height,data.resistance50,data.resistance500,data.barCode];
+    }else if (self.deviceType == QNDeviceTypeSlimScale) {
+        cell.textLabel.text = [NSString stringWithFormat:@"weight:%lf 50阻抗:%ld  500阻抗:%ld ", data.weight, data.resistance50, data.resistance500];
+    }else {
+       
+        cell.textLabel.text = [NSString stringWithFormat:@"weight:%lf  height:%lf  50阻抗:%ld  500阻抗:%ld ",data.weight,data.height,data.resistance50,data.resistance500];
+    }
+    
     return cell;
 }
 

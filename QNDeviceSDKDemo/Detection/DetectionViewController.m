@@ -114,6 +114,7 @@ typedef enum{
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.bleApi.dataListener = self;
+    self.bleApi.connectionChangeListener = self;
 }
 
 - (void)createUI {
@@ -499,6 +500,7 @@ typedef enum{
             [storageList addObject:data];
         }
         storageVC.storageList = [NSArray arrayWithArray:storedDataList];
+        storageVC.deviceType = device.deviceType;
         [self.navigationController pushViewController:storageVC animated:YES];
     }]];
     [alertC addAction:[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil]];
@@ -780,7 +782,12 @@ typedef enum{
     }else if(device.deviceType == QNDeviceTypeSlimScale) {
         
         QNUserScaleConfig *config = [[QNUserScaleConfig alloc]init];
+        
+        
         config.curUser = self.user;
+        // 连接设备时，默认访问坑位1的用户
+        config.curUser.index = 1;
+        config.curUser.secret = 1001;
         
         [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {}];
         [_bleApi connectUserScaleDevice:device config:config callback:^(NSError *error) {
