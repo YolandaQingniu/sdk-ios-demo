@@ -89,6 +89,7 @@
 		F51921ED2EB4DF110000B8AB /* QNBleProtocolHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = F51921AD2EB4DF110000B8AB /* QNBleProtocolHandler.h */; };
 		F51921EE2EB4DF110000B8AB /* QNBleApi.h in Headers */ = {isa = PBXBuildFile; fileRef = F51921A22EB4DF110000B8AB /* QNBleApi.h */; };
 		F51921EF2EB4DF110000B8AB /* QNIndicateConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F51921B82EB4DF110000B8AB /* QNIndicateConfig.h */; };
+		F52069FC2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F52069FB2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m */; };
 		F58271B82E6FC5D600AB6767 /* NSDate+ChangeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F58271B72E6FC5D600AB6767 /* NSDate+ChangeExtension.m */; };
 		F5BEBA702E6EAE1A006866BA /* HeightStorageDataVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BEBA6E2E6EAE1A006866BA /* HeightStorageDataVC.m */; };
 		F5BEBA712E6EAE1A006866BA /* HeightStorageDataVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5BEBA6F2E6EAE1A006866BA /* HeightStorageDataVC.xib */; };
@@ -223,6 +224,8 @@
 		F51921C62EB4DF110000B8AB /* QNWiFiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNWiFiConfig.h; sourceTree = "<group>"; };
 		F51921C72EB4DF110000B8AB /* QNWspConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNWspConfig.h; sourceTree = "<group>"; };
 		F51921C82EB4DF110000B8AB /* QNWspScaleDataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNWspScaleDataProtocol.h; sourceTree = "<group>"; };
+		F52069FA2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlimScaleSetFunctionVC.h; sourceTree = "<group>"; };
+		F52069FB2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlimScaleSetFunctionVC.m; sourceTree = "<group>"; };
 		F58271B62E6FC5D600AB6767 /* NSDate+ChangeExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+ChangeExtension.h"; sourceTree = "<group>"; };
 		F58271B72E6FC5D600AB6767 /* NSDate+ChangeExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ChangeExtension.m"; sourceTree = "<group>"; };
 		F5BEBA6D2E6EAE1A006866BA /* HeightStorageDataVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeightStorageDataVC.h; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 		F51921F02EB4DFA20000B8AB /* SlimScale */ = {
 			isa = PBXGroup;
 			children = (
+				F52069FA2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.h */,
+				F52069FB2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m */,
 			);
 			path = SlimScale;
 			sourceTree = "<group>";
@@ -688,6 +693,7 @@
 				1B99EA422540393200EE7DFA /* MASConstraintMaker.m in Sources */,
 				F58271B82E6FC5D600AB6767 /* NSDate+ChangeExtension.m in Sources */,
 				D2B9E98D20723DEC0020C2B6 /* DeviceTableViewCell.m in Sources */,
+				F52069FC2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m in Sources */,
 				1B99EA4E25403D6C00EE7DFA /* QNBleDevice+Addition.m in Sources */,
 				D2B9E98E20723DEC0020C2B6 /* PickerView.m in Sources */,
 				1B99EA402540393200EE7DFA /* ViewController+MASAdditions.m in Sources */,

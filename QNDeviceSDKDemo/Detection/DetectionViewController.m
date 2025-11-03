@@ -36,6 +36,7 @@ typedef enum{
 #import "HeightSetFunctionVC.h"
 #import "NSDate+ChangeExtension.h"
 #import "Masonry.h"
+#import "SlimScaleSetFunctionVC.h"
 
 @interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNUserScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener,QNScaleDataListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
@@ -117,7 +118,7 @@ typedef enum{
 
 - (void)createUI {
     self.setHeightScaleBtn = [[UIButton alloc]init];
-    [self.setHeightScaleBtn setTitle:@"设置身高秤" forState:UIControlStateNormal];
+    [self.setHeightScaleBtn setTitle:@"测试功能" forState:UIControlStateNormal];
     [self.setHeightScaleBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.setHeightScaleBtn addTarget:self action:@selector(clickSetHeightScaleAction) forControlEvents:UIControlEventTouchUpInside];
     [self.setHeightScaleBtn sizeToFit];
@@ -152,9 +153,10 @@ typedef enum{
     }
     
     if (self.connectedBleDevice.deviceType == QNDeviceTypeSlimScale) {
-        
+        SlimScaleSetFunctionVC *vc = [[SlimScaleSetFunctionVC alloc]init];
+        vc.connectedDevice = self.connectedBleDevice;
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 
 #pragma mark - 更新用户
