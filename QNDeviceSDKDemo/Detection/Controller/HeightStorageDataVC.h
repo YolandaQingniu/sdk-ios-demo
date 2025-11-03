@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "QNScaleStoreData.h"
+#import "QNBleApi.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HeightStorageDataVC : UIViewController
 
 @property (nonatomic, copy) NSArray <QNScaleStoreData*>*storageList;
+
+@property (nonatomic, assign) QNDeviceType  deviceType;
 
 @end
 

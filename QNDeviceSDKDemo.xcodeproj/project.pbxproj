@@ -455,8 +455,7 @@
 				D2B9E97F20723DEC0020C2B6 /* ScaleDataCell.h */,
 				D2B9E98320723DEC0020C2B6 /* ScaleDataCell.m */,
 				D2B9E97D20723DEC0020C2B6 /* ScaleDataCell.xib */,
-				F572A53D2E6AF80500AAF0D4 /* HeightScalePart */,
-				F51921F02EB4DFA20000B8AB /* SlimScale */,
+				F52069FD2EB8A72E008AEA21 /* Controller */,
 			);
 			path = Detection;
 			sourceTree = "<group>";
@@ -470,12 +469,21 @@
 			path = SlimScale;
 			sourceTree = "<group>";
 		};
-		F572A53D2E6AF80500AAF0D4 /* HeightScalePart */ = {
+		F52069FD2EB8A72E008AEA21 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				F5BEBA6D2E6EAE1A006866BA /* HeightStorageDataVC.h */,
 				F5BEBA6E2E6EAE1A006866BA /* HeightStorageDataVC.m */,
 				F5BEBA6F2E6EAE1A006866BA /* HeightStorageDataVC.xib */,
+				F572A53D2E6AF80500AAF0D4 /* HeightScalePart */,
+				F51921F02EB4DFA20000B8AB /* SlimScale */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F572A53D2E6AF80500AAF0D4 /* HeightScalePart */ = {
+			isa = PBXGroup;
+			children = (
 				F5BEBA752E6F006C006866BA /* HeightSetFunctionVC.h */,
 				F5BEBA762E6F006C006866BA /* HeightSetFunctionVC.m */,
 			);

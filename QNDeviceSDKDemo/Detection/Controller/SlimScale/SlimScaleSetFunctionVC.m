@@ -22,27 +22,48 @@
 @property (nonatomic, strong) UITextView *resultTextView;
 @property (nonatomic, strong) NSMutableArray<UIButton *> *userIndexBtns;
 
-// 减重秤配置相关控件
+// 添加访问或注册用户的UI控件
+// 包含用户坑位 （1 - 8）  生日  身高  性别 是否是运动员  密钥
+@property (nonatomic, strong) UISegmentedControl *userIndexSegment;  // 用户坑位选择 (1-8)
+@property (nonatomic, strong) UIDatePicker *birthdayPicker;          // 生日选择器
+@property (nonatomic, strong) UITextField *heightTextField;          // 身高输入框
+@property (nonatomic, strong) UISegmentedControl *genderSegment;     // 性别选择 (男/女)
+@property (nonatomic, strong) UISwitch *athleteSwitch;               // 是否是运动员开关
+// 密钥（默认1000） , 新增密钥的输入（ 访问用户时需要输入密钥 ）
+@property (nonatomic, strong) UITextField *secretTextField;          // 密钥输入框
+
+/********** 减重秤配置相关控件 ******/
 @property (nonatomic, strong) UISegmentedControl *alarmOperationSegment;
 @property (nonatomic, strong) NSArray<NSString *> *weeksTitles;
 @property (nonatomic, strong) NSMutableArray<UIButton *> *weekButtons;
 @property (nonatomic, strong) UITextField *hourTextField;
 @property (nonatomic, strong) UITextField *minuteTextField;
 @property (nonatomic, strong) UISegmentedControl *volumeSegment;
+// 提示音配置相关控件
+// 闹钟提醒提示音配置
+@property (nonatomic, strong) UISegmentedControl *alarmSoundSourceSegment;
+@property (nonatomic, strong) UISegmentedControl *alarmSoundOperationSegment;
+// 上秤测量提示音配置
+@property (nonatomic, strong) UISegmentedControl *measureSoundSourceSegment;
+@property (nonatomic, strong) UISegmentedControl *measureSoundOperationSegment;
+// 测量完成提示音配置
+@property (nonatomic, strong) UISegmentedControl *completeSoundSourceSegment;
+@property (nonatomic, strong) UISegmentedControl *completeSoundOperationSegment;
+// 完成目标提示音配置
+@property (nonatomic, strong) UISegmentedControl *goalSoundSourceSegment;
+@property (nonatomic, strong) UISegmentedControl *goalSoundOperationSegment;
 
-// 闹钟提醒提示音配置 上秤测量提示音配置  测量完成提示音配置 完成目标提示音配置
-// 请完成闹钟提醒提示音配置 上秤测量提示音配置  测量完成提示音配置 完成目标提示音配置
-// 每个配置均包含
-
-
-// 用户减重配置相关控件
+/********** 用户减重配置相关控件 ******/
 @property (nonatomic, strong) UITextField *userIndexTextField;
 @property (nonatomic, strong) UITextField *targetWeightTextField;
 @property (nonatomic, strong) UITextField *currentWeightTextField;
 
-// 曲线数据相关控件
+
+/********** 曲线数据相关控件 ******/
 @property (nonatomic, strong) UITextField *curveUserIndexTextField;
 @property (nonatomic, strong) UISwitch *todayFlagSwitch;
+@property (nonatomic, strong) NSMutableArray<UITextField *> *weightCurveTextFields; // 14个体重曲线输入框
+@property (nonatomic, strong) UIButton *generateWeightCurveButton;                  // 一键生成按钮
 
 @end
 
@@ -100,6 +121,13 @@
         _weekButtons = [NSMutableArray array];
     }
     return _weekButtons;
+}
+
+- (NSMutableArray<UITextField *> *)weightCurveTextFields {
+    if (!_weightCurveTextFields) {
+        _weightCurveTextFields = [NSMutableArray array];
+    }
+    return _weightCurveTextFields;
 }
 
 #pragma mark - QNBleConnectionChangeListener
@@ -325,37 +353,115 @@
     sender.backgroundColor = sender.selected ? [UIColor systemBlueColor] : [UIColor lightGrayColor];
 }
 
+- (void)userIndexChanged:(UISegmentedControl *)sender {
+    // 当用户坑位改变时，自动更新密钥的默认值
+    NSInteger userIndex = sender.selectedSegmentIndex + 1; // 坑位从1开始
+    NSInteger defaultSecret = 1000 + userIndex;
+    self.secretTextField.text = [NSString stringWithFormat:@"%ld", (long)defaultSecret];
+}
+
+- (void)generateWeightCurveButtonTapped:(UIButton *)sender {
+    // 获取第一个输入框的值作为基准
+    if (self.weightCurveTextFields.count == 0) return;
+    
+    UITextField *firstTextField = self.weightCurveTextFields[0];
+    double baseWeight = [firstTextField.text doubleValue];
+    
+    // 如果第一个输入框为空或值为0，使用默认值60.0
+    if (baseWeight <= 0) {
+        baseWeight = 60.0;
+        firstTextField.text = @"60.0";
+    }
+    
+    // 为后续13个输入框生成递增的体重值（每次+0.1kg）
+    for (NSInteger i = 1; i < self.weightCurveTextFields.count; i++) {
+        double weight = baseWeight + (i * 0.1);
+        UITextField *textField = self.weightCurveTextFields[i];
+        textField.text = [NSString stringWithFormat:@"%.1f", weight];
+    }
+}
+
 #pragma mark - Business Logic
 
 - (void)registerUser {
+    // 验证用户输入
+    if (![self validateUserInput]) {
+        return;
+    }
+    
     QNUser *user = [[QNUser alloc] init];
-    user.athleteType = YLAthleteDefault;
-    user.gender = @"female";
-    user.height = 164;
-    user.birthday = [NSDate dateWithTimeIntervalSince1970:1114948155];
+    
+    // 从UI控件获取运动员类型
+    user.athleteType = self.athleteSwitch.on ? YLAthleteSport : YLAthleteDefault;
+    
+    // 从UI控件获取性别 (0=女, 1=男)
+    user.gender = self.genderSegment.selectedSegmentIndex == 0 ? @"female" : @"male";
+    
+    // 从UI控件获取身高
+    int height = [self.heightTextField.text intValue];
+    user.height = height > 0 ? height : 170; // 默认170cm
+    
+    // 从UI控件获取生日
+    user.birthday = self.birthdayPicker.date;
+    
+    // 用户坑位从UI控件获取 (1-8)
+    user.index = (int)self.userIndexSegment.selectedSegmentIndex + 1;
+    
+    // 从UI控件获取密钥
+    int secret = [self.secretTextField.text intValue];
+    user.secret = secret > 0 ? secret : 1000; // 默认1000
     
     __weak typeof(self) weakSelf = self;
     [self.bleApi switchUserScaleUser:user callback:^(NSError * _Nullable error) {
-        if (error) {
-            weakSelf.resultTextView.text = error.localizedDescription;
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                weakSelf.resultTextView.text = [NSString stringWithFormat:@"注册用户失败: %@", error.localizedDescription];
+            } else {
+                weakSelf.resultTextView.text = [NSString stringWithFormat:@"注册用户成功 - 坑位:%d 性别:%@ 身高:%dcm 运动员:%@ 密钥:%d",
+                                              user.index, user.gender, user.height, user.athleteType == YLAthleteSport ? @"是" : @"否", user.secret];
+            }
+        });
     }];
 }
 
 - (void)vistorUser {
+    // 验证用户输入
+    if (![self validateUserInput]) {
+        return;
+    }
+    
     QNUser *user = [[QNUser alloc] init];
-    user.athleteType = YLAthleteDefault;
-    user.gender = @"male";
-    user.height = 170;
-    user.birthday = [NSDate dateWithTimeIntervalSince1970:814948155];
-    user.index = 2;
-    user.secret = 1000;
+    
+    // 从UI控件获取运动员类型
+    user.athleteType = self.athleteSwitch.on ? YLAthleteSport : YLAthleteDefault;
+    
+    // 从UI控件获取性别 (0=女, 1=男)
+    user.gender = self.genderSegment.selectedSegmentIndex == 0 ? @"female" : @"male";
+    
+    // 从UI控件获取身高
+    int height = [self.heightTextField.text intValue];
+    user.height = height > 0 ? height : 170; // 默认170cm
+    
+    // 从UI控件获取生日
+    user.birthday = self.birthdayPicker.date;
+    
+    // 用户坑位从UI控件获取 (1-8)
+    user.index = (int)self.userIndexSegment.selectedSegmentIndex + 1;
+    
+    // 从UI控件获取密钥 (访问用户时需要输入正确的密钥)
+    int secret = [self.secretTextField.text intValue];
+    user.secret = secret > 0 ? secret : 1000; // 默认1000
     
     __weak typeof(self) weakSelf = self;
     [self.bleApi switchUserScaleUser:user callback:^(NSError * _Nullable error) {
-        if (error) {
-            weakSelf.resultTextView.text = error.localizedDescription;
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                weakSelf.resultTextView.text = [NSString stringWithFormat:@"访问用户失败: %@", error.localizedDescription];
+            } else {
+                weakSelf.resultTextView.text = [NSString stringWithFormat:@"访问用户成功 - 坑位:%d 性别:%@ 身高:%dcm 运动员:%@ 密钥:%d", 
+                                                user.index, user.gender, user.height, user.athleteType == YLAthleteSport ? @"是" : @"否", user.secret];
+            }
+        });
     }];
 }
 
@@ -488,8 +594,75 @@
             break;
     }
     
-    ///  闹钟提醒提示音配置 上秤测量提示音配置  测量完成提示音配置 完成目标提示音配置
+    // 设置闹钟提醒提示音配置
+    if (self.alarmSoundSourceSegment && self.alarmSoundOperationSegment) {
+        QNSlimVoiceConfig *alarmVoice = [[QNSlimVoiceConfig alloc] init];
+        alarmVoice.voiceSource = (QNSlimVoiceSource)self.alarmSoundSourceSegment.selectedSegmentIndex; // 0=不修改, 1-8=音源1-8
+        alarmVoice.voiceOperation = (QNSlimVoiceOperation)self.alarmSoundOperationSegment.selectedSegmentIndex; // 0=不修改, 1=关闭, 2=打开
+        config.alarmVoice = alarmVoice;
+        
+        NSString *sourceText = alarmVoice.voiceSource == QNSlimVoiceSourceNoModify ? @"不修改" : [NSString stringWithFormat:@"音源%ld", (long)alarmVoice.voiceSource];
+        NSString *operationText = @"";
+        switch (alarmVoice.voiceOperation) {
+            case QNSlimVoiceOperationNoModify: operationText = @"不修改"; break;
+            case QNSlimVoiceOperationClose: operationText = @"关闭"; break;
+            case QNSlimVoiceOperationOpen: operationText = @"打开"; break;
+        }
+        log = [NSString stringWithFormat:@"%@ 闹钟提示音源:%@ 操作:%@", log, sourceText, operationText];
+    }
     
+    // 设置上秤测量提示音配置
+    if (self.measureSoundSourceSegment && self.measureSoundOperationSegment) {
+        QNSlimVoiceConfig *measureVoice = [[QNSlimVoiceConfig alloc] init];
+        measureVoice.voiceSource = (QNSlimVoiceSource)self.measureSoundSourceSegment.selectedSegmentIndex;
+        measureVoice.voiceOperation = (QNSlimVoiceOperation)self.measureSoundOperationSegment.selectedSegmentIndex;
+        config.measureStartVoice = measureVoice;
+        
+        NSString *sourceText = measureVoice.voiceSource == QNSlimVoiceSourceNoModify ? @"不修改" : [NSString stringWithFormat:@"音源%ld", (long)measureVoice.voiceSource];
+        NSString *operationText = @"";
+        switch (measureVoice.voiceOperation) {
+            case QNSlimVoiceOperationNoModify: operationText = @"不修改"; break;
+            case QNSlimVoiceOperationClose: operationText = @"关闭"; break;
+            case QNSlimVoiceOperationOpen: operationText = @"打开"; break;
+        }
+        log = [NSString stringWithFormat:@"%@ 测量提示音源:%@ 操作:%@", log, sourceText, operationText];
+    }
+    
+    // 设置测量完成提示音配置
+    if (self.completeSoundSourceSegment && self.completeSoundOperationSegment) {
+        QNSlimVoiceConfig *completeVoice = [[QNSlimVoiceConfig alloc] init];
+        completeVoice.voiceSource = (QNSlimVoiceSource)self.completeSoundSourceSegment.selectedSegmentIndex;
+        completeVoice.voiceOperation = (QNSlimVoiceOperation)self.completeSoundOperationSegment.selectedSegmentIndex;
+        config.measureFinishVoice = completeVoice;
+        
+        NSString *sourceText = completeVoice.voiceSource == QNSlimVoiceSourceNoModify ? @"不修改" : [NSString stringWithFormat:@"音源%ld", (long)completeVoice.voiceSource];
+        NSString *operationText = @"";
+        switch (completeVoice.voiceOperation) {
+            case QNSlimVoiceOperationNoModify: operationText = @"不修改"; break;
+            case QNSlimVoiceOperationClose: operationText = @"关闭"; break;
+            case QNSlimVoiceOperationOpen: operationText = @"打开"; break;
+        }
+        log = [NSString stringWithFormat:@"%@ 完成提示音源:%@ 操作:%@", log, sourceText, operationText];
+    }
+    
+    // 设置完成目标提示音配置
+    if (self.goalSoundSourceSegment && self.goalSoundOperationSegment) {
+        QNSlimVoiceConfig *goalVoice = [[QNSlimVoiceConfig alloc] init];
+        goalVoice.voiceSource = (QNSlimVoiceSource)self.goalSoundSourceSegment.selectedSegmentIndex;
+        goalVoice.voiceOperation = (QNSlimVoiceOperation)self.goalSoundOperationSegment.selectedSegmentIndex;
+        config.completeGoalVoice = goalVoice;
+        
+        NSString *sourceText = goalVoice.voiceSource == QNSlimVoiceSourceNoModify ? @"不修改" : [NSString stringWithFormat:@"音源%ld", (long)goalVoice.voiceSource];
+        NSString *operationText = @"";
+        switch (goalVoice.voiceOperation) {
+            case QNSlimVoiceOperationNoModify: operationText = @"不修改"; break;
+            case QNSlimVoiceOperationClose: operationText = @"关闭"; break;
+            case QNSlimVoiceOperationOpen: operationText = @"打开"; break;
+        }
+        log = [NSString stringWithFormat:@"%@ 目标提示音源:%@ 操作:%@", log, sourceText, operationText];
+    }
+    
+    NSLog(@"%@",log);
     
     __weak typeof(self) weakSelf = self;
     [self.bleApi updateSlimDeviceConfig:config callback:^(NSError * _Nullable error) {
@@ -545,14 +718,29 @@
 - (void)setUserCurveData {
     QNSlimUserCurveData *curveData = [[QNSlimUserCurveData alloc] init];
     
-    // 设置曲线体重数据数组（模拟14天的体重数据）
-    double baseWeight = 70.0;
+    // 从14个输入框获取体重数据
     NSMutableArray<NSNumber *> *weightArray = [NSMutableArray array];
-    for (NSInteger i = 0; i < 14; i++) {
-        // 模拟体重逐渐下降的趋势
-        double weight = baseWeight - i * 0.2 + (arc4random_uniform(100) / 100.0 - 0.5);
+    
+    // 验证输入框数量
+    if (self.weightCurveTextFields.count != 14) {
+        [self showAlert:@"错误" message:@"体重曲线输入框数量不正确"];
+        return;
+    }
+    
+    // 从输入框获取体重数据
+    for (NSInteger i = 0; i < self.weightCurveTextFields.count; i++) {
+        UITextField *textField = self.weightCurveTextFields[i];
+        double weight = [textField.text doubleValue];
+        
+        // 验证体重数据有效性
+        if (weight <= 0 || weight > 300) {
+            [self showAlert:@"输入错误" message:[NSString stringWithFormat:@"第%ld天的体重数据无效，请输入0-300kg之间的数值", (long)(i + 1)]];
+            return;
+        }
+        
         [weightArray addObject:@(weight)];
     }
+    
     curveData.curveWeightArr = weightArray;
     
     // 从UI控件获取今日标志
@@ -570,6 +758,13 @@
             if (error) {
                 weakSelf.resultTextView.text = [NSString stringWithFormat:@"用户体重曲线数据更新失败: %@", error.localizedDescription];
                 weakSelf.deviceStateLabel.text = [NSString stringWithFormat:@"用户体重曲线数据更新失败: %@", error.localizedDescription];
+            } else {
+                // 显示成功信息和体重数据范围
+                double minWeight = [weightArray.firstObject doubleValue];
+                double maxWeight = [weightArray.lastObject doubleValue];
+                weakSelf.resultTextView.text = [NSString stringWithFormat:@"用户%ld体重曲线数据更新成功 - 14天数据范围: %.1f-%.1fkg", 
+                                              (long)userIndex, minWeight, maxWeight];
+                weakSelf.deviceStateLabel.text = @"体重曲线数据更新成功";
             }
         });
     }];
@@ -797,6 +992,173 @@
     
     CGFloat currentY = 20;
     
+    // 用户注册/访问配置区域
+    UILabel *userRegisterTitleLabel = [[UILabel alloc] init];
+    userRegisterTitleLabel.text = @"用户注册/访问配置";
+    userRegisterTitleLabel.font = [UIFont boldSystemFontOfSize:16];
+    [contentView addSubview:userRegisterTitleLabel];
+    
+    [userRegisterTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+    }];
+    currentY += 40;
+    
+    // 用户坑位选择 (1-8)
+    UILabel *userIndexLabel = [[UILabel alloc] init];
+    userIndexLabel.text = @"用户坑位:";
+    userIndexLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:userIndexLabel];
+    
+    self.userIndexSegment = [[UISegmentedControl alloc] initWithItems:@[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8"]];
+    self.userIndexSegment.selectedSegmentIndex = 0; // 默认选择坑位1
+    [self.userIndexSegment addTarget:self action:@selector(userIndexChanged:) forControlEvents:UIControlEventValueChanged];
+    [contentView addSubview:self.userIndexSegment];
+    
+    [userIndexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@80);
+    }];
+    
+    [self.userIndexSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(userIndexLabel.mas_trailing).offset(10);
+        make.trailing.equalTo(contentView).offset(-20);
+    }];
+    currentY += 50;
+    
+    // 身高输入
+    UILabel *heightLabel = [[UILabel alloc] init];
+    heightLabel.text = @"身高(cm):";
+    heightLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:heightLabel];
+    
+    self.heightTextField = [[UITextField alloc] init];
+    self.heightTextField.placeholder = @"请输入身高(如:170)";
+    self.heightTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.heightTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.heightTextField.text = @"170";
+    [contentView addSubview:self.heightTextField];
+    
+    [heightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@80);
+    }];
+    
+    [self.heightTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(heightLabel.mas_trailing).offset(10);
+        make.width.equalTo(@150);
+    }];
+    currentY += 50;
+    
+    // 性别选择
+    UILabel *genderLabel = [[UILabel alloc] init];
+    genderLabel.text = @"性别:";
+    genderLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:genderLabel];
+    
+    self.genderSegment = [[UISegmentedControl alloc] initWithItems:@[@"女", @"男"]];
+    self.genderSegment.selectedSegmentIndex = 1; // 默认选择男
+    [contentView addSubview:self.genderSegment];
+    
+    [genderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@80);
+    }];
+    
+    [self.genderSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(genderLabel.mas_trailing).offset(10);
+        make.width.equalTo(@150);
+    }];
+    currentY += 50;
+    
+    // 生日选择
+    UILabel *birthdayLabel = [[UILabel alloc] init];
+    birthdayLabel.text = @"生日:";
+    birthdayLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:birthdayLabel];
+    
+    self.birthdayPicker = [[UIDatePicker alloc] init];
+    self.birthdayPicker.datePickerMode = UIDatePickerModeDate;
+    self.birthdayPicker.preferredDatePickerStyle = UIDatePickerStyleCompact;
+    // 设置默认日期为1990年1月1日
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.year = 1995;
+    components.month = 1;
+    components.day = 1;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *defaultDate = [calendar dateFromComponents:components];
+    self.birthdayPicker.date = defaultDate;
+    [contentView addSubview:self.birthdayPicker];
+    
+    [birthdayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@80);
+    }];
+    
+    [self.birthdayPicker mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(birthdayLabel.mas_trailing).offset(10);
+        make.width.equalTo(@200);
+    }];
+    currentY += 50;
+    
+    
+    // 是否是运动员
+    UILabel *athleteLabel = [[UILabel alloc] init];
+    athleteLabel.text = @"是否是运动员:";
+    athleteLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:athleteLabel];
+    
+    self.athleteSwitch = [[UISwitch alloc] init];
+    self.athleteSwitch.on = NO; // 默认不是运动员
+    [contentView addSubview:self.athleteSwitch];
+    
+    [athleteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@120);
+    }];
+    
+    [self.athleteSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(athleteLabel);
+        make.leading.equalTo(athleteLabel.mas_trailing).offset(10);
+    }];
+    currentY += 50;
+    
+    // 密钥输入
+    UILabel *secretLabel = [[UILabel alloc] init];
+    secretLabel.text = @"密钥:";
+    secretLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:secretLabel];
+    
+    self.secretTextField = [[UITextField alloc] init];
+    self.secretTextField.placeholder = @"访问用户需要正确密钥";
+    self.secretTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.secretTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.secretTextField.text = @"1000"; // 默认密钥1000
+    [contentView addSubview:self.secretTextField];
+    
+    [secretLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@80);
+    }];
+    
+    [self.secretTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(secretLabel.mas_trailing).offset(10);
+        make.width.equalTo(@150);
+    }];
+    currentY += 70;
+    
+    
     // 减重秤配置区域
     UILabel *configTitleLabel = [[UILabel alloc] init];
     configTitleLabel.text = @"减重秤配置";
@@ -815,7 +1177,8 @@
     alarmLabel.font = [UIFont systemFontOfSize:14];
     [contentView addSubview:alarmLabel];
     
-    self.alarmOperationSegment = [[UISegmentedControl alloc] initWithItems:@[@"不设置", @"关闭所有", @"设置天数"]];
+    self.alarmOperationSegment = [[UISegmentedControl alloc] initWithItems:@[@"不设置", @"关闭所有闹钟", @"打开并设置闹钟"]];
+    self.alarmOperationSegment.selectedSegmentIndex = 2;
     [contentView addSubview:self.alarmOperationSegment];
     
     [alarmLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -832,7 +1195,7 @@
     
     // 星期选择
     UILabel *weekLabel = [[UILabel alloc] init];
-    weekLabel.text = @"生效日期:";
+    weekLabel.text = @"生效星期:";
     weekLabel.font = [UIFont systemFontOfSize:14];
     [contentView addSubview:weekLabel];
     
@@ -852,6 +1215,9 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:12];
         [btn addTarget:self action:@selector(weekButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = index;
+        if(index == 0) {
+            [self weekButtonTapped:btn];
+        }
         [self.weekButtons addObject:btn];
         [weekStackView addArrangedSubview:btn];
     }
@@ -914,6 +1280,7 @@
     [contentView addSubview:volumeLabel];
     
     self.volumeSegment = [[UISegmentedControl alloc] initWithItems:@[@"不设置", @"1档", @"2档", @"3档", @"4档"]];
+    self.volumeSegment.selectedSegmentIndex = 4;
     [contentView addSubview:self.volumeSegment];
     
     [volumeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -926,7 +1293,257 @@
         make.leading.equalTo(volumeLabel.mas_trailing).offset(10);
         make.trailing.equalTo(contentView).offset(-20);
     }];
+    currentY += 50;
+    
+    // 提示音配置区域
+    UILabel *soundConfigTitleLabel = [[UILabel alloc] init];
+    soundConfigTitleLabel.text = @"提示音配置";
+    soundConfigTitleLabel.font = [UIFont boldSystemFontOfSize:16];
+    [contentView addSubview:soundConfigTitleLabel];
+    
+    [soundConfigTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+    }];
+    currentY += 40;
+    
+    // 闹钟提醒提示音配置
+    UILabel *alarmSoundLabel = [[UILabel alloc] init];
+    alarmSoundLabel.text = @"闹钟提醒提示音:";
+    alarmSoundLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:alarmSoundLabel];
+    
+    [alarmSoundLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@120);
+    }];
+    currentY += 30;
+    
+    // 音源选择
+    UILabel *alarmSourceLabel = [[UILabel alloc] init];
+    alarmSourceLabel.text = @"音源:";
+    alarmSourceLabel.font = [UIFont systemFontOfSize:12];
+    [contentView addSubview:alarmSourceLabel];
+    
+    self.alarmSoundSourceSegment = [[UISegmentedControl alloc] initWithItems:@[@"不修改", @"音源1", @"音源2", @"音源3", @"音源4", @"音源5", @"音源6", @"音源7", @"音源8"]];
+    self.alarmSoundSourceSegment.selectedSegmentIndex = 1;
+    [contentView addSubview:self.alarmSoundSourceSegment];
+    
+    [alarmSourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(40);
+        make.width.equalTo(@40);
+    }];
+    
+    [self.alarmSoundSourceSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(alarmSourceLabel.mas_trailing).offset(10);
+        make.trailing.equalTo(contentView).offset(-20);
+    }];
+    currentY += 40;
+    
+    // 操作选择
+    UILabel *alarmOperationLabel = [[UILabel alloc] init];
+    alarmOperationLabel.text = @"操作:";
+    alarmOperationLabel.font = [UIFont systemFontOfSize:12];
+    [contentView addSubview:alarmOperationLabel];
+    
+    self.alarmSoundOperationSegment = [[UISegmentedControl alloc] initWithItems:@[@"不修改", @"关闭", @"打开"]];
+    self.alarmSoundOperationSegment.selectedSegmentIndex = 2;
+    [contentView addSubview:self.alarmSoundOperationSegment];
+    
+    [alarmOperationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(40);
+        make.width.equalTo(@40);
+    }];
+    
+    [self.alarmSoundOperationSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(alarmOperationLabel.mas_trailing).offset(10);
+        make.width.equalTo(@200);
+    }];
+    currentY += 50;
+    
+    // 上秤测量提示音配置
+    UILabel *measureSoundLabel = [[UILabel alloc] init];
+    measureSoundLabel.text = @"上秤测量提示音:";
+    measureSoundLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:measureSoundLabel];
+    
+    [measureSoundLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@120);
+    }];
+    currentY += 30;
+    
+    // 音源选择
+    UILabel *measureSourceLabel = [[UILabel alloc] init];
+    measureSourceLabel.text = @"音源:";
+    measureSourceLabel.font = [UIFont systemFontOfSize:12];
+    [contentView addSubview:measureSourceLabel];
+    
+    self.measureSoundSourceSegment = [[UISegmentedControl alloc] initWithItems:@[@"不修改", @"音源1", @"音源2", @"音源3", @"音源4", @"音源5", @"音源6", @"音源7", @"音源8"]];
+    self.measureSoundSourceSegment.selectedSegmentIndex = 2;
+    [contentView addSubview:self.measureSoundSourceSegment];
+    
+    [measureSourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(40);
+        make.width.equalTo(@40);
+    }];
+    
+    [self.measureSoundSourceSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(measureSourceLabel.mas_trailing).offset(10);
+        make.trailing.equalTo(contentView).offset(-20);
+    }];
+    currentY += 40;
+    
+    // 操作选择
+    UILabel *measureOperationLabel = [[UILabel alloc] init];
+    measureOperationLabel.text = @"操作:";
+    measureOperationLabel.font = [UIFont systemFontOfSize:12];
+    [contentView addSubview:measureOperationLabel];
+    
+    self.measureSoundOperationSegment = [[UISegmentedControl alloc] initWithItems:@[@"不修改", @"关闭", @"打开"]];
+    self.measureSoundOperationSegment.selectedSegmentIndex = 2;
+    [contentView addSubview:self.measureSoundOperationSegment];
+    
+    [measureOperationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(40);
+        make.width.equalTo(@40);
+    }];
+    
+    [self.measureSoundOperationSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(measureOperationLabel.mas_trailing).offset(10);
+        make.width.equalTo(@200);
+    }];
+    currentY += 50;
+    
+    // 测量完成提示音配置
+    UILabel *completeSoundLabel = [[UILabel alloc] init];
+    completeSoundLabel.text = @"测量完成提示音:";
+    completeSoundLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:completeSoundLabel];
+    
+    [completeSoundLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@120);
+    }];
+    currentY += 30;
+    
+    // 音源选择
+    UILabel *completeSourceLabel = [[UILabel alloc] init];
+    completeSourceLabel.text = @"音源:";
+    completeSourceLabel.font = [UIFont systemFontOfSize:12];
+    [contentView addSubview:completeSourceLabel];
+    
+    self.completeSoundSourceSegment = [[UISegmentedControl alloc] initWithItems:@[@"不修改", @"音源1", @"音源2", @"音源3", @"音源4", @"音源5", @"音源6", @"音源7", @"音源8"]];
+    self.completeSoundSourceSegment.selectedSegmentIndex = 3;
+    [contentView addSubview:self.completeSoundSourceSegment];
+    
+    [completeSourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(40);
+        make.width.equalTo(@40);
+    }];
+    
+    [self.completeSoundSourceSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(completeSourceLabel.mas_trailing).offset(10);
+        make.trailing.equalTo(contentView).offset(-20);
+    }];
+    currentY += 40;
+    
+    // 操作选择
+    UILabel *completeOperationLabel = [[UILabel alloc] init];
+    completeOperationLabel.text = @"操作:";
+    completeOperationLabel.font = [UIFont systemFontOfSize:12];
+    [contentView addSubview:completeOperationLabel];
+    
+    self.completeSoundOperationSegment = [[UISegmentedControl alloc] initWithItems:@[@"不修改", @"关闭", @"打开"]];
+    self.completeSoundOperationSegment.selectedSegmentIndex = 2;
+    [contentView addSubview:self.completeSoundOperationSegment];
+    
+    [completeOperationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(40);
+        make.width.equalTo(@40);
+    }];
+    
+    [self.completeSoundOperationSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(completeOperationLabel.mas_trailing).offset(10);
+        make.width.equalTo(@200);
+    }];
+    currentY += 50;
+    
+    // 完成目标提示音配置
+    UILabel *goalSoundLabel = [[UILabel alloc] init];
+    goalSoundLabel.text = @"完成目标提示音:";
+    goalSoundLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:goalSoundLabel];
+    
+    [goalSoundLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@120);
+    }];
+    currentY += 30;
+    
+    // 音源选择
+    UILabel *goalSourceLabel = [[UILabel alloc] init];
+    goalSourceLabel.text = @"音源:";
+    goalSourceLabel.font = [UIFont systemFontOfSize:12];
+    [contentView addSubview:goalSourceLabel];
+    
+    self.goalSoundSourceSegment = [[UISegmentedControl alloc] initWithItems:@[@"不修改", @"音源1", @"音源2", @"音源3", @"音源4", @"音源5", @"音源6", @"音源7", @"音源8"]];
+    self.goalSoundSourceSegment.selectedSegmentIndex = 3;
+    [contentView addSubview:self.goalSoundSourceSegment];
+    
+    [goalSourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(40);
+        make.width.equalTo(@40);
+    }];
+    
+    [self.goalSoundSourceSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(goalSourceLabel.mas_trailing).offset(10);
+        make.trailing.equalTo(contentView).offset(-20);
+    }];
+    currentY += 40;
+    
+    // 操作选择
+    UILabel *goalOperationLabel = [[UILabel alloc] init];
+    goalOperationLabel.text = @"操作:";
+    goalOperationLabel.font = [UIFont systemFontOfSize:12];
+    [contentView addSubview:goalOperationLabel];
+    
+    self.goalSoundOperationSegment = [[UISegmentedControl alloc] initWithItems:@[@"不修改", @"关闭", @"打开"]];
+    self.goalSoundOperationSegment.selectedSegmentIndex = 2;
+    [contentView addSubview:self.goalSoundOperationSegment];
+    
+    [goalOperationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(40);
+        make.width.equalTo(@40);
+    }];
+    
+    [self.goalSoundOperationSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(goalOperationLabel.mas_trailing).offset(10);
+        make.width.equalTo(@200);
+    }];
     currentY += 70;
+    
+    
     
     // 用户减重配置区域
     UILabel *userConfigTitleLabel = [[UILabel alloc] init];
@@ -941,10 +1558,10 @@
     currentY += 40;
     
     // 用户索引
-    UILabel *userIndexLabel = [[UILabel alloc] init];
-    userIndexLabel.text = @"用户索引(1-8):";
-    userIndexLabel.font = [UIFont systemFontOfSize:14];
-    [contentView addSubview:userIndexLabel];
+    UILabel *visitUserIndexLabel = [[UILabel alloc] init];
+    visitUserIndexLabel.text = @"用户索引(1-8):";
+    visitUserIndexLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:visitUserIndexLabel];
     
     self.userIndexTextField = [[UITextField alloc] init];
     self.userIndexTextField.placeholder = @"1-8";
@@ -953,14 +1570,14 @@
     self.userIndexTextField.text = @"1";
     [contentView addSubview:self.userIndexTextField];
     
-    [userIndexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [visitUserIndexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(contentView).offset(currentY);
         make.leading.equalTo(contentView).offset(20);
     }];
     
     [self.userIndexTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(contentView).offset(currentY);
-        make.leading.equalTo(userIndexLabel.mas_trailing).offset(10);
+        make.leading.equalTo(visitUserIndexLabel.mas_trailing).offset(10);
         make.width.equalTo(@100);
     }];
     currentY += 50;
@@ -975,7 +1592,7 @@
     self.targetWeightTextField.placeholder = @"目标体重";
     self.targetWeightTextField.borderStyle = UITextBorderStyleRoundedRect;
     self.targetWeightTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    self.targetWeightTextField.text = @"60.0";
+    self.targetWeightTextField.text = @"65.0";
     [contentView addSubview:self.targetWeightTextField];
     
     [targetWeightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -1073,6 +1690,75 @@
     }];
     currentY += 50;
     
+    // 14个体重曲线输入框
+    UILabel *weightCurveLabel = [[UILabel alloc] init];
+    weightCurveLabel.text = @"体重曲线数据(14天):";
+    weightCurveLabel.font = [UIFont boldSystemFontOfSize:14];
+    [contentView addSubview:weightCurveLabel];
+    
+    [weightCurveLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+    }];
+    currentY += 30;
+    
+    // 一键生成按钮
+    self.generateWeightCurveButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.generateWeightCurveButton setTitle:@"一键生成" forState:UIControlStateNormal];
+    self.generateWeightCurveButton.backgroundColor = [UIColor systemBlueColor];
+    [self.generateWeightCurveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.generateWeightCurveButton.layer.cornerRadius = 5;
+    self.generateWeightCurveButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.generateWeightCurveButton addTarget:self action:@selector(generateWeightCurveButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [contentView addSubview:self.generateWeightCurveButton];
+    
+    [self.generateWeightCurveButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView).offset(currentY);
+        make.leading.equalTo(contentView).offset(20);
+        make.width.equalTo(@100);
+        make.height.equalTo(@35);
+    }];
+    currentY += 50;
+    
+    // 创建14个体重输入框，分两行排布
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat textFieldWidth = (screenWidth - 60) / 7; // 每行7个，减去边距
+    CGFloat textFieldHeight = 35;
+    
+    [self.weightCurveTextFields removeAllObjects];
+    
+    for (NSInteger i = 0; i < 14; i++) {
+        UITextField *textField = [[UITextField alloc] init];
+        textField.borderStyle = UITextBorderStyleRoundedRect;
+        textField.keyboardType = UIKeyboardTypeDecimalPad;
+        textField.font = [UIFont systemFontOfSize:12];
+        textField.textAlignment = NSTextAlignmentCenter;
+        
+        // 第一个输入框默认值为60.0
+        if (i == 0) {
+            textField.text = @"60.0";
+        }
+        
+        textField.placeholder = [NSString stringWithFormat:@"第%ld天", (long)(i + 1)];
+        [contentView addSubview:textField];
+        [self.weightCurveTextFields addObject:textField];
+        
+        // 计算位置：前7个为第一行，后7个为第二行
+        NSInteger row = i / 7;
+        NSInteger col = i % 7;
+        CGFloat x = 20 + col * textFieldWidth;
+        CGFloat y = currentY + row * (textFieldHeight + 10);
+        
+        [textField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(contentView).offset(y);
+            make.leading.equalTo(contentView).offset(x);
+            make.width.equalTo(@(textFieldWidth - 5)); // 减去间距
+            make.height.equalTo(@(textFieldHeight));
+        }];
+    }
+    
+    currentY += (textFieldHeight + 10) * 2 + 20; // 两行的高度加上间距
+    
     // 设置内容视图高度
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(currentY));
@@ -1098,4 +1784,31 @@
     return image ?: [[UIImage alloc] init];
 }
 
+- (BOOL)validateUserInput {
+    // 验证身高输入
+    int height = [self.heightTextField.text intValue];
+    if (height <= 0 || height > 300) {
+        [self showAlert:@"输入错误" message:@"请输入有效的身高(1-300cm)"];
+        return NO;
+    }
+    
+    // 验证密钥输入
+    int secret = [self.secretTextField.text intValue];
+    if (secret <= 0 || secret > 9999) {
+        [self showAlert:@"输入错误" message:@"请输入有效的密钥(大于0或者是小于等于9999的整数)"];
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)showAlert:(NSString *)title message:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title 
+                                                                   message:message 
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 @end
+ 
