@@ -234,9 +234,11 @@
             break;
         case QNScaleEventDeleteUserSuccess:
             message = @"删除用户成功";
+            self.resultTextView.text = @"删除用户成功";
             break;
         case QNScaleEventDeleteUserFail:
             message = @"删除用户失败";
+            self.resultTextView.text = @"删除用户失败";
             break;
         case QNScaleEventSyncUserInfoSuccess:
             message = @"同步用户信息成功";
@@ -404,12 +406,12 @@
     // 从UI控件获取生日
     user.birthday = self.birthdayPicker.date;
     
-    // 用户坑位从UI控件获取 (1-8)
-    user.index = (int)self.userIndexSegment.selectedSegmentIndex + 1;
+    // 注册用户index = 0;
+    user.index = 0;
     
     // 从UI控件获取密钥
     int secret = [self.secretTextField.text intValue];
-    user.secret = secret > 0 ? secret : 1000; // 默认1000
+    user.secret = secret > 0 ? secret : 1001;
     
     __weak typeof(self) weakSelf = self;
     [self.bleApi switchUserScaleUser:user callback:^(NSError * _Nullable error) {
@@ -417,8 +419,7 @@
             if (error) {
                 weakSelf.resultTextView.text = [NSString stringWithFormat:@"注册用户失败: %@", error.localizedDescription];
             } else {
-                weakSelf.resultTextView.text = [NSString stringWithFormat:@"注册用户成功 - 坑位:%d 性别:%@ 身高:%dcm 运动员:%@ 密钥:%d",
-                                              user.index, user.gender, user.height, user.athleteType == YLAthleteSport ? @"是" : @"否", user.secret];
+                weakSelf.resultTextView.text = [NSString stringWithFormat:@"执行注册用户的操作 性别:%@ 身高:%dcm 运动员:%@ 密钥:%d", user.gender, user.height, user.athleteType == YLAthleteSport ? @"是" : @"否", user.secret];
             }
         });
     }];
@@ -450,7 +451,7 @@
     
     // 从UI控件获取密钥 (访问用户时需要输入正确的密钥)
     int secret = [self.secretTextField.text intValue];
-    user.secret = secret > 0 ? secret : 1000; // 默认1000
+    user.secret = secret > 0 ? secret : 1001;
     
     __weak typeof(self) weakSelf = self;
     [self.bleApi switchUserScaleUser:user callback:^(NSError * _Nullable error) {
@@ -938,6 +939,7 @@
     CGFloat btnWidth = (screenWidth - 200) / options.count;
     CGFloat btnHeight = 30.0;
     
+    self.userIndexBtns = [NSMutableArray array];
     for (NSInteger index = 0; index < options.count; index++) {
         NSNumber *number = options[index];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1142,7 +1144,7 @@
     self.secretTextField.placeholder = @"访问用户需要正确密钥";
     self.secretTextField.borderStyle = UITextBorderStyleRoundedRect;
     self.secretTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.secretTextField.text = @"1000"; // 默认密钥1000
+    self.secretTextField.text = @"1001";
     [contentView addSubview:self.secretTextField];
     
     [secretLabel mas_makeConstraints:^(MASConstraintMaker *make) {
