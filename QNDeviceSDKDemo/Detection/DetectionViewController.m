@@ -9,8 +9,8 @@
 typedef enum{
     DeviceStyleNormal = 0,  //默认状态
     DeviceStyleScanning = 1,//正在扫描
-    DeviceStyleLinging = 2,   //正在链接
-    DeviceStyleLingSucceed = 3, //链接成功
+    DeviceStyleLinging = 2,   //正在连接
+    DeviceStyleLingSucceed = 3, //连接成功
     DeviceStyleMeasuringWeight = 4,//测量体重
     DeviceStyleMeasuringResistance = 5,//测量阻抗
     DeviceStyleMeasuringHeartRate = 6, //测量心率
@@ -199,10 +199,10 @@ typedef enum{
             }
             [self startScanDevice];
             break;
-        case DeviceStyleLinging: //正在链接
+        case DeviceStyleLinging: //正在连接
             [self setLingingStyleUI];
             break;
-        case DeviceStyleLingSucceed: //链接成功
+        case DeviceStyleLingSucceed: //连接成功
             [self setLingSucceedStyleUI];
             break;
         case DeviceStyleWifiBleStartNetwork: //开始配网
@@ -244,12 +244,12 @@ typedef enum{
 - (void)setScanningStyleUI {
     [self.scanBtn setTitle:@"正在扫描" forState:UIControlStateNormal];
     self.headerView.hidden = NO;
-    self.styleLabel.text = @"点击链接设备";
+    self.styleLabel.text = @"点击连接设备";
     self.unstableWeightLabel.text = @"";
     self.tableView.hidden = NO;
 }
 
-#pragma mark 正在链接状态UI
+#pragma mark 正在连接状态UI
 - (void)setLingingStyleUI {
     [self.scanBtn setTitle:@"断开连接" forState:UIControlStateNormal];
     self.styleLabel.text = @"正在连接";
@@ -258,7 +258,7 @@ typedef enum{
     self.headerView.hidden = YES;
 }
 
-#pragma mark 链接成功状态UI
+#pragma mark 连接成功状态UI
 - (void)setLingSucceedStyleUI {
     [self.scanBtn setTitle:@"断开连接" forState:UIControlStateNormal];
     self.styleLabel.text = @"连接成功";
@@ -332,7 +332,7 @@ typedef enum{
     }];
 }
 
-#pragma mark 链接设备设备
+#pragma mark 连接设备设备
 - (void)connectDevice:(QNBleDevice *)device {
     [_bleApi stopBleDeviceDiscorvery:^(NSError *error) {
         
@@ -383,7 +383,7 @@ typedef enum{
 
 #pragma mark - QNBleConnectionChangeListener
 - (void)onScaleStateChange:(QNBleDevice *)device scaleState:(QNScaleState)state{//秤连接或测量状态变化
-    if (state == QNScaleStateConnected) {//链接成功
+    if (state == QNScaleStateConnected) {//连接成功
         self.currentStyle = DeviceStyleLingSucceed;
         self.connectedBleDevice = device;
         if (device.deviceType == QNDeviceTypeHeightScale || device.deviceType == QNDeviceTypeSlimScale) {
@@ -573,7 +573,7 @@ typedef enum{
 }
 
 - (void)onBleKitchenStateChange:(QNBleKitchenDevice *)device scaleState:(QNScaleState)state {
-    if (state == QNScaleStateConnected) {//链接成功
+    if (state == QNScaleStateConnected) {//连接成功
         self.currentStyle = DeviceStyleLingSucceed;
     }else if (state == QNScaleStateRealTime){//测量重量
         self.currentStyle = DeviceStyleMeasuringWeight;
@@ -780,10 +780,9 @@ typedef enum{
         self.wspConfigVC.delegate = self;
         [self presentViewController:self.wspConfigVC animated:YES completion:nil];
     }else if(device.deviceType == QNDeviceTypeSlimScale) {
-        
+        QNConfig *shareConfig = self.config;
+        [shareConfig save];
         QNUserScaleConfig *config = [[QNUserScaleConfig alloc]init];
-        
-        
         config.curUser = self.user;
         // 连接设备时，默认访问坑位1的用户
         config.curUser.index = 1;

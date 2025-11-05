@@ -292,9 +292,9 @@
     self.resultTextView.text = [NSString stringWithFormat:@"蓝牙版本：%d", bleVer];
 }
 
-- (void)deviceRestoreFactorySettings:(BOOL)state device:(QNBleDevice *)device user:(QNUser *)user {
-    self.resultTextView.text = state ? @"恢复出厂设置成功" : @"恢复出厂设置失败";
-    self.deviceStateLabel.text = state ? @"恢复出厂设置成功" : @"恢复出厂设置失败";
+- (void)deviceRestoreFactorySettings:(BOOL)success device:(QNBleDevice *)device {
+    self.resultTextView.text = success ? @"恢复出厂设置成功" : @"恢复出厂设置失败";
+    self.deviceStateLabel.text = success ? @"恢复出厂设置成功" : @"恢复出厂设置失败";
 }
 
 - (void)updateUserCurveDataResult:(BOOL)success device:(QNBleDevice *)device userIndex:(int)userIndex {

@@ -90,7 +90,7 @@
                                 <action selector="clickScanBtn:" destination="-1" eventType="touchUpInside" id="0on-Ut-AUL"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEN-tQ-TzR" userLabel="链接状态">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEN-tQ-TzR" userLabel="连接状态">
                             <rect key="frame" x="100" y="140" width="140" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="z2K-Z8-779"/>
