@@ -491,7 +491,7 @@
 /// 更新减重秤设备设置
 /// @param config 减重秤的设备配置
 /// @param callback 结果的回调
-- (void)updateSlimDeviceConfig:(QNSlimDeviceConfig *_Nonnull)config callback:(QNResultCallback _Nonnull)callback;
+- (void)updateSlimDeviceConfig:(QNSlimDeviceConfig *_Nonnull)config callback:(QNResultCallback _Nonnull)callback NS_SWIFT_NAME(update(slimDeviceConfig:callback:));
 
 /// 更新秤端已注册用户的曲线体重数据
 /// @param data 用户曲线体重数据

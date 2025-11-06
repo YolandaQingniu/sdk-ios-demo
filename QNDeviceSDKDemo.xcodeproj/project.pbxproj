@@ -102,11 +102,7 @@
 		F51921ED2EB4DF110000B8AB /* QNBleProtocolHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = F51921AD2EB4DF110000B8AB /* QNBleProtocolHandler.h */; };
 		F51921EE2EB4DF110000B8AB /* QNBleApi.h in Headers */ = {isa = PBXBuildFile; fileRef = F51921A22EB4DF110000B8AB /* QNBleApi.h */; };
 		F51921EF2EB4DF110000B8AB /* QNIndicateConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F51921B82EB4DF110000B8AB /* QNIndicateConfig.h */; };
-		F52069FC2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F52069FB2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m */; };
 		F58271B82E6FC5D600AB6767 /* NSDate+ChangeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F58271B72E6FC5D600AB6767 /* NSDate+ChangeExtension.m */; };
-		F5BEBA702E6EAE1A006866BA /* HeightStorageDataVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BEBA6E2E6EAE1A006866BA /* HeightStorageDataVC.m */; };
-		F5BEBA712E6EAE1A006866BA /* HeightStorageDataVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5BEBA6F2E6EAE1A006866BA /* HeightStorageDataVC.xib */; };
-		F5BEBA772E6F006C006866BA /* HeightSetFunctionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BEBA762E6F006C006866BA /* HeightSetFunctionVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,15 +261,8 @@
 		F51921C62EB4DF110000B8AB /* QNWiFiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNWiFiConfig.h; sourceTree = "<group>"; };
 		F51921C72EB4DF110000B8AB /* QNWspConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNWspConfig.h; sourceTree = "<group>"; };
 		F51921C82EB4DF110000B8AB /* QNWspScaleDataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNWspScaleDataProtocol.h; sourceTree = "<group>"; };
-		F52069FA2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlimScaleSetFunctionVC.h; sourceTree = "<group>"; };
-		F52069FB2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlimScaleSetFunctionVC.m; sourceTree = "<group>"; };
 		F58271B62E6FC5D600AB6767 /* NSDate+ChangeExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+ChangeExtension.h"; sourceTree = "<group>"; };
 		F58271B72E6FC5D600AB6767 /* NSDate+ChangeExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ChangeExtension.m"; sourceTree = "<group>"; };
-		F5BEBA6D2E6EAE1A006866BA /* HeightStorageDataVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeightStorageDataVC.h; sourceTree = "<group>"; };
-		F5BEBA6E2E6EAE1A006866BA /* HeightStorageDataVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeightStorageDataVC.m; sourceTree = "<group>"; };
-		F5BEBA6F2E6EAE1A006866BA /* HeightStorageDataVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeightStorageDataVC.xib; sourceTree = "<group>"; };
-		F5BEBA752E6F006C006866BA /* HeightSetFunctionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeightSetFunctionVC.h; sourceTree = "<group>"; };
-		F5BEBA762E6F006C006866BA /* HeightSetFunctionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeightSetFunctionVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -497,7 +486,6 @@
 				D2B9E97F20723DEC0020C2B6 /* ScaleDataCell.h */,
 				D2B9E98320723DEC0020C2B6 /* ScaleDataCell.m */,
 				D2B9E97D20723DEC0020C2B6 /* ScaleDataCell.xib */,
-				F52069FD2EB8A72E008AEA21 /* Controller */,
 			);
 			path = Detection;
 			sourceTree = "<group>";
@@ -567,36 +555,6 @@
 				F51389F02EB9F15700851CC9 /* IQKeyboardReturnKeyHandler.m */,
 			);
 			path = IQKeyboardManager;
-			sourceTree = "<group>";
-		};
-		F51921F02EB4DFA20000B8AB /* SlimScale */ = {
-			isa = PBXGroup;
-			children = (
-				F52069FA2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.h */,
-				F52069FB2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m */,
-			);
-			path = SlimScale;
-			sourceTree = "<group>";
-		};
-		F52069FD2EB8A72E008AEA21 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				F5BEBA6D2E6EAE1A006866BA /* HeightStorageDataVC.h */,
-				F5BEBA6E2E6EAE1A006866BA /* HeightStorageDataVC.m */,
-				F5BEBA6F2E6EAE1A006866BA /* HeightStorageDataVC.xib */,
-				F572A53D2E6AF80500AAF0D4 /* HeightScalePart */,
-				F51921F02EB4DFA20000B8AB /* SlimScale */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		F572A53D2E6AF80500AAF0D4 /* HeightScalePart */ = {
-			isa = PBXGroup;
-			children = (
-				F5BEBA752E6F006C006866BA /* HeightSetFunctionVC.h */,
-				F5BEBA762E6F006C006866BA /* HeightSetFunctionVC.m */,
-			);
-			path = HeightScalePart;
 			sourceTree = "<group>";
 		};
 		F58271B52E6FC55900AB6767 /* Category */ = {
@@ -759,7 +717,6 @@
 				D232D6572004DE2D00AABD67 /* LaunchScreen.storyboard in Resources */,
 				D2B9E98F20723DEC0020C2B6 /* PickerView.xib in Resources */,
 				D232D6542004DE2D00AABD67 /* Assets.xcassets in Resources */,
-				F5BEBA712E6EAE1A006866BA /* HeightStorageDataVC.xib in Resources */,
 				7E04E16227D875880066AC91 /* test123456789.qn in Resources */,
 				D232D6522004DE2D00AABD67 /* Main.storyboard in Resources */,
 				D2048A5220A6E15600D943BC /* 123456789.qn in Resources */,
@@ -789,8 +746,6 @@
 				D244245F2271CD0400F63F35 /* WiFiTool.m in Sources */,
 				1B99EA412540393200EE7DFA /* MASCompositeConstraint.m in Sources */,
 				1B1350F32417649200E94394 /* UIView+Toast.m in Sources */,
-				F5BEBA772E6F006C006866BA /* HeightSetFunctionVC.m in Sources */,
-				F5BEBA702E6EAE1A006866BA /* HeightStorageDataVC.m in Sources */,
 				1B99EA462540393200EE7DFA /* MASConstraint.m in Sources */,
 				1B99EA452540393200EE7DFA /* View+MASAdditions.m in Sources */,
 				D2B9E98C20723DEC0020C2B6 /* ScaleDataCell.m in Sources */,
@@ -823,7 +778,6 @@
 				1B99EA422540393200EE7DFA /* MASConstraintMaker.m in Sources */,
 				F58271B82E6FC5D600AB6767 /* NSDate+ChangeExtension.m in Sources */,
 				D2B9E98D20723DEC0020C2B6 /* DeviceTableViewCell.m in Sources */,
-				F52069FC2EB87F9A008AEA21 /* SlimScaleSetFunctionVC.m in Sources */,
 				1B99EA4E25403D6C00EE7DFA /* QNBleDevice+Addition.m in Sources */,
 				D2B9E98E20723DEC0020C2B6 /* PickerView.m in Sources */,
 				1B99EA402540393200EE7DFA /* ViewController+MASAdditions.m in Sources */,

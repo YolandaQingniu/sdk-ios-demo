@@ -32,11 +32,8 @@ typedef enum{
 #import <CoreLocation/CoreLocation.h>
 #import "WspConfigVC.h"
 #import "UIView+Toast.h"
-#import "HeightStorageDataVC.h"
-#import "HeightSetFunctionVC.h"
 #import "NSDate+ChangeExtension.h"
 #import "Masonry.h"
-#import "SlimScaleSetFunctionVC.h"
 
 @interface DetectionViewController ()<UITableViewDelegate,UITableViewDataSource,QNBleConnectionChangeListener,QNUserScaleDataListener,QNBleDeviceDiscoveryListener,QNBleStateListener,WspConfigVCDelegate,QNBleKitchenListener,QNScaleDataListener>
 @property (weak, nonatomic) IBOutlet UILabel *appIdLabel;
@@ -149,14 +146,9 @@ typedef enum{
 
 - (void)clickSetHeightScaleAction {
     if (self.connectedBleDevice.deviceType == QNDeviceTypeHeightScale) {
-        HeightSetFunctionVC *vc = [[HeightSetFunctionVC alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
     }
     
     if (self.connectedBleDevice.deviceType == QNDeviceTypeSlimScale) {
-        SlimScaleSetFunctionVC *vc = [[SlimScaleSetFunctionVC alloc]init];
-        vc.connectedDevice = self.connectedBleDevice;
-        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -489,22 +481,6 @@ typedef enum{
         NSLog(@"******* %ld - %ld ******",data.resistance50,data.resistance500);
         [self.view makeToast:[NSString stringWithFormat:@"******* %ld - %ld ******",data.resistance50,data.resistance500]];
     }
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"存储数据" message:[NSString stringWithFormat:@"一共收到[%lu]条存储数据",(unsigned long)storedDataList.count] preferredStyle:(UIAlertControllerStyleAlert)];
-    [alertC addAction:[UIAlertAction actionWithTitle:@"前往查看" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        NSMutableArray *storageList = [NSMutableArray array];
-        HeightStorageDataVC *storageVC = [[HeightStorageDataVC alloc] init];
-        for (int i = 0; i < storedDataList.count; i++) {
-            QNScaleStoreData *data = storedDataList[i];
-            NSLog(@"******* %ld - %ld ******",data.resistance50,data.resistance500);
-            [self.view makeToast:[NSString stringWithFormat:@"******* %ld - %ld ******",data.resistance50,data.resistance500]];
-            [storageList addObject:data];
-        }
-        storageVC.storageList = [NSArray arrayWithArray:storedDataList];
-        storageVC.deviceType = device.deviceType;
-        [self.navigationController pushViewController:storageVC animated:YES];
-    }]];
-    [alertC addAction:[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil]];
-    [self presentViewController:alertC animated:true completion:nil];
 }
 
 - (void)onScaleEventChange:(QNBleDevice *)device scaleEvent:(QNScaleEvent)scaleEvent {
