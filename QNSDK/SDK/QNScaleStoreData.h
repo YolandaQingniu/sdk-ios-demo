@@ -60,6 +60,9 @@
 /// (身高体重一体秤专属)条形码信息
 @property (nonatomic, strong) NSString *barCode;
 
+///（八电极用户秤专属）八电极设备方案  0-默认方案、1-新方案
+@property(nonatomic, assign, readonly) NSInteger newEightModel;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -77,6 +80,17 @@
  @return QNScaleData
  */
 - (QNScaleData *)generateScaleData;
+
+
+/**
+ 获取测量数据详情2
+ 
+ 必须调用 "- (void)setUser:(QNUser *)user" 确定该存储数据的拥有者，才能获取测量数据详情
+ 
+ @return QNScaleData
+ @param lastEightHmac 上一条八电极设备测量数据（需要满足两个条件：1. 体脂率大于0；2. QNScaleData的newEightModel == 1）
+ */
+- (QNScaleData *)generateScaleDataWithLastEightHmac:(nullable NSString *)lastEightHmac;
 
 
 /**

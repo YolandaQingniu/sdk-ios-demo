@@ -41,6 +41,9 @@ typedef NS_ENUM(NSUInteger, QNHeightWeightMode) {
 /// (身高体重一体秤专属)条形码信息
 @property (nonatomic, strong) NSString *barCode;
 
+///（八电极用户秤专属）八电极设备方案  0-默认方案、1-新方案
+@property(nonatomic, assign, readonly) NSInteger newEightModel;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
