@@ -53,7 +53,11 @@ typedef NS_ENUM(NSInteger, QNScaleType) {
     QNScaleTypeFattyLiverRisk = 32, //脂肪肝风险等级
     QNScaleTypeResistance50KHZ = 33, //50阻抗
     QNScaleTypeResistance500KHZ = 34, //500阻抗
-    
+    QNScaleTypeSubcutaneousFatMass = 35, //皮下脂肪量
+    QNScaleTypeSkeletalMuscleIndex = 36, //四肢骨骼肌指数SMI
+    QNScaleTypeWaistHipRatio = 37, //腰臀比
+    QNScaleTypeObesityLevel = 38, //肥胖等级
+
     QNScaleTypeRightArmMucaleWeightIndex = 101, //右臂肌肉重量
     QNScaleTypeLeftArmMucaleWeightIndex = 102, //左臂肌肉重量
     QNScaleTypeTrunkMucaleWeightIndex = 103, //躯干肌肉重量
@@ -72,6 +76,12 @@ typedef NS_ENUM(NSInteger, QNScaleType) {
     QNScaleTypeTrunkFatMass = 115, //躯干脂肪量
     QNScaleTypeRightLegFatMass = 116, //右腿脂肪量
     QNScaleTypeLeftLegFatMass = 117, //左腿脂肪量
+
+    QNScaleTypeLeftArmMuscleIndex = 118, //左上肢肌肉率
+    QNScaleTypeRightArmMuscleIndex = 119, //右上肢肌肉率
+    QNScaleTypeTrunkMuscleIndex = 120, //躯干肌肉率
+    QNScaleTypeLeftLegMuscleIndex = 121, //左下肢肌肉率
+    QNScaleTypeRightLegMuscleIndex = 122, //右下肢肌肉率
 };
 
 @interface QNScaleItemData : NSObject

@@ -86,7 +86,7 @@ typedef NS_ENUM(NSUInteger,YLHeightDecision) {
 /** 身高体重秤（身高体重一体机） 设备专用，用于计算其他指标（除了体重、身高和BMI外的其他指标），默认使用测量数据身高 */
 @property (nonatomic, assign) YLHeightDecision heightDecision;
 
-/// 四电极人体秤设备专用，当测量数据中配置有控制相关指标（例如体重控制、脂肪控制、肌肉控制等）时需要进行传递，如果不传则为默认值，默认为 非亚洲地区
+/// 人体秤设备专用，当测量数据中配置有控制相关指标（例如体重控制、脂肪控制、肌肉控制等）时需要进行传递，如果不传则为默认值，默认为 非亚洲地区
 @property (nonatomic, assign) QNAreaType areaType;
 
 /**
