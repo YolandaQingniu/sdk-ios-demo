@@ -1,0 +1,5 @@
+module QNSDK {
+  umbrella header "QNSDK.h"
+  export *
+  module * { export * }
+}
