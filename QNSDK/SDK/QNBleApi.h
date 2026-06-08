@@ -34,7 +34,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
 
- 当前版本【 2.32.2 - 20260526】
+ 当前版本【 2.35.0 - 20260608】
  
  SDK最低配置8.0的系统
  
@@ -309,6 +309,31 @@
  @return QNBleDevice
  */
 - (QNBleDevice *)buildDevice:(CBPeripheral *)peripheral rssi:(NSNumber *)rssi advertisementData:(NSDictionary *)advertisementData callback:(QNResultCallback)callback;
+
+/**
+ 通过缓存的蓝牙信息快速重建设备对象（用于 iOS 后台状态恢复 / 快速重连）
+
+ 典型用法：App 被系统在后台唤醒后，在 QNBleStateListener 的 onBleWillRestoreState: 中拿到 peripheral，
+ 结合上次连接时持久化的广播数据（QNBleAdvData，可从 QNBleDevice.advData 获取并归档保存），
+ 调用该方法快速重建 QNBleDevice 后直接重连，无需重新扫描。
+
+ @param peripheral 外设对象（由 QNBleStateListener 的 onBleWillRestoreState: 回调中的 peripherals 返回）
+ @param rssi 信号强度，快速重建时可传 @0
+ @param advData 上次连接时缓存的广播数据（QNBleAdvData，自管理蓝牙模式可用 QNBleAdvData 工厂方法从系统字典构建）
+ @param callback 结果的回调，广播数据无效时回调错误
+ @return QNBleDevice，解析失败返回 nil
+ */
+- (nullable QNBleDevice *)buildReconnectDevice:(CBPeripheral *)peripheral rssi:(NSNumber *)rssi advData:(QNBleAdvData *)advData callback:(QNResultCallback)callback;
+
+/**
+ 断开后台状态恢复返回的外设连接
+
+ 典型用法：App 被系统在后台唤醒后，在 QNBleStateListener 的 onBleWillRestoreState: 中拿到处于「连接中/已连接」状态的 peripheral，
+ 若收到蓝牙恢复之后，需要进行SDK完整的连接测量过程，可先调用该方法主动断开，再通过外设对象构建SDK设备对象进行连接。
+
+ @param peripheral 外设对象（由 QNBleStateListener 的 onBleWillRestoreState: 回调中的 peripherals 返回）
+ */
+- (void)disconnectRestoredPeripheral:(CBPeripheral *)peripheral;
 
 /**
  创建轻牛广播蓝牙秤设备对象

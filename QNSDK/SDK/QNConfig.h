@@ -99,6 +99,14 @@ typedef NS_ENUM(NSUInteger,QNVolume) {
 @property (nonatomic, assign) BOOL enhanceBleBoradcast;
 
 /**
+ CoreBluetooth 状态恢复标识（用于 iOS 后台蓝牙状态恢复）
+ 设置非空字符串后，SDK 内部创建的 CBCentralManager 会启用状态恢复，App 在后台被系统唤醒时可通过 QNBleStateListener 的 onBleWillRestoreState: 回调拿到恢复信息。
+ 注意：该设置只有在初始化蓝牙管理类（initBleManager / initSdk）之前设置才生效；设置后会保存本地，下次启动 SDK 自动配置。
+ 该属性的作用详情请参考 Apple Developer Documentation => CoreBluetooth => CBCentralManager => CBCentralManagerOptionRestoreIdentifierKey
+ */
+@property (nonatomic, copy, nullable) NSString *restoreIdentifier;
+
+/**
  CP30C身高秤端显示的身高单位
  */
 @property (nonatomic, assign) QNHeightUnit heightUnit;
