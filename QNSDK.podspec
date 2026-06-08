@@ -4,7 +4,10 @@
 #
 # Any lines starting with a # are optional, but their use is encouraged
 # To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
+# 
 #
+#   忽略模拟器强行发布的指令： 
+#   pod trunk push QNSDK.podspec --allow-warnings --skip-tests --skip-import-validation --verbose 
 
 Pod::Spec.new do |s|
 s.name             = 'QNSDK'
