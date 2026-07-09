@@ -34,7 +34,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
 
- 当前版本【 2.35.0 - 20260608】
+ 当前版本【 2.36.0 - 20260701】
  
  SDK最低配置8.0的系统
  
@@ -125,6 +125,11 @@
  @return QNBleApi
  */
 + (QNBleApi *)sharedBleApi;
+
+/**
+ 当前 SDK 版本，例如 2.36.0。
+ */
++ (NSString *)sdkVersion;
 
 /**
  初始化SDK：注册SDK +  初始化蓝牙管理类，等效于“registerSdk” + “initBleManager”
@@ -531,4 +536,3 @@
 - (void)updateUserSlimConfig:(QNSlimUserSlimConfig *_Nonnull)config userIndex:(int)userIndex callback:(QNResultCallback _Nonnull)callback NS_SWIFT_NAME(update(userSlimConfig:userIndex:callback:));
 
 @end
-

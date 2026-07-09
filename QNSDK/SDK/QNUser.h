@@ -89,6 +89,9 @@ typedef NS_ENUM(NSUInteger,YLHeightDecision) {
 /// 人体秤设备专用，当测量数据中配置有控制相关指标（例如体重控制、脂肪控制、肌肉控制等）时需要进行传递，如果不传则为默认值，默认为 非亚洲地区
 @property (nonatomic, assign) QNAreaType areaType;
 
+/// 该字段用于八电极设备，取同用户同一类型八电极设备的上一笔体脂率大于0的测量数据的hmac，同类型是指newEightModel（QNScaleData）数值一致的内容
+@property (nullable, nonatomic, strong) NSString *hmac;
+
 /**
  建立用户模型
  
