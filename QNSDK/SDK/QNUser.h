@@ -92,6 +92,10 @@ typedef NS_ENUM(NSUInteger,YLHeightDecision) {
 /// 该字段用于八电极设备，取同用户同一类型八电极设备的上一笔体脂率大于0的测量数据的hmac，同类型是指newEightModel（QNScaleData）数值一致的内容
 @property (nullable, nonatomic, strong) NSString *hmac;
 
+
+/// 该用户使用八电极设备的测量次数
+@property(nonatomic, assign) int measureNum;
+
 /**
  建立用户模型
  

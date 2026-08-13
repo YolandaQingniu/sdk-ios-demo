@@ -34,7 +34,7 @@
 /**
  此SDK为轻牛旗下设备连接工具的静态库，使用时需要向轻牛官方获取 "appId" 否则无法正常使用该SDK
 
- 当前版本【 2.36.3 - 20260717】
+ 当前版本【 2.37.0 - 20260813】
  
  SDK最低配置8.0的系统
  
@@ -430,10 +430,10 @@
 
 /// 重算数据指标
 /// @param user 重算数据指标的目标用户
-/// @param hmac 重算数据的hmac
-/// @param lastEightHmac 上次测量数据的hmac，八电极设备拟合要用
+/// @param hmac 重算数据的hmac， 如果hmac是八电极设备的hmac，则 要求user.hmac 非 nil；没有上一笔有效测量 HMAC （同一用户同类型设备上一笔体脂率大于0的测量数据的hmac）时user.hmac请传空字符串。
+
 /// @param callback 回调
-- (QNScaleData *)calculateScaleDataByHmac:(QNUser *)user hmac:(NSString *)hmac lastEightHmac:(nullable NSString *)lastEightHmac callback:(QNResultCallback)callback;
+- (QNScaleData *)calculateScaleDataByHmac:(QNUser *)user hmac:(NSString *)hmac callback:(QNResultCallback)callback;
 
 /**
  体质推算测量方法
@@ -455,6 +455,13 @@
 /// @param weight 体重
 /// @param callback 结果的回调
 - (void)updateUserScaleIdentifyWeight:(double)weight callback:(QNResultCallback)callback;
+
+/// 更新新方案八电极设备的用户的基准数据。
+/// @param userIndex 秤端用户索引，取值范围1-8。
+/// @param weight 基准体重，单位kg。
+/// @param hmac 对应用户的同类型新方案八电极测量数据的hmac；为空或无效时仅更新体重。
+/// @param callback 结果回调。
+- (void)updateUserScaleDatumData:(NSInteger)userIndex weight:(double)weight hmac:(nullable NSString *)hmac callback:(QNResultCallback)callback;
 
 /// 删除用户秤秤端用户信息(用户秤，包含减重秤)
 /// @param indexList 用户索引数组

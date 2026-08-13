@@ -17,7 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 - (void)registerUserComplete:(QNBleDevice *)device user:(QNUser *)user;
 
-- (NSString *)getLastDataHmac:(QNBleDevice *)device user:(QNUser *)user;
+/// 自 QNDeviceSDK 2.37.0 起废弃，iOS 不可用。
+/// 请在发起蓝牙连接前，将上一笔有效测量 HMAC 写入连接配置的 `config.curUser.hmac`；
+/// 没有历史 HMAC 时请显式传入空字符串 `@""`。
+- (NSString *)getLastDataHmac:(QNBleDevice *)device user:(QNUser *)user API_UNAVAILABLE(ios);
 
 /// 更新减重秤设备设置的回调
 /// @param success 操作是否成功

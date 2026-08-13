@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, QNHeightWeightMode) {
 ///（新方案八电极专属）本次测量是否异常，0-正常；1-异常。
 @property(nonatomic, assign, readonly) NSInteger eightIsAbnormal;
 
-///（新方案八电极专属）本次测量异常原因，0-正常；1-手部异常；2-腿部异常；3-手脚均异常。
+///（新方案八电极专属）本次测量异常原因，0-正常；1-手部异常；2-腿部异常；3-手脚均异常；4-手脚均异常，且手臂可能与躯干接触。
 @property(nonatomic, assign, readonly) NSInteger eightReasonMask;
 
 - (instancetype)init NS_UNAVAILABLE;

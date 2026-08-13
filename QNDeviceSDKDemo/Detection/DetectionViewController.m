@@ -978,6 +978,7 @@ typedef enum{
     self.currentStyle = DeviceStyleLinging;
     self.user.index = userIndex;
     self.user.secret = userSecret;
+    self.user.hmac = @"";
     config.curUser = self.user;
     [_bleApi connectUserScaleDevice:device config:config callback:^(NSError *error) {
         

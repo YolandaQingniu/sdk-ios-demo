@@ -23,7 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)wspRestoreFactorySettings:(QNBleDevice *)device suceess:(BOOL)suceess;
 
-- (NSString *)wspGetLastDataHmac:(QNBleDevice *)device user:(QNUser *)user;
+/// 自 QNDeviceSDK 2.37.0 起废弃，iOS 不可用。
+/// 请在发起蓝牙连接前，将上一笔有效测量 HMAC 写入 `QNWspConfig.curUser.hmac`；
+/// 没有历史 HMAC 时请显式传入空字符串 `@""`。
+- (NSString *)wspGetLastDataHmac:(QNBleDevice *)device user:(QNUser *)user API_UNAVAILABLE(ios);
 @end
 
 NS_ASSUME_NONNULL_END

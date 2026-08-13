@@ -68,6 +68,8 @@
 /**
  设置该存储数据的拥有者
 
+ 八电极未知存储数据要求 user.hmac 非 nil；没有上一笔有效测量 HMAC （同一用户同类型设备上一笔体脂率大于0的测量数据的hmac）时请传空字符串。
+
  @param user QNUser
  */
 - (BOOL)setUser:(QNUser *)user;
@@ -84,13 +86,11 @@
 
 /**
  获取测量数据详情2
- 
- 必须调用 "- (void)setUser:(QNUser *)user" 确定该存储数据的拥有者，才能获取测量数据详情
- 
- @return QNScaleData
- @param lastEightHmac 上一条八电极设备测量数据（需要满足两个条件：1. 体脂率大于0；2. QNScaleData的newEightModel == 1）
+
+ 自 QNDeviceSDK 2.37.0 起废弃，iOS 不可用。请先将上一条八电极测量数据 HMAC
+ 写入 user.hmac，再调用 generateScaleData。
  */
-- (QNScaleData *)generateScaleDataWithLastEightHmac:(nullable NSString *)lastEightHmac;
+- (QNScaleData *)generateScaleDataWithLastEightHmac:(nullable NSString *)lastEightHmac API_UNAVAILABLE(ios);
 
 
 /**
