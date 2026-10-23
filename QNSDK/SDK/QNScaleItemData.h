@@ -19,6 +19,21 @@ typedef NS_ENUM(NSUInteger, QNValueType) {
     QNValueTypeInt = 1,
 };
 
+/**
+ 无机盐状态。该枚举用于 QNScaleTypeMineralSaltStatus，各平台含义一致。
+
+ - QNMineralSaltStatusUnknown: 未知
+ - QNMineralSaltStatusLow: 低
+ - QNMineralSaltStatusStandard: 标准
+ - QNMineralSaltStatusHigh: 高
+ */
+typedef NS_ENUM(NSInteger, QNMineralSaltStatus) {
+    QNMineralSaltStatusUnknown = 0,
+    QNMineralSaltStatusLow = 1,
+    QNMineralSaltStatusStandard = 2,
+    QNMineralSaltStatusHigh = 3,
+};
+
 
 /** 指标类型 */
 typedef NS_ENUM(NSInteger, QNScaleType) {
@@ -39,11 +54,12 @@ typedef NS_ENUM(NSInteger, QNScaleType) {
     QNScaleTypeHealthScore = 15, //分数
     QNScaleTypeHeartRate = 16, //心率
     QNScaleTypeHeartIndex = 17, //心脏指数
+    QNScaleTypeBoneMassRate = 18, //骨量比
     QNScaleTypeFatMassIndex = 21, //脂肪重量
     QNScaleTypeObesityDegreeIndex = 22, //肥胖度
     QNScaleTypeWaterContentIndex = 23, //含水量
     QNScaleTypeProteinMassIndex = 24, //蛋白质量
-    QNScaleTypeMineralSaltIndex = 25, //无机盐状况
+    QNScaleTypeMineralSaltIndex = 25, //无机盐状况，iOS历史值：0未知、1标准、2低、3充足
     QNScaleTypeBestVisualWeightIndex = 26, //理想视觉体重
     QNScaleTypeStandWeightIndex = 27, //标准体重
     QNScaleTypeWeightControlIndex = 28, //体重控制
@@ -57,6 +73,7 @@ typedef NS_ENUM(NSInteger, QNScaleType) {
     QNScaleTypeSkeletalMuscleIndex = 36, //四肢骨骼肌指数SMI
     QNScaleTypeWaistHipRatio = 37, //腰臀比
     QNScaleTypeObesityLevel = 38, //肥胖等级
+    QNScaleTypeMineralSaltStatus = 39, //跨平台无机盐状态：0未知、1低、2标准、3高，新业务推荐使用
 
     QNScaleTypeRightArmMucaleWeightIndex = 101, //右臂肌肉重量
     QNScaleTypeLeftArmMucaleWeightIndex = 102, //左臂肌肉重量
